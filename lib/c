@@ -1,9 +1,11 @@
 #! /usr/bin/env bash
 
+function c() {
 
-__SCRIPT_VERSION="0.0.1"
-__SCRIPT_NAME=$( basename $0 )
-__DESCRIPTION="A super simple fuzzy 'cd' command using the fuzzy finder 'f'"
+
+local __SCRIPT_VERSION="0.0.1"
+local __SCRIPT_NAME=$( basename $0 )
+local __DESCRIPTION="A super simple fuzzy 'cd' command using the fuzzy finder 'f'"
 
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
@@ -28,16 +30,16 @@ while getopts ":hvp:" opt
 do
   case $opt in
 
-  h|help     )  usage; exit 0   ;;
+  h|help     )  usage; return 0   ;;
 
-  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; return 0   ;;
 
   p )
     PATH_TO_SEARCH=$OPTARG
     ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
-      usage_head; exit 1   ;;
+      usage_head; return 1   ;;
 
   esac    # --- end of case ---
 done
@@ -59,13 +61,15 @@ if [[ $NUMBER_OF_LINES = 1 ]]; then
   for folder in $FOLDERS; do
     echo $FOLDERS
     cd $folder
-    exit 0
+    return 0
   done
 else
   PS3="Where to go: "
   select folder in $FOLDERS; do
     echo "You have selected $folder"
     cd $folder
-    exit 0
+    return 0
   done
 fi
+
+}
