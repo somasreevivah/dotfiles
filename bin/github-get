@@ -1,14 +1,63 @@
 #!/bin/bash
 
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0 )
+__DESCRIPTION="Silly github project getter"
+__OPTIONS=":hvu:m:d"
 
-if [[ -n "$2" ]]; then
-  USER=$1
-  REPO=$2
-  DESTINATION=$3
-else
-  USER="alejandrogallo"
-  REPO="$1"
-  DESTINATION=$2
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] REPO_NAME"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -u            User
+    -m            Method: https, ssh. (default ssh)
+    -d            Destination folder
+
+
+    This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts $__OPTIONS opt
+do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  u )  GH_USER=$OPTARG   ;;
+
+  m )  echo "Method: $OPTARG"; GH_METHOD=$OPTARG   ;;
+
+  * )  echo -e "\n  Option does not exist : $OPTARG\n"
+      usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+REPO_NAME=$1
+
+if [[ -z $REPO_NAME ]]; then 
+  usage_head;
+  exit 1;
 fi
 
-git clone https://github.com/$USER/$REPO.git $DESTINATION
+GH_USER=${GH_USER:-alejandrogallo}
+GH_METHOD=${GH_METHOD:-ssh}
+
+if [[ $GH_METHOD = https ]]; then
+  git clone https://github.com/$GH_USER/$REPO_NAME.git $DESTINATION
+else
+  git clone git:git@github.com/$GH_USER/$REPO_NAME.git $DESTINATION
+fi
+
