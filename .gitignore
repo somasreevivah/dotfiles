@@ -19,3 +19,9 @@
 # Ignore any file with LOCAL in the name (good for per-machine vars/functions)
 *LOCAL*
 /**/*.swp
+
+############
+#  Elinks  #
+############
+/link/elinks/bookmarks
+/link/elinks/*hist
