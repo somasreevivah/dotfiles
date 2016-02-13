@@ -8,8 +8,7 @@ For Bash, they work as follows. Read down the appropriate column. Executes A, th
 
 Table 1 : [Source](https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/)
 
-|                |Interactive|Interactive|Script|
-|                |login      |non-login  |      |
+|                |Interactive login|Interactive non-login|Script|
 |----------------|-----------|-----------|------|
 |/etc/zshenv     |    A      |    A      |  A   |
 |~/.zshenv       |    B      |    B      |  B   |
