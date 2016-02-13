@@ -8,17 +8,15 @@ For Bash, they work as follows. Read down the appropriate column. Executes A, th
 
 Table 1 : [Source](https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/)
 
-|                |Interactive login|Interactive non-login|Script|
-|----------------|-----------|-----------|------|
-|/etc/zshenv     |    A      |    A      |  A   |
-|~/.zshenv       |    B      |    B      |  B   |
-|/etc/zprofile   |    C      |           |      |
-|~/.zprofile     |    D      |           |      |
-|/etc/zshrc      |    E      |    C      |      |
-|~/.zshrc        |    F      |    D      |      |
-|/etc/zlogin     |    G      |           |      |
-|~/.zlogin       |    H      |           |      |
-|                |           |           |      |
-|                |           |           |      |
-|~/.zlogout      |    I      |           |      |
-|/etc/zlogout    |    J      |           |      |
+| Files            | Interactive login  | Interactive non-login  | Script |
+| ---------------- | ------------------ | ---------------------- | ------ |
+| /etc/zshenv      | A                  | A                      | A      |
+| ~/.zshenv        | B                  | B                      | B      |
+| /etc/zprofile    | C                  |                        |        |
+| ~/.zprofile      | D                  |                        |        |
+| /etc/zshrc       | E                  | C                      |        |
+| ~/.zshrc         | F                  | D                      |        |
+| /etc/zlogin      | G                  |                        |        |
+| ~/.zlogin        | H                  |                        |        |
+| ~/.zlogout       | I                  |                        |        |
+| /etc/zlogout     | J                  |                        |        |
