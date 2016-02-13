@@ -1,0 +1,10 @@
+#! /bin/bash
+
+if [[ $1 ]]
+then 
+	touch $1
+	chmod 0755 $1
+else
+	echo "Missing file name of the file to be created"
+	exit -1 
+fi
