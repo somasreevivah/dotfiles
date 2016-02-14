@@ -1,3 +1,9 @@
+######################################
+#  I DO NOT KNOW YET WHAT THIS DOES  #
+######################################
+return 
+
+
 export PATH
 PATH=~/.nave/installed/default/bin:"$(path_remove ~/.nave/installed/*/bin)"
 
