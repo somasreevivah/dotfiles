@@ -18,7 +18,7 @@ function nave_install() {
   [[ ! "$1" ]] && echo "Specify a node version or \"stable\"" && return 1
   [[ "$1" == "stable" ]] && version=$(nave stable) || version=${1#v}
   if [[ ! -d "${NAVE_DIR:-$HOME/.nave}/installed/$version" ]]; then
-    e_header "Installing Node.js $version"
+    dfs::header "Installing Node.js $version"
     nave install $version
   fi
   [[ "$1" == "stable" ]] && nave_default stable && npm_install
@@ -33,12 +33,12 @@ npm_globals=(
 # Update npm and install global modules.
 function npm_install() {
   local installed modules
-  e_header "Updating npm"
+  dfs::header "Updating npm"
   npm update -g npm
   { pushd "$(npm config get prefix)/lib/node_modules"; installed=(*); popd; } >/dev/null
   modules=($(setdiff "${npm_globals[*]}" "${installed[*]}"))
   if (( ${#modules[@]} > 0 )); then
-    e_header "Installing Npm modules: ${modules[*]}"
+    dfs::header "Installing Npm modules: ${modules[*]}"
     npm install -g "${modules[@]}"
   fi
 }

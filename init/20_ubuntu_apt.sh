@@ -21,7 +21,7 @@ This will be skipped if "Y" isn't pressed within the next $prompt_delay seconds.
 EOF
   read -N 1 -t $prompt_delay -p "Update sudoers file? [y/N] " update_sudoers; echo
   if [[ "$update_sudoers" =~ [Yy] ]]; then
-    e_header "Updating sudoers"
+    dfs::header "Updating sudoers"
     visudo -cf "$sudoers_src" &&
     sudo cp "$sudoers_src" "$sudoers_dest" &&
     sudo chmod 0440 "$sudoers_dest" &&
@@ -33,7 +33,7 @@ EOF
 fi
 
 # Update APT.
-e_header "Updating APT"
+dfs::header "Updating APT"
 sudo apt-get -qq update
 sudo apt-get -qq dist-upgrade
 
@@ -52,7 +52,7 @@ packages=(
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
 if (( ${#packages[@]} > 0 )); then
-  e_header "Installing APT packages: ${packages[*]}"
+  dfs::header "Installing APT packages: ${packages[*]}"
   for package in "${packages[@]}"; do
     sudo apt-get -qq install "$package"
   done
@@ -60,7 +60,7 @@ fi
 
 # Install Git Extras
 if [[ ! "$(type -P git-extras)" ]]; then
-  e_header "Installing Git Extras"
+  dfs::header "Installing Git Extras"
   (
     cd $DOTFILES/vendor/git-extras &&
     sudo make install
