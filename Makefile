@@ -1,8 +1,4 @@
 
-INIT_DIR = init
+.PHONY: init
 init: 
-		@for script in $(INIT_DIR); do \
-			bash $$script; \
-		done
-
-
+	./bin/dotfiles
