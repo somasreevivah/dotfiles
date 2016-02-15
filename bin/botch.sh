@@ -31,7 +31,7 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-SECONDS=""
+BOTCH_SECONDS=""
 
 while getopts "hvs:" opt
 do
@@ -41,7 +41,7 @@ do
 
   v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-  s|seconds  )  SECONDS=$OPTARG ;;
+  s|seconds  )  BOTCH_SECONDS=$OPTARG ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage; exit 1   ;;
@@ -50,17 +50,16 @@ do
 done
 shift $(($OPTIND-1))
 
-test -z $SECONDS || SECONDS=2
+test $BOTCH_SECONDS || BOTCH_SECONDS=2
 
-echo $@
-echo "Running every $SECONDS seconds";
-
-read
+#echo $@
+#echo "Running every $BOTCH_SECONDS seconds";
+#read
 
 while true; do
   clear
-  date +"%H:%M:%S"
-  date +"--------"
+  printf "%s \t\t\t\t\t Every %s s\n" $(date +"%H:%M:%S") $BOTCH_SECONDS
+  echo -e "\033[0;92m--------\033[0m"
   eval $@
-  sleep $SECONDS
+  sleep $BOTCH_SECONDS
 done
