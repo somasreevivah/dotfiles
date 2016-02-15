@@ -15,6 +15,8 @@ function install_node_npm_locally() {
 
 if ! which node > /dev/null 2>&1 ; then 
   dfs::error "Node is not installed..."
+  read -p "Do you want to install it? (Y/n): " install_node
+  [[ $install_node == [y,Y] ]] || return 1
   dfs::header "Installing node..."
   if sudo -v ; then
     dfs::install node npm
