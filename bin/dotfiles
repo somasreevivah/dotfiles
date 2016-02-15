@@ -261,8 +261,7 @@ function do_stuff() {
 }
 
 # Enough with the functions, let's do stuff.
-
-export prompt_delay=5
+export prompt_delay=1
 
 # Ensure that we can actually, like, compile anything.
 if [[ ! "$(type -P gcc)" ]] && dfs::is_osx; then
