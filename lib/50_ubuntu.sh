@@ -1,11 +1,6 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
 dfs::is_ubuntu || return 1
 
-# Package management
-alias update="sudo apt-get -qq update && sudo apt-get upgrade"
-alias install="sudo apt-get install"
-alias remove="sudo apt-get remove"
-alias search="apt-cache search"
 
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
