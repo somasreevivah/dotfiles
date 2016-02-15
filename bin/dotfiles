@@ -44,6 +44,7 @@ function dfs::is_ubuntu() {
   [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
 }
 function dfs::is_on_mpi_fkf() {
+  #If the computer is at the mpi
   [[ $(hostname) = pccq* || $(hostname) = abakus* ]] || return 1
 }
 function get_os() {
@@ -54,7 +55,7 @@ function get_os() {
 
 # Remove an entry from $PATH
 # Based on http://stackoverflow.com/a/2108540/142339
-function path_remove() {
+function dfs::path_remove() {
   local arg path
   path=":$PATH:"
   for arg in "$@"; do path="${path//:$arg:/:}"; done
@@ -63,6 +64,7 @@ function path_remove() {
   echo "$path"
 }
 
+# Menu prompting stuff {{{2 #
 # Display a fancy multi-select menu.
 # Inspired by http://serverfault.com/a/298312
 function prompt_menu() {

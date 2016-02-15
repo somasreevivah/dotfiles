@@ -1,34 +1,9 @@
 ######################################
 #  I DO NOT KNOW YET WHAT THIS DOES  #
 ######################################
-return 
+return 0
 
 
-export PATH
-PATH=~/.nave/installed/default/bin:"$(path_remove ~/.nave/installed/*/bin)"
-
-# Set a specific version of node as the "default" for "nave use default"
-function nave_default() {
-  local version
-  local default=${NAVE_DIR:-$HOME/.nave}/installed/default
-  [[ ! "$1" ]] && echo "Specify a node version or \"stable\"" && return 1
-  [[ "$1" == "stable" ]] && version=$(nave stable) || version=${1#v}
-  rm "$default" 2>/dev/null
-  ln -s $version "$default"
-  echo "Nave default set to $version"
-}
-
-# Install a version of node, set as default, install npm modules, etc.
-function nave_install() {
-  local version
-  [[ ! "$1" ]] && echo "Specify a node version or \"stable\"" && return 1
-  [[ "$1" == "stable" ]] && version=$(nave stable) || version=${1#v}
-  if [[ ! -d "${NAVE_DIR:-$HOME/.nave}/installed/$version" ]]; then
-    dfs::header "Installing Node.js $version"
-    nave install $version
-  fi
-  [[ "$1" == "stable" ]] && nave_default stable && npm_install
-}
 
 # Global npm modules to install.
 npm_globals=(
@@ -63,41 +38,12 @@ function npm_publish() {
   fi
 }
 
-# Crazy-ass, cross-repo npm linking.
 
-# Inter-link all projects, where each project exists in a subdirectory of
-# the current parent directory. Uses https://github.com/cowboy/node-linken
-alias npm_linkall='eachdir "rm -rf node_modules; npm install"; linken */ --src .'
-alias npm_link='rm -rf node_modules; npm install; linken . --src ..'
-
-# Link this project's grunt stuff to the in-development grunt stuff.
-alias npm_link_grunt='linken . --src ~/gruntjs'
-
-# Print npm owners in subdirectories.
-alias npm_owner_list='eachdir "npm owner ls 2>/dev/null | sort"'
-
-# Add npm owners to projects in subdirectories.
-function npm_owner_add() {
-  local users=
-  local root="$(basename $(pwd))"
-  [[ $root == "gruntjs" ]] && users="cowboy tkellen"
-  if [[ -n "$users" ]]; then
-    eachdir "__npm_owner_add_each $users"
-  fi
-}
-
-function __npm_owner_add_each() {
-  local owners
-  owners="$(npm owner ls 2>/dev/null)"
-  [[ $? != 0 ]] && return
-  for user in $*; do
-    echo $owners | grep -v $user >/dev/null && npm owner add $user
-  done
-}
 
 # Look at a project's package.json and figure out what dependencies can be
 # updated. While the "npm outdated" command only lists versions that are valid
 # per the version string in package.json, this looks at the @latest tag in npm.
+
 function npm_latest() {
   if [[ -e 'node_modules' ]]; then
     echo 'Backing up node_modules directory.'
@@ -118,3 +64,4 @@ function npm_latest() {
     echo -e '\nAll dependencies are @latest version.'
   fi
 }
+
