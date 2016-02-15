@@ -1,5 +1,5 @@
 # OSX-only stuff. Abort if not OSX.
-is_osx || return 1
+dfs::is_osx || return 1
 
 # Exit if Homebrew is not installed.
 [[ ! "$(type -P brew)" ]] && dfs::error "Brew recipes need Homebrew to install." && return 1

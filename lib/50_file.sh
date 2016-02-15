@@ -4,7 +4,7 @@
 umask 022
 
 # Always use color output for `ls`
-if is_osx; then
+if dfs::is_osx; then
   alias ls="command ls -G"
 else
   alias ls="command ls --color"
