@@ -26,11 +26,3 @@ if (( ${#packages[@]} > 0 )); then
   done
 fi
 
-# Install Git Extras
-if [[ ! "$(type -P git-extras)" ]]; then
-  dfs::header "Installing Git Extras"
-  (
-    cd $DOTFILES/vendor/git-extras &&
-    sudo make install
-  )
-fi
