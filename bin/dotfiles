@@ -2,18 +2,45 @@
 [[ "$1" == "source" ]] || \
 
 # help message {{{1 #
-echo "DOTFILES INITIALIZATION"
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0)
+__DESCRIPTION="General configuration files"
 
-if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 
-Usage: $(basename "$0")
+function usage_head() {
+echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"
+}
+function usage ()
+{
+cat <<EOF
+$(usage_head)
 
-See the README for documentation.
-https://github.com/alejandrogallo/dotfiles
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version"
+
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
-HELP
-exit; fi
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts ":hv" opt
+do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  #* )  echo -e "\n  Option does not exist : $OPTARG\n"
+      #usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
 ###########################################
 # GENERAL PURPOSE EXPORTED VARS / FUNCTIONS {{{1 #
 ###########################################
