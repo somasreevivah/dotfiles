@@ -2,19 +2,15 @@
 
 __ScriptVersion="0.0.1"
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
-#===============================================================================
 function usage ()
 {
-  echo "Usage :  $(basename $0) <script> [options] [--]
+  echo "Usage :  $(basename $0) [-h|-help] [-v|-version] command
 
     Options:
-    script        Script or commands to be performed
     -h|help       Display this message
     -v|version    Display script version
     -s|seconds    Set the repetition interval (in seconds)
+    command       Script or commands to be performed
 
     watch(1) is a very useful little tool when you want to see the results of a
     command changing over time.
