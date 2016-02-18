@@ -2,7 +2,7 @@
 search=''
 echo "Googling ---> $@"
 for term in $@
-do 
+do
   search="$search%20$term"
 done
 open -a Safari "https://www.google.com/search?q=$search"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+if [[ -n "$2" ]]; then
+  USER=$1
+  REPO=$2
+else
+  USER="alejandrogallo"
+  REPO="$1"
+fi
+
+git clone https://github.com/$USER/$REPO.git
