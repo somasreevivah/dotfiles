@@ -22,3 +22,7 @@ fi
 
 # Disable ansible cows }:]
 export ANSIBLE_NOCOWS=1
+
+
+alias l="ll"
+alias cl="clear"
