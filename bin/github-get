@@ -4,9 +4,11 @@
 if [[ -n "$2" ]]; then
   USER=$1
   REPO=$2
+  DESTINATION=$3
 else
   USER="alejandrogallo"
   REPO="$1"
+  DESTINATION=$2
 fi
 
-git clone https://github.com/$USER/$REPO.git
+git clone https://github.com/$USER/$REPO.git $DESTINATION
