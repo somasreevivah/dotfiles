@@ -5,7 +5,7 @@ for term in $@
 do
   search="$search%20$term"
 done
-url="https://www.google.com/search?q=$search"
+url="http://www.google.com/search?q=$search"
 [[ $TERM = "xterm" ]] && open -a Safari $url
-[[ $TERM = "linux" ]] && lynx $url
+[[ $TERM = "screen" ]] && lynx $url
 
