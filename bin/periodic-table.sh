@@ -15,8 +15,8 @@ $(usage_head)
     Options:
     -h|help       Display this message
     -v|version    Display script version"
-    -e            Display element information:
-                  Example: $__SCRIPT_NAME -e he > helimu_info.txt
+    -e            Display element information (lowercase elements):
+                  Example: $__SCRIPT_NAME -e he > helium_info.txt
 
 
     This program is maintained by Alejandro Gallo.
