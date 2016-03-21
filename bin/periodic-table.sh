@@ -4,7 +4,7 @@ __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="ASCII periodic table for fast consulting"
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e <element_symbold_lowercase>]"; }
 function usage ()
 {
 cat <<EOF
