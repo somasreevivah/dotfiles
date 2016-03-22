@@ -1,3 +1,4 @@
+#! /usr/bin/env bash
 
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
