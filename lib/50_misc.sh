@@ -24,5 +24,3 @@ fi
 export ANSIBLE_NOCOWS=1
 
 
-alias l="ll"
-alias cl="clear"

@@ -20,10 +20,15 @@ else
   alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
 fi
 
+
 # Easier navigation: .., ..., -
 alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
+# Do not write so much
+alias l="ll"
+alias cl="clear"
+alias cls="clear; ls"
 
 # File size
 alias fs="stat -f '%z bytes'"
