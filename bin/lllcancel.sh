@@ -6,6 +6,7 @@ function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 USER_NAME=$USER
+which llq || ( error "What should I say? You have no llq command, I recommend seeing a doctor, for real."; exit 1 )
 JOBS_IDS=$(llq | grep $USER | awk '{print $1}')
 
 
@@ -26,7 +27,7 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version"
 
-    This program is working only in environments 
+    This program is working only in environments
     where a loadleveler and the llq/llcancel commands exist
 
     This program is maintained by Alejandro Gallo.
