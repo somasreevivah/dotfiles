@@ -26,6 +26,8 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version"
 
+    This program is working only in environments 
+    where a loadleveler and the llq/llcancel commands exist
 
     This program is maintained by Alejandro Gallo.
 EOF
