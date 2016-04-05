@@ -6,7 +6,7 @@ function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 USER_NAME=$USER
-which llq || ( error "What should I say? You have no llq command, I recommend seeing a doctor, for real."; exit 1 )
+which llq > /dev/null || ( error "What should I say? You have no llq command, I recommend seeing a doctor, for real."; exit 1 )
 JOBS_IDS=$(llq | grep $USER | awk '{print $1}')
 
 
