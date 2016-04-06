@@ -44,20 +44,37 @@ done
 shift $(($OPTIND-1))
 
 function run_interactive() {
+  local search_input=
+  local search_buffer="words"
   while : ; do
-    echo
+    read -p "Input: " -e -i $search_buffer search_input
+    echo ""
+    search_buffer=$search_buffer$search_input
+    sleep 1
   done
 }
-FOLDER_NAME=$1
-FZ_TEMP_FOLDER=/tmp/fz.tmp
 
-if [[ -z $FOLDER_NAME ]]; then
-  INTERACTIVE_MODE=1
-fi
+SEARCH_NAMES=$@
+FZ_TEMP_FOLDER=/tmp/fz.tmp
+FZ_TEMP_BUFFER=/tmp/fz.buf.tmp
 
 find $PATH_TO_SEARCH > $FZ_TEMP_FOLDER
 
+if [[ -z $SEARCH_NAMES ]]; then
+  INTERACTIVE_MODE=1
+fi
 
-
-
+if [[ -n $INTERACTIVE_MODE ]]; then
+  run_interactive
+  exit 0
+else
+  for i in ${SEARCH_NAMES[@]}; do
+    #echo $i
+    #read
+    #cat $FZ_TEMP_FOLDER
+    grep $i $FZ_TEMP_FOLDER > $FZ_TEMP_BUFFER
+    cat $FZ_TEMP_BUFFER > $FZ_TEMP_FOLDER 
+  done
+  cat $FZ_TEMP_FOLDER
+fi
 
