@@ -1,0 +1,63 @@
+#! /usr/bin/env bash
+
+
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0 )
+__DESCRIPTION="A super simple fuzzy searcher implemented in bash"
+
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -p            Path to search, default is current directory
+
+
+    This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts ":hvp:" opt
+do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  p )
+    PATH_TO_SEARCH=$OPTARG
+    ;;
+
+  * )  echo -e "\n  Option does not exist : $OPTARG\n"
+      usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+function run_interactive() {
+  while : ; do
+    echo
+  done
+}
+FOLDER_NAME=$1
+FZ_TEMP_FOLDER=/tmp/fz.tmp
+
+if [[ -z $FOLDER_NAME ]]; then
+  INTERACTIVE_MODE=1
+fi
+
+find $PATH_TO_SEARCH > $FZ_TEMP_FOLDER
+
+
+
+
+

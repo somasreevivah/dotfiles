@@ -1,4 +1,4 @@
 
 
 alias vip="vim +CtrlP"
-alias vi="vim -u /dev/null"
+alias vi="vim -N -u /dev/null +'set backspace=indent,eol,start'"
