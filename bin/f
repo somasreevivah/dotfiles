@@ -72,7 +72,6 @@ else
   for i in ${SEARCH_NAMES[@]}; do
     regex="${regex}${i}.*"
   done
-  echo $regex
   grep -E "$regex" $FZ_TEMP_FOLDER
   #for i in ${SEARCH_NAMES[@]}; do
     ##echo $i
