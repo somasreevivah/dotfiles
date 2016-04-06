@@ -68,13 +68,19 @@ if [[ -n $INTERACTIVE_MODE ]]; then
   run_interactive
   exit 0
 else
+  regex=
   for i in ${SEARCH_NAMES[@]}; do
-    #echo $i
-    #read
-    #cat $FZ_TEMP_FOLDER
-    grep $i $FZ_TEMP_FOLDER > $FZ_TEMP_BUFFER
-    cat $FZ_TEMP_BUFFER > $FZ_TEMP_FOLDER 
+    regex="${regex}${i}.*"
   done
-  cat $FZ_TEMP_FOLDER
+  echo $regex
+  grep -E "$regex" $FZ_TEMP_FOLDER
+  #for i in ${SEARCH_NAMES[@]}; do
+    ##echo $i
+    ##read
+    ##cat $FZ_TEMP_FOLDER
+    #grep $i $FZ_TEMP_FOLDER > $FZ_TEMP_BUFFER
+    #cat $FZ_TEMP_BUFFER > $FZ_TEMP_FOLDER 
+  #done
+  #cat $FZ_TEMP_FOLDER
 fi
 
