@@ -48,10 +48,7 @@ done
 shift $(($OPTIND-1))
 
 function run_interactive() {
-  local search_input=
-  local search_buffer="words"
-  while : ; do
-    echo <<EOF
+  echo <<EOF
  _______________________________________ 
 / Interactive mode not yet implemented, \
 \ sorry!                                /
@@ -62,6 +59,10 @@ function run_interactive() {
                 ||----w |
                 ||     ||
 EOF
+  local search_input=
+  local search_buffer="words"
+  exit 0
+  while : ; do
     read -p "Input: " -e -i $search_buffer search_input
     search_buffer=$search_buffer$search_input
     sleep 1
