@@ -48,7 +48,7 @@ done
 shift $(($OPTIND-1))
 
 function run_interactive() {
-  echo <<EOF
+  echo '
  _______________________________________ 
 / Interactive mode not yet implemented, \
 \ sorry!                                /
@@ -58,10 +58,10 @@ function run_interactive() {
             (__)\       )\/\
                 ||----w |
                 ||     ||
-EOF
+'
+  exit 0
   local search_input=
   local search_buffer="words"
-  exit 0
   while : ; do
     read -p "Input: " -e -i $search_buffer search_input
     search_buffer=$search_buffer$search_input
@@ -78,7 +78,6 @@ find $PATH_TO_SEARCH > $FZ_TEMP_FOLDER
 
 if [[ -n $INTERACTIVE_MODE ]]; then
   run_interactive
-  exit 0
 else
   regex=
   for i in ${SEARCH_NAMES[@]}; do
