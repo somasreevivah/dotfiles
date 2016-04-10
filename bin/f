@@ -73,7 +73,7 @@ SEARCH_NAMES=$@
 FZ_TEMP_FOLDER=/tmp/fz.tmp
 FZ_TEMP_BUFFER=/tmp/fz.buf.tmp
 
-find $PATH_TO_SEARCH > $FZ_TEMP_FOLDER
+find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
 
 
 if [[ -n $INTERACTIVE_MODE ]]; then
