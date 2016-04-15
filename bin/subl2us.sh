@@ -63,6 +63,7 @@ for file in $FILES ; do
     | sed "s/<!\[CDATA\[//"\
     | sed "s/\]\]>//" \
     | sed "s/snippet\s\+\(\S*\)\s\(.*\+\)\s\+b/snippet \1 \"\2\" b/" \
+    | sed "s/snippet\s\+\(\S*\)\s\+b/snippet \1 \"\" b/" \
     > $SNIPPET_FILE
 
 done
