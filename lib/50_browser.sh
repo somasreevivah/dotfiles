@@ -1,7 +1,11 @@
 
-if [[ $TERM = "linux" ]]; then
+if [[ $TERM = "linux" || $TERM = "screen" ]]; then
   which lynx &> /dev/null && export BROWSER="lynx"
 else
-  dfs::is_osx && export BROWSER="open -a Safari"
+  if dfs::is_osx ; then
+    export BROWSER="open -a Safari"
+  else
+    export BROWSER="firefox"
+  fi
 fi
 
