@@ -6,6 +6,9 @@ do
   search="$search%20$term"
 done
 url="http://www.google.com/search?q=$search"
-[[ $TERM = "xterm" ]] && open -a Safari $url
-[[ $TERM = "screen" ]] && lynx $url
+
+#[[ $TERM = "xterm" ]] && open -a Safari $url
+#[[ $TERM = "screen" ]] && lynx $url
+
+[[ -n $BROWSER ]] && $BROWSER $url
 
