@@ -13,21 +13,21 @@ INTERFACE="eth1"
 
 
 function vprint (){
-	if test -n $VERBOSE; then
-		echo $@
-	fi
+  if test -n $VERBOSE; then
+    echo $@
+  fi
 }
 
 function usage ()
 {
-	echo "Usage :  $0 [options] [--]
+  echo "Usage :  $0 [options] [--]
 
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -s        	  SSID of the network to connect to 
+    -s            SSID of the network to connect to
     -l|list       List saved configuration files
-    -q|quiet   	  Quiet mode, less verbose"
+    -q|quiet       Quiet mode, less verbose"
 
 }    # ----------  end of function usage  ----------
 
@@ -38,41 +38,41 @@ list_configuration_files() {
 }
 
 function connect() {
-	vprint "Trying to connect"
-	if test -n "$1"; then	
-		check_ssid $1
-	else
-		check_wifi		
-	fi
-	connect_wpa
+  vprint "Trying to connect"
+  if test -n "$1"; then
+    check_ssid $1
+  else
+    check_wifi
+  fi
+  connect_wpa
 }
 
 function connect_wpa() {
-	if test -n "$CONF_FILE"; then
-		sudo wpa_supplicant -B -i $INTERFACE -D wext -c $CONF_FILE
-		sudo dhclient $INTERFACE
-	else
-		echo "Configuration file not found"
-		exit 1
-	fi
+  if test -n "$CONF_FILE"; then
+    sudo wpa_supplicant -B -i $INTERFACE -D wext -c $CONF_FILE
+    sudo dhclient $INTERFACE
+  else
+    echo "Configuration file not found"
+    exit 1
+  fi
 }
 
 function check_ssid() {
-	vprint "Checking the config file for network $1 is already in the system"
-	ssid=$1
-	for my_ssid in /etc/wpa_supplicant/*.conf; do 
-		if [[ "$ssid.conf" = "$(basename $my_ssid)" ]]; then
-			vprint "Detected a saved configuration file for network $ssid"
-			CONF_FILE=$my_ssid
-		fi
-	done
+  vprint "Checking the config file for network $1 is already in the system"
+  ssid=$1
+  for my_ssid in /etc/wpa_supplicant/*.conf; do
+    if [[ "$ssid.conf" = "$(basename $my_ssid)" ]]; then
+      vprint "Detected a saved configuration file for network $ssid"
+      CONF_FILE=$my_ssid
+    fi
+  done
 }
 
 function check_wifi() {
-	vprint "Checking if a config file for current networks exists"
-	for ssid in $( sudo iwlist scan | grep ESSID | sed -e "s/ESSID://" -e "s/\"//g" | cat); do 
-		check_ssid $ssid
-	done
+  vprint "Checking if a config file for current networks exists"
+  for ssid in $( sudo iwlist scan | grep ESSID | sed -e "s/ESSID://" -e "s/\"//g" | cat); do
+    check_ssid $ssid
+  done
 }
 
 
@@ -84,22 +84,39 @@ while getopts ":hvqs:l" opt
 do
   case $opt in
 
-	h|help     )  usage; exit 0   ;;
+  h|help     )  usage; exit 0   ;;
 
-	v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+  v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-	q|quiet  )  VERBOSE=""   ;;
+  q|quiet  )  VERBOSE=""   ;;
 
-	l|list  )  list_configuration_files  ;;
+  l|list  )  list_configuration_files  ; exit 0;;
 
-	s|ssid  )  
-		echo $OPTARG
-		connect $OPTARG	
-	;;
+  s|ssid  )
+    echo $OPTARG
+    connect $OPTARG
+    exit 0
+  ;;
 
-	\? )  echo -e "\n  Option does not exist : $OPTARG\n"; usage; exit 1   ;;
-	: )  echo -e "Option -$OPTARG requires an argument";  exit 1 ;;
+  \? )  echo -e "\n  Option does not exist : $OPTARG\n"; usage; exit 1   ;;
+  : )  echo -e "Option -$OPTARG requires an argument";  exit 1 ;;
 
   esac    # --- end of case ---
 done
 shift $(($OPTIND-1))
+
+
+
+#####################################
+#  SELECT LOOP FOR SIMPLE CHOOSING  #
+#####################################
+
+PS3="\033[1;97mWhich to connect to?  \033[0m"
+select ssid in $( list_configuration_files ); do
+  echo "You have selected $ssid, connecting to it..."
+  connect $ssid
+  exit 0
+done
+
+
+
