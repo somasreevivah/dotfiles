@@ -48,6 +48,7 @@ function connect() {
 }
 
 function connect_wpa() {
+  [[ -n $1 ]] && CONF_FILE=$1
   if test -n "$CONF_FILE"; then
     sudo wpa_supplicant -B -i $INTERFACE -D wext -c $CONF_FILE
     sudo dhclient $INTERFACE
@@ -111,10 +112,10 @@ shift $(($OPTIND-1))
 #  SELECT LOOP FOR SIMPLE CHOOSING  #
 #####################################
 
-PS3="\033[1;97mWhich to connect to?  \033[0m"
+PS3="Which to connect to?  "
 select ssid in $( list_configuration_files ); do
   echo "You have selected $ssid, connecting to it..."
-  connect $ssid
+  connect_wpa $ssid
   exit 0
 done
 
