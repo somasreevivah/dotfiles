@@ -27,9 +27,15 @@ function usage ()
     -v|version    Display script version
     -s            SSID of the network to connect to
     -l|list       List saved configuration files
-    -q|quiet       Quiet mode, less verbose"
+    -q|quiet      Quiet mode, less verbose
+    -w            List wireless connections
+    "
 
 }    # ----------  end of function usage  ----------
+
+function list_wireless_connections() {
+  sudo iwlist eth1 scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
+}
 
 list_configuration_files() {
   for file in /etc/wpa_supplicant/*.conf; do
@@ -81,7 +87,7 @@ function check_wifi() {
 #                    HANDLE COMMAND LINE ARGUMENTS                    #
 #######################################################################
 
-while getopts ":hvqs:l" opt
+while getopts ":hvqs:lw" opt
 do
   case $opt in
 
@@ -92,6 +98,8 @@ do
   q|quiet  )  VERBOSE=""   ;;
 
   l|list  )  list_configuration_files  ; exit 0;;
+
+  w )  list_wireless_connections  ; exit 0;;
 
   s|ssid  )
     echo $OPTARG
