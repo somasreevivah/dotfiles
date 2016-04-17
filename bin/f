@@ -17,7 +17,7 @@ $(usage_head)
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -i            Interactive mode
+    -i            Case insensitive search
     -p            Path to search, default is current directory
 
 
@@ -34,7 +34,7 @@ do
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
   i )
-    INTERACTIVE_MODE=1
+    CASE_INSENSITIVE_FLAG="-i"
     ;;
   p )
     PATH_TO_SEARCH=$OPTARG
@@ -47,28 +47,6 @@ do
 done
 shift $(($OPTIND-1))
 
-function run_interactive() {
-  echo '
- _______________________________________ 
-/ Interactive mode not yet implemented, \
-\ sorry!                                /
- --------------------------------------- 
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-'
-  exit 0
-  local search_input=
-  local search_buffer="words"
-  while : ; do
-    read -p "Input: " -e -i $search_buffer search_input
-    search_buffer=$search_buffer$search_input
-    sleep 1
-  done
-}
-
 SEARCH_NAMES=$@
 FZ_TEMP_FOLDER=/tmp/fz.tmp
 FZ_TEMP_BUFFER=/tmp/fz.buf.tmp
@@ -76,13 +54,8 @@ FZ_TEMP_BUFFER=/tmp/fz.buf.tmp
 find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
 
 
-if [[ -n $INTERACTIVE_MODE ]]; then
-  run_interactive
-else
-  regex=
-  for i in ${SEARCH_NAMES[@]}; do
-    regex="${regex}${i}.*"
-  done
-  grep -E "$regex" $FZ_TEMP_FOLDER
-fi
-
+regex=
+for i in ${SEARCH_NAMES[@]}; do
+  regex="${regex}${i}.*"
+done
+grep $CASE_INSENSITIVE_FLAG -E "$regex" $FZ_TEMP_FOLDER
