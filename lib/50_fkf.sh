@@ -11,7 +11,6 @@ test -s ~/.alias && . ~/.alias || true
 ulimit -s unlimited
 module purge
 module load  mpi.intel/5.1.2 ifort/16.0.1
-export OMP_NUM_THREADS=1
 
 # set p4vasp environment variables
 export PATH=$PATH:/home/gallo/opt/p4vasp/bin
@@ -35,3 +34,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 
 # ALIASES
 alias aba="ssh abakus01"
+
+export LANG=C
+export LC_CTYPE=C
+export OMP_NUM_THREADS=1
