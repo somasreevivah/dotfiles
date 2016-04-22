@@ -47,4 +47,7 @@ do
 done
 shift $(($OPTIND-1))
 
-./$1
+PROGRAM=$1
+shift 1
+
+./$PROGRAM $@
