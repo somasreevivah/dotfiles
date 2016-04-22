@@ -9,10 +9,19 @@ __OPTIONS=":hv"
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
 function usage ()
 {
-cat <<EOF
+cat <<"EOF"
 $(usage_head)
 
-    $__DESCRIPTION
+ _________________________________________ 
+/ Substitution for ./ because I am effing \
+\ lazy, gawd...                           /
+ ----------------------------------------- 
+        \   ^__^
+         \  (xo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
 
     Options:
     -h|help       Display this message
