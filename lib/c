@@ -1,10 +1,7 @@
-#! /usr/bin/env bash
-
 function c() {
 
-
 local __SCRIPT_VERSION="0.0.1"
-local __SCRIPT_NAME=$( basename $0 )
+local __SCRIPT_NAME=c
 local __DESCRIPTION="A super simple fuzzy 'cd' command using the fuzzy finder 'f'"
 
 
