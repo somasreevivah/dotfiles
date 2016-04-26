@@ -29,6 +29,8 @@ function usage ()
     -l|list       List saved configuration files
     -q|quiet      Quiet mode, less verbose
     -w            List wireless connections
+    -d            With dialog command.
+                  You must have 'dialog' installed.
     "
 
 }    # ----------  end of function usage  ----------
@@ -87,7 +89,7 @@ function check_wifi() {
 #                    HANDLE COMMAND LINE ARGUMENTS                    #
 #######################################################################
 
-while getopts ":hvqs:lw" opt
+while getopts ":hvqs:lwd" opt
 do
   case $opt in
 
@@ -96,6 +98,8 @@ do
   v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
   q|quiet  )  VERBOSE=""   ;;
+
+  d )  WITH_DIALOG=1   ;;
 
   l|list  )  list_configuration_files  ; exit 0;;
 
@@ -121,11 +125,18 @@ shift $(($OPTIND-1))
 #####################################
 
 PS3="Which to connect to?  "
-select ssid in $( list_configuration_files ); do
-  echo "You have selected $ssid, connecting to it..."
-  connect_wpa $ssid
-  exit 0
-done
+if [[ -z $WITH_DIALOG ]]; then
+  select ssid_path in $( list_configuration_files ); do
+    echo "You have selected $ssid_path, connecting to it..."
+    connect_wpa $ssid_path
+    exit 0
+  done
+else
+  dialog --radiolist "$PS3 (press space to select)" 80 90 70 $( for i in $(list_configuration_files); do echo -n "$(echo $i)" "$i" "off" ; done ) 2> /tmp/dialog
+  ssid_name=$(cat /tmp/dialog)
+  dialog --msgbox "You chose $ssid_name, we will be connecting..." 30 50
+  connect_wpa $ssid_name && dialog --msgbox "Connection established" || dialog --msgbox "Could not connect, check stuff up"
+fi
 
 
 
