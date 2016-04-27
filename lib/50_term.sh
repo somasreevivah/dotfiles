@@ -16,4 +16,4 @@
 #/* -/+ulc                       turn off/on display of underline as color */
 #/**************************************************************************/
 
-alias xterm="xterm -bg black -cr yellow -fg green"
+#alias xterm="xterm -bg black -cr yellow -fg green"
