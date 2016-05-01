@@ -29,6 +29,7 @@ function usage ()
     -l|list       List saved configuration files
     -q|quiet      Quiet mode, less verbose
     -w            List wireless connections
+    -i            Interface, default is $INTERFACE
     -d            With dialog command.
                   You must have 'dialog' installed.
     "
@@ -36,7 +37,7 @@ function usage ()
 }    # ----------  end of function usage  ----------
 
 function list_wireless_connections() {
-  sudo iwlist eth1 scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
+  sudo iwlist $INTERFACE scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
 }
 
 list_configuration_files() {
@@ -100,6 +101,8 @@ do
   q|quiet  )  VERBOSE=""   ;;
 
   d )  WITH_DIALOG=1   ;;
+
+  i )  INTERFACE=$OPTARG   ;;
 
   l|list  )  list_configuration_files  ; exit 0;;
 
