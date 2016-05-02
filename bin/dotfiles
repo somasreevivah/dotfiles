@@ -75,7 +75,7 @@ function dfs::is_on_mpi_fkf() {
   [[ $(hostname) = pccq* || $(hostname) = abakus* ]] || return 1
 }
 function dfs::is_cluster_abakus() {
-  [[ $(hostname) = abakus* ]] && return 0 || return 1
+  [[ $(hostname) = abakus* ]] || return 1
 }
 function get_os() {
   for os in osx ubuntu; do
