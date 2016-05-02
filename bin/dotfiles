@@ -74,6 +74,9 @@ function dfs::is_on_mpi_fkf() {
   #If the computer is at the mpi
   [[ $(hostname) = pccq* || $(hostname) = abakus* ]] || return 1
 }
+function dfs::is_cluster_abakus() {
+  [[ $(hostname) = abakus* ]] && return 0 || return 1
+}
 function get_os() {
   for os in osx ubuntu; do
     is_$os; [[ $? == ${1:-0} ]] && echo $os
