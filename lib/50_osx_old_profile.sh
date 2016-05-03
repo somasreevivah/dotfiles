@@ -1,5 +1,5 @@
 # OSX-only stuff. Abort if not OSX.
-dfs::is_osx || return 1
+dfs_is_osx || return 1
 
 
 expenses(){

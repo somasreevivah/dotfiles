@@ -49,32 +49,32 @@ shift $(($OPTIND-1))
 export DOTFILES=~/.dotfiles
 
 # Logging stuff.
-function dfs::header()   { echo -e "\n\033[1m$@\033[0m"; }
-function dfs::success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
-function dfs::error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
-function dfs::arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
+function dfs_header()   { echo -e "\n\033[1m$@\033[0m"; }
+function dfs_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+function dfs_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+function dfs_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 # For testing.
-function dfs::assert() {
+function dfs_assert() {
   local success modes equals actual expected
-  modes=(dfs::error dfs::success); equals=("!=" "=="); expected="$1"; shift
+  modes=(dfs_error dfs_success); equals=("!=" "=="); expected="$1"; shift
   actual="$("$@")"
   [[ "$actual" == "$expected" ]] && success=1 || success=0
   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
 }
 
 # OS Detection {{{1 #
-function dfs::is_osx() {
+function dfs_is_osx() {
   [[ "$OSTYPE" =~ ^darwin ]] || return 1
 }
-function dfs::is_ubuntu() {
+function dfs_is_ubuntu() {
   [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
 }
-function dfs::is_on_mpi_fkf() {
+function dfs_is_on_mpi_fkf() {
   #If the computer is at the mpi
   [[ $(hostname) = pccq* || $(hostname) = abakus* ]] || return 1
 }
-function dfs::is_cluster_abakus() {
+function dfs_is_cluster_abakus() {
   [[ $(hostname) = abakus* ]] || return 1
 }
 function get_os() {
@@ -85,7 +85,7 @@ function get_os() {
 
 # Remove an entry from $PATH
 # Based on http://stackoverflow.com/a/2108540/142339
-function dfs::path_remove() {
+function dfs_path_remove() {
   local arg path
   path=":$PATH:"
   for arg in "$@"; do path="${path//:$arg:/:}"; done
@@ -128,16 +128,16 @@ function _prompt_menu_iter() {
 }
 
 function _prompt_menu_draws() {
-  dfs::header "$1"
+  dfs_header "$1"
   _prompt_menu_iter _prompt_menu_draw "$2"
 }
 
 function _prompt_menu_draw() {
   local modes=(error success)
   if [[ "$3" ]]; then
-    dfs::${modes[$1]} "$(printf "%2d) %s\n" $(($2+1)) "${menu_options[$2]}")"
+    dfs_${modes[$1]} "$(printf "%2d) %s\n" $(($2+1)) "${menu_options[$2]}")"
   else
-    dfs::${modes[$1]} "${menu_options[$2]}"
+    dfs_${modes[$1]} "${menu_options[$2]}"
   fi
 }
 
@@ -225,12 +225,12 @@ function init_files() {
   done
 }
 function init_do() {
-  dfs::header "Sourcing $(basename "$2")"
+  dfs_header "Sourcing $(basename "$2")"
   source "$2"
 }
 
 # Copy files.
-function copy_header() { dfs::header "Copying files into home directory"; }
+function copy_header() { dfs_header "Copying files into home directory"; }
 function copy_test() {
   if [[ -e "$2" && ! "$(cmp "$1" "$2" 2> /dev/null)" ]]; then
     echo "same file"
@@ -239,17 +239,17 @@ function copy_test() {
   fi
 }
 function copy_do() {
-  dfs::success "Copying ~/$1."
+  dfs_success "Copying ~/$1."
   cp "$2" ~/
 }
 
 # Link files.
-function link_header() { dfs::header "Linking files into home directory"; }
+function link_header() { dfs_header "Linking files into home directory"; }
 function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
 function link_do() {
-  dfs::success "Linking ~/$1."
+  dfs_success "Linking ~/$1."
   ln -sf ${2#$HOME/} ~/.$1
 }
 
@@ -271,12 +271,12 @@ function do_stuff() {
       # If _test function returns a string, skip file and print that message.
       skip="$("$1_test" "$file" "$dest")"
       if [[ "$skip" ]]; then
-        dfs::error "Skipping ~/$base, $skip."
+        dfs_error "Skipping ~/$base, $skip."
         continue
       fi
       # Destination file already exists in ~/. Back it up!
       if [[ -e "$dest" ]]; then
-        dfs::arrow "Backing up ~/$base."
+        dfs_arrow "Backing up ~/$base."
         # Set backup flag, so a nice message can be shown at the end.
         backup=1
         # Create backup dir if it doesn't already exist.
@@ -294,21 +294,21 @@ function do_stuff() {
 export prompt_delay=1
 
 # Ensure that we can actually, like, compile anything.
-if [[ ! "$(type -P gcc)" ]] && dfs::is_osx; then
-  dfs::error "XCode or the Command Line Tools for XCode must be installed first."
+if [[ ! "$(type -P gcc)" ]] && dfs_is_osx; then
+  dfs_error "XCode or the Command Line Tools for XCode must be installed first."
   exit 1
 fi
 
 # If Git is not installed, install it (Ubuntu only, since Git comes standard
 # with recent XCode or CLT)
-if [[ ! "$(type -P git)" ]] && dfs::is_ubuntu; then
-  dfs::header "Installing Git"
+if [[ ! "$(type -P git)" ]] && dfs_is_ubuntu; then
+  dfs_header "Installing Git"
   sudo apt-get -qq install git-core
 fi
 
 # If Git isn't installed by now, something exploded. We gots to quit!
 if [[ ! "$(type -P git)" ]]; then
-  dfs::error "Git should be installed. It isn't. Aborting."
+  dfs_error "Git should be installed. It isn't. Aborting."
   exit 1
 fi
 
@@ -317,18 +317,18 @@ if [[ ! -d $DOTFILES ]]; then
   # $DOTFILES directory doesn't exist? Clone it!
   new_dotfiles_install=1
   prompt_delay=15
-  dfs::header "Downloading dotfiles"
+  dfs_header "Downloading dotfiles"
   git clone --recursive git://github.com/${github_user:-alejandrogallo}/dotfiles.git $DOTFILES
   cd $DOTFILES
 elif [[ "$1" != "restart" ]]; then
   # Make sure we have the latest files.
-  dfs::header "Updating dotfiles"
+  dfs_header "Updating dotfiles"
   cd $DOTFILES
   prev_head="$(git rev-parse HEAD)"
   git pull
   git submodule update --init --recursive --quiet
   if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
-    dfs::header "Changes detected, restarting script"
+    dfs_header "Changes detected, restarting script"
     exec "$0" "restart"
   fi
 fi
@@ -359,5 +359,5 @@ if [[ "$backup" ]]; then
 fi
 
 # All done!
-dfs::header "All done!"
+dfs_header "All done!"
 
