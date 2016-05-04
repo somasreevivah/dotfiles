@@ -35,9 +35,4 @@ PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 # ALIASES
 alias aba="ssh abakus01"
 
-if dfs_is_cluster_abakus; then
-  export LC_CTYPE=C
-else
-  export LC_ALL=en_GB.utf8
-fi
 export OMP_NUM_THREADS=1
