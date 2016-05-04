@@ -12,3 +12,6 @@ if dfs_is_cluster_abakus; then
 else
   export LC_ALL=en_GB.utf8
 fi
+
+export LANG=en_GB.utf8
+export LANGUAGE=en_GB.utf8
