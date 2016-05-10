@@ -190,7 +190,7 @@ set editor = 'vim'
 
 # set alias_file = '~/.muttrc'
 set folder = '~/mail' # default: '~/Mail'
-set from = 'alejandroamsg@gmail.com' # default: '(empty)'
+set from = 'aamsgallo@gmail.com' # default: '(empty)'
 set realname = 'Alejandro Gallo' # default: '(empty)'
 
 ##########
