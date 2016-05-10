@@ -421,8 +421,8 @@ set sort_re = yes
 # set entropy_file = '(empty)'
 # set ssl_ca_certificates_file = '(empty)'
 # set ssl_client_cert = '(empty)'
-# set ssl_force_tls = no
 # set ssl_min_dh_prime_bits = '0'
+set ssl_force_tls = yes
 set ssl_starttls = yes
 # set ssl_use_sslv2 = no
 # set ssl_use_sslv3 = no
@@ -460,10 +460,17 @@ set ssl_starttls = yes
 # set tmpdir = '(empty)'
 
 ##########
-# bindings {{{1
+# macros {{{1
 ##########
 
 macro index gi '=INBOX' 'Go to inbox'
+macro index gh '<enter-command>set content_type="text/html"<enter><enter-command>exec mail<enter>' 'Compose an html email'
+
+
+##########
+# bindings {{{1
+##########
+
 
 # Index {{{2
 bind index j next-entry
