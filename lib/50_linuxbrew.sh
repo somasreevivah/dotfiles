@@ -1,5 +1,5 @@
 
-[[ $(hostname) = pccq* ]] || return 0
+[[ $(hostname) = pccq* || $(hostname) = bridge ]] || return 0
 
 # Until LinuxBrew is fixed, the following is required.
 # See: https://github.com/Homebrew/linuxbrew/issues/47
