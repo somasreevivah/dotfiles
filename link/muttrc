@@ -5,6 +5,9 @@
 macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
 folder-hook 'gmail.com' 'source ~/.mutt/alejandroamsg.gmail'
 
+macro index <f3> '<change-folder>imaps://mx.fkf.mpg.de<enter>'
+folder-hook 'fkf.mpg.de' 'source ~/.mutt/gallo.fkf.mpg.de'
+
 
 #macro index <f3> '<change-folder>imaps://imap.otherdomain.tld<enter>'
 
@@ -41,7 +44,7 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set autoedit = no
 # set compose_format = '-- Mutt: Compose  [Approx. msg size: %l   Atts: %a]%>-'
 # set content_type = 'text/plain'
-# set edit_headers = no
+ set edit_headers # See headers while editing, default no
  set editor = 'vim'
 # set fast_reply = no
 # set fcc_clear = no
@@ -460,6 +463,8 @@ bind index k previous-entry
 bind index J next-thread
 bind index K previous-thread
 
+bind index l display-message
+
 bind index / search
 bind index ? search-reverse
 bind index n search-next
@@ -471,8 +476,8 @@ bind index G last-entry
 bind index \Cd half-down
 bind index \Cu half-up
 
-bind index l collapse-thread
-bind index z collapse-all
+bind index z collapse-thread
+bind index Z collapse-all
 
 bind index r reply
 bind index a group-reply
