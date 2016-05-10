@@ -23,7 +23,6 @@ set postponed=+postponed       # an 'internal' box for mutt basically
 # set alias_format = '%4n %2f %t %-10a   %r'
 # set hidden_host = no
 # set hostname = '(empty)'
-set realname = 'Alejandro Gallo' # default: '(empty)'
 # set reply_self = no
 # set reply_to = ask-yes
 # set reverse_name = no
@@ -44,7 +43,6 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set compose_format = '-- Mutt: Compose  [Approx. msg size: %l   Atts: %a]%>-'
 # set content_type = 'text/plain'
 set edit_headers # See headers while editing, default no
-set editor = 'vim'
 # set fast_reply = no
 # set fcc_clear = no
 # set followup_to = yes
@@ -160,7 +158,7 @@ set allow_ansi = yes # default: no
 # set arrow_cursor = no
 set ascii_chars = no
 # set braille_friendly = no
-set charset = 'utf-8'
+set charset = 'utf8'
 # set help = yes
 # set index_format = '%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
 # set markers = yes
@@ -181,6 +179,7 @@ set charset = 'utf-8'
 # editor {{{1
 ##########
 
+set editor = 'vim'
 # set escape = '~'
 # set visual = '(empty)'
 
@@ -191,6 +190,7 @@ set charset = 'utf-8'
 # set alias_file = '~/.muttrc'
 set folder = '~/mail' # default: '~/Mail'
 set from = 'alejandroamsg@gmail.com' # default: '(empty)'
+set realname = 'Alejandro Gallo' # default: '(empty)'
 
 ##########
 # folders {{{1
@@ -201,7 +201,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set delete_untag = yes
 # set folder_format = '%2C %t %N %F %2l %-8.8u %-8.8g %8s %d %f'
 # set keep_flagged = no
-# set mail_check = '5'
+set mail_check = '2'
 # set maildir_header_cache_verify = yes
 # set maildir_trash = no
 # set mark_old = yes
@@ -235,14 +235,6 @@ set mbox_type = 'mbox'
 # set imap_servernoise = yes
 # set imap_user = '(empty)'
 
-##########
-# mh {{{1
-##########
-
-# set mh_purge = no
-# set mh_seq_flagged = 'flagged'
-# set mh_seq_replied = 'replied'
-# set mh_seq_unseen = 'unseen'
 
 ##########
 # network {{{1
@@ -253,10 +245,6 @@ set mbox_type = 'mbox'
 # set preconnect = '(empty)'
 # set tunnel = '(empty)'
 # set use_ipv6 = yes
-
-##########
-# nntp {{{1
-##########
 
 
 ##########
@@ -320,7 +308,7 @@ set mbox_type = 'mbox'
 # reading {{{1
 ##########
 
-set assumed_charset = 'utf-8'
+set assumed_charset = 'utf8'
 # set attach_sep = '\n'
 # set attach_split = yes
 # set auto_tag = no
@@ -354,7 +342,7 @@ set assumed_charset = 'utf-8'
 # sending {{{1
 ##########
 
-# set allow_8bit = yes
+set allow_8bit = yes
 # set bounce = ask-yes
 # set bounce_delivered = yes
 # set copy = yes
@@ -369,14 +357,14 @@ set assumed_charset = 'utf-8'
 # set mix_entry_format = '%4n %c %-16s %a'
 # set mixmaster = 'mixmaster'
 # set record = '~/sent'
-# set send_charset = 'us-ascii:iso-8859-1:utf-8'
+set send_charset = 'utf-8:us-ascii:iso-8859-1'
 # set sendmail = '/usr/sbin/sendmail -oem -oi'
 # set sendmail_wait = '0'
 # set use_8bitmime = no
 # set use_envelope_from = no
-# set use_from = yes
-# set user_agent = yes
-# set write_bcc = yes
+set use_from = yes
+set user_agent = yes
+set write_bcc = yes
 
 ##########
 # smime {{{1
@@ -441,7 +429,7 @@ set ssl_starttls = yes
 # set header_cache = '(empty)'
 # set header_cache_compress = yes
 # set header_cache_pagesize = '16384'
-# set history = '10'
+set history = '0'
 # set locale = 'C'
 # set mailcap_sanitize = yes
 # set mask = '!^\.[^.]'
