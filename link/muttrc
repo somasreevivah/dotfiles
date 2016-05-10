@@ -1,5 +1,15 @@
 
 ##########
+# accounts {{{1
+##########
+macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
+folder-hook 'gmail.com' 'source ~/.mutt/alejandroamsg.gmail'
+
+
+#macro index <f3> '<change-folder>imaps://imap.otherdomain.tld<enter>'
+
+
+##########
 # addressing {{{1
 ##########
 
