@@ -110,7 +110,7 @@ set attach_charset = 'utf8' # default: '(empty)'
 # set postpone_encrypt = no
 # set postpone_encrypt_as = '(empty)'
 # set prompt_after = yes
-# set query_command = '(empty)'
+set query_command = 'echo pepe@gmail.com'
 # set query_format = '%4c %t %-25.25a %-25.25n %?e?(%e)?'
 # set quote_regexp = '^([ \t]*[|>:}#])+'
 # set read_inc = '10'
@@ -159,9 +159,9 @@ set attach_charset = 'utf8' # default: '(empty)'
 
 set allow_ansi = yes # default: no
 # set arrow_cursor = no
-# set ascii_chars = no
+set ascii_chars = no
 # set braille_friendly = no
-# set charset = '(empty)'
+set charset = 'utf-8'
 # set help = yes
 # set index_format = '%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
 # set markers = yes
@@ -314,7 +314,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # reading {{{1
 ##########
 
-# set assumed_charset = '(empty)'
+set assumed_charset = 'utf-8'
 # set attach_sep = '\n'
 # set attach_split = yes
 # set auto_tag = no
@@ -405,7 +405,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set sort_alias = 'alias'
 # set sort_aux = 'date'
 set sort_browser = 'date' # default: 'alpha'
-# set sort_re = yes
+set sort_re = yes
 
 ##########
 # ssl {{{1
@@ -456,6 +456,8 @@ set sort_browser = 'date' # default: 'alpha'
 ##########
 # bindings {{{1
 ##########
+
+macro index gi '=INBOX' 'Go to inbox'
 
 # Index
 bind index j next-entry
