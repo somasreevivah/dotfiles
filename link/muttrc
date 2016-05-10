@@ -1,6 +1,6 @@
 
 ##########
-# Category addressing {{{1
+# addressing {{{1
 ##########
 
 # set alias_format = '%4n %2f %t %-10a   %r'
@@ -14,13 +14,13 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set use_domain = yes
 
 ##########
-# Category attachments {{{1
+# attachments {{{1
 ##########
 
 # set attach_format = '%u%D%I %t%4n %T%.40d%> [%.7m/%.10M, %.6e%?C?, %C?, %s] '
 
 ##########
-# Category composing {{{1
+# composing {{{1
 ##########
 
 # set abort_nosubject = ask-yes
@@ -32,7 +32,7 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set compose_format = '-- Mutt: Compose  [Approx. msg size: %l   Atts: %a]%>-'
 # set content_type = 'text/plain'
 # set edit_headers = no
-# set editor = '(empty)'
+ set editor = 'vim'
 # set fast_reply = no
 # set fcc_clear = no
 # set followup_to = yes
@@ -62,7 +62,7 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set signature = '~/.signature'
 
 ##########
-# Category crypto {{{1
+# crypto {{{1
 ##########
 
 # set crypt_autoencrypt = no
@@ -77,7 +77,7 @@ set realname = 'Alejandro Gallo' # default: '(empty)'
 # set crypt_verify_sig = yes
 
 ##########
-# Category default {{{1
+# default {{{1
 ##########
 
 set attach_charset = 'utf8' # default: '(empty)'
@@ -141,7 +141,7 @@ set attach_charset = 'utf8' # default: '(empty)'
 # set wrap_headers = '78'
 
 ##########
-# Category display {{{1
+# display {{{1
 ##########
 
 set allow_ansi = yes # default: no
@@ -166,14 +166,14 @@ set allow_ansi = yes # default: no
 # set write_inc = '10'
 
 ##########
-# Category editor {{{1
+# editor {{{1
 ##########
 
 # set escape = '~'
 # set visual = '(empty)'
 
 ##########
-# Category essential {{{1
+# essential {{{1
 ##########
 
 # set alias_file = '~/.muttrc'
@@ -181,7 +181,7 @@ set folder = '~/mail' # default: '~/Mail'
 set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 
 ##########
-# Category folders {{{1
+# folders {{{1
 ##########
 
 # set confirmappend = yes
@@ -199,7 +199,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set spoolfile = '(empty)'
 
 ##########
-# Category imap {{{1
+# imap {{{1
 ##########
 
 # set imap_authenticators = '(empty)'
@@ -217,7 +217,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set imap_user = '(empty)'
 
 ##########
-# Category mh {{{1
+# mh {{{1
 ##########
 
 # set mh_purge = no
@@ -226,7 +226,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set mh_seq_unseen = 'unseen'
 
 ##########
-# Category network {{{1
+# network {{{1
 ##########
 
 # set connect_timeout = '30'
@@ -236,12 +236,12 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set use_ipv6 = yes
 
 ##########
-# Category nntp {{{1
+# nntp {{{1
 ##########
 
 
 ##########
-# Category patches {{{1
+# patches {{{1
 ##########
 
 # set history_file = '~/.mutthistory'
@@ -250,7 +250,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set smtp_url = '(empty)'
 
 ##########
-# Category pgp {{{1
+# pgp {{{1
 ##########
 
 # set pgp_auto_decode = no
@@ -284,7 +284,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set pgp_verify_key_command = '(empty)'
 
 ##########
-# Category pop3 {{{1
+# pop3 {{{1
 ##########
 
 # set pop_auth_try_all = yes
@@ -298,7 +298,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set pop_user = '(empty)'
 
 ##########
-# Category reading {{{1
+# reading {{{1
 ##########
 
 # set assumed_charset = '(empty)'
@@ -332,7 +332,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set wrapmargin = '0'
 
 ##########
-# Category sending {{{1
+# sending {{{1
 ##########
 
 # set allow_8bit = yes
@@ -360,7 +360,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set write_bcc = yes
 
 ##########
-# Category smime {{{1
+# smime {{{1
 ##########
 
 # set smime_ask_cert_label = yes
@@ -385,7 +385,7 @@ set from = 'alejandroamsg@gmail.com' # default: '(empty)'
 # set smime_verify_opaque_command = '(empty)'
 
 ##########
-# Category sorting {{{1
+# sorting {{{1
 ##########
 
 # set sort = 'date'
@@ -395,7 +395,7 @@ set sort_browser = 'date' # default: 'alpha'
 # set sort_re = yes
 
 ##########
-# Category ssl {{{1
+# ssl {{{1
 ##########
 
 # set certificate_file = '~/.mutt_certificates'
@@ -411,7 +411,7 @@ set sort_browser = 'date' # default: 'alpha'
 # set ssl_usesystemcerts = yes
 
 ##########
-# Category system {{{1
+# system {{{1
 ##########
 
 # set beep = yes
@@ -440,18 +440,106 @@ set sort_browser = 'date' # default: 'alpha'
 # set suspend = yes
 # set tmpdir = '(empty)'
 
-# Colors
+##########
+# bindings {{{1
+##########
 
-color attachment brightmagenta brightyellow
-color error      brightred    red
-color hdrdefault green        default
-color indicator  brightyellow red
-color markers    brightcyan   default
-color message    brightcyan   default
-color normal     default      default
-color quoted     brightblue   default
-color search     default      green
-color signature  red          default
-color status     yellow       blue
-color tilde      magenta      default
-color tree       magenta      default
+# Index
+bind index j next-entry
+bind index k previous-entry
+bind index J next-thread
+bind index K previous-thread
+
+bind index / search
+bind index ? search-reverse
+bind index n search-next
+bind index N search-opposite
+
+bind index gg first-entry
+bind index G last-entry
+
+bind index \Cd half-down
+bind index \Cu half-up
+
+bind index l collapse-thread
+bind index z collapse-all
+
+bind index r reply
+bind index a group-reply
+bind index L list-reply
+
+bind index h limit
+
+# '?' is used for search-opposite
+bind index \Ch help
+
+# Always start with threads collapsed and with the most recent thread selected
+push <collapse-all><last-entry>
+
+# Pager
+
+bind pager j next-line
+bind pager k previous-line
+
+# The mouse wheel seems to send <up><up><up>/<down><down><down> by default with
+# GNOME Terminal. Use it to scroll through messages.
+bind pager <down> next-line
+bind pager <up>   previous-line
+
+bind pager / search
+bind pager ? search-reverse
+bind pager n search-next
+bind pager N search-opposite
+
+bind pager gg top
+bind pager G bottom
+
+bind pager \Cd half-down
+bind pager \Cu half-up
+
+bind pager r reply
+bind pager a group-reply
+bind pager l list-reply
+bind pager L list-reply
+
+# '?' is used for search-opposite
+bind pager \Ch help
+
+
+# Colors {{{1
+color quoted    yellow     default
+color quoted1   cyan       default
+color quoted2   magenta    default
+color quoted3   green      default
+color quoted4   red        default
+
+color signature blue default
+color normal    white black
+color status    brightgreen blue
+color indicator brightyellow black
+color error     red black
+color tree      yellow black
+color attachment blue default
+#color index     cyan black (calomel.org)
+color header    green black .*
+color header    brightred  black (^From\:|^Reply-To\:)
+color header    brightyellow black (^To\:|^cc\:|^Cc\:)
+
+color body      magenta      default "(ftp|http|https)://[^ ]+"
+#color body      magenta      default [-a-z_0-9.]+@[-a-z_0-9.]+
+color body      brightgreen  default "^(gpg: )?Good signature"
+color body      brightgreen  default "^(gpg: )?encrypted"
+color body      brightred    default "^(gpg: )?Bad signature"
+color body      red          default "^(gpg: )?warning:"
+color body      red          default "^(gpg: ).*failed:"
+
+color message    magenta        default # info messages
+color search     brightyellow   red     # search matches
+color tilde      brightmagenta  default # ~ at bottom of msg
+color markers    red            default # + at beginning of wrapped lines
+color hdrdefault cyan           default # default header lines
+color bold       cyan           default # hiliting bold patterns in body
+color underline  cyan           default # hiliting underlined patterns in body
+
+color index     green          default  ~T      # Tagged
+color index     red            default  ~D      # Deletedcolor quoted    yellow     default
