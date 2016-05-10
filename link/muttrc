@@ -3,12 +3,13 @@
 # accounts {{{1
 ##########
 macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
-folder-hook 'gmail.com' 'source ~/.mutt/alejandroamsg.gmail'
+folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
+
 
 macro index <f3> '<change-folder>imaps://mx.fkf.mpg.de<enter>'
 folder-hook 'fkf.mpg.de' 'source ~/.mutt/gallo.fkf.mpg.de'
 
-set header_cache=~/.mail/mutt_cache/ # a much faster opening of mailboxes...
+set header_cache=~/mail/mutt_cache/ # a much faster opening of mailboxes...
 set spoolfile=+inbox    # incoming mails (~/.mail/inbox)
 set move=yes            # yes (move read mails automatically to $mbox)
 set keep_flagged=yes    # esc-f to mark message in spool, and it won't move to $mbox)
@@ -522,4 +523,6 @@ bind pager L list-reply
 # '?' is used for search-opposite
 bind pager \Ch help
 
+#  init {{{1 #
 
+source ~/.mutt/aamsgallo.gmail
