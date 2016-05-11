@@ -362,7 +362,11 @@ set send_charset = 'utf-8:us-ascii:iso-8859-1'
 # set sendmail = '/usr/sbin/sendmail -oem -oi'
 # set sendmail_wait = '0'
 # set use_8bitmime = no
-# set use_envelope_from = no
+
+# This adds the -f option when calling $sendmail to deliver the mail, forcing it to use the same address for the envelope as for the From: header field. 
+# https://dev.mutt.org/trac/wiki/MuttFaq/Header
+set use_envelope_from = yes
+
 set use_from = yes
 set user_agent = yes
 set write_bcc = yes
