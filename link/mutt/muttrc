@@ -343,7 +343,6 @@ set assumed_charset = 'utf8'
 # sending {{{1
 ##########
 
-set allow_8bit = yes
 # set bounce = ask-yes
 # set bounce_delivered = yes
 # set copy = yes
@@ -358,10 +357,11 @@ set allow_8bit = yes
 # set mix_entry_format = '%4n %c %-16s %a'
 # set mixmaster = 'mixmaster'
 # set record = '~/sent'
-set send_charset = 'utf-8:us-ascii:iso-8859-1'
-# set sendmail = '/usr/sbin/sendmail -oem -oi'
 # set sendmail_wait = '0'
 # set use_8bitmime = no
+set allow_8bit = yes
+set send_charset = 'utf-8:us-ascii:iso-8859-1'
+set sendmail = '/usr/sbin/sendmail -oem -oi'
 
 # This adds the -f option when calling $sendmail to deliver the mail, forcing it to use the same address for the envelope as for the From: header field. 
 # https://dev.mutt.org/trac/wiki/MuttFaq/Header
