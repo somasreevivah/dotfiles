@@ -43,7 +43,6 @@ set postponed=+postponed       # an 'internal' box for mutt basically
 # set autoedit = no
 # set compose_format = '-- Mutt: Compose  [Approx. msg size: %l   Atts: %a]%>-'
 # set content_type = 'text/plain'
-set edit_headers # See headers while editing, default no
 # set fast_reply = no
 # set fcc_clear = no
 # set followup_to = yes
@@ -71,6 +70,7 @@ set edit_headers # See headers while editing, default no
 # set sig_dashes = yes
 # set sig_on_top = no
 # set signature = '~/.signature'
+set edit_headers = yes # See headers while editing, default no
 
 ##########
 # crypto {{{1
