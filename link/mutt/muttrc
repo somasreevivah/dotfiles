@@ -457,6 +457,12 @@ macro index gh '<enter-command>set content_type="text/html"<enter><enter-command
 
 
 ##########
+# colors {{{1
+##########
+
+source ~/.mutt/mutt-colors-contrejour-dark-16.muttrc
+
+##########
 # bindings {{{1
 ##########
 
