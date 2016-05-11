@@ -91,7 +91,7 @@ set edit_headers = yes # See headers while editing, default no
 # default {{{1
 ##########
 
-set attach_charset = 'utf8' # default: '(empty)'
+set attach_charset = 'utf-8' # default: '(empty)'
 # set check_mbox_size = no
 # set crypt_confirmhook = yes
 # set crypt_opportunistic_encrypt = no
@@ -159,7 +159,7 @@ set allow_ansi = yes # default: no
 # set arrow_cursor = no
 set ascii_chars = no
 # set braille_friendly = no
-set charset = 'utf8'
+set charset = 'utf-8'
 # set help = yes
 # set index_format = '%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
 # set markers = yes
@@ -309,7 +309,7 @@ set mbox_type = 'mbox'
 # reading {{{1
 ##########
 
-set assumed_charset = 'utf8'
+set assumed_charset = 'utf-8'
 # set attach_sep = '\n'
 # set attach_split = yes
 # set auto_tag = no
