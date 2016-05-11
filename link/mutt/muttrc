@@ -108,7 +108,6 @@ set attach_charset = 'utf8' # default: '(empty)'
 # set postpone_encrypt = no
 # set postpone_encrypt_as = '(empty)'
 # set prompt_after = yes
-set query_command = 'echo pepe@gmail.com'
 # set query_format = '%4c %t %-25.25a %-25.25n %?e?(%e)?'
 # set quote_regexp = '^([ \t]*[|>:}#])+'
 # set read_inc = '10'
@@ -143,13 +142,14 @@ set query_command = 'echo pepe@gmail.com'
 # set text_flowed = no
 # set thorough_search = yes
 # set time_inc = '0'
-# set timeout = '600'
 # set to_chars = ' +TCFL'
 # set ts_enabled = no
 # set ts_icon_format = 'M%?n?AIL&ail?'
 # set ts_status_format = 'Mutt with %?m?%m messages&no messages?%?n? [%n NEW]?'
 # set wrap = '0'
 # set wrap_headers = '78'
+set query_command = 'echo pepe@gmail.com'
+set timeout = '10' # 10 seconds
 
 ##########
 # display {{{1
