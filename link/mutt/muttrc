@@ -526,6 +526,8 @@ bind pager G bottom
 bind pager \Cd half-down
 bind pager \Cu half-up
 
+bind index \Ct untag-pattern
+
 bind pager r reply
 bind pager a group-reply
 bind pager l list-reply
