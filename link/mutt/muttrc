@@ -148,7 +148,8 @@ set attach_charset = 'utf-8' # default: '(empty)'
 # set ts_status_format = 'Mutt with %?m?%m messages&no messages?%?n? [%n NEW]?'
 # set wrap = '0'
 # set wrap_headers = '78'
-set query_command = 'echo pepe@gmail.com'
+
+set query_command = 'grep %s ~/contacts/contacts.header'
 set timeout = '10' # 10 seconds
 
 ##########
