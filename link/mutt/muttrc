@@ -149,7 +149,7 @@ set attach_charset = 'utf-8' # default: '(empty)'
 # set wrap = '0'
 # set wrap_headers = '78'
 
-set query_command = 'grep %s ~/contacts/contacts.header'
+set query_command = 'grep -i %s ~/contacts/contacts.header'
 set timeout = '10' # 10 seconds
 
 ##########
