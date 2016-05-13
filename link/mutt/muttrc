@@ -526,7 +526,8 @@ bind pager G bottom
 bind pager \Cd half-down
 bind pager \Cu half-up
 
-bind index \Ct untag-pattern
+# from http://rhonda.deb.at/config/mutt/keys
+bind editor \cT complete-query     # complete address with query
 
 bind pager r reply
 bind pager a group-reply
