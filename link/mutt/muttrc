@@ -527,7 +527,8 @@ bind pager \Cd half-down
 bind pager \Cu half-up
 
 # from http://rhonda.deb.at/config/mutt/keys
-bind editor \cT complete-query     # complete address with query
+#bind editor \cT complete-query     # complete address with query
+bind editor \cx complete-query     # complete address with query
 
 bind pager r reply
 bind pager a group-reply
