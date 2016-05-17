@@ -1,8 +1,6 @@
 #! /usr/bin/env bash
 
 
-
-
 search_string=
 for term in $@
 do
