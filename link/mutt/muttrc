@@ -538,7 +538,7 @@ bind pager L list-reply
 # '?' is used for search-opposite
 bind pager \Ch help
 
-bind index G imap-fetch-mail
+#bind index G imap-fetch-mail
 
 #  init {{{1 #
 source ~/.mutt/aamsgallo.gmail
