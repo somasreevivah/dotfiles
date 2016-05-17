@@ -12,7 +12,7 @@ done
 #  From bibtexsearch.com  #
 ###########################
 
-curl "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
+curl -s "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
   jq  ".[] | ._source.bibtex" | \
   sed "s/\\\t/  /g" | \
   sed "s/\\\n/\n/g" | \
