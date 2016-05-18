@@ -12,7 +12,9 @@ done
 #  From bibtexsearch.com  #
 ###########################
 
-curl -s "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
+echo "% bibtexsearch.com"
+url="http://search.bibtexsearch.com/search?auth=web&q=$search_string"
+curl -s $url | \
   jq  ".[] | ._source.bibtex" | \
   sed "s/\\\t/  /g" | \
   sed "s/\\\n/\n/g" | \
@@ -24,7 +26,9 @@ curl -s "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
 ################
 
 
-curl -s http://export.arxiv.org/api/query?search_query=all:$search_string | \
+echo "% arxiv.org and arxiv2bibtex.org"
+url="http://export.arxiv.org/api/query?search_query=all:$search_string"
+curl -s $url | \
   grep pdf | \
   sed -E "s/.*\/pdf\/(\S+)\".*/\1/" | \
   while read i ; do 
