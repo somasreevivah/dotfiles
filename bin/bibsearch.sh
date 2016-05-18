@@ -17,3 +17,18 @@ curl -s "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
   sed "s/\\\t/  /g" | \
   sed "s/\\\n/\n/g" | \
   sed -e "s/\"@/@/g" -e "s/}\"/}/g" 
+
+
+################
+#  FROM arxiv  #
+################
+
+
+curl -s http://export.arxiv.org/api/query?search_query=all:$search_string | \
+  grep pdf | \
+  sed -E "s/.*\/pdf\/(\S+)\".*/\1/" | \
+  while read i ; do 
+    curl -s https://arxiv2bibtex.org/?q=$i&format=bibtex ; 
+  done | \
+    sed -n -e "/@.*{/,/}<\/textarea>/ p" | \
+    sed -e "s/<\/textarea>//"
