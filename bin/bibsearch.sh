@@ -20,7 +20,7 @@ curl -s "http://search.bibtexsearch.com/search?auth=web&q=$search_string" | \
 
 
 ################
-#  FROM arxiv  #
+#  From arxiv  #
 ################
 
 
