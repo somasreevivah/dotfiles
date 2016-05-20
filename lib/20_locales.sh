@@ -17,6 +17,10 @@ export LANGUAGE=en_US.UTF-8
 export LC_MESSAGES="C"
 export LC_CTYPE="C"
 
+if [[ -f /etc/default/locale ]]; then
+  cat /etc/default/locale | while read locale_line ; do eval "export $locale_line"; done
+fi
+
 #export LC_NUMERIC="en_US.UTF-8"
 #export LC_TIME="en_US.UTF-8"
 #export LC_MONETARY="en_US.UTF-8"
