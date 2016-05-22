@@ -149,7 +149,8 @@ set attach_charset = 'utf-8' # default: '(empty)'
 # set wrap = '0'
 # set wrap_headers = '78'
 
-set query_command = 'grep -i %s ~/contacts/contacts.header'
+set query_format = '%n %a %e'
+set query_command = "~/contacts/query '%s'"
 set timeout = '10' # 10 seconds
 
 ##########
@@ -157,10 +158,10 @@ set timeout = '10' # 10 seconds
 ##########
 
 set allow_ansi = yes # default: no
-# set arrow_cursor = no
 set ascii_chars = no
-# set braille_friendly = no
 set charset = 'utf-8'
+# set braille_friendly = no
+# set arrow_cursor = no
 # set help = yes
 # set index_format = '%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
 # set markers = yes
