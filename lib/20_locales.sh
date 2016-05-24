@@ -1,35 +1,26 @@
 
-##########################
-#  LOCALE CONFIGURATION  #
-##########################
-
-
-
+return
 
 #This variable governs the collation rules used for sorting and regular
 #expressions.  Setting the value to C can for example make the ls command sort
 #dotfiles first, followed by uppercase and lowercase filenames: 
-export LC_COLLATE="C"
+#export LC_COLLATE="C"
 
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
 
-export LC_MESSAGES="C"
-export LC_CTYPE="C"
 
 if [[ -f /etc/default/locale ]]; then
   cat /etc/default/locale | while read locale_line ; do eval "export $locale_line"; done
+else
+  export LANG=en_US.UTF-8
+  for LOC in $(locale -a) ; do
+    if [[ $LOC =~ "UTF-8" ]]; then
+      LC_ALL=$LOC
+      return 0
+    fi
+  done
+  export LC_ALL=C
 fi
 
-#export LC_NUMERIC="en_US.UTF-8"
-#export LC_TIME="en_US.UTF-8"
-#export LC_MONETARY="en_US.UTF-8"
-#export LC_PAPER="en_US.UTF-8"
-#export LC_NAME="en_US.UTF-8"
-#export LC_ADDRESS="en_US.UTF-8"
-#export LC_TELEPHONE="en_US.UTF-8"
-#export LC_MEASUREMENT="en_US.UTF-8"
-#export LC_IDENTIFICATION="en_US.UTF-8"
 
 
 #LC_ALL is the only LC_* variable, which cannot be set in locale.conf files: it
