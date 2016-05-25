@@ -70,7 +70,7 @@ color index  black   red   "~D"  # deleted messages
 color hdrdefault  brightgreen  default
 color header      brightgreen  default  "^"
 # Strong
-color header      brightblue   default  "^(From)"
+color header      magenta   default  "^(From)"
 # Highlight
 color header      cyan    default  "^(Subject)"
 
