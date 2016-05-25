@@ -541,5 +541,3 @@ bind pager \Ch help
 
 #bind index G imap-fetch-mail
 
-#  init {{{1 #
-source ~/.mutt/aamsgallo.gmail
