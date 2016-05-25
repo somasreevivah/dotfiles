@@ -6,12 +6,15 @@
 # §3.7 Using color and mono video attributes <http://www.mutt.org/doc/manual/manual-3.html#ss3.7>
 #
 
+# Colors include: white, black, green, magenta, blue, cyan,
+# yellow, red, default, colorN.
+
 ## Base
 color normal      brightyellow  default # softer, bold
 
 ## Weak
 color tilde       brightgreen  default  # `~` padding at the end of pager
-color attachment  brightgreen  default
+color attachment  yellow  default
 color tree        brightgreen  default  # arrow in threads
 color signature   brightgreen  default
 color markers     brightgreen  default  # `+` wrap indicator in pager
@@ -37,15 +40,16 @@ color index  default  default  "~v~(!~N)"  # collapsed thread with no unread
 color index  default  default  "~Q"        # messages that have been replied to
 
 ## Strong
-color index  brightgreen   default  "(~U|~N|~O)"     # unread, new, old messages
-color index  brightgreen   default  "~v~(~U|~N|~O)"  # collapsed thread with unread
+#color index  brightgreen   default  "(~U|~N|~O)"     # unread, new, old messages
+color index  brightgreen   default  "(~U|~N)"     # unread, new, old messages
+color index  brightgreen   default  "~v~(~U|~N)"  # collapsed thread with unread
 
 ## Highlight
 ### Trusted
 #color index  cyan     default  "~g"  # PGP signed messages
 #color index  cyan     default  "~G"  # PGP encrypted messages
 
-color index  green     default  "~b \"(alejandro|gallo|aamsgallo|agallo)\" !~p !~P" # messages which mention my name in the body
+color index  default     default  "~b \"(alejandro|gallo|aamsgallo|agallo)\" !~p !~P" # messages which mention my name in the body
 #
 ### Odd
 color index  yellow  default  "~E"  # past Expires: header date
