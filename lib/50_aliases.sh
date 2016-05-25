@@ -1,0 +1,3 @@
+
+
+alias octave="octave --silent"
