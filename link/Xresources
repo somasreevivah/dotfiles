@@ -2,4 +2,4 @@
 XTerm*background:black
 XTerm*foreground:white
 XTerm*cursorColor:red
-XTerm*faceSize:30
+xterm*font:     *-fixed-*-*-*-18-*
