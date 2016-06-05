@@ -244,12 +244,22 @@ function copy_do() {
 }
 
 # Link files.
+function link_config_header() { dfs_header "Linking files into config directory"; }
+function link_config_test() {
+  [[ "$1" -ef "$2" ]] && echo "same file"
+}
+function link_config_do() {
+  dfs_success "Linking ~/.config/$1."
+  ln -sf ../${2#$HOME/} ~/.config/$1
+}
+
+# Link files.
 function link_header() { dfs_header "Linking files into home directory"; }
 function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
 function link_do() {
-  dfs_success "Linking ~/$1."
+  dfs_success "Linking ~/.$1."
   ln -sf ${2#$HOME/} ~/.$1
 }
 
@@ -351,6 +361,7 @@ backup=
 # Execute code for each file in these subdirectories.
 do_stuff "copy"
 do_stuff "link"
+do_stuff "link_config"
 do_stuff "init"
 
 # Alert if backups were made.
