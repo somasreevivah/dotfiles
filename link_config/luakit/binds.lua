@@ -343,10 +343,10 @@ add_binds("normal", {
     key({"Control"}, "Page_Down", "Go to next tab.",
         function (w) w:next_tab() end),
 
-    key({"Control"}, "Tab", "Go to next tab.",
+    key({"Control"}, "n", "Go to next tab.",
         function (w) w:next_tab() end),
 
-    key({"Shift","Control"}, "Tab", "Go to previous tab.",
+    key({"Control"}, "p", "Go to previous tab.",
         function (w) w:prev_tab() end),
 
     buf("^gT$", "Go to previous tab.",
