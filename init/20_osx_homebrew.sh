@@ -37,3 +37,7 @@ function brew_install_recipes() {
     done
   fi
 }
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
