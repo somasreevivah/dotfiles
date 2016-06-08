@@ -1,42 +1,7 @@
-let INFO = xml`
-<plugin name="Inspector" version="0.3"
-        href="http://github.com/vimpr/vimperator-plugins/raw/master/inspector.js"
-        summary="run DOM Inspector"
-        xmlns="http://vimperator.org/namespaces/liberator">
-  <author email="teramako@gmail.com">teramako</author>
-  <license>MPL 1.1/GPL 2.0/LGPL 2.1</license>
-  <project name="Vimperator" minVersion="2.3"/>
-  <p>
-    run DOM Inspector.
-    Of caorse, needs DOM Inspector.
-  </p>
-  <item>
-    <tags>:inspect</tags>
-    <spec>:inspect<oa>!</oa> #<a>id</a></spec>
-    <description>
-      <p>inspect the element of <a>id</a> in browser content</p>
-      <p>if bang (<a>!</a>) is exists, inspect in firefox instead.</p>
-    </description>
-  </item>
-  <item>
-    <tags>:inspect</tags>
-    <spec>:inpeect <a>expr</a></spec>
-    <description>
-      <p>inspect the return value of evaluated the <a>expr</a></p>
-    </description>
-  </item>
-</plugin>`;
 
 
 var inspectorID = "inspector@mozilla.org";
-if (window.AddonManager) {
-  AddonManager.getAddonByID(inspectorID, function(ext){
-    if (ext.isActive)
-      init();
-  });
-} else if (Application.extensions.has(inspectorID) && Application.extensions.get(inspectorID).enabled) {
-  init();
-}
+init();
 
 function init(){
 
@@ -67,7 +32,7 @@ function getIDList(filter, isChrome){
 var options = [
   [["-frame","-f"], commands.OPTION_NOARG]
 ];
-commands.addUserCommand(["inspect","dominspect"],"run DOM Inspector",
+commands.add(["inspect","dominspect"],"run DOM Inspector",
   function(args){
     var arg = args[0];
     var doc = args.bang ? document : content.document;

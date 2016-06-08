@@ -2,4 +2,8 @@
 
 source! /home/gallo/.vimperatorrc.local
 
+
+" go tp the last tab opened for toggling
+noremap g; <C-^>
+
 " vim: set ft=vimperator:
