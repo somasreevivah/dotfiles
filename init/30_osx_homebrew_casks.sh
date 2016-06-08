@@ -1,6 +1,11 @@
 # OSX-only stuff. Abort if not OSX.
 dfs_is_osx || return 1
 
+if [[ $(whoami) =~ st* ]]; then
+  export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications --caskroom=$HOME/local/"
+fi
+
+
 # Exit if Homebrew is not installed.
 [[ ! "$(type -P brew)" ]] && dfs_error "Brew casks need Homebrew to install." && return 1
 
