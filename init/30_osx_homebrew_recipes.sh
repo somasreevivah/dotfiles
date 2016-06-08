@@ -9,9 +9,9 @@ recipes=(
   #android-platform-tools
   #ansible
   #bash
-  #cmatrix
-  #cowsay
-  #git
+  cmatrix
+  cowsay
+  git
   #git-extras
   #htop-osx
   #hub
@@ -24,8 +24,8 @@ recipes=(
   #ssh-copy-id
   #terminal-notifier
   #the_silver_searcher
-  #tree
-  #wget
+  tree
+  wget
 )
 
 brew_install_recipes
