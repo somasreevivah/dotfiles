@@ -103,7 +103,7 @@ bindsym $mod+b border toggle
 new_window pixel
 
 #wallpaper script
-exec set_wallpaper.sh
+exec_always ~/.dotfiles/bin/set_wallpaper.sh
 
 # focus the child container
 #bindsym $mod+d focus child

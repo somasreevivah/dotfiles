@@ -197,7 +197,7 @@ let INFO = xml`
     );
   }
 
-  commands.addUserCommand(
+  commands.add(
     ['epubreader'],
     'ePub Reader addon controler',
     function (args) {
