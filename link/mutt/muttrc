@@ -4,10 +4,11 @@
 ##########
 macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
 folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
+set folder="imaps://imap.gmail.com"
 
 
-macro index <f3> '<change-folder>imaps://mx.fkf.mpg.de<enter>'
-folder-hook 'fkf.mpg.de' 'source ~/.mutt/gallo.fkf.mpg.de'
+#macro index <f3> '<change-folder>imaps://mx.fkf.mpg.de<enter>'
+#folder-hook 'fkf.mpg.de' 'source ~/.mutt/gallo.fkf.mpg.de'
 
 set header_cache=~/mail/mutt_cache/ # a much faster opening of mailboxes...
 set spoolfile=+inbox    # incoming mails (~/.mail/inbox)
@@ -192,8 +193,6 @@ set editor = 'vim'
 
 # set alias_file = '~/.muttrc'
 set folder = '~/mail' # default: '~/Mail'
-set from = 'aamsgallo@gmail.com' # default: '(empty)'
-set realname = 'Alejandro Gallo' # default: '(empty)'
 
 ##########
 # folders {{{1
@@ -433,14 +432,14 @@ set ssl_starttls = yes
 # set default_hook = '~f %s !~P | (~P ~C %s)'
 # set dotlock_program = '/usr/local/bin/mutt_dotlock'
 # set gecos_mask = '^[^,]*'
-# set header_cache = '(empty)'
 # set header_cache_compress = yes
 # set header_cache_pagesize = '16384'
 set history = '0'
 # set locale = 'C'
 # set mailcap_sanitize = yes
 # set mask = '!^\.[^.]'
-# set message_cachedir = '(empty)'
+set message_cachedir =~/mail/mutt_cache/
+set header_cache=~/mail/mutt_cache/
 # set meta_key = no
 # set pipe_decode = no
 # set pipe_sep = '\n'

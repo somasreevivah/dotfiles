@@ -40,6 +40,12 @@ client.urgent           #e74c3c #e74c3c #ffffff #900000
 # kill focused window
 bindsym $mod+Shift+q kill
 
+#scratchpad config 
+bindsym $mod+Shift+minus move scratchpad
+#show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+
 # lock session
 bindsym $mod+Shift+x exec i3lock
 
