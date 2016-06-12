@@ -540,6 +540,9 @@ add_cmds({
     cmd({"javascript", "js"}, "Evaluate JavaScript snippet.",
         function (w, a) w.view:eval_js(a) end),
 
+    cmd({"invert", "inv"}, "Evaluate JavaScript snippet.",
+        function () w.view:eval_js("userscripts.INVERT_COLORS") end),
+
     -- Tab manipulation commands
     cmd("tab", "Execute command and open result in new tab.",
         function (w, a) w:new_tab() w:run_cmd(":" .. a) end),

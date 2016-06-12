@@ -1,6 +1,3 @@
-__SCRIPT_VERSION="0.0.1"
-__SCRIPT_NAME=$( basename $0 )
-__DESCRIPTION="Simple script to change volume"
 __OPTIONS=":hv"
 
 
@@ -44,19 +41,15 @@ shift $(($OPTIND-1))
 VOLUME_LEVEL=$1
 
 
-###############
-#  In debian  #
-###############
-if uname -a | grep -i debian &>/dev/null ; then
 
-  if [[ ! $VOLUME_LEVEL = *% ]]; then
-    VOLUME_LEVEL=$VOLUME_LEVEL'%'
-    arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
-  fi
+if [[ ! $VOLUME_LEVEL = *% ]]; then
+  VOLUME_LEVEL=$VOLUME_LEVEL'%'
+  arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
+fi
 
-  if which mixer &> /dev/null; then
-    error "This script uses mixer in debian, please install it\n\t sudo apt-get install amixer"
-    exit 1
-  fi
+if which amixer &> /dev/null; then
   amixer set Master $VOLUME_LEVEL
+else
+  error "This script uses mixer in debian, please install it\n\t sudo apt-get install amixer"
+  exit 1
 fi
