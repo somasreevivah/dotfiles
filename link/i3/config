@@ -40,6 +40,9 @@ client.urgent           #e74c3c #e74c3c #ffffff #900000
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# kill focused window
+bindsym $mod+Shift+w exec ~/.dotfiles/bin/set_wallpaper.sh
+
 #scratchpad config 
 bindsym $mod+Shift+minus move scratchpad
 #show the first scratchpad window
