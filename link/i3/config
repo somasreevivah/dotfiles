@@ -130,7 +130,7 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $windows+Return exec espeak stupid
+bindsym $windows+t exec "date +'%H %M' | sed -e 's/^0\+//g' -e 's/\s0/ /g' | espeak"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
