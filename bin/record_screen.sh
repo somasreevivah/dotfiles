@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 # NTSC 720x486 in columns 88x27
 
 DIRNAME=$(date | tr " " "_")
 mkdir -p $DIRNAME
 
-function create_video() {
+create_video() {
   echo "Putting together images ... "
   echo "Please wait ..."
   convert -antialias -resize 720x486! -delay 60 $DIRNAME/* CAPTURE_$DIRNAME.gif
