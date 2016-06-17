@@ -10,6 +10,10 @@ VERBOSE="true"
 CONF_FILE=""
 INTERFACE="eth1"
 
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 
 function vprint (){
@@ -26,6 +30,7 @@ function usage ()
     -h|help       Display this message
     -v|version    Display script version
     -s            SSID of the network to connect to
+    -i            Interface, default is $INTERFACE
     -l|list       List saved configuration files
     -q|quiet      Quiet mode, less verbose
     -w            List wireless connections
@@ -44,7 +49,7 @@ list_configuration_files() {
 }
 
 function connect() {
-  vprint "Trying to connect"
+  arrow "Trying to connect"
   if test -n "$1"; then
     check_ssid $1
   else
@@ -59,24 +64,24 @@ function connect_wpa() {
     sudo wpa_supplicant -B -i $INTERFACE -D wext -c $CONF_FILE
     sudo dhclient $INTERFACE
   else
-    echo "Configuration file not found"
+    error "Configuration file not found"
     exit 1
   fi
 }
 
 function check_ssid() {
-  vprint "Checking the config file for network $1 is already in the system"
+  arrow "Checking the config file for network $1 is already in the system"
   ssid=$1
   for my_ssid in /etc/wpa_supplicant/*.conf; do
     if [[ "$ssid.conf" = "$(basename $my_ssid)" ]]; then
-      vprint "Detected a saved configuration file for network $ssid"
+      success "Detected a saved configuration file for network $ssid"
       CONF_FILE=$my_ssid
     fi
   done
 }
 
 function check_wifi() {
-  vprint "Checking if a config file for current networks exists"
+  arrow "Checking if a config file for current networks exists"
   for ssid in $( sudo iwlist scan | grep ESSID | sed -e "s/ESSID://" -e "s/\"//g" | cat); do
     check_ssid $ssid
   done
@@ -87,7 +92,7 @@ function check_wifi() {
 #                    HANDLE COMMAND LINE ARGUMENTS                    #
 #######################################################################
 
-while getopts ":hvqs:lw" opt
+while getopts ":hvqs:lwi:" opt
 do
   case $opt in
 
@@ -96,6 +101,8 @@ do
   v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
   q|quiet  )  VERBOSE=""   ;;
+
+  i  )  INTERFACE=$OPTARG   ;;
 
   l|list  )  list_configuration_files  ; exit 0;;
 
@@ -122,7 +129,7 @@ shift $(($OPTIND-1))
 
 PS3="Which to connect to?  "
 select ssid in $( list_configuration_files ); do
-  echo "You have selected $ssid, connecting to it..."
+  arrow "You have selected $ssid, connecting to it..."
   connect_wpa $ssid
   exit 0
 done
