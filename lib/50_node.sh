@@ -14,12 +14,12 @@ npm_globals=(
 # Update npm and install global modules.
 function npm_install() {
   local installed modules
-  dfs::header "Updating npm"
+  dfs_header "Updating npm"
   npm update -g npm
   { pushd "$(npm config get prefix)/lib/node_modules"; installed=(*); popd; } >/dev/null
   modules=($(setdiff "${npm_globals[*]}" "${installed[*]}"))
   if (( ${#modules[@]} > 0 )); then
-    dfs::header "Installing Npm modules: ${modules[*]}"
+    dfs_header "Installing Npm modules: ${modules[*]}"
     npm install -g "${modules[@]}"
   fi
 }

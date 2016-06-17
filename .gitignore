@@ -26,3 +26,27 @@
 /link/elinks/bookmarks
 /link/elinks/*hist
 /link/elinks/elinks
+
+##########
+#  mutt  #
+##########
+/link/mutt/*gmail
+/link/mutt/*de
+/link/mutt/mutt
+
+/link/newsbeuter/newsbeuter
+/link/vimperator/vimperator
+/link_config/luakit/luakit
+
+
+link/newsbeuter/cache.db
+link/newsbeuter/history.cmdline
+link/newsbeuter/history.search
+link/newsbeuter/queue
+wallpapers/2-fractal-wallpaper.jpg
+wallpapers/WDF_2490814.jpg
+wallpapers/abstract-chemistry.jpeg
+wallpapers/abstract_cubes_desktop_1920x1200_hd-wallpaper-620701.jpg
+wallpapers/abstract_desktop_1600x1000_hd-wallpaper-538499.jpg
+wallpapers/autum_paint_by_tatasz-d9gvmo8.png.jpeg
+

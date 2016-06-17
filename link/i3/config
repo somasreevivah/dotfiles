@@ -10,12 +10,13 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
+set $windows Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 11
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -25,13 +26,35 @@ font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec xterm -bg black -cr yellow -fg green
 #bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec "xterm"
+#bindsym $mod+Return exec "which urxvt && urxvt || xterm"
+bindsym $mod+Return exec "gnome-terminal"
+
+# Colors
+# # class                 border  backgr. text    indicator
+#client.focused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
+client.focused          #2c3e50 #aa3e50 #00009c #2e9ef4
+client.unfocused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
+client.urgent           #e74c3c #e74c3c #ffffff #900000
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# kill focused window
+bindsym $mod+Shift+w exec ~/.dotfiles/bin/set_wallpaper.sh
+
+#scratchpad config 
+bindsym $mod+Shift+minus move scratchpad
+#show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
+
+# lock session
+bindsym $mod+Shift+x exec i3lock
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -88,6 +111,12 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+b border toggle
+#borders of windows will be default a pixel wide
+new_window pixel
+
+#wallpaper script
+exec_always ~/.dotfiles/bin/set_wallpaper.sh
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -103,6 +132,8 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+bindsym $windows+t exec "date +'%H %M' | sed -e 's/^0\+//g' -e 's/\s0/ /g' | espeak"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -152,5 +183,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        position top
+        status_command i3status --config ~/.i3/i3status.conf
+        #status_command py3status -c ~/.i3/i3status.conf
+        colors {
+                background #2c3e50
+                statusline #ffffff
+
+                separator #666666
+                active_workspace   #2c3e50 #2c3e50 #1abc9c
+                focused_workspace  #2c3e50 #2c3e50 #1abc9c
+                inactive_workspace #2c3e50 #2c3e50 #ecf0f1
+                urgent_workspace   #e74c3c #e74c3c #ecf0f1
+        }
 }

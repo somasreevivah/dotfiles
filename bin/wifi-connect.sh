@@ -34,12 +34,15 @@ function usage ()
     -l|list       List saved configuration files
     -q|quiet      Quiet mode, less verbose
     -w            List wireless connections
+    -i            Interface, default is $INTERFACE
+    -d            With dialog command.
+                  You must have 'dialog' installed.
     "
 
 }    # ----------  end of function usage  ----------
 
 function list_wireless_connections() {
-  sudo iwlist eth1 scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
+  sudo iwlist $INTERFACE scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
 }
 
 list_configuration_files() {
@@ -92,7 +95,7 @@ function check_wifi() {
 #                    HANDLE COMMAND LINE ARGUMENTS                    #
 #######################################################################
 
-while getopts ":hvqs:lwi:" opt
+while getopts ":hvqs:lwi:d" opt
 do
   case $opt in
 
@@ -102,7 +105,9 @@ do
 
   q|quiet  )  VERBOSE=""   ;;
 
-  i  )  INTERFACE=$OPTARG   ;;
+  d )  WITH_DIALOG=1   ;;
+
+  i )  INTERFACE=$OPTARG   ;;
 
   l|list  )  list_configuration_files  ; exit 0;;
 
@@ -128,11 +133,18 @@ shift $(($OPTIND-1))
 #####################################
 
 PS3="Which to connect to?  "
-select ssid in $( list_configuration_files ); do
-  arrow "You have selected $ssid, connecting to it..."
-  connect_wpa $ssid
-  exit 0
-done
+if [[ -z $WITH_DIALOG ]]; then
+  select ssid_path in $( list_configuration_files ); do
+    echo "You have selected $ssid_path, connecting to it..."
+    connect_wpa $ssid_path
+    exit 0
+  done
+else
+  dialog --radiolist "$PS3 (press space to select)" 80 90 70 $( for i in $(list_configuration_files); do echo -n "$(echo $i)" "$i" "off" ; done ) 2> /tmp/dialog
+  ssid_name=$(cat /tmp/dialog)
+  dialog --msgbox "You chose $ssid_name, we will be connecting..." 30 50
+  connect_wpa $ssid_name && dialog --msgbox "Connection established" || dialog --msgbox "Could not connect, check stuff up"
+fi
 
 
 

@@ -1,5 +1,5 @@
 # OSX-only stuff. Abort if not OSX.
-dfs::is_osx || return 1
+dfs_is_osx || return 1
 
 # Some tools look for XCode, even though they don't need it.
 # https://github.com/joyent/node/issues/3681

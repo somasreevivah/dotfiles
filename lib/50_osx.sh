@@ -1,8 +1,8 @@
 # OSX-only stuff. Abort if not OSX.
-dfs::is_osx || return 0
+dfs_is_osx || return 0
 
 # APPLE, Y U PUT /usr/bin B4 /usr/local/bin?!
-#PATH="/usr/local/bin:$(dfs::path_remove /usr/local/bin)"
+#PATH="/usr/local/bin:$(dfs_path_remove /usr/local/bin)"
 #export PATH
 
 # Trim new lines and copy to clipboard

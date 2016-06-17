@@ -1,10 +1,10 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
-dfs::is_ubuntu || return 1
+dfs_is_ubuntu || return 1
 
 
 
 # Update APT.
-dfs::header "Updating APT"
+dfs_header "Updating APT"
 sudo apt-get -qq update
 sudo apt-get -qq dist-upgrade
 
@@ -20,7 +20,7 @@ packages=(
 packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
 if (( ${#packages[@]} > 0 )); then
-  dfs::header "Installing APT packages: ${packages[*]}"
+  dfs_header "Installing APT packages: ${packages[*]}"
   for package in "${packages[@]}"; do
     sudo apt-get -qq install "$package"
   done

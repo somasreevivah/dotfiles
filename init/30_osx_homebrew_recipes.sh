@@ -1,17 +1,17 @@
 # OSX-only stuff. Abort if not OSX.
-dfs::is_osx || return 1
+dfs_is_osx || return 1
 
 # Exit if Homebrew is not installed.
-[[ ! "$(type -P brew)" ]] && dfs::error "Brew recipes need Homebrew to install." && return 1
+[[ ! "$(type -P brew)" ]] && dfs_error "Brew recipes need Homebrew to install." && return 1
 
 # Homebrew recipes
 recipes=(
   #android-platform-tools
   #ansible
   #bash
-  #cmatrix
-  #cowsay
-  #git
+  cmatrix
+  cowsay
+  git
   #git-extras
   #htop-osx
   #hub
@@ -24,8 +24,8 @@ recipes=(
   #ssh-copy-id
   #terminal-notifier
   #the_silver_searcher
-  #tree
-  #wget
+  tree
+  wget
 )
 
 brew_install_recipes

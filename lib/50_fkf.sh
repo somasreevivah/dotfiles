@@ -1,4 +1,4 @@
-dfs::is_on_mpi_fkf || return 1
+dfs_is_on_mpi_fkf || return 1
 
 ####################
 #  MaxPlanck stuff  #
@@ -35,6 +35,4 @@ PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 # ALIASES
 alias aba="ssh abakus01"
 
-export LANG=C
-export LC_CTYPE=C
 export OMP_NUM_THREADS=1

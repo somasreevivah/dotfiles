@@ -1,5 +1,5 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
-dfs::is_ubuntu || return 1
+dfs_is_ubuntu || return 1
 
 
 # colored GCC warnings and errors

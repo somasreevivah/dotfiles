@@ -1,5 +1,6 @@
 
 
-alias vi="vim -N -u /dev/null +'set backspace=indent,eol,start'"
+alias vi="vim -N -u $HOME/.vim/etc/vanillaish.rc"
 #Spartan vim
 alias vip="vim --cmd 'let NO_SPARTAN=1'"
+alias v="vip"

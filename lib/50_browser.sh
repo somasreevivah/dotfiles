@@ -7,7 +7,7 @@ if [[ $TERM = "linux" || $TERM = "screen"  || $TERM =~ "xterm" ]]; then
     export LYNX_CFG=$HOME/.lynx.cfg
   fi
 else
-  if dfs::is_osx ; then
+  if dfs_is_osx ; then
     export BROWSER="open -a Safari"
   else
     export BROWSER="firefox"

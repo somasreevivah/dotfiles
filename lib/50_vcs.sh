@@ -142,7 +142,7 @@ function gstat() {
 }
 
 # OSX-specific Git shortcuts
-if dfs::is_osx; then
+if dfs_is_osx; then
   alias gdk='git ksdiff'
   alias gdkc='gdk --cached'
   function gt() {
