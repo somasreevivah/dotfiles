@@ -1,5 +1,44 @@
 
+/****************************************************
+*  Reload the whole thing with xrdb ~/.Xresources  *
+****************************************************/
+
+/***********
+*  XTERM  *
+***********/
+
 XTerm*background:black
 XTerm*foreground:white
 XTerm*cursorColor:red
 xterm*font:     *-fixed-*-*-*-18-*
+
+
+
+
+
+/***********
+*  URxvt  *
+***********/
+
+
+!URxvt.font: xft:*:size=15
+urxvt.font: xft:Inconsolata:size=12
+
+*background:black
+*foreground:white
+
+
+URxvt.internalBorder:      0
+URxvt.externalBorder:      0
+
+URxvt.scrollBar:           false
+
+URxvt*fading:              30
+
+URxvt.perl-ext-common:     resize-font
+
+URxvt.resize-font.smaller: C-Up
+URxvt.resize-font.bigger:  C-Down
+
+URxvt.url-launcher:        /usr/bin/chromium
+URxvt.colorUL:             #7780a1
