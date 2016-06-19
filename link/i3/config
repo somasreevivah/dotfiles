@@ -32,7 +32,7 @@ focus_follows_mouse no
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec "xterm"
 #bindsym $mod+Return exec "which urxvt && urxvt || xterm"
-bindsym $mod+Return exec "which gnome-terminal || xterm"
+bindsym $mod+Return exec "which gnome-terminal && gnome-terminal || xterm"
 
 # Colors
 # # class                 border  backgr. text    indicator
