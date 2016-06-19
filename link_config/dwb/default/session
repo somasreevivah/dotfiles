@@ -1,9 +1,27 @@
 g:*default
--7 dwb:bookmarks dwb - Bookmarks
--6 dwb:keys dwb - Keys
--5 http://google/ Error
--4 https://www.google.de/?gfe_rd=cr&ei=lT1lV5aYJYXZ8AfOw5CYCQ&gws_rd=ssl Google
--3 https://www.google.de/#q=pepe pepe - Google-Suche
+-15 dwb:bookmarks dwb - Bookmarks
+-14 dwb:settings dwb - Settings
+-13 https://www.google.de/?gfe_rd=cr&ei=kkdlV82jFYHZ8AeC4JCgCQ&gws_rd=ssl Google
+-12 https://www.google.de/?gfe_rd=cr&ei=kkdlV82jFYHZ8AeC4JCgCQ&gws_rd=ssl#q=pepe pepe - Google-Suche
+-11 https://www.youtube.com/ 
+-10 https://www.youtube.com/playlist?list=PL0sHkSjKd2roowJbtmJJdBoCLq4eE6KMP 
+-9 https://www.youtube.com/watch?v=8R5ZwMjNfEY MARTIN TUNED KSFREAK's AUDI | Ksfreakwhatelse - YouTube
+-8 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl Google
+-7 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=volume+control+debian+ volume control debian - Google-Suche
+-6 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=volume+control+debian++jj volume control debian - Google-Suche
+-5 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=volume+control+debian+ mango raspberry pi - Google-Suche
+-4 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=mango+raspberry+pi 
+-3 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=nango+raspberry+pi+stackexchange+ nango raspberry pi stackexchange - Google-Suche
+-2 https://www.google.de/?gfe_rd=cr&ei=AlFlV7jkHYfZ8Afd1IGwAg&gws_rd=ssl#q=ognan+raspberry+pi+stackexchange+ ognan raspberry pi stackexchange - Google-Suche
+-1 http://raspberrypi.stackexchange.com/users/30989/ognan User Ognan - Raspberry Pi Stack Exchange
+0|0 http://raspberrypi.stackexchange.com/questions/31663/problem-wpa-supplicant-rapsberry-pi-2 wifi - Problem wpa_supplicant rapsberry pi 2 - Raspberry Pi Stack Exchange
+-5 dwb:bookmarks dwb - Bookmarks
+-4 https://www.google.de/?gfe_rd=cr&ei=bFNlV5-tCYbZ8AfOh4zgCA&gws_rd=ssl install firmware debian - Google-Suche
+-3 https://www.google.de/?gfe_rd=cr&ei=bFNlV5-tCYbZ8AfOh4zgCA&gws_rd=ssl#q=install+firmware+debian 
+-2 https://www.debian.org/releases/stable/i386/ch06s04.html.en 6.4. Loading Missing Firmware
+-1 https://packages.debian.org/search?keywords=firmware Debian -- Package Search Results -- firmware
+0|0 https://packages.debian.org/jessie/firmware-realtek Debian -- Details of package firmware-realtek in jessie
 -2 dwb:bookmarks dwb - Bookmarks
--1 dwb:searchengines dwb - Searchengines
-0|0 dwb:keys dwb - Keys
+-1 https://www.google.de/?gfe_rd=cr&ei=WFVlV87vCKSK8Qfi45LADA&gws_rd=ssl instagram - Google-Suche
+0|0 https://www.google.de/?gfe_rd=cr&ei=WFVlV87vCKSK8Qfi45LADA&gws_rd=ssl#q=install+realtek+firmware+debian install realtek firmware debian - Google-Suche
+1 http://unix.stackexchange.com/questions/49260/installing-wireless-driver-realtek-8188ce-on-debian-wheezy linux - Installing wireless driver (realtek 8188CE) on Debian wheezy - Unix & Linux Stack Exchange
