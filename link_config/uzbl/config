@@ -5,7 +5,7 @@
 
 # common directory locations
 set prefix      = @(echo $PREFIX)@
-set data_home   = @(echo $XDG_DATA_HOME)@
+set data_home   = @(echo $HOME/.config)@
 set cache_home  = @(echo $XDG_CACHE_HOME)@
 set config_home = @(echo $XDG_CONFIG_HOME)@
 
@@ -13,7 +13,7 @@ set config_home = @(echo $XDG_CONFIG_HOME)@
 set fifo_dir   = /tmp
 set socket_dir = /tmp
 
-set shell_cmd       = sh -c
+set shell_cmd       = bash -c
 
 # === General config aliases =================================================
 
@@ -76,6 +76,9 @@ set download_handler    = sync_spawn @scripts_dir/download.sh
 
 # Userscripts/per-site-settings. See the script and the example configuration for details
 #@on_event   LOAD_COMMIT    spawn @scripts_dir/per-site-settings.py @data_home/uzbl/per-site-settings
+#
+@on_event   LOAD_COMMIT    spawn @scripts_dir/change_style.sh
+@on_event   LOAD_FINISH    spawn @scripts_dir/change_style2.sh
 
 # Load finish handlers
 @on_event   LOAD_FINISH    @set_status <span foreground="gold">done</span>
@@ -464,6 +467,7 @@ sync_spawn_exec @scripts_dir/load_cookies.sh
 sync_spawn_exec @scripts_dir/load_cookies.sh @data_home/uzbl/session-cookies.txt
 
 # Set the "home" page.
-set uri = uzbl.org/doesitwork/@COMMIT
+#set uri = uzbl.org/doesitwork/@COMMIT
+set uri = www.google.com
 
 # vim: set fdm=syntax:
