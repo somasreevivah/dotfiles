@@ -7,16 +7,22 @@ folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
 set folder="imaps://imap.gmail.com"
 
 
-#macro index <f3> '<change-folder>imaps://mx.fkf.mpg.de<enter>'
-#folder-hook 'fkf.mpg.de' 'source ~/.mutt/gallo.fkf.mpg.de'
-
-set header_cache=~/mail/mutt_cache/ # a much faster opening of mailboxes...
+set message_cachedir =~/mail/mutt_cache/
+set header_cache=~/mail/mutt_cache/
 set spoolfile=+inbox    # incoming mails (~/.mail/inbox)
-set move=yes            # yes (move read mails automatically to $mbox)
+#set move=yes            # yes (move read mails automatically to $mbox)
 set keep_flagged=yes    # esc-f to mark message in spool, and it won't move to $mbox)
 set mbox=+read_inbox           # ~/.mail/read_inbox
 set postponed=+postponed       # an 'internal' box for mutt basically
+set copy                 # always keep a copy of my mails
+set fast_reply           # do not ask for to, subject,... when replying.
 
+# Quadoptions
+#       set foo=yes
+#  or   set foo=ask-yes
+#  or   set foo=no
+#  or   set foo=ask-no
+#  or   reset foo (reset to compile time default)
 
 ##########
 # addressing {{{1
@@ -150,8 +156,9 @@ set attach_charset = 'utf-8' # default: '(empty)'
 # set wrap = '0'
 # set wrap_headers = '78'
 
+#set query_format = '%n %a %e'
 set query_format = '%n %a %e'
-set query_command = "~/contacts/query '%s'"
+set query_command = "~/contacts/query %s"
 set timeout = '10' # 10 seconds
 
 ##########
@@ -230,12 +237,9 @@ set mbox_type = 'mbox'
 # set imap_idle = no
 # set imap_keepalive = '300'
 # set imap_list_subscribed = no
-# set imap_login = '(empty)'
-# set imap_pass = '(empty)'
 # set imap_passive = yes
 # set imap_peek = yes
 # set imap_servernoise = yes
-# set imap_user = '(empty)'
 
 
 ##########
@@ -438,8 +442,6 @@ set history = '0'
 # set locale = 'C'
 # set mailcap_sanitize = yes
 # set mask = '!^\.[^.]'
-set message_cachedir =~/mail/mutt_cache/
-set header_cache=~/mail/mutt_cache/
 # set meta_key = no
 # set pipe_decode = no
 # set pipe_sep = '\n'
@@ -449,9 +451,9 @@ set header_cache=~/mail/mutt_cache/
 # set print_decode = yes
 # set print_split = no
 # set quit = yes
-# set shell = '(empty)'
 # set suspend = yes
 # set tmpdir = '(empty)'
+set shell = 'bash'
 
 ##########
 # macros {{{1
@@ -509,6 +511,7 @@ push <collapse-all><last-entry>
 # Pager {{{2
 bind pager j next-line
 bind pager k previous-line
+#bind pager h quit
 
 # The mouse wheel seems to send <up><up><up>/<down><down><down> by default with
 # GNOME Terminal. Use it to scroll through messages.
@@ -533,7 +536,7 @@ bind editor \cx complete-query     # complete address with query
 bind pager r reply
 bind pager a group-reply
 bind pager l list-reply
-bind pager L list-reply
+#bind pager L list-reply
 
 # '?' is used for search-opposite
 bind pager \Ch help
