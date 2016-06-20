@@ -1,0 +1,21 @@
+#######################################################################
+#                         General javascript                          #
+#######################################################################
+
+snippet createEl "Create Element" b
+var ${1:Variable} = document.createElement("${2:TagName}");$0
+endsnippet
+
+snippet al "alert" b
+alert("${1:alert}");$0
+endsnippet
+
+snippet so "stdout" b
+console.log(${1:"${2:string}"});
+endsnippet
+
+snippet forEach "For each loop" b
+${1:object}.forEach(function(${2:element}, ${3:index}){
+${4://Body}
+});$0
+endsnippet

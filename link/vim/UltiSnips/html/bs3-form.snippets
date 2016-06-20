@@ -1,0 +1,450 @@
+extends html
+
+
+snippet bs3-form:horizontal "" b
+
+<form action="${1}" method="${2:POST}" class="form-horizontal" role="form">
+		<div class="form-group">
+			<legend>${3:Form title}</legend>
+		</div>
+
+		${0}
+
+		<div class="form-group">
+			<div class="col-sm-10 col-sm-offset-2">
+				<button type="submit" class="btn btn-primary">${4:Submit}</button>
+			</div>
+		</div>
+</form>
+
+endsnippet
+
+
+snippet bs3-form:inline "" b
+
+<form action="${1}" method="${2:POST}" class="form-inline" role="form">
+
+	${3:<div class="form-group">
+		<label class="sr-only" for="">label</label>
+		<input type="email" class="form-control" id="" placeholder="Input field">
+	</div>}
+
+	${0}
+
+	<button type="submit" class="btn btn-primary">${4:Submit}</button>
+</form>
+
+endsnippet
+
+
+snippet bs3-form:label "" b
+
+<label for="${1:input-id}" ${2:class="col-sm-2"}>${3}</label>
+
+endsnippet
+
+
+snippet bs3-form "" b
+
+<form action="${1}" method="${2:POST}" role="form">
+	<legend>${3:Form title}</legend>
+
+	<div class="form-group">
+		<label for="">${4:label}</label>
+		<input type="text" class="form-control" id="" placeholder="Input field">
+	</div>
+
+	${0}
+
+	<button type="submit" class="btn btn-primary">${5:Submit}</button>
+</form>
+
+endsnippet
+
+
+snippet bs3-input:checkbox "" b
+
+<div class="checkbox">
+	<label>
+		<input type="checkbox" value="${1}">
+		${2:Checkbox}
+	</label>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:color:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="color" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:color "" b
+
+<input type="color" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:date:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="date" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:date "" b
+
+<input type="date" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:email:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="email" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:email "" b
+
+<input type="email" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:hidden "" b
+
+<input type="hidden" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"}>
+
+endsnippet
+
+
+snippet bs3-input:label "" b
+
+<label for="${1:input-id}" ${2:class="col-sm-2"}>${3}</label>
+
+endsnippet
+
+
+snippet bs3-input:month:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="month" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:month "" b
+
+<input type="month" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:number:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="number" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${5:min="{6}"} ${7:max="${8}"} ${9:step="${10}"} ${11:required="required"} ${12:title="${13}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:number "" b
+
+<input type="number" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:min="{5}"} ${6:max="${7}"} ${8:step="${9}"} ${10:required="required"} ${11:title="${12}"}>
+
+endsnippet
+
+
+snippet bs3-input:password:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="password" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:required="required"} ${5:title="${6}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:password "" b
+
+<input type="password" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:required="required"} ${3:title="${4}"}>
+
+endsnippet
+
+
+snippet bs3-input:radio "" b
+
+<div class="radio">
+	<label>
+		<input type="radio" name="${1}" id="input${1/(\w+)/\u\1/g}" value="${2}" ${3:checked="checked"}>
+		${4:Radio Box}
+	</label>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:range:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="range" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${5:min="{6}"} ${7:max="${8}"} ${9:step="${10}"} ${11:required="required"} ${12:title="${13}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:range "" b
+
+<input type="range" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:min="{5}"} ${6:max="${7}"} ${8:step="${9}"} ${10:required="required"} ${11:title="${12}"}>
+
+endsnippet
+
+
+snippet bs3-input:reset:h "" b
+
+<div class="form-group">
+	<div class="col-sm-${1:10} col-offset-${2:2}">
+		<input type="reset" value="${3:Reset}" class="btn btn-default">
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:reset "" b
+
+<input type="reset" value="${1:Reset}" class="btn btn-default">
+
+endsnippet
+
+
+snippet bs3-input:search:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="search" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:search "" b
+
+<input type="search" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:select:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<select name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control">
+			<option value="">${4:-- Select One --}</option>
+		</select>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:select "" b
+
+<select name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control">
+	<option value="">${2:-- Select One --}</option>
+</select>
+
+endsnippet
+
+
+snippet bs3-input:submit:h "" b
+
+<div class="form-group">
+	<div class="col-${3:sm-10} col-offset-2">
+		<button type="submit" class="btn btn-primary">${5:Submit}</button>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:submit "" b
+
+<button type="submit" class="btn btn-primary">${5:Submit}</button>
+
+endsnippet
+
+
+snippet bs3-input:tel:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="tel" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:tel "" b
+
+<input type="tel" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:text:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="text" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:pattern="${8}"} ${9:title="${10}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:text "" b
+
+<input type="text" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:pattern="${6}"} ${7:title="${8}"}>
+
+endsnippet
+
+
+snippet bs3-input:time:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="time" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:time "" b
+
+<input type="time" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:url:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="url" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:url "" b
+
+<input type="url" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-input:week:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<input type="week" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${4:value="${5}"} ${6:required="required"} ${7:title="${8}"}>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-input:week "" b
+
+<input type="week" name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:value="${3}"} ${4:required="required"} ${5:title="${6}"}>
+
+endsnippet
+
+
+snippet bs3-select:h "" b
+
+<div class="form-group">
+	<label for="input${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${2:sm-10}">
+		<select name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${3:required="required"}>
+			<option value="">${0}</option>
+		</select>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-select "" b
+
+<select name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" ${2:required="required"}>
+	<option value="">${0}</option>
+</select>
+
+endsnippet
+
+
+snippet bs3-textarea:h "" b
+
+<div class="form-group">
+	<label for="textarea${1/(\w+)/\u\1/g}" class="col-${2:sm-2} control-label">${1/(\w+)/\u\1/g}:</label>
+	<div class="col-${3:sm-10}">
+		<textarea name="${1}" id="textarea${1/(\w+)/\u\1/g}" class="form-control" rows="${4:3}" ${5:required="required"}>${6}</textarea>
+	</div>
+</div>
+
+endsnippet
+
+
+snippet bs3-textarea "" b
+
+<textarea name="${1}" id="input${1/(\w+)/\u\1/g}" class="form-control" rows="${2:3}" ${3:required="required"}>${4}</textarea>
+
+endsnippet
+
+

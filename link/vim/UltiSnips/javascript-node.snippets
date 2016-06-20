@@ -1,0 +1,22 @@
+extends javascript
+
+snippet exit "exit in node" b
+process.exit(${1:1});$0
+endsnippet
+
+snippet ls "List files" b
+fs.readdir(${1:path}, function(err, items) {
+		if( err ){
+			console.log(err);
+			process.exit(1);
+		}
+
+		for (var i=0; i<items.length; i++) {
+			${2:console.log(items[i]);}
+		}
+});
+endsnippet
+
+snippet mkdir "Make dir" b
+fs.mkdir(${1:path}, ${2:mode}, ${3:callback});
+endsnippet

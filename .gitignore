@@ -50,3 +50,14 @@ wallpapers/abstract_cubes_desktop_1920x1200_hd-wallpaper-620701.jpg
 wallpapers/abstract_desktop_1600x1000_hd-wallpaper-538499.jpg
 wallpapers/autum_paint_by_tatasz-d9gvmo8.png.jpeg
 
+
+link_config/dwb/default/cookies
+link_config/dwb/dwb
+link_config/uzbl/uzbl
+
+#########
+#  vim  #
+#########
+
+/link/vim/bundle/
+

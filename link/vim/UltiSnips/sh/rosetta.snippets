@@ -1,0 +1,246 @@
+
+#######################################################################
+#                                TYPES                                #
+#######################################################################
+
+snippet const "Constant value" b
+declare -r ${1:type(-i)} ${2:variable_name}${3:=${4:32}}
+endsnippet
+
+
+# int
+########
+
+snippet int "Definition of int type" b
+${1:variable_name}=${2:42}
+endsnippet
+snippet tint "Definition of int type safely" b
+declare -i ${1:variable_name}=${2:42}
+endsnippet
+snippet cint "Definition of constants of int type" b
+declare -r -i ${1:variable_name}=${2:42}
+endsnippet
+snippet aint "Definition of one dimensional array of int type" b
+${1:variable_name}=${2:(1 2 3 4 5)}
+endsnippet
+
+# float
+########
+
+snippet float "Definition of float type" A
+${1:variable_name}${2:=${3:3.14}}
+endsnippet
+snippet tfloat "Definition of float type safely" b
+declare -x ${1:variable_name}${2:=${3:3.14}}
+endsnippet
+snippet cfloat "Definition of constants of float type" b
+declare -x -r ${1:variable_name}${2:=${3:3.14}}
+endsnippet
+snippet afloat "Definition of one dimensional array of float type" b
+declare -x -r ${1:variable_name}${2:=${3:(3.14 3.14 3.14 3.14 3.14)}}
+endsnippet
+
+# str
+########
+
+snippet str "Definition of str type" A
+${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet tstr "Definition of str type safely" b
+declare -x ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet cstr "Definition of constants of str type" b
+declare -x -r ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet astr "Definition of one dimensional array of str type" b
+declare -x -r ${1:variable_name}${2:=${3:(a b c d e)}}
+endsnippet
+
+
+# char
+########
+
+snippet char "Definition of char type" A
+${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet tchar "Definition of char type safely" b
+declare -x ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet cchar "Definition of constants of char type" b
+declare -x -r ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet achar "Definition of one dimensional array of char type" b
+declare -x -r ${1:variable_name}${2:=${3:(a b c d e)}}
+endsnippet
+
+
+
+# arr
+########
+
+snippet arr "Definition of arr type" b
+${1:variable_name}${2:=${3:(hello world array)}}
+endsnippet
+snippet tarr "Definition of arr type safely" b
+declare -a ${1:variable_name}${2:=${3:(hello world array)}}
+endsnippet
+snippet carr "Definition of constants of arr type" b
+declare -a -r ${1:variable_name}${2:=${3:(hello world array)}}
+endsnippet
+
+
+# fun
+########
+
+snippet fun "Definition of fun type" b
+function ${1:function_name}() {
+	${0:#function_body}
+}
+endsnippet
+snippet tfun "Definition of fun type safely" b
+declare -f function ${1:function_name}() {
+	${0:#function_body}
+}
+endsnippet
+snippet cfun "Definition of constants of fun type" b
+declare -f -r function ${1:function_name}() {
+	${0:#function_body}
+}
+endsnippet
+
+# hex
+########
+snippet hex "Hexadecimal digit" i
+$(echo -n -e "\\\\x${1:ff}")$0
+endsnippet
+
+
+
+#######################################################################
+#                                UTILS                                #
+#######################################################################
+
+snippet so "Stdout" b
+echo ${1:${2:stuff}}$0
+endsnippet
+
+snippet serr "stderr" b
+echo ${1:${2:stuff}} >&2$0
+endsnippet
+
+snippet read "Stdin read" b
+read ${1:-p ${2:"Prompt message:"}} ${3:variable_name}$0
+endsnippet
+
+snippet cd "Change directory" b
+cd ${1:folder}$0
+endsnippet
+
+snippet mkdir "Make directory" b
+mkdir -p ${1:/path/to/dir}$0
+endsnippet
+
+snippet exit "Exit function" b
+exit ${1:0}$0
+endsnippet
+
+snippet ret "Return statement" b
+return ${1:0}$0
+endsnippet
+
+snippet pac "Import package" b
+source ${1:path/to/package.sh}$0
+endsnippet
+
+snippet argc "Get arguments number" i
+$#$0
+endsnippet
+
+snippet argvi "Get ith argument" i
+\$${1:i}$0
+endsnippet
+
+
+
+#######################################################################
+#                              BRANCHING                              #
+#######################################################################
+
+snippet if "If branching" b
+if ${2:[[ ${1:condition} ]]}; then
+	${0:#statements}
+fi
+endsnippet
+
+snippet elif "If branching" b
+elif ${2:[[ ${1:condition} ]]}; then
+	${0:#statements}
+endsnippet
+
+snippet ife "If else" b
+if ${2:[[ ${1:condition} ]]}; then
+	${3:#statements}
+else
+	${0:#statements}
+fi
+endsnippet
+
+snippet ifsh "If branching" b
+if ${2:[[ ${1:condition} ]]}; then ${0:#statements} fi
+endsnippet
+
+snippet if3 "If branching" b
+${2:[[ ${1:condition} ]]} && ${3:success statements} || ${3:error statements}
+endsnippet
+
+snippet until "until ... (done)" b
+until ${2:[[ ${1:condition} ]]}; do
+	${0:#statements}
+done
+endsnippet
+
+snippet while "while ... (done)" b
+while ${2:[[ ${1:condition} ]]}; do
+	${0:#statements}
+done
+endsnippet
+
+snippet for "for loop" b
+for (( ${2:i} = 0; $2 < ${1:count}; $2++ )); do
+	${0:#statements}
+done
+endsnippet
+
+snippet fori "for something in somewhere" b
+for ${1:needle} in ${2:haystack} ; do
+	${0:#statements}
+done
+endsnippet
+
+
+
+#######################################################################
+#                              CONSTANTS                              #
+#######################################################################
+
+snippet true "True value" i
+0
+endsnippet
+snippet false "True value" i
+1
+endsnippet
+snippet not "not operator" i
+!
+endsnippet
+snippet and "and operator" i
+&&
+endsnippet
+snippet or "Or operator" i
+||
+endsnippet
+snippet bor "Bitwise or" i
+|
+endsnippet
+snippet band "Bitwise and" i
+&
+endsnippet

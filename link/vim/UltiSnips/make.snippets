@@ -1,0 +1,45 @@
+
+snippet base "Base makefile"
+CC=clang++
+CFLAGS=-Wall -Wextra -Wno-unused-parameter -stdlib=libc++ -std=c++11
+CINCLUDE=-I/usr/local/include -L/usr/local/lib
+CLIBS=-lArtemisCpp -lsfml-graphics -lsfml-window -lsfml-system
+
+BIN=bin/${1:Executable}
+
+CMD=\$(CC) \$(CFLAGS) \$(CINCLUDE) \$(CLIBS) -o \$(BIN)${1:Executable}
+
+########################################################################
+
+$0
+
+clean:
+	rm -rf \$(BIN)${1:Executable}
+endsnippet
+
+snippet : "Make rule"
+${1:target}: ${2:deps}
+	$0
+endsnippet
+
+snippet $ "Get a variable" i
+$(${1:VAR_NAME})$0
+endsnippet
+
+snippet for "Embedded shell for" b
+	@for ${1:variable} in ${2:container}; do \
+		${3:Body}; \
+	done
+endsnippet
+
+snippet ife "Bash if else" b
+	@if ${1:Cond}; then \
+		${2:#Body}; \
+	else \
+		${3:#Body}; \
+	fi
+endsnippet
+
+snippet so "Stdout" b
+@echo $1
+endsnippet

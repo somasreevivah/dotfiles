@@ -1,0 +1,3124 @@
+snippet do:Version "Information" b
+
+VIProductVersion "${1:0}.${2:0}.${3:0}.${4:0}"
+VIFileVersion		"${1:0}.${2:0}.${3:0}.${4:0}"
+VIAddVersionKey	"FileDescription"	"${5:description}"
+VIAddVersionKey	"FileVersion"			"${6:${1:0}.${2:0}.${3:0}.${4:0}}"
+VIAddVersionKey	"ProductName"			"${7:product_name}"
+VIAddVersionKey	"ProductVersion"	 "${8:${1:0}.${2:0}.${3:0}.${4:0}}"
+VIAddVersionKey	"LegalCopyright"	 "${9:copyright}"
+VIAddVersionKey	"OriginalFilename" "${10:file_name}.exe"
+VIAddVersionKey	"Comments"				 "${11:comment}"
+VIAddVersionKey	"LegalTrademarks"	"${12:trademark}"
+VIAddVersionKey	"CompanyName"			"${13:company_name}"
+VIAddVersionKey	"InternalName"		 "${14:internal_name}"
+VIAddVersionKey	"PrivateBuild"		 "${15:private_build}"
+VIAddVersionKey	"SpecialBuild"		 "${16:special_build}"
+
+endsnippet
+
+
+snippet do:Help "Dialog" b
+
+\${GetParameters} \$${1:var}
+
+\${If}	 \$${1} == "/?"
+\${OrIf} \$${1} == "--?"
+\${OrIf} \$${1} == "--h"
+\${OrIf} \$${1} == "--help"
+\${OrIf} \$${1} == "-?"
+\${OrIf} \$${1} == "-h"
+\${OrIf} \$${1} == "-help"
+\${OrIf} \$${1} == "/h"
+\${OrIf} \$${1} == "help"
+	${2:# your help dialog}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IllegalFileCharacters "" b
+
+!define ILLEGAL_CHARS "\$\\"\$*/:<>?\|"
+
+endsnippet
+
+
+snippet do:IsNT..Else "" b
+
+\${If} \${IsNT}
+
+	${1:# your NT code here}
+
+\${Else}
+
+	${2:# your non-NT code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsNT "" b
+
+\${If} \${IsNT}
+
+	${1:# your code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsRunningX64..Else "" b
+
+\${If} \${IsRunningX64}
+
+	${1:# your 64-bit code here}
+
+\${Else}
+
+	${2:# your 32-bit code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsRunningX64 "" b
+
+\${If} \${IsRunningX64}
+
+	${1:# your code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServer..Else "" b
+
+\${If} \${IsServer}
+
+	${1:# your server code here}
+
+\${Else}
+
+	${2:# your non-server code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServer "" b
+
+\${If} \${IsServer}
+
+	${1:# your code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows 2000)" b
+
+\${If} \${IsWin2000}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${ElseIf} \${IsServicePack} 3
+
+		${4:# your SP3 code here}
+
+	\${ElseIf} \${IsServicePack} 4
+
+		${5:# your SP4 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows 7)" b
+
+\${If} \${IsWin7}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows NT4)" b
+
+\${If} \${IsWinNT4}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${ElseIf} \${IsServicePack} 3
+
+		${4:# your SP3 code here}
+
+	\${ElseIf} \${IsServicePack} 4
+
+		${5:# your SP4 code here}
+
+	\${ElseIf} \${IsServicePack} 5
+
+		${6:# your SP5 code here}
+
+	\${ElseIf} \${IsServicePack} 6
+
+		${7:# your SP6 code here}
+
+	\${ElseIf} \${IsServicePack} 6a
+
+		${8:# your SP6a code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows Server 2003)" b
+
+\${If} \${IsWin2003}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows Server 2008)" b
+
+\${If} \${IsWin2008}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows Vista)" b
+
+\${If} \${IsWinVista}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:IsServicePack "(Windows XP)" b
+
+\${If} \${IsWinXP}
+	\${If} \${IsServicePack} 0
+
+		${1:# your pre-SP code here}
+
+	\${ElseIf} \${IsServicePack} 1
+
+		${2:# your SP1 code here}
+
+	\${ElseIf} \${IsServicePack} 2
+
+		${3:# your SP2 code here}
+
+	\${ElseIf} \${IsServicePack} 3
+
+		${4:# your SP3 code here}
+
+	\${EndIf}
+\${EndIf}
+
+endsnippet
+
+
+snippet do:Language "Dialog (Africa)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+${1:Push \${LANG_AFRIKAANS}
+Push "Afrikaans"
+
+Push \${LANG_ARABIC}
+Push "Arabic"
+
+Push \${LANG_FRENCH}
+Push "French"
+
+Push \${LANG_PORTUGUESE}
+Push "Portuguese"
+
+Push \${LANG_SPANISHINTERNATIONAL}
+Push "Spanish"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog (Americas)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+Push \${LANG_DUTCH}
+Push "Dutch"
+
+Push \${LANG_FRENCH}
+Push "French"
+
+Push \${LANG_PORTUGUESEBR}
+Push "Portuguese"
+
+Push \${LANG_SPANISHINTERNATIONAL}
+Push "Spanish"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog (Asia)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+Push \${LANG_ARABIC}
+Push "Arabic"
+
+Push \${LANG_SIMPCHINESE}
+Push "Chinese (Simplified)"
+
+Push \${LANG_TRADCHINESE}
+Push "Chinese (Traditional)"
+
+Push \${LANG_FARSI}
+Push "Farsi"
+
+Push \${LANG_GEORGIAN}
+Push "Georgian"
+
+Push \${LANG_HEBREW}
+Push "Hebrew"
+
+Push \${LANG_INDONESIAN}
+Push "Indonesian"
+
+Push \${LANG_JAPANESE}
+Push "Japanese"
+
+Push \${LANG_KOREAN}
+Push "Korean"
+
+Push \${LANG_KURDISH}
+Push "Kurdish"
+
+Push \${LANG_MALAY}
+Push "Malay"
+
+Push \${LANG_MONGOLIAN}
+Push "Mongolian"
+
+Push \${LANG_PASHTO}
+Push "Pashto"
+
+Push \${LANG_RUSSIAN}
+Push "Russian"
+
+Push \${LANG_THAI}
+Push "Thai"
+
+Push \${LANG_TURKISH}
+Push "Turkish"
+
+Push \${LANG_UKRAINIAN}
+Push "Ukrainian"
+
+Push \${LANG_UZBEK}
+Push "Uzbek"
+
+Push \${LANG_VIETNAMESE}
+Push "Vietnamese"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog (East-Asia)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+Push \${LANG_SIMPCHINESE}
+Push "Chinese (Simplified)"
+
+Push \${LANG_TRADCHINESE}
+Push "Chinese (Traditional)"
+
+Push \${LANG_INDONESIAN}
+Push "Indonesian"
+
+Push \${LANG_JAPANESE}
+Push "Japanese"
+
+Push \${LANG_KOREAN}
+Push "Korean"
+
+Push \${LANG_MALAY}
+Push "Malay"
+
+Push \${LANG_MONGOLIAN}
+Push "Mongolian"
+
+Push \${LANG_RUSSIAN}
+Push "Russian"
+
+Push \${LANG_THAI}
+Push "Thai"
+Push \${LANG_VIETNAMESE}
+Push "Vietnamese"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog (Europe)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+Push \${LANG_ALBANIAN}
+Push "Albanian"
+
+Push \${LANG_ASTURIAN}
+Push "Asturian"
+
+Push \${LANG_BASQUE}
+Push "Basque"
+
+Push \${LANG_BELARUSIAN}
+Push "Belarusian"
+
+Push \${LANG_BOSNIAN}
+Push "Bosnian"
+
+Push \${LANG_BRETON}
+Push "Breton"
+
+Push \${LANG_BULGARIAN}
+Push "Bulgarian"
+
+Push \${LANG_CATALAN}
+Push "Catalan"
+
+Push \${LANG_CROATIAN}
+Push "Croatian"
+
+Push \${LANG_CZECH}
+Push "Czech"
+
+Push \${LANG_DANISH}
+Push "Danish"
+
+Push \${LANG_DUTCH}
+Push "Dutch"
+
+Push \${LANG_ESTONIAN}
+Push "Estonian"
+
+Push \${LANG_FINNISH}
+Push "Finnish"
+
+Push \${LANG_FRENCH}
+Push "French"
+
+Push \${LANG_GALICIAN}
+Push "Galician"
+
+Push \${LANG_GERMAN}
+Push "German"
+
+Push \${LANG_GREEK}
+Push "Greek"
+
+Push \${LANG_HUNGARIAN}
+Push "Hungarian"
+
+Push \${LANG_ICELANDIC}
+Push "Icelandic"
+
+Push \${LANG_IRISH}
+Push "Irish"
+
+Push \${LANG_ITALIAN}
+Push "Italian"
+
+Push \${LANG_KURDISH}
+Push "Kurdish"
+
+Push \${LANG_LATVIAN}
+Push "Latvian"
+
+Push \${LANG_LITHUANIAN}
+Push "Lithuanian"
+
+Push \${LANG_LUXEMBOURGISH}
+Push "Luxembourgish"
+
+Push \${LANG_MACEDONIAN}
+Push "Macedonian"
+
+Push \${LANG_NORWEGIAN}
+Push "Norwegian"
+
+Push \${LANG_NORWEGIANNYNORSK}
+Push "Norwegian (Nynorsk)"
+
+Push \${LANG_POLISH}
+Push "Polish"
+
+Push \${LANG_PORTUGUESE}
+Push "Portuguese"
+
+Push \${LANG_ROMANIAN}
+Push "Romanian"
+
+Push \${LANG_RUSSIAN}
+Push "Russian"
+
+Push \${LANG_SCOTSGAELIC}
+Push "Scots (Gaelic)"
+
+Push \${LANG_SERBIAN}
+Push "Serbian"
+
+Push \${LANG_SERBIANLATIN}
+Push "Serbian (Latin)"
+
+Push \${LANG_SLOVAK}
+Push "Slovak"
+
+Push \${LANG_SLOVENIAN}
+Push "Slovenian"
+
+Push \${LANG_SPANISH}
+Push "Spanish"
+
+Push \${LANG_SWEDISH}
+Push "Swedish"
+
+Push \${LANG_TURKISH}
+Push "Turkish"
+
+Push \${LANG_UKRAINIAN}
+Push "Ukrainian"
+
+Push \${LANG_WELSH}
+Push "Welsh"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+Push \${LANG_AFRIKAANS}
+Push "Afrikaans"
+
+Push \${LANG_ALBANIAN}
+Push "Albanian"
+
+Push \${LANG_ALBANIAN}
+Push "Albanian"
+
+Push \${LANG_ARABIC}
+Push "Arabic"
+
+Push \${LANG_ASTURIAN}
+Push "Asturian"
+
+Push \${LANG_BASQUE}
+Push "Basque"
+
+Push \${LANG_BELARUSIAN}
+Push "Belarusian"
+
+Push \${LANG_BOSNIAN}
+Push "Bosnian"
+
+Push \${LANG_BRETON}
+Push "Breton"
+
+Push \${LANG_BULGARIAN}
+Push "Bulgarian"
+
+Push \${LANG_CATALAN}
+Push "Catalan"
+
+Push \${LANG_SIMPCHINESE}
+Push "Chinese (Simplified)"
+
+Push \${LANG_TRADCHINESE}
+Push "Chinese (Traditional)"
+
+Push \${LANG_CROATIAN}
+Push "Croatian"
+
+Push \${LANG_CZECH}
+Push "Czech"
+
+Push \${LANG_DANISH}
+Push "Danish"
+
+Push \${LANG_DUTCH}
+Push "Dutch"
+
+Push \${LANG_ESPERANTO}
+Push "Esperanto"
+
+Push \${LANG_ESTONIAN}
+Push "Estonian"
+
+Push \${LANG_FARSI}
+Push "Farsi"
+
+Push \${LANG_FINNISH}
+Push "Finnish"
+
+Push \${LANG_FRENCH}
+Push "French"
+
+Push \${LANG_GALICIAN}
+Push "Galician"
+
+Push \${LANG_GEORGIAN}
+Push "Georgian"
+
+Push \${LANG_GERMAN}
+Push "German"
+
+Push \${LANG_GREEK}
+Push "Greek"
+
+Push \${LANG_HEBREW}
+Push "Hebrew"
+
+Push \${LANG_HUNGARIAN}
+Push "Hungarian"
+
+Push \${LANG_ICELANDIC}
+Push "Icelandic"
+
+Push \${LANG_INDONESIAN}
+Push "Indonesian"
+
+Push \${LANG_IRISH}
+Push "Irish"
+
+Push \${LANG_ITALIAN}
+Push "Italian"
+
+Push \${LANG_JAPANESE}
+Push "Japanese"
+
+Push \${LANG_KOREAN}
+Push "Korean"
+
+Push \${LANG_KURDISH}
+Push "Kurdish"
+
+Push \${LANG_LATVIAN}
+Push "Latvian"
+
+Push \${LANG_LITHUANIAN}
+Push "Lithuanian"
+
+Push \${LANG_LUXEMBOURGISH}
+Push "Luxembourgish"
+
+Push \${LANG_MACEDONIAN}
+Push "Macedonian"
+
+Push \${LANG_MALAY}
+Push "Malay"
+
+Push \${LANG_MONGOLIAN}
+Push "Mongolian"
+
+Push \${LANG_NORWEGIAN}
+Push "Norwegian"
+
+Push \${LANG_NORWEGIANNYNORSK}
+Push "Norwegian (Nynorsk)"
+
+Push \${LANG_PASHTO}
+Push "Pashto"
+
+Push \${LANG_POLISH}
+Push "Polish"
+
+Push \${LANG_PORTUGUESE}
+Push "Portuguese"
+
+Push \${LANG_PORTUGUESEBR}
+Push "Portuguese (Brazil)"
+
+Push \${LANG_ROMANIAN}
+Push "Romanian"
+
+Push \${LANG_RUSSIAN}
+Push "Russian"
+
+Push \${LANG_SCOTSGAELIC}
+Push "Scots (Gaelic)"
+
+Push \${LANG_SERBIAN}
+Push "Serbian"
+
+Push \${LANG_SERBIANLATIN}
+Push "Serbian (Latin)"
+
+Push \${LANG_SLOVAK}
+Push "Slovak"
+
+Push \${LANG_SLOVENIAN}
+Push "Slovenian"
+
+Push \${LANG_SPANISH}
+Push "Spanish"
+
+Push \${LANG_SPANISHINTERNATIONAL}
+Push "Spanish (International)"
+
+Push \${LANG_SWEDISH}
+Push "Swedish"
+
+Push \${LANG_THAI}
+Push "Thai"
+
+Push \${LANG_TURKISH}
+Push "Turkish"
+
+Push \${LANG_UKRAINIAN}
+Push "Ukrainian"
+
+Push \${LANG_UZBEK}
+Push "Uzbek"
+
+Push \${LANG_VIETNAMESE}
+Push "Vietnamese"
+
+Push \${LANG_WELSH}
+Push "Welsh"
+
+
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Language "Dialog (Worldwide)" b
+
+Push ""
+
+# first language will be default
+Push \${LANG_ENGLISH}
+Push "English"
+
+# more languages here
+${1:Push \${LANG_AFRIKAANS}
+Push "Afrikaans"
+
+Push \${LANG_ALBANIAN}
+Push "Albanian"
+
+Push \${LANG_ARABIC}
+Push "Arabic"
+
+Push \${LANG_ASTURIAN}
+Push "Asturian"
+
+Push \${LANG_BASQUE}
+Push "Basque"
+
+Push \${LANG_BELARUSIAN}
+Push "Belarusian"
+
+Push \${LANG_BOSNIAN}
+Push "Bosnian"
+
+Push \${LANG_BRETON}
+Push "Breton"
+
+Push \${LANG_BULGARIAN}
+Push "Bulgarian"
+
+Push \${LANG_CATALAN}
+Push "Catalan"
+
+Push \${LANG_SIMPCHINESE}
+Push "Chinese (Simplified)"
+
+Push \${LANG_TRADCHINESE}
+Push "Chinese (Traditional)"
+
+Push \${LANG_CROATIAN}
+Push "Croatian"
+
+Push \${LANG_CZECH}
+Push "Czech"
+
+Push \${LANG_DANISH}
+Push "Danish"
+
+Push \${LANG_DUTCH}
+Push "Dutch"
+
+Push \${LANG_ESPERANTO}
+Push "Esperanto"
+
+Push \${LANG_ESTONIAN}
+Push "Estonian"
+
+Push \${LANG_FARSI}
+Push "Farsi"
+
+Push \${LANG_FINNISH}
+Push "Finnish"
+
+Push \${LANG_FRENCH}
+Push "French"
+
+Push \${LANG_GALICIAN}
+Push "Galician"
+
+Push \${LANG_GEORGIAN}
+Push "Georgian"
+
+Push \${LANG_GERMAN}
+Push "German"
+
+Push \${LANG_GREEK}
+Push "Greek"
+
+Push \${LANG_HEBREW}
+Push "Hebrew"
+
+Push \${LANG_HUNGARIAN}
+Push "Hungarian"
+
+Push \${LANG_ICELANDIC}
+Push "Icelandic"
+
+Push \${LANG_INDONESIAN}
+Push "Indonesian"
+
+Push \${LANG_IRISH}
+Push "Irish"
+
+Push \${LANG_ITALIAN}
+Push "Italian"
+
+Push \${LANG_JAPANESE}
+Push "Japanese"
+
+Push \${LANG_KOREAN}
+Push "Korean"
+
+Push \${LANG_KURDISH}
+Push "Kurdish"
+
+Push \${LANG_LATVIAN}
+Push "Latvian"
+
+Push \${LANG_LITHUANIAN}
+Push "Lithuanian"
+
+Push \${LANG_LUXEMBOURGISH}
+Push "Luxembourgish"
+
+Push \${LANG_MACEDONIAN}
+Push "Macedonian"
+
+Push \${LANG_MALAY}
+Push "Malay"
+
+Push \${LANG_MONGOLIAN}
+Push "Mongolian"
+
+Push \${LANG_NORWEGIAN}
+Push "Norwegian"
+
+Push \${LANG_NORWEGIANNYNORSK}
+Push "Norwegian (Nynorsk)"
+
+Push \${LANG_PASHTO}
+Push "Pashto"
+
+Push \${LANG_POLISH}
+Push "Polish"
+
+Push \${LANG_PORTUGUESE}
+Push "Portuguese"
+
+Push \${LANG_PORTUGUESEBR}
+Push "Portuguese (Brazil)"
+
+Push \${LANG_ROMANIAN}
+Push "Romanian"
+
+Push \${LANG_RUSSIAN}
+Push "Russian"
+
+Push \${LANG_SCOTSGAELIC}
+Push "Scots (Gaelic)"
+
+Push \${LANG_SERBIAN}
+Push "Serbian"
+
+Push \${LANG_SERBIANLATIN}
+Push "Serbian (Latin)"
+
+Push \${LANG_SLOVAK}
+Push "Slovak"
+
+Push \${LANG_SLOVENIAN}
+Push "Slovenian"
+
+Push \${LANG_SPANISH}
+Push "Spanish"
+
+Push \${LANG_SPANISHINTERNATIONAL}
+Push "Spanish (International)"
+
+Push \${LANG_SWEDISH}
+Push "Swedish"
+
+Push \${LANG_THAI}
+Push "Thai"
+
+Push \${LANG_TURKISH}
+Push "Turkish"
+
+Push \${LANG_UKRAINIAN}
+Push "Ukrainian"
+
+Push \${LANG_UZBEK}
+Push "Uzbek"
+
+Push \${LANG_VIETNAMESE}
+Push "Vietnamese"
+
+Push \${LANG_WELSH}
+Push "Welsh"
+
+Push "A"
+
+LangDLL::LangDialog "${1:Program Language}" "${2:Please select a language for this program}"
+Pop \$LANGUAGE
+StrCmp \$LANGUAGE "cancel" 0 +2
+Abort
+
+endsnippet
+
+
+snippet do:Library "function" b
+
+!define funcName "${1:function_name}"
+
+!macro ${1:funcName}Call ${2:_PARAM} ${3:_RESULT}
+		!verbose push
+		!verbose \$\{_${1/(.*)/\U\1/}_VERBOSE\}
+		Push `\$\{${2:_PARAM}\}`
+		\$\{CallArtificialFunction\} ${1:funcName}_
+		Pop `\$\{${3:_RESULT}\}`
+		!verbose pop
+!macroend
+
+!define ${1:funcName} `!insertmacro ${1:funcName}Call`
+!define un.${1:funcName} `!insertmacro ${1:funcName}Call`
+
+!macro ${1:funcName}
+!macroend
+
+!macro un.${1:funcName}
+!macroend
+
+!macro ${1:funcName}_
+		!verbose push
+		!verbose ${_${1/(.*)/\U\1/}_VERBOSE
+
+		${7:# your code}
+
+		!verbose pop
+!macroend
+
+endsnippet
+
+
+snippet do:nsDialogs "Function" b
+
+Function "${1:function}"
+	nsDialogs::Create /NOUNLOAD 1018
+	Pop \$${2:page_dialog}
+
+	StrCmp \$${2:page_dialog} "error" 0 +2
+	Abort
+
+	nsDialogs::Show
+FunctionEnd
+
+endsnippet
+
+
+snippet do:nsDialogs "ChangeFilerequest" b
+
+
+\${NSD_CreateFileRequest} ${1:x} ${2:y} ${3:width} ${4:height} "${5:text}"
+Pop \$${6:filerequest_dialog}
+
+\${NSD_OnChange} \$${6:filerequest_dialog} ${7:filerequest_function}
+
+endsnippet
+
+
+snippet do:nsDialogs "onChangePassword" b
+
+
+\${NSD_Password} ${1:x} ${2:y} ${3:width} ${4:height} "${5:text}""
+Pop \$${6:password_dialog}
+
+\${NSD_OnChange} \$${6:password_dialog} ${7:password_function}
+
+endsnippet
+
+
+snippet do:nsDialogs "onChangeText" b
+
+
+\${NSD_CreateText} ${1:x} ${2:y} ${3:width} ${4:height} "${5:text}""
+Pop \$${6:text_dialog}
+
+\${NSD_OnChange} \$${6:text_dialog} ${7:text_function}
+
+endsnippet
+
+
+snippet do:nsDialogs "ClickButton" b
+
+\${NSD_CreateButton} ${1:x} ${2:y} ${3:width} ${4:height} "${5:text}"
+Pop \$${6:button_variable}
+
+GetFunctionAddress \$0 ${7:click_function}
+nsDialogs::OnClick /NOUNLOAD \$${6:button_variable} $0
+
+endsnippet
+
+
+snippet do:UAC "Init Macro" b
+
+!macro Init thing
+	uac_tryagain:
+	!insertmacro UAC_RunElevated
+	\${Switch} \$0
+	\${Case} 0
+		\${IfThen} \$1 = 1 \${|} Quit \${|} ;we are the outer process, the inner process has done its work, we are done
+		\${IfThen} \$3 <> 0 \${|} \${Break} \${|} ;we are admin, let the show go on
+		\${If} \$1 = 3 ;RunAs completed successfully, but with a non-admin user
+			MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_TOPMOST|MB_SETFOREGROUND "${1:This \$\{thing\} requires admin privileges, try again}" /SD IDNO IDYES uac_tryagain IDNO 0
+		\${EndIf}
+		;fall-through and die
+	\${Case} 1223
+		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "${2:This \$\{thing\} requires admin privileges, aborting!}"
+		Quit
+	\${Case} 1062
+		MessageBox MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "${3:Logon service not running, aborting!}"
+		Quit
+	\${Default}
+		MessageBox MB_ICONSTOP|mb_TopMost|MB_SETFOREGROUND "${4:Unable to elevate, error \$0}"
+		Quit
+	\${EndSwitch}
+
+	SetShellVarContext all
+!macroend
+
+endsnippet
+
+
+snippet do:VersionCompare "" b
+
+\${VersionCompare} "${1:version1}" "${2:version2}" \$${3:result}
+
+\${If} \$${3} = 0 # is equal
+
+	${4:# your code here}
+
+\${ElseIf} \$${3} = 1 # ${1} is newer
+
+	${5:# your code here}
+
+\${ElseIf} \$${3} = 2 # ${2} is newer
+
+	${6:# your code here}
+
+\${EndIf}
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (2 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\L\1/}_index}
+
+	${11:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+Function .onInit
+
+	${12:# your code here}
+
+FunctionEnd
+
+$13
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (2 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\L\1/}_index}
+
+	${11:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+$12
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (3 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\L\1/}_index}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\L\1/}_index}
+
+	${14:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+Function .onInit
+
+	${15:# your code here}
+
+FunctionEnd
+
+$16
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (3 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\L\1/}_index}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\L\1/}_index}
+
+	${14:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+$15
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (4 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section_name}" ${10:section_index2}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\L\1/}_index}
+
+	${14:# your code here}
+
+SectionEnd
+
+Section "${15:section4}" ${16:${15/(.*)/\L\1/}_index}
+
+	${17:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+Function .onInit
+
+	${18:# your code here}
+
+FunctionEnd
+
+$19
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (4 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\L\1/}_index}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\L\1/}_index}
+
+	${14:# your code here}
+
+SectionEnd
+
+Section "${15:section4}" ${16:${15/(.*)/\L\1/}_index}
+
+	${17:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+$18
+
+endsnippet
+
+
+snippet scaffold:Basic "Script (onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+Function .onInit
+
+	${9:# your code here}
+
+FunctionEnd
+
+$10
+
+endsnippet
+
+
+snippet scaffold:Basic "Script" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+$5
+
+; Pages ------------------------------------
+Page components
+Page directory
+Page instfiles
+
+; Sections ---------------------------------
+Section "${6:section_name}" ${7:${6/(.*)/\L\1/}_index}
+
+	${8:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+$9
+
+endsnippet
+
+
+snippet scaffold:InstallOptions "" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Includes ---------------------------------
+ReserveFile "\${NSISDIR}\Plugins\InstallOptions.dll"
+ReserveFile "${5:\${NSISDIR\}\Examples\InstallOptions\test}.ini"
+
+; Pages ------------------------------------
+Page custom "${6:iopage}" "${7:${6:iopage}_validation}" ": ${8:iopage_caption}"
+Page components
+Page directory
+Page instfiles
+
+
+; Sections ---------------------------------
+Section "${11:section_name}" ${12:section_index}
+
+	${13:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+Function .onInit
+
+	InitPluginsDir
+	File "/oname=\$PLUGINSDIR\\${9:ioFile}.ini" "${5}.ini"
+
+FunctionEnd
+
+Function "${6}"
+
+ 	Push \$R0
+	InstallOptions::dialog "\$PLUGINSDIR\\${9}.ini"
+		Pop \$R0
+
+	Pop \$R0
+
+FunctionEnd
+
+Function "${7}"
+
+ 	${10:# your code here}
+
+FunctionEnd
+
+endsnippet
+
+
+snippet scaffold:Library "v2" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+!define libName "${1:library_name}"
+!define funcName "${2:function_name}"
+
+!ifndef ${1/(.*)/\U\1/}_INCLUDED
+		!define ${1/(.*)/\U\1/}_INCLUDED
+
+		; Includes ---------------------------------
+		${3:!include Util.nsh}
+		$4
+		; Settings ---------------------------------
+		!verbose push
+		!verbose 3
+		!ifndef _${1/(.*)/\U\1/}_VERBOSE
+				!define _${1/(.*)/\U\1/}_VERBOSE 3
+		!endif
+		!verbose ${_${1/(.*)/\U\1/}_VERBOSE
+		!define ${1/(.*)/\U\1/}_VERBOSE `!insertmacro ${1/(.*)/\U\1/}_VERBOSE`
+		!verbose pop
+
+		; Macros -----------------------------------
+		!macro ${1/(.*)/\U\1/}_VERBOSE _VERBOSE
+				!verbose push
+				!verbose 3
+				!undef _${1/(.*)/\U\1/}_VERBOSE
+				!define _${1/(.*)/\U\1/}_VERBOSE ${_VERBOSE}
+				!verbose pop
+		!macroend
+
+		; Functions --------------------------------
+		!macro ${2:funcName}Call ${5:_PARAM} ${6:_RESULT}
+				!verbose push
+				!verbose \$\{_${1/(.*)/\U\1/}_VERBOSE\}
+				Push `\$\{${5:_PARAM}\}`
+				\$\{CallArtificialFunction\} ${2:funcName}_
+				Pop `\$\{${6:_RESULT}\}`
+				!verbose pop
+		!macroend
+
+		!define ${2:funcName} `!insertmacro ${2:funcName}Call`
+		!define un.${2:funcName} `!insertmacro ${2:funcName}Call`
+
+		!macro ${2:funcName}
+		!macroend
+
+		!macro un.${2:funcName}
+		!macroend
+
+		!macro ${2:funcName}_
+				!verbose push
+				!verbose ${_${1/(.*)/\U\1/}_VERBOSE
+
+				${7:# your code}
+
+				!verbose pop
+		!macroend
+
+!endif
+
+endsnippet
+
+
+snippet scaffold:Library "v3" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+!define libName "${1:library_name}"
+!define funcName "${2:function_name}"
+
+!ifndef ${1/(.*)/\U\1/}_INCLUDED
+		!define ${1/(.*)/\U\1/}_INCLUDED
+
+		; Includes ---------------------------------
+		${3:!include Util.nsh}
+		$4
+		; Settings ---------------------------------
+		!verbose push 3
+		!define /ifndef _${1/(.*)/\U\1/}_VERBOSE 3
+		!verbose ${_${1/(.*)/\U\1/}_VERBOSE
+		!define ${1/(.*)/\U\1/}_VERBOSE `!insertmacro ${1/(.*)/\U\1/}_VERBOSE`
+
+		; Macros -----------------------------------
+		!macro ${1/(.*)/\U\1/}_VERBOSE _VERBOSE
+				!verbose push 3
+				!define /redef _${1/(.*)/\U\1/}_VERBOSE ${_VERBOSE}
+				!verbose pop
+		!macroend
+
+		; Functions --------------------------------
+		!macro ${2:funcName}Call ${5:_PARAM} ${6:_RESULT}
+				!verbose push
+				!verbose \$\{_${1/(.*)/\U\1/}_VERBOSE\}
+				Push `\$\{${5:_PARAM}\}`
+				\$\{CallArtificialFunction\} ${2:funcName}_
+				Pop `\$\{${6:_RESULT}\}`
+				!verbose pop
+		!macroend
+
+		!define ${2:funcName} `!insertmacro ${2:funcName}Call`
+		!define un.${2:funcName} `!insertmacro ${2:funcName}Call`
+
+		!macro ${2:funcName}
+		!macroend
+
+		!macro un.${2:funcName}
+		!macroend
+
+		!macro ${2:funcName}_
+				!verbose push
+				!verbose ${_${1/(.*)/\U\1/}_VERBOSE
+
+				${7:# your code}
+
+				!verbose pop
+		!macroend
+
+!endif
+
+endsnippet
+
+
+snippet scaffold:Minimal "Script" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Settings ---------------------------------
+OutFile "${1:installer_name}"
+
+; Includes ---------------------------------
+$2
+
+; Pages ------------------------------------
+${3:Page instfiles}
+
+; Sections ---------------------------------
+Section "${4:section_name}"
+
+	${5:# your code here}
+
+SectionEnd
+
+; Functions --------------------------------
+$7
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(2 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${12:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${13:section2_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+Function .onInit
+
+	${14:# your code here}
+
+FunctionEnd
+
+$15
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(2 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${12:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${13:section2_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+$14
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(3 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\U\1/}_INDEX}
+
+	${14:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${15:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${16:section2_description}"
+LangString DESC_${13} \${LANG_${5/(.*)/\U\1/}} "${17:section3_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${13}} \$(DESC_${13})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+Function .onInit
+
+	${18:# your code here}
+
+FunctionEnd
+
+$19
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(3 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\U\1/}_INDEX}
+
+	${14:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${15:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${16:section2_description}"
+LangString DESC_${13} \${LANG_${5/(.*)/\U\1/}} "${17:section3_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${13}} \$(DESC_${13})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+$18
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(4 Sections, onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\U\1/}_INDEX}
+
+	${14:# your code here}
+
+SectionEnd
+
+Section "${15:section4}" ${16:${15/(.*)/\U\1/}_INDEX}
+
+	${17:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${18:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${19:section2_description}"
+LangString DESC_${13} \${LANG_${5/(.*)/\U\1/}} "${20:section3_description}"
+LangString DESC_${16} \${LANG_${5/(.*)/\U\1/}} "${21:section4_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${13}} \$(DESC_${13})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${16}} \$(DESC_${16})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+Function .onInit
+
+	${22:# your code here}
+
+FunctionEnd
+
+$23
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(4 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section1}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+Section "${9:section2}" ${10:${9/(.*)/\U\1/}_INDEX}
+
+	${11:# your code here}
+
+SectionEnd
+
+Section "${12:section3}" ${13:${12/(.*)/\U\1/}_INDEX}
+
+	${14:# your code here}
+
+SectionEnd
+
+Section "${15:section4}" ${16:${15/(.*)/\U\1/}_INDEX}
+
+	${17:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${18:section1_description}"
+LangString DESC_${10} \${LANG_${5/(.*)/\U\1/}} "${19:section2_description}"
+LangString DESC_${13} \${LANG_${5/(.*)/\U\1/}} "${20:section3_description}"
+LangString DESC_${16} \${LANG_${5/(.*)/\U\1/}} "${21:section4_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${10}} \$(DESC_${10})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${13}} \$(DESC_${13})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${16}} \$(DESC_${16})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+$22
+
+endsnippet
+
+
+snippet scaffold:ModernUI "(onInit)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${9:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+Function .onInit
+
+	${10:# your code here}
+
+FunctionEnd
+
+$11
+
+endsnippet
+
+
+snippet scaffold:ModernUI "" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${5:English}"
+
+; Sections ---------------------------------
+Section "${6:section}" ${7:${6/(.*)/\U\1/}_INDEX}
+
+	${8:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${7} \${LANG_${5/(.*)/\U\1/}} "${9:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${7}} \$(DESC_${7})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+; Functions --------------------------------
+$10
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "ModernUI (2 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Variables --------------------------------
+$7
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${8:English}"
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${9:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${10:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${11:section1}" ${12:${11/(.*)/\U\1/}_INDEX}
+
+	${13:# your code here}
+
+SectionEnd
+
+Section "${14:section2}" ${15:${14/(.*)/\U\1/}_INDEX}
+
+	${16:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${12} \${LANG_${8/(.*)/\U\1/}} "${17:section_description}"
+LangString DESC_${15} \${LANG_${8/(.*)/\U\1/}} "${18:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${12}} \$(DESC_${12})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${15}} \$(DESC_${15})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "ModernUI (3 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Variables --------------------------------
+$7
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${8:English}"
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${9:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${10:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${11:section1}" ${12:${11/(.*)/\U\1/}_INDEX}
+
+	${13:# your code here}
+
+SectionEnd
+
+Section "${14:section2}" ${15:${14/(.*)/\U\1/}_INDEX}
+
+	${16:# your code here}
+
+SectionEnd
+
+Section "${17:section3}" ${18:${17/(.*)/\U\1/}_INDEX}
+
+	${19:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${12} \${LANG_${8/(.*)/\U\1/}} "${20:section_description}"
+LangString DESC_${15} \${LANG_${8/(.*)/\U\1/}} "${21:section_description}"
+LangString DESC_${18} \${LANG_${8/(.*)/\U\1/}} "${22:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${12}} \$(DESC_${12})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${15}} \$(DESC_${15})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${18}} \$(DESC_${18})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "ModernUI (4 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Variables --------------------------------
+$7
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${8:English}"
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${9:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${10:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${11:section1}" ${12:${11/(.*)/\U\1/}_INDEX}
+
+	${13:# your code here}
+
+SectionEnd
+
+Section "${14:section2}" ${15:${14/(.*)/\U\1/}_INDEX}
+
+	${16:# your code here}
+
+SectionEnd
+
+Section "${17:section3}" ${18:${17/(.*)/\U\1/}_INDEX}
+
+	${19:# your code here}
+
+SectionEnd
+
+Section "${20:section4}" ${21:${20/(.*)/\U\1/}_INDEX}
+
+	${22:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${12} \${LANG_${8/(.*)/\U\1/}} "${23:section_description}"
+LangString DESC_${15} \${LANG_${8/(.*)/\U\1/}} "${24:section_description}"
+LangString DESC_${18} \${LANG_${8/(.*)/\U\1/}} "${25:section_description}"
+LangString DESC_${21} \${LANG_${8/(.*)/\U\1/}} "${26:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${12}} \$(DESC_${12})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${15}} \$(DESC_${15})
+	!insertmacro MUI_DESCRIPTION_TEXT \${${18}} \$(DESC_${18})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "ModernUI" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+!include MUI2.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+!insertmacro MUI_PAGE_COMPONENTS
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Variables --------------------------------
+$7
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "${8:English}"
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${9:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${10:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${11:section}" ${12:${11/(.*)/\U\1/}_INDEX}
+
+	${13:# your code here}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_${12} \${LANG_${8/(.*)/\U\1/}} "${14:section_description}"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+	!insertmacro MUI_DESCRIPTION_TEXT \${${12}} \$(DESC_${12})
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "(2 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+Page components
+Page directory
+Page instfiles
+
+; Variables --------------------------------
+$7
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${8:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${9:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${10:section1}" ${11:${10/(.*)/\U\1/}_INDEX}
+
+	${12:# your code here}
+
+SectionEnd
+
+Section "${13:section2}" ${14:${13/(.*)/\U\1/}_INDEX}
+
+	${15:# your code here}
+
+SectionEnd
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "(3 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+Page components
+Page directory
+Page instfiles
+
+; Variables --------------------------------
+$7
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${8:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${9:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${10:section1}" ${11:${10/(.*)/\U\1/}_INDEX}
+
+	${12:# your code here}
+
+SectionEnd
+
+Section "${13:section2}" ${14:${13/(.*)/\U\1/}_INDEX}
+
+	${15:# your code here}
+
+SectionEnd
+
+Section "${16:section3}" ${17:${16/(.*)/\U\1/}_INDEX}
+
+	${18:# your code here}
+
+SectionEnd
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "(4 Sections)" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+Page components
+Page directory
+Page instfiles
+
+; Variables --------------------------------
+$7
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${8:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${9:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${10:section1}" ${11:${10/(.*)/\U\1/}_INDEX}
+
+	${12:# your code here}
+
+SectionEnd
+
+Section "${13:section2}" ${14:${13/(.*)/\U\1/}_INDEX}
+
+	${15:# your code here}
+
+SectionEnd
+
+Section "${16:section3}" ${17:${16/(.*)/\U\1/}_INDEX}
+
+	${18:# your code here}
+
+SectionEnd
+
+Section "${19:section4}" ${18:${19/(.*)/\U\1/}_INDEX}
+
+	${21:# your code here}
+
+SectionEnd
+
+endsnippet
+
+
+snippet scaffold:nsDialogs "" b
+
+; Scaffolding by https://github.com/idleberg/NSIS-Sublime-Text
+
+; Includes ---------------------------------
+!include nsDialogs.nsh
+!include LogicLib.nsh
+
+; Settings ---------------------------------
+Name "${1:installer_name}"
+OutFile "${2:${1}}.exe"
+RequestExecutionLevel ${3:user}
+InstallDir "\$PROGRAMFILES\\${4:${1}}"
+
+; Pages ------------------------------------
+Page custom "${5:nsdialog_page}" "${6:${5:nsdialog_page}_validation}"
+Page components
+Page directory
+Page instfiles
+
+; Variables --------------------------------
+$7
+
+; Functions --------------------------------
+Function "$5"
+
+	nsDialogs::Create 1018
+	Pop \$0
+
+	${8:# your code here}
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function "$6"
+
+	${9:# your code here}
+
+FunctionEnd
+
+; Sections ---------------------------------
+Section "${10:section}" ${11:${10/(.*)/\U\1/}_INDEX}
+
+	${12:# your code here}
+
+SectionEnd
+
+endsnippet
+
+
+snippet scaffold:Translate "MUI (French)" b
+
+!insertmacro LANGFILE "${1:French}" "${1:Français}"
+
+!ifdef MUI_WELCOMEPAGE
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TITLE "${2:Bienvenue dans le programme d'installation de \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "${3:Vous êtes sur le point de désinstaller \$(^NameDA) de votre ordinateur.}\$\r\$\n\$\r\$\n${4:Avant de démarrer l'installation, il est recommandé de fermer toutes les autres applications. Cela permettra la mise à jour de certains fichiers système sans redémarrer votre ordinateur.}\$\r\$\n\$\r\$\n\$_CLICK"
+!endif
+
+!ifdef MUI_UNWELCOMEPAGE
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TITLE "${5:Bienvenue dans le programme de désinstallation de \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TEXT "${6:Vous êtes sur le point de désinstaller \$(^NameDA) de votre ordinateur.}\$\r\$\n\$\r\$\n${7:Avant d'amorcer la désinstallation, assurez-vous que \$(^NameDA) ne soit pas en cours d'exécution.}\$\r\$\n\$\r\$\n\$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE
+	\${LangFileString} MUI_TEXT_LICENSE_TITLE "${8:Licence utilisateur}"
+	\${LangFileString} MUI_TEXT_LICENSE_SUBTITLE "${9:Veuillez examiner les termes de la licence avant d'installer \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM "${10:Si vous acceptez les conditions de la licence utilisateur, cliquez sur J'accepte pour continuer. Vous devez accepter la licence utilisateur afin d'installer \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_CHECKBOX "${11:Si vous acceptez les conditions de la licence utilisateur, cochez la case ci-dessous. Vous devez accepter la licence utilisateur afin d'installer \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${12:Si vous acceptez les conditions de la licence utilisateur, sélectionnez le premier choix ci-dessous. Vous devez accepter la licence utilisateur afin d'installer \$(^NameDA).}"
+!endif
+
+!ifdef MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_UNTEXT_LICENSE_TITLE "${13:Licence utilisateur}"
+	\${LangFileString} MUI_UNTEXT_LICENSE_SUBTITLE "${14:Veuillez examiner les conditions de la licence avant de désinstaller \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "${15:Si vous acceptez les conditions de la licence utilisateur, cliquez sur J'accepte pour continuer. Vous devez accepter la licence utilisateur afin de désinstaller \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_CHECKBOX "${16:Si vous acceptez les conditions de la licence utilisateur, cochez la case ci-dessous. Vous devez accepter la licence utilisateur afin de désintaller \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${17:Si vous acceptez les conditions de la licence utilisateur, sélectionnez le premier choix ci-dessous. Vous devez accepter la licence utilisateur afin de désinstaller \$(^NameDA).}"
+!endif
+
+!ifdef MUI_LICENSEPAGE | MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_INNERTEXT_LICENSE_TOP "${18:Appuyez sur Page Suivante pour lire le reste de la licence utilisateur.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE
+	\${LangFileString} MUI_TEXT_COMPONENTS_TITLE "${19:Choisissez les composants}"
+	\${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "${20:Choisissez les composants de \$(^NameDA) que vous souhaitez installer.}"
+!endif
+
+!ifdef MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_TITLE "${21:Choose Components}"
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_SUBTITLE "${22:Choose which features of \$(^NameDA) you want to uninstall.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "${23:Description}"
+	!ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${24:Passez le curseur de votre souris sur un composant pour en voir la description.}"
+	!else
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${25:Passez le curseur de votre souris sur un composant pour en voir la description.}"
+	!endif
+!endif
+
+!ifdef MUI_DIRECTORYPAGE
+	\${LangFileString} MUI_TEXT_DIRECTORY_TITLE "${26:Choisissez le dossier d'installation}"
+	\${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "${27:Choisissez le dossier dans lequel installer \$(^NameDA).}"
+!endif
+
+!ifdef MUI_UNDIRECTORYPAGE
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "${28:Choisissez le dossier de désinstallation}"
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "${29:Choisissez le dossier à partir duquel vous voulez désinstaller \$(^NameDA).}"
+!endif
+
+!ifdef MUI_INSTFILESPAGE
+	\${LangFileString} MUI_TEXT_INSTALLING_TITLE "${30:Installation en cours}"
+	\${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "${31:Veuillez patienter pendant que \$(^NameDA) est en train d'être installé.}"
+	\${LangFileString} MUI_TEXT_FINISH_TITLE "${32:Installation terminée}"
+	\${LangFileString} MUI_TEXT_FINISH_SUBTITLE "${33:L'installation s'est terminée avec succès.}"
+	\${LangFileString} MUI_TEXT_ABORT_TITLE "${34:Installation interrompue}"
+	\${LangFileString} MUI_TEXT_ABORT_SUBTITLE "${35:L'installation n'a pas été terminée.}"
+!endif
+
+!ifdef MUI_UNINSTFILESPAGE
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_TITLE "${36:Désinstallation en cours}"
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_SUBTITLE "${37:Veuillez patienter pendant que \$(^NameDA) est en train d'être supprimé de votre ordinateur.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_TITLE "${38:Désinstallation terminée}"
+	\${LangFileString} MUI_UNTEXT_FINISH_SUBTITLE "${39:La désinstallation s'est terminée avec succès.}"
+	\${LangFileString} MUI_UNTEXT_ABORT_TITLE "${40:Désinstallation interrompue}"
+	\${LangFileString} MUI_UNTEXT_ABORT_SUBTITLE "${41:La désinstallation n'a pas été terminée.}"
+!endif
+
+!ifdef MUI_FINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TITLE "${42:Fin de l'installation de \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TEXT "${43:\$(^NameDA) a été installé sur votre ordinateur}\$\r\$\n\$\r\$\n${44:Cliquez sur Fermer pour quitter le programme d'installation.}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_REBOOT "${45:Votre ordinateur doit être redémarré afin de compléter l'installation de \$(^NameDA). Souhaitez-vous redémarrer maintenant ?}"
+!endif
+
+!ifdef MUI_UNFINISHPAGE
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TITLE "${46:Fin de la désinstallation de \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TEXT "${47:\$(^NameDA) a été supprimé de votre ordinateur.}\$\r\$\n\$\r\$\n${48:Cliquez sur Fermer pour quitter le programme d'installation.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_REBOOT "${49:Votre ordinateur doit être redémarré pour terminer la désinstallation de \$(^NameDA). Souhaitez-vous redémarrer maintenant ?}"
+!endif
+
+!ifdef MUI_FINISHPAGE | MUI_UNFINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTNOW "${50:Redémarrer maintenant}"
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "${51:Je souhaite redémarrer moi-même plus tard}"
+	\${LangFileString} MUI_TEXT_FINISH_RUN "${52:Lancer \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_FINISH_SHOWREADME "${53:Afficher le fichier Readme}"
+	\${LangFileString} MUI_BUTTONTEXT_FINISH "${54:&Fermer}"
+!endif
+
+!ifdef MUI_STARTMENUPAGE
+	\${LangFileString} MUI_TEXT_STARTMENU_TITLE "${55:Choisissez un dossier dans le menu Démarrer}"
+	\${LangFileString} MUI_TEXT_STARTMENU_SUBTITLE "${56:Choisissez un dossier dans le menu Démarrer pour les raccourcis de l'application.}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_TOP "${57:Choisissez le dossier du menu Démarrer dans lequel vous voulez placer les raccourcis du programme. Vous pouvez également entrer un nouveau nom pour créer un nouveau dossier.}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_CHECKBOX "${58:Ne pas créer de raccourcis}"
+!endif
+
+!ifdef MUI_UNCONFIRMPAGE
+	\${LangFileString} MUI_UNTEXT_CONFIRM_TITLE "${59:Désinstaller \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_CONFIRM_SUBTITLE "${60:Supprimer \$(^NameDA) de votre ordinateur.}"
+!endif
+
+!ifdef MUI_ABORTWARNING
+	\${LangFileString} MUI_TEXT_ABORTWARNING "${61:Êtes-vous sûr de vouloir quitter l'installation de \$(^Name) ?}"
+!endif
+
+!ifdef MUI_UNABORTWARNING
+	\${LangFileString} MUI_UNTEXT_ABORTWARNING "${62:Êtes-vous sûr de vouloir quitter la désinstallation de \$(^Name) ?}"
+!endif
+
+!ifdef MULTIUSER_INSTALLMODEPAGE
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_TITLE "${63:Choix des utilisateurs}"
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_SUBTITLE "${64:Sélection des utilisateurs désirant utiliser \$(^NameDA).}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_TOP "${65:Choix entre installer \$(^NameDA) seulement pour vous-même	ou bien pour tous les utilisateurs du système. \$(^ClickNext)}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_ALLUSERS "${66:Installer pour tous les utilisateurs}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_CURRENTUSER "${67:Installer seulement pour moi}"
+!endif
+
+endsnippet
+
+
+snippet scaffold:Translate "MUI (Spanish)" b
+
+!insertmacro LANGFILE "${1:Spanish}" "${1:Español}"
+
+!ifdef MUI_WELCOMEPAGE
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TITLE "${2:Bienvenido al Asistente de Instalación de \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "${3:Este programa instalará \$(^NameDA) en su ordenador.}\$\r\$\n\$\r\$\n${4:Se recomienda que cierre todas las demás aplicaciones antes de iniciar la instalación. Esto hará posible actualizar archivos relacionados con el sistema sin tener que reiniciar su ordenador.}\$\r\$\n\$\r\$\n\\$_CLICK"
+!endif
+
+!ifdef MUI_UNWELCOMEPAGE
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TITLE "${5:Bienvenido al Asistente de Desinstalación de \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TEXT "${6:Este asistente le guiará durante la desinstalación de \$(^NameDA).}\$\r\$\n\$\r\$\n${7:Antes de comenzar la desinstalación, asegúrese de que \$(^NameDA) no se está ejecutando.}\$\r\$\n\$\r\$\n\\$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE
+	\${LangFileString} MUI_TEXT_LICENSE_TITLE "${8:Acuerdo de licencia}"
+	\${LangFileString} MUI_TEXT_LICENSE_SUBTITLE "${9:Por favor revise los términos de la licencia antes de instalar \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM "${10:Si acepta todos los términos del acuerdo, seleccione Acepto para continuar. Debe aceptar el acuerdo para instalar \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_CHECKBOX "${11:Si acepta los términos del acuerdo, marque abajo la casilla. Debe aceptar los términos para instalar \$(^NameDA).} \$_CLICK"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${12:Si acepta los términos del acuerdo, seleccione abajo la primera opción. Debe aceptar los términos para instalar \$(^NameDA).} \$_CLICK"
+!endif
+
+!ifdef MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_UNTEXT_LICENSE_TITLE "${13:Acuerdo de licencia}"
+	\${LangFileString} MUI_UNTEXT_LICENSE_SUBTITLE "${14:Por favor revise los términos de la licencia antes de desinstalar \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "${15:Si acepta todos los términos del acuerdo, seleccione Acepto para continuar. Debe aceptar el acuerdo para desinstalar \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_CHECKBOX "${16:Si acepta los términos del acuerdo, marque abajo la casilla. Debe aceptar los términos para desinstalar \$(^NameDA).} \$_CLICK"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${17:Si acepta los términos del acuerdo, seleccione abajo la primera opción. Debe aceptar los términos para desinstalar \$(^NameDA).} \$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE | MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_INNERTEXT_LICENSE_TOP "${18:Presione Avanzar Página para ver el resto del acuerdo.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE
+	\${LangFileString} MUI_TEXT_COMPONENTS_TITLE "${19:Selección de componentes}"
+	\${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "${20:Seleccione qué características de \$(^NameDA) desea instalar}"
+!endif
+
+!ifdef MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_TITLE "${21:Selección de componentes}"
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_SUBTITLE "${22:Seleccione qué características de \$(^NameDA) desea desinstalar.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "${23:Descripción}"
+	!ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${24:Sitúe el ratón encima de un componente para ver su descripción.}"
+	!else
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${25:Sitúe el ratón encima de un componente para ver su descripción.}"
+	!endif
+!endif
+
+!ifdef MUI_DIRECTORYPAGE
+	\${LangFileString} MUI_TEXT_DIRECTORY_TITLE "${26:Elegir lugar de instalación}"
+	\${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "${27:Elija el directorio para instalar \$(^NameDA).}"
+!endif
+
+!ifdef MUI_UNDIRECTORYPAGE
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "${28:Elegir lugar de desinstalación}"
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "${29:Elija el directorio desde el cual se desinstalará \$(^NameDA).}"
+!endif
+
+!ifdef MUI_INSTFILESPAGE
+	\${LangFileString} MUI_TEXT_INSTALLING_TITLE "${30:Instalando}"
+	\${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "${31:Por favor espere mientras \$(^NameDA) se instala.}"
+	\${LangFileString} MUI_TEXT_FINISH_TITLE "${32:Instalación Completada}"
+	\${LangFileString} MUI_TEXT_FINISH_SUBTITLE "${33:La instalación se ha completado correctamente.}"
+	\${LangFileString} MUI_TEXT_ABORT_TITLE "${34:Instalación Anulada}"
+	\${LangFileString} MUI_TEXT_ABORT_SUBTITLE "${35:La instalación no se completó correctamente.}"
+!endif
+
+!ifdef MUI_UNINSTFILESPAGE
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_TITLE "${36:Desinstalando}"
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_SUBTITLE "${37:Por favor espere mientras \$(^NameDA) se desinstala.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_TITLE "${38:Desinstalación Completada}"
+	\${LangFileString} MUI_UNTEXT_FINISH_SUBTITLE "${39:La desinstalación se ha completado correctamente.}"
+	\${LangFileString} MUI_UNTEXT_ABORT_TITLE "${40:Desinstalación Anulada}"
+	\${LangFileString} MUI_UNTEXT_ABORT_SUBTITLE "${41:La desinstalación no se completó correctamente.}"
+!endif
+
+!ifdef MUI_FINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TITLE "${42:Completando el Asistente de Instalación de \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TEXT "${43:\$(^NameDA) ha sido instalado en su sistema.}\$\r\$\n\$\r\$\n${44:Presione Terminar para cerrar este asistente.}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_REBOOT "${45:Su sistema debe ser reiniciado para que pueda completarse la instalación de \$(^NameDA). ¿Desea reiniciar ahora?}"
+!endif
+
+!ifdef MUI_UNFINISHPAGE
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TITLE "${46:Completando el Asistente de Desinstalación de \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TEXT "${47:\$(^NameDA) ha sido desinstalado de su sistema.}\$\r\$\n\$\r\$\n${48:Presione Terminar para cerrar este asistente.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_REBOOT "${49:Su ordenador debe ser reiniciado para completar la desinstalación de \$(^NameDA). ¿Desea reiniciar ahora?}"
+!endif
+
+!ifdef MUI_FINISHPAGE | MUI_UNFINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTNOW "${50:Reiniciar ahora}"
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "${51:Deseo reiniciar manualmente más tarde}"
+	\${LangFileString} MUI_TEXT_FINISH_RUN "${52:&Ejecutar \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_FINISH_SHOWREADME "${53:&Ver Léame}"
+	\${LangFileString} MUI_BUTTONTEXT_FINISH "${54:&Terminar}"
+!endif
+
+!ifdef MUI_STARTMENUPAGE
+	\${LangFileString} MUI_TEXT_STARTMENU_TITLE "${55:Elegir Carpeta del Menú Inicio}"
+	\${LangFileString} MUI_TEXT_STARTMENU_SUBTITLE "${56:Elija una Carpeta del Menú Inicio para los accesos directos de \$(^NameDA).}"
+	\${LangFileString} MUI_TEXT_STARTMENU_SUBTITLE "${56:Elija una Carpeta del Menú Inicio para los accesos directos de \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_TOP "${57:Choisissez le dossier du menu Démarrer dans lequel vous voulez placer les raccourcis du programme. Vous pouvez également entrer un nouveau nom pour créer un nouveau dossier.}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_CHECKBOX "${58:No crear accesos directos}"
+!endif
+
+!ifdef MUI_UNCONFIRMPAGE
+	\${LangFileString} MUI_UNTEXT_CONFIRM_TITLE "${59:Desinstalar \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_CONFIRM_SUBTITLE "${60:Elimina \$(^NameDA) de su sistema.}"
+!endif
+
+!ifdef MUI_ABORTWARNING
+	\${LangFileString} MUI_TEXT_ABORTWARNING "${61:¿Está seguro de que desea salir de la instalación de \$(^Name)?}"
+!endif
+
+!ifdef MUI_UNABORTWARNING
+	\${LangFileString} MUI_UNTEXT_ABORTWARNING "${62:¿Está seguro de que desea salir de la desinstalación de \$(^Name)?}"
+!endif
+
+!ifdef MULTIUSER_INSTALLMODEPAGE
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_TITLE "${63:Elegir Usuarios}"
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_SUBTITLE "${64:Elija los usuarios para los cuales Ud. desea instalar \$(^NameDA).}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_TOP "${65:Seleccione si desea instalar \$(^NameDA) sólo para Ud. o para todos los usuarios de este Ordenador.\$(^ClickNext)}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_ALLUSERS "${66:Instación para cualquier usuario de este ordenador}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_CURRENTUSER "${67:Instalación solo para mí}"
+!endif
+
+endsnippet
+
+
+snippet scaffold:Translate "MUI" b
+
+!insertmacro LANGFILE "${1:English}" "${1:English}"
+
+!ifdef MUI_WELCOMEPAGE
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TITLE "${2:Welcome to the \$(^NameDA) Setup Wizard}"
+	\${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "${3:This wizard will guide you through the installation of \$(^NameDA).}\$\r\$\n\$\r\$\n${4:It is recommended that you close all other applications before starting Setup. This will make it possible to update relevant system files without having to reboot your computer.}\$\r\$\n\$\r\$\n\$_CLICK"
+!endif
+
+!ifdef MUI_UNWELCOMEPAGE
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TITLE "${5:Welcome to the \$(^NameDA) Uninstall Wizard}"
+	\${LangFileString} MUI_UNTEXT_WELCOME_INFO_TEXT "${6:This wizard will guide you through the uninstallation of \$(^NameDA).}\$\r\$\n\$\r\$\n${7:Before starting the uninstallation, make sure \$(^NameDA) is not running.}\$\r\$\n\$\r\$\n\$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE
+	\${LangFileString} MUI_TEXT_LICENSE_TITLE "${8:License Agreement}"
+	\${LangFileString} MUI_TEXT_LICENSE_SUBTITLE "${9:Please review the license terms before installing \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM "${10:If you accept the terms of the agreement, clickMUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS I Agree to continue. You must accept the agreement to install \$(^NameDA).}"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_CHECKBOX "${11:If you accept the terms of the agreement, click the check box below. You must accept the agreement to install \$(^NameDA).} \$_CLICK"
+	\${LangFileString} MUI_INNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${12:If you accept the terms of the agreement, select the first option below. You must accept the agreement to install \$(^NameDA).} \$_CLICK"
+!endif
+
+!ifdef MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_UNTEXT_LICENSE_TITLE "${13:License Agreement}"
+	\${LangFileString} MUI_UNTEXT_LICENSE_SUBTITLE "${14:Please review the license terms before uninstalling \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "${15:If you accept the terms of the agreement, click I Agree to continue. You must accept the agreement to uninstall \$(^NameDA).}"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_CHECKBOX "${16:If you accept the terms of the agreement, click the check box below. You must accept the agreement to uninstall \$(^NameDA).} \$_CLICK"
+	\${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "${17:If you accept the terms of the agreement, select the first option below. You must accept the agreement to uninstall \$(^NameDA).} \$_CLICK"
+!endif
+
+!ifdef MUI_LICENSEPAGE | MUI_UNLICENSEPAGE
+	\${LangFileString} MUI_INNERTEXT_LICENSE_TOP "${18:Press Page Down to see the rest of the agreement.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE
+	\${LangFileString} MUI_TEXT_COMPONENTS_TITLE "${19:Choose Components}"
+	\${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "${20:Choose which features of \$(^NameDA) you want to install.}"
+!endif
+
+!ifdef MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_TITLE "${21:Choose Components}"
+	\${LangFileString} MUI_UNTEXT_COMPONENTS_SUBTITLE "${22:Choose which features of \$(^NameDA) you want to uninstall.}"
+!endif
+
+!ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+	\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "${23:Description}"
+	!ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${24:Position your mouse over a component to see its description.}"
+	!else
+		\${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "${25:Position your mouse over a component to see its description.}"
+	!endif
+!endif
+
+!ifdef MUI_DIRECTORYPAGE
+	\${LangFileString} MUI_TEXT_DIRECTORY_TITLE "${26:Choose Install Location}"
+	\${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "${27:Choose the folder in which to install \$(^NameDA).}"
+!endif
+
+!ifdef MUI_UNDIRECTORYPAGE
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "${28:Choose Uninstall Location}"
+	\${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "${29:Choose the folder from which to uninstall \$(^NameDA).}"
+!endif
+
+!ifdef MUI_INSTFILESPAGE
+	\${LangFileString} MUI_TEXT_INSTALLING_TITLE "${30:Installing}"
+	\${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "${31:Please wait while \$(^NameDA) is being installed.}"
+	\${LangFileString} MUI_TEXT_FINISH_TITLE "${32:Installation Complete}"
+	\${LangFileString} MUI_TEXT_FINISH_SUBTITLE "${33:Setup was completed successfully.}"
+	\${LangFileString} MUI_TEXT_ABORT_TITLE "${34:Installation Aborted}"
+	\${LangFileString} MUI_TEXT_ABORT_SUBTITLE "${35:Setup was not completed successfully.}"
+!endif
+
+!ifdef MUI_UNINSTFILESPAGE
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_TITLE "${36:Uninstalling}"
+	\${LangFileString} MUI_UNTEXT_UNINSTALLING_SUBTITLE "${37:Please wait while \$(^NameDA) is being uninstalled.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_TITLE "${38:Uninstallation Complete}"
+	\${LangFileString} MUI_UNTEXT_FINISH_SUBTITLE "${39:Uninstall was completed successfully.}"
+	\${LangFileString} MUI_UNTEXT_ABORT_TITLE "${40:Uninstallation Aborted}"
+	\${LangFileString} MUI_UNTEXT_ABORT_SUBTITLE "${41:Uninstall was not completed successfully.}"
+!endif
+
+!ifdef MUI_FINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TITLE "${42:Completing the \$(^NameDA) Setup Wizard}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_TEXT "${43:\$(^NameDA) has been installed on your computer.}\$\r\$\n\$\r\$\n${44:Click Finish to close this wizard.}"
+	\${LangFileString} MUI_TEXT_FINISH_INFO_REBOOT "${45:Your computer must be restarted in order to complete the installation of \$(^NameDA). Do you want to reboot now?}"
+!endif
+
+!ifdef MUI_UNFINISHPAGE
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TITLE "${46:Completing the \$(^NameDA) Uninstall Wizard}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_TEXT "${47:\$(^NameDA) has been uninstalled from your computer.}\$\r\$\n\$\r\$\n${48:Click Finish to close this wizard.}"
+	\${LangFileString} MUI_UNTEXT_FINISH_INFO_REBOOT "${49:Your computer must be restarted in order to complete the uninstallation of \$(^NameDA). Do you want to reboot now?}"
+!endif
+
+!ifdef MUI_FINISHPAGE | MUI_UNFINISHPAGE
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTNOW "${50:Reboot now}"
+	\${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "${51:I want to manually reboot later}"
+	\${LangFileString} MUI_TEXT_FINISH_RUN "${52:&Run \$(^NameDA)}"
+	\${LangFileString} MUI_TEXT_FINISH_SHOWREADME "${53:&Show Readme}"
+	\${LangFileString} MUI_BUTTONTEXT_FINISH "${54:&Finish}"
+!endif
+
+!ifdef MUI_STARTMENUPAGE
+	\${LangFileString} MUI_TEXT_STARTMENU_TITLE "${55:Choose Start Menu Folder}"
+	\${LangFileString} MUI_TEXT_STARTMENU_SUBTITLE "${56:Choose a Start Menu folder for the \$(^NameDA) shortcuts.}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_TOP "${57:Select the Start Menu folder in which you would like to create the program's shortcuts. You can also enter a name to create a new folder.}"
+	\${LangFileString} MUI_INNERTEXT_STARTMENU_CHECKBOX "${58:Do not create shortcuts}"
+!endif
+
+!ifdef MUI_UNCONFIRMPAGE
+	\${LangFileString} MUI_UNTEXT_CONFIRM_TITLE "${59:Uninstall \$(^NameDA)}"
+	\${LangFileString} MUI_UNTEXT_CONFIRM_SUBTITLE "${60:Remove \$(^NameDA) from your computer.}"
+!endif
+
+!ifdef MUI_ABORTWARNING
+	\${LangFileString} MUI_TEXT_ABORTWARNING "${61:Are you sure you want to quit \$(^Name) Setup?}"
+!endif
+
+!ifdef MUI_UNABORTWARNING
+	\${LangFileString} MUI_UNTEXT_ABORTWARNING "${62:Are you sure you want to quit \$(^Name) Uninstall?}"
+!endif
+
+!ifdef MULTIUSER_INSTALLMODEPAGE
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_TITLE "${63:Choose Users}"
+	\${LangFileString} MULTIUSER_TEXT_INSTALLMODE_SUBTITLE "${64:Choose for which users you want to install \$(^NameDA).}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_TOP "${65:Select whether you want to install \$(^NameDA) for yourself only or for all users of this computer. \$(^ClickNext)}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_ALLUSERS "${66:Install for anyone using this computer}"
+	\${LangFileString} MULTIUSER_INNERTEXT_INSTALLMODE_CURRENTUSER "${67:Install just for me}"
+!endif
+
+endsnippet
+
+

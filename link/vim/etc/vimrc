@@ -1,0 +1,520 @@
+"  VUNDLE.VIM  {{{1"
+
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+if ! exists("NO_SPARTAN")
+  "Plugins that are not loaded 
+  "when I want to be spartan
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'bling/vim-airline'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'vim-scripts/VCard-syntax'
+  Plugin 'scrooloose/syntastic'
+  if v:version >= 730
+    Plugin 'jlanzarotta/bufexplorer'
+  endif
+  Plugin 'easymotion/vim-easymotion'
+  Plugin 'takac/vim-hardtime'
+  Plugin 'burnettk/vim-angular'
+endif
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'othree/html5.vim'
+Plugin 'lervag/vimtex'
+Plugin 'derekwyatt/vim-fswitch'
+Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/gnuplot.vim'
+Plugin 'alejandrogallo/vasp.vim'
+Plugin 'alejandrogallo/vim-asymptote'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-surround'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'dhruvasagar/vim-table-mode'
+if has("lua")
+  " it needs lua!
+  Plugin 'Shougo/neocomplete.vim'
+endif
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/nerdcommenter'
+if v:version >= 704
+  "it needs vim 7.04..
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
+endif
+Plugin 'mattn/emmet-vim'
+" Track the engine.
+Plugin 'VundleVim/Vundle.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()
+
+
+
+
+" GENERAL STUFF {{{1 "
+
+function! s:get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  " from
+  " http://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+function! TabReplace()
+  %s/\t/  /g
+endfunction
+
+function! TrailingSpacesClean()
+  echom "Removing trailing spaces"
+  %s/\v\s+$//g
+endfunction
+" convert print as a keyword in python 2 to a function for python 3
+fun! PrintPython2ToPython3()
+  %s/\vprint\s+(.*)/print(\1)/c
+endf
+
+"set undo stuff, it needs VIM 7.3 at least
+if has("persistent_undo")
+  " src: http://stackoverflow.com/questions/17936130/vim-undo-undo-changes-after-file-write
+  set undofile
+  set undodir=$MYVIMRC/etc/undo
+endif
+
+" allowing modeline
+set modeline
+
+"No compatibility with vi
+set nocompatible
+
+"Go to normal mode typing  kj in insert mode
+inoremap kj <ESC>
+vnoremap kj <ESC>
+
+filetype plugin on
+"Autocompletion from vim
+
+"Numbering of lines
+set number
+
+" Relative numbering
+if v:version >= 704
+  "is only supported for vim 7.04 and above...
+  set relativenumber
+endif
+
+
+"Automatic indentation for plugins
+filetype plugin indent on
+
+"enable coloring and so on
+syntax enable
+
+"Highlight search as you type the searching word
+set incsearch
+
+"provide a graphical menu of all the matches you can cycle through in the command line
+set wildmenu
+
+" Marks for special characters
+set listchars=eol:~,trail:*
+set listchars+=tab:>\  "Tab should be ok like that
+" Activate listchars
+set list
+
+" OmniCompletion {{{1 "
+
+set tags+=~/.vim/commontags
+set omnifunc=syntaxcomplete#Complete
+let OmniCpp_MayCompleteDot      = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow    = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope    = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem     = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch     = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+let OmniCpp_LocalSearchDecl     = 1 " don't require special style of function opening braces
+
+" Microsoft Windows stuff {{{1
+
+if !has("unix")
+  set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\ -executionpolicy\ bypass
+endif
+
+" GrepAndReplace {{{1 "
+
+function! GrepAndReplace(word, ...)
+  let folder = "."
+  let word_replace = ""
+  echom "Contents of the replacing list"
+  echom "------------------------------"
+  let i = 1
+  for argument in a:000
+    echom i
+    if i == len(a:000)
+      let word_replace = word_replace.argument
+    else
+      let word_replace = word_replace.argument." "
+    endif
+    let i+=1
+    echom argument
+  endfor
+  let command = "grep -E \"".a:word."\" -R ".folder
+  echom "Replacing... : ".a:word
+  echom "By           : ".word_replace
+  echom command
+  call setqflist([])
+  execute command
+  let qflist = getqflist()
+  for matchfl in qflist
+    execute ".s/".a:word."/".word_replace."/gc"
+    execute "write"
+    execute "cnext"
+    "try
+    "execute "cnext"
+    "catch
+    "echom "No more items"
+    "endtry
+  endfor
+endfunction
+
+command! -nargs=* Greplace call GrepAndReplace(<f-args>)
+
+
+
+" Leader and localleader {{{1 "
+
+"Set maplocalleader to something else if you like
+let maplocalleader = "\<Space>"
+
+"Set maplocalleader to something else if you like
+let mapleader = ','
+
+"Save current buffer
+nnoremap <localleader>w :w<cr>
+
+"Close vim without saving
+nnoremap <localleader>q :q<cr>
+
+"/ is way too far away, and I want case insensitive!
+nnoremap <localleader>f /\c
+nnoremap <localleader>F ?\c
+vnoremap <localleader>f /\c
+vnoremap <localleader>F ?\c
+
+" too complicated to replace
+nnoremap <localleader>r :%s/
+"replace in the current visual selection
+vnoremap <localleader>r :s/
+" replace at the current line
+nnoremap <localleader>rr :.s/
+
+"Toggle NERDTree file structure easily
+noremap <localleader>ne :NERDTreeToggle<cr>
+
+" Toggle Tagbar
+noremap <localleader>tg :TagbarToggle<cr>
+
+"edit vimrc
+nnoremap <localleader>V :e $HOME/.vim/etc/vimrc<cr>
+
+" edit bashrc
+nnoremap <localleader>B :edit $DOTFILES/link/bashrc<cr>
+
+" align stuff for =
+vnoremap <localleader>t :Tabularize /
+
+" paste adding a blank space
+"nnoremap <localleader>p :normal! a <ESC>p " For cnext now 
+
+
+
+" Folding stuff {{{1 "
+nnoremap <localleader>zmm :set foldmethod=marker<cr>
+nnoremap <localleader>zmi :set foldmethod=indent<cr>
+
+" Quickfix stff {{{1 "
+
+" remap ccnext and cprevious, nice for grep, make etc...
+nnoremap <localleader>n :cnext<cr>
+nnoremap <localleader>p :cprevious<cr>
+
+" Buffer control {{{1 "
+
+"Change to next buffer
+nnoremap <Tab> :bn<CR>
+
+"Change to previous buffer
+nnoremap <S-Tab> :bp<CR>
+
+"Delete
+nnoremap <localleader>bd :bd<CR>
+
+"Make shortcut
+nnoremap <localleader>m :make
+
+
+
+"  AIRLINE  {{{1"
+
+
+"let g:airline_powerline_fonts = 0
+"let g:Powerline_symbols = 'fancy'
+
+let g:airline_theme = 'badwolf'
+
+let g:airline#extensions#tabline#enabled = 1
+
+" To get the downbar
+set laststatus=2
+
+
+"  ULTISNIPS STUFF  {{{1"
+let g:UltiSnipsExpandTrigger="<C-j>"
+
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+let g:UltiSnipsListSnippets="<c-l>"
+
+let g:UltiSnipsEditSplit="vertical"
+
+" edit ultisnips
+nnoremap <localleader>ul :UltiSnipsEdit<cr>
+
+
+
+
+"  TAB CONFIGURATION  {{{1"
+
+
+"Set tabstop to tell vim how many columns a tab counts for
+"(for syntax for example that use explicitly the tab character for linting)
+set tabstop=2
+
+"When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
+"(expand tab in spaces)
+set expandtab
+
+"Set shiftwidth to control how many columns text is indented with the reindent operations 
+"(<< and >>)
+set shiftwidth=2
+
+"Set softtabstop to control how many columns vim uses when you hit Tab in insert mode
+set softtabstop=2
+
+"Set tab to 4
+nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+"Set tab to 8 with insertmode tab to 4
+nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+"Some other common configuration
+nmap \M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+"Set tab to 2
+nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+
+" Windowing configuration {{{1 "
+
+"split vertically like in i3
+nnoremap <localleader><cr> :vsp<cr>
+"split horizontally like in i3
+nnoremap <localleader><localleader><cr> :sp<cr>
+
+let g:WINDOW_IS_ZOOMED=0
+function! ToggleWindowZoom()
+  "a very simple and stupid function to maximize some windows, it messes
+  "everything up, but I do not need much more for the moment
+  if g:WINDOW_IS_ZOOMED==1
+    exec "normal! \<C-w>="
+    let g:WINDOW_IS_ZOOMED=0
+  else
+    "Resize height
+    exec ":resize 400"
+    "Resize width
+    exec ":vertical resize 400"
+    let g:WINDOW_IS_ZOOMED=1
+  endif
+endfunction
+nnoremap <C-w>f :call ToggleWindowZoom()<cr>
+
+" Contacts {{{1 "
+
+let s:CONTACT_AUTOCOMPLETION=""
+let s:CONTACT_FILE="~/contacts/contacts.header"
+
+function! GetContact(name)
+  exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
+  let result = {}
+  let croppedResults=[]
+  for result in getqflist()
+    call add(croppedResults, result.text)
+  endfor
+  return croppedResults
+endfunction
+
+fun! CompleteContacts(findstart, base)
+  if a:findstart
+
+    " locate the start of the word
+    let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
+
+    let line = getline('.')
+    let start = col('.') - 1
+    while start > 0 && line[start - 1] =~ '\a'
+      let start -= 1
+    endwhile
+    return start
+  else
+    let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
+    return contacts
+  endif
+endfun
+set completefunc=CompleteContacts
+
+
+
+" Text Formatting {{{1 "
+function! CreateRsTTitle(character)
+  "This function creates a header of the rst type
+  "We use execute because then we can write Esc inside the command
+  execute "normal! yypv^$r".a:character."\<ESC>"
+endfunction
+nnoremap <localleader>t= :call CreateRsTTitle("=")<cr>
+nnoremap <localleader>t- :call CreateRsTTitle("-")<cr>
+nnoremap <localleader>t~ :call CreateRsTTitle("~")<cr>
+
+
+
+"  emmet.vim  {{{1"
+"Remap emmet trigger jey ctrl + e (CTRL+EMMET)
+let g:user_emmet_leader_key='<C-e>'
+
+
+
+"  neocomplete.vim  {{{1"
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_fuzzy_completion = 1
+
+
+
+" Fugitive {{{1 "
+nnoremap <localleader>gs :Gstatus
+nnoremap <localleader>gw :Gwrite
+nnoremap <localleader>gm :Gcommit
+nnoremap <localleader>gma :Gcommit -a
+nnoremap <localleader>gp :Gpush
+nnoremap <localleader>gu :Gpull
+
+
+
+
+"  CtrlP  {{{1"
+
+let g:ctrlp_map = 'Q' " This is the default
+let g:ctrlp_cmd = 'CtrlP'
+nnoremap <localleader>bb :CtrlPBuffer<cr>
+
+nnoremap <localleader>Q :CtrlPTag<cr>
+
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+
+
+
+
+" Ctags {{{1 "
+"TODO :
+function! FindInCtagsVisualSelection()
+  let visual_string = s:get_visual_selection()
+  normal! tag visual_string
+endfunction
+vnoremap <localleader>t :normal! :call FindInCtagsVisualSelection()<cr>
+
+" Set default tags filename as 'tags' 
+set tags=tags
+" Go to definition of something
+nnoremap <F1> <C-]>
+" Get back from definition
+nnoremap <F2> <C-t>
+" Get back plus delete buffer
+nnoremap <F3> :bd<cr>
+
+
+
+"  Moving around  {{{1"
+
+"go to the next parentheses
+nnoremap gp /(<CR>
+nnoremap gP ?(<CR>
+
+
+"  Syntastic  {{{1"
+
+if ! exists("NO_SPARTAN")
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
+endif
+
+"from repository of syntastic 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" ignore some anoying warnings
+
+nnoremap <localleader>ts :SyntasticToggleMode<cr>
+
+
+"  Color theme  {{{1"
+
+if &term ==# "xterm"
+  " Sometimes when environment variable TERM is only set
+  " to xterm, I have problems with colors, so I try to
+  " force 256 colors and not only 8
+  let &term = "xterm-256color"
+elseif &term ==# "screen"
+  let &t_Co = 256
+elseif &term ==# "linux"
+  let &t_Co = 8
+endif
+
+if has("unix")
+  if &term=="linux"
+    color default
+    set background=dark
+  else
+    let g:solarized_termcolors=256
+    colorscheme solarized
+    set background=dark
+  endif
+else
+  color default
+  set background=dark
+endif
+
+
+
+" Spelling {{{1 "
+
+"English as a default languages, needless to say
+"it is the default language of vim
+set spelllang=en_gb
+" This should be after the color theme
+hi clear SpellBad
+hi SpellBad guibg=#ff2929 ctermbg=160
+
+
+" Configuration file edit options {{{1
+" vim:foldmethod=marker
+

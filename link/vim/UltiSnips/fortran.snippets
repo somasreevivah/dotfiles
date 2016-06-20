@@ -1,0 +1,24 @@
+
+snippet impl
+IMPLICIT NONE
+	$0
+endsnippet
+
+
+snippet iface
+INTERFACE ${1:NAME}
+	${0}
+END INTERFACE $1
+endsnippet
+
+
+snippet intent
+${1:TYPE}, INTENT(IN/OUT) :: $0
+endsnippet
+
+snippet sub
+SUBROUTINE ${1:NAME}($2)
+IMPLICIT NONE
+	$0
+END SUBROUTINE $1
+endsnippet

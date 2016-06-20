@@ -1,0 +1,128 @@
+snippet shbang "Shebang #!" b
+#! /usr/bin/env asy
+endsnippet
+
+snippet 3d-vector-render "Render 3d graphics in vector" b
+settings.prc       = false;
+settings.render    = 0;
+settings.outformat = "pdf";
+endsnippet
+
+snippet unitsize "Set unit size" b
+unitsize(${1:1cm});$0
+endsnippet
+
+snippet size "Set size of the window" b
+size(${1:x_size},${2:y_size});$0
+endsnippet
+
+snippet label "Simple label" b
+label("${1:text}", ${2:Point}, ${3:SW});$0
+endsnippet
+
+snippet square "simple square" i
+box(${1:Position Point}, ${2:(xlength, ylength)});$0
+endsnippet
+
+snippet dot "Draw a point with optional value" b
+dot(${2:Label("${1:text}"), }${3:point});$0
+endsnippet
+
+snippet if "If " b
+if ( ${1:Condition} ) {
+	${2://statement}
+}
+endsnippet
+
+snippet ife "If else" b
+if ( ${1:Condition} ) {
+	${2://statement}
+} else {
+	${3://statement}
+}
+endsnippet
+
+snippet fori "For int i" b
+for ( int ${1:i} = ${2:0}; $1 ${3:<} ${4:len}; ${5:$1+=1} ) {
+	${6://statement}
+}
+endsnippet
+
+snippet forin "For k in array" b
+for ( ${1:int} ${2:k} : ${3:array} ) {
+	${4://statement}
+}
+endsnippet
+
+snippet so "Stdout print" b
+write(${1:"${2:message}"});$0
+endsnippet
+
+snippet draw "Draw something" b
+draw(${1:path});$0
+endsnippet
+
+snippet fdraw "Draw with filling" b
+filldraw(${1:path}, ${2:color});$0
+endsnippet
+
+##########################
+#  Usual variable types  #
+##########################
+snippet struct "Define struct" b
+struct ${1:var_name} {
+	${2:var_type} ${3:var_name}$0;
+}
+endsnippet
+
+snippet list "Define list/array" b
+${1:int}[] ${2:array}={${3:el1,el2,...}};$0
+endsnippet
+
+snippet int "Integer define" b
+int ${1:name} ${2:= ${3:value}};$0
+endsnippet
+
+snippet string "String define" b
+string ${1:name} ${2:= ${3:value}};$0
+endsnippet
+
+snippet float "Real number define" b
+real ${1:name} ${2:= ${3:value}};$0
+endsnippet
+
+snippet point "2D point define (or complex number)" b
+pair ${1:z} ${2:= ${3:(x,y)}};$0
+endsnippet
+
+
+snippet 3dpoint "3D point define" b
+triple ${1:z} ${2:= ${3:(x,y,z)}};$0
+endsnippet
+
+
+snippet bool "Boolean define" b
+bool ${1:name} ${2:= ${3:value}};$0
+endsnippet
+
+
+snippet path "Path define" b
+path ${1:p} ${2:= ${3:z[0]..z[1]---z[2]}};$0
+endsnippet
+
+##########################
+#  Functions definition  #
+##########################
+
+
+snippet fun "Traditional function" b
+${1:void} ${2:function_name} ( ${3:int i ...} ){
+${4://statements}
+};
+endsnippet
+
+snippet fun-unnamed "Unnamed function" b
+${1:f} = new ${2:void} ( ${3:arguments} ){
+${4://statements}
+};
+endsnippet

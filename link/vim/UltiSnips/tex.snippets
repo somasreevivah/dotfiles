@@ -1,0 +1,263 @@
+################
+#  math stuff  #
+################
+
+snippet d "Subindex (down)" i
+_{${1:${VISUAL}}} ${0}
+endsnippet
+
+snippet u "Superindex (upper)" i
+^{${1:${VISUAL}}} ${0}
+endsnippet
+
+snippet m
+$ ${1:${VISUAL}} $ ${0}
+endsnippet
+
+snippet qu
+\quad
+endsnippet
+
+snippet qqu
+\qquad
+endsnippet
+snippet hat
+\hat{${1:${VISUAL}}}$0
+endsnippet
+
+snippet sqr
+\sqrt{${1:${VISUAL}} } $0
+endsnippet
+
+snippet set
+\left \\{ ${1:${VISUAL}} \right \\} $0
+endsnippet
+
+snippet mrm
+\mathrm{${1:${VISUAL}}}$0
+endsnippet
+
+snippet mbf
+\mathbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet document "documentclass" b
+\documentclass[a4paper]{${1:article}}$0
+endsnippet
+
+snippet graphic "Include graphic" b
+\includegraphics[]{${1:filePath}}
+endsnippet
+snippet twidth "text width" b
+\textwidth
+endsnippet
+snippet theight "text height" b
+\textheight
+endsnippet
+snippet minipage "Minipage" b
+\begin{minipage}[${1:t}]{${2:0.5}\textwidth}
+${3:${VISUAL}}
+\end{minipage}
+endsnippet
+snippet centeri "Centering" b
+\centering
+endsnippet
+snippet vspace "vertical space" b
+\vspace{${1:1cm}}
+endsnippet
+snippet hspace "horizontal space" b
+\hspace{${1:1cm}}
+endsnippet
+
+
+snippet it "Text italics with visual support"
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+snippet (( "normal parenthesis" i
+( $1 )$0
+endsnippet
+
+
+snippet center "Center with visual" b
+\begin{center}
+${VISUAL}
+\end{center}
+endsnippet
+
+# DIFFERENTIAL OPERATORS
+snippet nab "Nabla operator" i
+\nabla
+endsnippet
+
+snippet diff "Integral differential" i
+\ \mathrm{d} ${1:\\mathbf{r}}$0
+endsnippet
+
+#SPINS
+snippet Spin2
+S_{${1:${VISUAL}}}^{$2} $0
+endsnippet
+
+snippet Spinx2
+\hat S_{x}^{2}
+endsnippet
+
+snippet Spiny2
+\hat S_{y}^{2}
+endsnippet
+
+snippet Spinz2
+\hat S_{z}^{2}
+endsnippet
+
+#brakets..
+snippet ket
+\left | ${1:${VISUAL}} \right \rangle $0
+endsnippet
+
+snippet bra
+\left \langle ${1:${VISUAL}} \right | $0
+endsnippet
+
+snippet braket
+\left \langle $1 \right .
+\left | $2 \right \rangle $0
+endsnippet
+
+###################
+#  Greek letters  #
+###################
+
+snippet alpha "alpha" i
+\alpha $0
+endsnippet
+snippet nu "nu" i
+\nu $0
+endsnippet
+snippet beta "beta" i
+\beta $0
+endsnippet
+snippet Xi "Xi" i
+\Xi $0
+endsnippet
+snippet xi "xi" i
+\xi $0
+endsnippet
+snippet gamma "gamma" i
+\gamma $0
+endsnippet
+snippet Gamma "Gamma" i
+\Gamma $0
+endsnippet
+snippet delta "delta" i
+\delta $0
+endsnippet
+snippet Delta "Delta" i
+\Delta $0
+endsnippet
+snippet pi "pi" i
+\pi $0
+endsnippet
+snippet Pi "Pi" i
+\Pi $0
+endsnippet
+snippet epsilon "epsilon" i
+\epsilon $0
+endsnippet
+snippet varepsilon "varepsilon" i
+\varepsilon $0
+endsnippet
+snippet rho "rho" i
+\rho $0
+endsnippet
+snippet varrho "varrho" i
+\varrho $0
+endsnippet
+#zeta is b for itemize
+snippet zeta "zeta" b
+\zeta $0
+endsnippet
+snippet sigma "sigma" i
+\sigma $0
+endsnippet
+snippet Sigma "Sigma" i
+\Sigma $0
+endsnippet
+snippet eta "eta" i
+\eta $0
+endsnippet
+snippet tau "tau" i
+\tau $0
+endsnippet
+snippet theta "theta" i
+\theta $0
+endsnippet
+snippet vartheta "vartheta" i
+\vartheta $0
+endsnippet
+snippet Theta "Theta" i
+\Theta $0
+endsnippet
+snippet upsilon "upsilon" i
+\upsilon $0
+endsnippet
+snippet Upsilon "Upsilon" i
+\Upsilon $0
+endsnippet
+snippet iota "iota" i
+\iota $0
+endsnippet
+snippet phi "phi" i
+\phi $0
+endsnippet
+snippet varphi "varphi" i
+\varphi $0
+endsnippet
+snippet Phi "Phi" i
+\Phi $0
+endsnippet
+snippet kappa "kappa" i
+\kappa $0
+endsnippet
+snippet Kappa "Kappa" i
+\Kappa $0
+endsnippet
+snippet chi "chi" i
+\chi $0
+endsnippet
+snippet lambda "lambda" i
+\lambda $0
+endsnippet
+snippet Lambda "Lambda" i
+\Lambda $0
+endsnippet
+snippet psi "psi" i
+\psi $0
+endsnippet
+snippet Psi "Psi" i
+\Psi $0
+endsnippet
+snippet mu "mu" i
+\mu $0
+endsnippet
+snippet omega "omega" i
+\omega $0
+endsnippet
+snippet Omega "Omega" i
+\Omega $0
+endsnippet
+
+
+
+############
+#  Bibtex  #
+############
+snippet bibtex "Initialise bibtex" b
+\usepackage[backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
+\bibliography{${1:file_name(without extension)}}
+endsnippet
+snippet bibtex-add "Insert bibtex document in latex document" b
+\bibliographystyle{abbrv}
+\bibliography{${1:file_name(without extension)}}
+endsnippet

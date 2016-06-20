@@ -1,0 +1,18 @@
+extends html
+
+
+snippet bs3-breadcrumbs "" b
+
+<ol class="breadcrumb">
+	<li>
+		<a href="${1:#}">${2:Home}</a>
+	</li>
+	${3:<li>
+		<a href="#">Link</a>
+	</li>}
+	<li class="active">${4:Current}</li>
+</ol>
+
+endsnippet
+
+

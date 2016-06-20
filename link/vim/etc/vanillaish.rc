@@ -1,0 +1,15 @@
+
+set backspace=indent,eol,start
+set nocompatible
+
+"enable coloring and so on
+syntax enable
+
+
+"Highlight search as you type the searching word
+set incsearch
+
+"provide a graphical menu of all the matches you can cycle through in the command line
+set wildmenu
+
+" vim: ft=vim

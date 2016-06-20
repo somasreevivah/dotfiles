@@ -1,0 +1,74 @@
+snippet shbang "Shebang #!" b
+#! /usr/bin/env bash
+endsnippet
+
+snippet scriptDir "Variable w script directory" b
+${1:SCRIPT_DIR}=$(dirname \$0) $0
+endsnippet
+
+snippet $ "Variable" i
+$\{${1:n}${3::-${2:Default}}\}$0
+endsnippet
+
+snippet confirm "Prompt for confirmation" b
+read -p "${1:Are you sure?} (y/N)" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	# do dangerous stuff
+fi
+REPLY= # unset REPLY after using it
+endsnippet
+
+snippet select "Select loop" b
+PS3="${1:Choice}"
+select ${2:opt} in ${3:\$some_options}; do
+	${4:echo "You have selected \$$2"}
+done
+endsnippet
+
+snippet argv-parse "Parse command line arguments" b
+__SCRIPT_VERSION="${1:0.0.1}"
+__SCRIPT_NAME=$( basename \$0 )
+__DESCRIPTION="${2:Description_one_liner}"
+__OPTIONS=":hv"
+
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+		$__DESCRIPTION
+
+		Options:
+		-h|help       Display this message
+		-v|version    Display script version
+
+
+		This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts $__OPTIONS opt
+do
+	case $opt in
+
+	h|help     )  usage; exit 0   ;;
+
+	v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+	* )  echo -e "\n  Option does not exist : $OPTARG\n"
+			usage_head; exit 1   ;;
+
+	esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+endsnippet
+
+snippet color-echos "Some color echos to locally use in scripts" b
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+endsnippet

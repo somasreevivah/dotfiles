@@ -1,0 +1,87 @@
+TYPES
+
+fun           Simple function definition
+lambda        Lambda expression
+class         Class definition
+met           Method of a class
+attr          Attribute of a class
+const         Readonly variale
+macro         Clike macro
+int           Simple integer definition
+float         Simple floating point definition
+double        Double precission
+char          Character definition
+str           String definition
+dic           Relational array
+arr           List of values
+pointer       Pointer-like variable
+reference     Reference-like variable
+enum          Enumeration definition
+struct        Structure construct
+type          Define custom type
+bin           Binary numbers
+hex           Hexadecimal numbers
+octal         Octal numbers
+bool          Boolean variables
+name          Namespace
+module        Define module, package etc..
+c<TYPE>       Constant type definition
+t<TYPE>       Type safe definition
+ct<TYPE>      Constant type safe definition
+a<TYPE>       Array 1D type definition
+ca<TYPE>      Array 1D type definition
+
+BRANCHING
+
+if            If construct
+ife           If else construct
+elif          Else if construct
+ifsh          If construct, short form
+if3           If construct tertiary form
+for           For with index
+fori          For in iterator form
+while         While loop
+until         Until loop
+case          Case construct
+try           Try/catch
+
+UTILS
+
+new           Instantiate object
+pac           Include some package
+so            Print to stdout
+serr          Print to stderr
+sex           Raise exception
+read          Stdin read
+cd            Change dir
+sys           Talk to the shell
+mkdir         Create directory
+cp            Copy a file
+cpr           Copy dir
+fopen         File open
+fclose        File open
+fwrite        File write
+fread         File read
+exit          Exit a program with status
+ret           Return a value in function
+argc          Get arguments number
+argvi         Get ith argument
+
+CONSTANTS
+
+true          True variable
+false         False keyword
+and           And operator
+or            Or operator
+bor           Bitwise or
+band          Bitwise and
+nan           Not a number
+null          Undefined variable
+eof           End of file character
+
+TEMPLATES
+
+argv parse    Parse command line
+main          Main template
+
+
