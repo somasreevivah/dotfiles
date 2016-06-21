@@ -114,6 +114,7 @@ bindsym $mod+a focus parent
 bindsym $mod+b border toggle
 #borders of windows will be default a pixel wide
 new_window pixel
+hide_edge_borders both
 
 #wallpaper script
 exec_always ~/.dotfiles/bin/set_wallpaper.sh
