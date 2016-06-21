@@ -217,7 +217,7 @@ exec_always ~/.dotfiles/bin/set_wallpaper.sh
 bindsym XF86Tools exec ~/.dotfiles/bin/set_wallpaper.sh
 bindsym XF86MonBrightnessDown exec ~/.dotfiles/bin/set_wallpaper.sh
 bindsym XF86MonBrightnessUp exec ~/.dotfiles/bin/set_wallpaper.sh
-bindsym XF86AudioLowerVolume exec ~/.dotfiles/bin/set_wallpaper.sh
+bindsym XF86AudioLowerVolume exec "xterm -C alsamixer"
 bindsym XF86AudioRaiseVolume exec ~/.dotfiles/bin/set_wallpaper.sh
 bindsym XF86Search exec ~/.dotfiles/bin/set_wallpaper.sh
 
