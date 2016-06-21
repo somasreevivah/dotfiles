@@ -135,6 +135,8 @@ bindsym $mod+0 workspace 10
 
 bindsym $windows+t exec "date +'%H %M' | sed -e 's/^0\+//g' -e 's/\s0/ /g' | espeak"
 bindsym $windows+p exec "import -window root $HOME/screenshot_$(date | tr ' ' '_').jpg "
+#invert colors
+bindsym $windows+i exec "xcalib -invert -alter"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
