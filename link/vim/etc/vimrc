@@ -19,6 +19,9 @@ if ! exists("NO_SPARTAN")
   Plugin 'easymotion/vim-easymotion'
   Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
+  if has("lua") " it needs lua!
+    Plugin 'Shougo/neocomplete.vim'
+  endif
 endif
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'othree/html5.vim'
@@ -34,10 +37,6 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'dhruvasagar/vim-table-mode'
-if has("lua")
-  " it needs lua!
-  Plugin 'Shougo/neocomplete.vim'
-endif
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdcommenter'
 if v:version >= 704

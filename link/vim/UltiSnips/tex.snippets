@@ -1,6 +1,7 @@
-################
-#  math stuff  #
-################
+
+#  math stuff {{{1  #
+#####################
+
 
 snippet d "Subindex (down)" i
 _{${1:${VISUAL}}} ${0}
@@ -125,9 +126,8 @@ snippet braket
 \left | $2 \right \rangle $0
 endsnippet
 
-###################
-#  Greek letters  #
-###################
+#  Greek letters  {{{1 #
+########################
 
 snippet alpha "alpha" i
 \alpha $0
@@ -250,9 +250,10 @@ endsnippet
 
 
 
-############
-#  Bibtex  #
-############
+
+#  bibtex {{{1  #
+#################
+
 snippet bibtex "Initialise bibtex" b
 \usepackage[backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
 \bibliography{${1:file_name(without extension)}}
@@ -261,3 +262,36 @@ snippet bibtex-add "Insert bibtex document in latex document" b
 \bibliographystyle{abbrv}
 \bibliography{${1:file_name(without extension)}}
 endsnippet
+
+
+
+
+#  Sections override {{{1  #
+############################
+
+snippet sec "Section" b
+\section{${1:section name}} %{{{1
+\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+snippet sub "Subsection" b
+\subsection{${1:subsection name}} %{{{1
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+snippet ssub "Subsubsection" b
+\subsubsection{${1:subsubsection name}} %{{{1
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+snippet cha "Chapter" b
+\chapter{${1:chapter name}} %{{{1
+\label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+# vim : fdm=marker
