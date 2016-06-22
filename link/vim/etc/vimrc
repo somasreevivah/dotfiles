@@ -437,7 +437,7 @@ function! FindInCtagsVisualSelection()
   let visual_string = s:get_visual_selection()
   normal! tag visual_string
 endfunction
-vnoremap <localleader>t :normal! :call FindInCtagsVisualSelection()<cr>
+"vnoremap <localleader>t :normal! :call FindInCtagsVisualSelection()<cr>
 
 " Set default tags filename as 'tags' 
 set tags=tags
