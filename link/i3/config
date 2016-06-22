@@ -96,7 +96,7 @@ bindsym $mod+a focus parent
 bindsym $mod+b border toggle
 #borders of windows will be default a pixel wide
 new_window pixel
-hide_edge_borders both
+hide_edge_borders none
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
