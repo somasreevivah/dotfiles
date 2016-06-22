@@ -214,12 +214,14 @@ exec_always ~/.dotfiles/bin/set_wallpaper.sh
 #XF86Bluetooth
 #XF86WLAN }}}
 
-bindsym XF86Tools exec ~/.dotfiles/bin/set_wallpaper.sh
-bindsym XF86MonBrightnessDown exec ~/.dotfiles/bin/set_wallpaper.sh
-bindsym XF86MonBrightnessUp exec ~/.dotfiles/bin/set_wallpaper.sh
+bindsym XF86Tools exec espeak tools
+
+bindsym XF86PowerOff exec espeak 'brightness down'
+bindsym XF86MonBrightnessDown exec espeak 'brightness down'
+bindsym XF86MonBrightnessUp exec  espeak 'brightness up'
 bindsym XF86AudioLowerVolume exec "xterm -C alsamixer"
-bindsym XF86AudioRaiseVolume exec ~/.dotfiles/bin/set_wallpaper.sh
-bindsym XF86Search exec ~/.dotfiles/bin/set_wallpaper.sh
+bindsym XF86AudioRaiseVolume exec espeak 'raise volume'
+bindsym XF86Search exec espeak search
 
 #  Workspaces {{{1  #
 #####################
@@ -320,3 +322,5 @@ bar {
 client.focused          #2c3e50 #aa3e50 #00009c #2e9ef4
 client.unfocused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
 client.urgent           #e74c3c #e74c3c #ffffff #900000
+
+# vim:foldmethod=marker
