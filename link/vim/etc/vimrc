@@ -460,6 +460,13 @@ nnoremap <F3> :bd<cr>
 
 
 
+
+"  Latex {{{1  "
+""""""""""""""""
+"if &ft == "tex"
+  "inoremap C-u ^{}
+  "inoremap C-d _{}
+"endif
 "  Moving around  {{{1"
 
 "go to the next parentheses
