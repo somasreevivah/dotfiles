@@ -256,8 +256,18 @@ nnoremap <S-Tab> :bp<CR>
 "Delete
 nnoremap <localleader>bd :bd<CR>
 
+"Silent command not to see
+"any output from the command and
+"to redraw the screen afterwards
+command! -nargs=1 Silent
+      \ | execute ':silent !'.<q-args>
+      \ | execute ':redraw!'
+
 "Make shortcut
-nnoremap <localleader>m :make
+" First for general make
+nnoremap <localleader>M :make
+" do a quick make mainly for latex stuff
+nnoremap <localleader>m :Silent make<cr>
 
 
 
