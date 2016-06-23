@@ -295,6 +295,9 @@ snippet bibtex-add "Insert bibtex document in latex document" b
 \bibliography{${1:file_name(without extension)}}
 endsnippet
 
+#snippet label "Label" b
+#\label{sec:${1:something}${1/\s+/_/g}
+#endsnippet
 
 
 
