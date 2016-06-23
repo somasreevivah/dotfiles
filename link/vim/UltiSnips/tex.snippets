@@ -63,6 +63,16 @@ endsnippet
 snippet theight "text height" b
 \textheight
 endsnippet
+snippet eq "equation" b
+\begin{equation${1:*}}
+${3:${VISUAL}}
+\end{equation$1}
+endsnippet
+snippet align "align" b
+\begin{align${1:*}}
+${3:${VISUAL}}
+\end{align$1}
+endsnippet
 snippet minipage "Minipage" b
 \begin{minipage}[${1:t}]{${2:0.5}\textwidth}
 ${3:${VISUAL}}
