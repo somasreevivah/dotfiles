@@ -52,12 +52,14 @@ done
 shift $(($OPTIND-1))
 
 SEARCH_NAMES=$@
-FZ_TEMP_FOLDER=/tmp/$(sed "s:/:_:g" <<<$PWD)
+FZ_TEMP_FOLDER=/tmp/f_buffer$(sed "s:/:_:g" <<<$PWD)
 
-if [[ -f ${FZ_TEMP_FOLDER} ]]; then
+if [[ -e ${FZ_TEMP_FOLDER} ]]; then
   if [[ -n ${TEMP_REDO} ]]; then
     find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
   fi
+else
+  find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
 fi
 
 
