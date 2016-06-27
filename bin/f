@@ -18,6 +18,7 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -i            Case insensitive search
+    -f            Force recalculation of the temporary file
     -p            Path to search, default is current directory
 
 
@@ -25,7 +26,7 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
-while getopts ":hvp:i" opt
+while getopts ":hvp:if" opt
 do
   case $opt in
 
@@ -39,6 +40,9 @@ do
   p )
     PATH_TO_SEARCH=$OPTARG
     ;;
+  f )
+    TEMP_REDO=1
+    ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -48,10 +52,13 @@ done
 shift $(($OPTIND-1))
 
 SEARCH_NAMES=$@
-FZ_TEMP_FOLDER=/tmp/fz.tmp
-FZ_TEMP_BUFFER=/tmp/fz.buf.tmp
+FZ_TEMP_FOLDER=/tmp/$(sed "s:/:_:g" <<<$PWD)
 
-find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
+if [[ -f ${FZ_TEMP_FOLDER} ]]; then
+  if [[ -n ${TEMP_REDO} ]]; then
+    find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
+  fi
+fi
 
 
 regex=
