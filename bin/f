@@ -26,7 +26,7 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
-while getopts ":hvp:if" opt
+while getopts ":hvp:it" opt
 do
   case $opt in
 
@@ -40,8 +40,8 @@ do
   p )
     PATH_TO_SEARCH=$OPTARG
     ;;
-  f )
-    TEMP_REDO=1
+  t )
+    TEMP_NOREDO=1
     ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
@@ -55,7 +55,7 @@ SEARCH_NAMES=$@
 FZ_TEMP_FOLDER=/tmp/f_buffer$(sed "s:/:_:g" <<<$PWD)
 
 if [[ -e ${FZ_TEMP_FOLDER} ]]; then
-  if [[ -n ${TEMP_REDO} ]]; then
+  if [[ -z ${TEMP_NOREDO} ]]; then
     find ${PATH_TO_SEARCH:-.} > $FZ_TEMP_FOLDER
   fi
 else

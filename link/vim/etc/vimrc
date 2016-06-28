@@ -19,10 +19,10 @@ if ! exists("NO_SPARTAN")
   Plugin 'easymotion/vim-easymotion'
   Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
-  if has("lua") " it needs lua!
-  endif
 endif
-Plugin 'Shougo/neocomplete.vim'
+if has("lua") " it needs lua!
+  Plugin 'Shougo/neocomplete.vim'
+endif
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'othree/html5.vim'
 Plugin 'lervag/vimtex'
