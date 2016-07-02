@@ -2,14 +2,11 @@ extends html
 
 
 snippet bs3-image "" b
-
 <img src="${1:#}" ${2:class="img-responsive"} alt="${3:Image}">
-
 endsnippet
 
 
 snippet bs3-thumbnail:content "" b
-
 <div class="col-xs-${1:3} col-sm-${1:3} col-md-${1:3} col-lg-${1:3}">
 	<div class="thumbnail">
 		<img data-src="${2:#}" alt="${3}">
@@ -25,18 +22,15 @@ snippet bs3-thumbnail:content "" b
 		</div>
 	</div>
 </div>
-
 endsnippet
 
 
 snippet bs3-thumbnail "" b
-
 <div class="col-xs-${1:3} col-sm-${1:3} col-md-${1:3} col-lg-${1:3}">
 	<a href="${2:#}" class="thumbnail">
 		<img data-src="${3:#}" alt="${4}">
 	</a>
 </div>
-
 endsnippet
 
 

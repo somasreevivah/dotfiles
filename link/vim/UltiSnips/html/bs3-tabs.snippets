@@ -2,7 +2,6 @@ extends html
 
 
 snippet bs3-tabs "" b
-
 <div role="tabpanel">
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
@@ -13,14 +12,12 @@ snippet bs3-tabs "" b
 			<a href="#${2:tab}" aria-controls="${2:tab}" role="tab" data-toggle="tab">${2:tab}</a>
 		</li>
 	</ul>
-
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="${1:home}">...</div>
 		<div role="tabpanel" class="tab-pane" id="${2:tab}">...</div>
 	</div>
 </div>
-
 endsnippet
 
 
