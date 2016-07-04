@@ -275,7 +275,7 @@ nnoremap <localleader>m :Silent make<cr>
 
 "Run actual script being edited
 command! -nargs=0 Run execute ':!./%'
-nnoremap <localleader><localleader> :Run <cr>
+nnoremap <localleader><localleader>r :Run <cr>
 
 
 "  Airline  {{{1"
