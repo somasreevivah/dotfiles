@@ -35,12 +35,17 @@ EOF
 ####################
 
 TEMPLI_PATH="${TEMPLI_PATH}:$HOME/.templi:$HOME/.local/templi"
+TEMPLI_META_HEADER="_TEMPLI"
 TMP_FILE=/tmp/templi.tmp
 FILE_FOUND=
 
 #  fucntion definition {{{1  #
 ##############################
 
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
 function printv() {
   if [[ -n ${VERBOSE} ]]; then
     echo $@
@@ -53,17 +58,35 @@ function format_to_template() {
   sed '
   #s/\$/\\$/g #s/\([^ ]\)$ / \\$ /g
   #s/\([^ ]\)$ / \\$ /g
+  /^_TEMPLI_/d
   s/\\[^$]/\\\\/g
   s/\$\([0-9]\)/\\$\1/g
   ' ${file_to_convert}
 }
 
 
+    #s/[^}]*\([$][{].*[}]\)[^{$]*/\1/g
+    #s/.*\([$][{].*[}]\).*/\1/g
 
 function list_templates() {
   for path_dir in $(tr ":" "\n" <<<${TEMPLI_PATH}) ;do
     [[ -d ${path_dir} ]] && for file in ${path_dir}/* ; do
-      echo $file
+    path=$(dirname $file)
+    filename=$(basename $file)
+    description=$(sed -n "/"${TEMPLI_META_HEADER}_DESCRIPTION"/s/.*=//g p" $file)
+    variables=$(sed -e "
+    s/\\\\\$[{(]\w*[})]//g
+    s/\(\$[{]\)/\n\1/g
+    " $file | sed  -e "
+    /\${/ ! {d}
+    s/\${//g
+    s/}.*//g
+    s/:-\(.*\)/(\1)/g
+    " | sort | uniq | paste -s)
+    header ${filename}
+    arrow "\033[1;34mPath:\033[0m ${path}"
+    [[ -n ${description} ]] && arrow "\033[1;34mDescription:\033[0m ${description}"
+    [[ -n ${variables} ]] && arrow "\033[1;34mVariables:\033[0m ${variables}"
     done
   done
 }
@@ -149,11 +172,7 @@ cat > ${TMP_FILE}<<EOF
 $(tr ":" "\n" <<<$@ | while read pair; do echo $pair; done)
 
 cat <<TEMPLIEOF
-
-
 $(format_to_template ${INPUT_TEMPLATE_FILE})
-
-
 TEMPLIEOF
 
 EOF
