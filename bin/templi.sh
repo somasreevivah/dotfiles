@@ -1,0 +1,137 @@
+#! /usr/bin/env bash
+
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0 )
+__DESCRIPTION="Minimal template engine written in bash"
+__OPTIONS=":hvi:o:d"
+
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -i            Input template file
+    -o            Output template file
+    -d            Verbose mode
+
+
+    This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts $__OPTIONS opt
+do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  i          )  INPUT_TEMPLATE_FILE=$OPTARG ;;
+
+  o          )  OUTPUT_FILE=$OPTARG ;;
+
+  d          )  VERBOSE=1 ;;
+
+  * )  echo -e "\n  Option does not exist : $OPTARG\n"
+      usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+function printv() {
+  if [[ -n ${VERBOSE} ]]; then
+    echo $@
+  fi
+}
+
+function convert_to_template() {
+  file_to_convert=$1
+  sed "
+  #s/\$/\\$/g
+  #s/\([^ ]\)$ / \\$ /g
+  s/\\/\\\\/g
+  " ${file_to_convert}
+}
+
+TEMPLI_PATH="${TEMPLI_PATH}:$HOME/.templi"
+TMP_FILE=/tmp/templi.tmp
+FILE_FOUND=
+
+
+
+###################
+#  look for file  #
+###################
+printv "Looking for file ${INPUT_TEMPLATE_FILE}"
+if [[ -e ${INPUT_TEMPLATE_FILE} ]]; then
+
+  printv "File found in current directory"
+
+  FILE_FOUND=1
+
+else
+
+  printv "File NOT found in current directory"
+  printv "Looking for the file in TEMPLI_PATH"
+
+  for path_dir in $(tr ":" "\n" <<<${TEMPLI_PATH}) ;do
+
+  printv "Looking for file in ${path_dir}"
+
+  INPUT_FILE_SEARCH=${path_dir}/${INPUT_TEMPLATE_FILE}
+  if [[ -f ${INPUT_FILE_SEARCH}  ]]; then
+    printv "File found in ${path_dir}"
+    INPUT_TEMPLATE_FILE=${INPUT_FILE_SEARCH}
+    FILE_FOUND=1
+    break
+  fi
+  done
+
+fi
+
+if [[ -z ${FILE_FOUND} ]]; then
+  echo "${INPUT_TEMPLATE_FILE} not found in TEMPLI_PATH or in current directory"
+  exit 1
+else
+  printv "File ${INPUT_TEMPLATE_FILE} found"
+fi
+
+
+printv "Preparing template file"
+
+
+
+cat > ${TMP_FILE}<<EOF
+#! /usr/bin/env sh
+
+$(tr ":" "\n" <<<$@ | while read pair; do echo $pair; done)
+
+cat <<TEMPLIEOF
+
+
+$(cat ${INPUT_TEMPLATE_FILE})
+
+
+TEMPLIEOF
+
+EOF
+
+
+
+printv "Done preparing template file"
+
+printv "Running the script"
+
+
+chmod +x ${TMP_FILE}
+${TMP_FILE}
+
