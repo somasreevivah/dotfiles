@@ -271,7 +271,14 @@ nnoremap <localleader>m :Silent make<cr>
 
 
 
-"  AIRLINE  {{{1"
+" Some General commands {{{1
+
+"Run actual script being edited
+command! -nargs=0 Run execute ':!./%'
+nnoremap <localleader><localleader> :Run <cr>
+
+
+"  Airline  {{{1"
 
 
 "let g:airline_powerline_fonts = 0
