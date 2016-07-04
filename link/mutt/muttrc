@@ -512,7 +512,7 @@ bind index h limit
 bind index \Ch help
 
 # Always start with threads collapsed and with the most recent thread selected
-#push <collapse-all><last-entry>
+push <collapse-all><last-entry>
 
 # Pager {{{2
 bind pager j next-line
