@@ -34,7 +34,7 @@ EOF
 #  constants {{{1  #
 ####################
 
-TEMPLI_PATH="${TEMPLI_PATH}:$HOME/.templi"
+TEMPLI_PATH="${TEMPLI_PATH}:$HOME/.templi:$HOME/.local/templi"
 TMP_FILE=/tmp/templi.tmp
 FILE_FOUND=
 
@@ -62,7 +62,7 @@ function format_to_template() {
 
 function list_templates() {
   for path_dir in $(tr ":" "\n" <<<${TEMPLI_PATH}) ;do
-    for file in ${path_dir}/* ; do
+    [[ -d ${path_dir} ]] && for file in ${path_dir}/* ; do
       echo $file
     done
   done
