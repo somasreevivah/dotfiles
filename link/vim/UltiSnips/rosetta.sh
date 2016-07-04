@@ -91,7 +91,7 @@ function check_triggers() {
 
 if [[ $COMMAND =~ check ]]; then
   for file in $(get_rosetta_snippets) ; do
-    header $file
+    header "\033[1;36mLANGUAGE\033[0m: \033[46m\033[1;93m    $( dirname ${file} | sed "s/\.\///")    \033[0m\033[0m"
     check_triggers $file
   done
 fi

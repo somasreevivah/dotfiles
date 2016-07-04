@@ -6,7 +6,7 @@ class         Class definition
 met           Method of a class
 attr          Attribute of a class
 const         Readonly variale
-macro         Clike macro
+macro         C-like macro
 int           Simple integer definition
 float         Simple floating point definition
 double        Double precission
@@ -40,10 +40,12 @@ ifsh          If construct, short form
 if3           If construct tertiary form
 for           For with index
 fori          For in iterator form
+ford          For in dictionary/table form
 while         While loop
 until         Until loop
 case          Case construct
 try           Try/catch
+ifm           If regex match
 
 UTILS
 
@@ -52,8 +54,10 @@ pac           Include some package
 so            Print to stdout
 serr          Print to stderr
 sex           Raise exception
+sof           Printf to stdout (formated)
 read          Stdin read
 cd            Change dir
+ls            List directory
 sys           Talk to the shell
 mkdir         Create directory
 cp            Copy a file
@@ -66,6 +70,8 @@ exit          Exit a program with status
 ret           Return a value in function
 argc          Get arguments number
 argvi         Get ith argument
+match         Regex match
+sizeof        Get size of variables or types
 
 CONSTANTS
 
@@ -81,7 +87,6 @@ eof           End of file character
 
 TEMPLATES
 
-argv parse    Parse command line
+argv-parse    Parse command line
 main          Main template
-
 
