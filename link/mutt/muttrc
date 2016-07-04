@@ -2,20 +2,36 @@
 ##########
 # accounts {{{1
 ##########
-macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
-folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
-set folder="imaps://imap.gmail.com"
+
+#macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
+#folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
+
+source ~/.mutt/aamsgallo.gmail'
+
+#set folder="$HOME/.mail"
+#set folder="mail/aamsgallo"
+#set folder="imaps://imap.gmail.com"
+set folder="imaps://aamsgallo@imap.gmail.com/"
 
 
-set message_cachedir =~/mail/mutt_cache/
-set header_cache=~/mail/mutt_cache/
+# set alias_file = '~/.muttrc'
+# *************************************************************************
+# * see the wiki, there are 4 to choose from. mbox is here a way 'how' to *
+# * store mails. Below is mbox meant as a 'mailbox' where read mails are  *
+# * saved ouf of the inbox ($spoolfile).                                  *
+set mbox_type = 'mbox'
+# *************************************************************************
+set message_cachedir=+mutt_cache
+set header_cache=+mutt_cache
 set spoolfile=+inbox    # incoming mails (~/.mail/inbox)
 #set move=yes            # yes (move read mails automatically to $mbox)
 set keep_flagged=yes    # esc-f to mark message in spool, and it won't move to $mbox)
 set mbox=+read_inbox           # ~/.mail/read_inbox
 set postponed=+postponed       # an 'internal' box for mutt basically
-set copy                 # always keep a copy of my mails
+set record=+sent               # folder for sent emails
+set copy=yes                 # always keep a copy of my mails
 set fast_reply           # do not ask for to, subject,... when replying.
+
 
 # Quadoptions
 #       set foo=yes
@@ -198,8 +214,6 @@ set editor = 'vim'
 # essential {{{1
 ##########
 
-# set alias_file = '~/.muttrc'
-set folder = '~/mail' # default: '~/Mail'
 
 ##########
 # folders {{{1
@@ -214,17 +228,9 @@ set mail_check = '2'
 # set maildir_header_cache_verify = yes
 # set maildir_trash = no
 # set mark_old = yes
-# set mbox = '~/mbox'
 
-# *************************************************************************
-# * see the wiki, there are 4 to choose from. mbox is here a way 'how' to *
-# * store mails. Below is mbox meant as a 'mailbox' where read mails are  *
-# * saved ouf of the inbox ($spoolfile).                                  *
-set mbox_type = 'mbox'
-# *************************************************************************
 
 # set save_empty = yes
-# set spoolfile = '(empty)'
 
 ##########
 # imap {{{1
@@ -506,7 +512,7 @@ bind index h limit
 bind index \Ch help
 
 # Always start with threads collapsed and with the most recent thread selected
-push <collapse-all><last-entry>
+#push <collapse-all><last-entry>
 
 # Pager {{{2
 bind pager j next-line
