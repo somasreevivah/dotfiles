@@ -61,6 +61,14 @@ function prompt_git() {
 prompt_stack=()
 trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
 
+function prompt_jobs() {
+  #to know how many jobs in the background
+  #I have because more often than never I
+  #forget about everything
+  number_of_jobs=$(jobs | wc -l)
+  [[ ! ${number_of_jobs} = 0 ]] && echo "(${number_of_jobs})"
+}
+
 function prompt_command() {
   local exit_code=$?
   # If the first command in the stack is prompt_command, no command was run.
@@ -83,6 +91,9 @@ function prompt_command() {
   # PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
   # path: [user@host:path]
   PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
+  # jobs prompt
+  PS1="$PS1$(prompt_jobs)"
+  # newline
   PS1="$PS1\n"
   # date: [HH:MM:SS]
   PS1="$PS1$c1[$c0$(date +"%H$c1:$c0%M$c1:$c0%S")$c1]$c9"
