@@ -18,7 +18,7 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -i            Case insensitive search
-    -f            Force recalculation of the temporary file
+    -t            Reuse temporary file if exists
     -p            Path to search, default is current directory
 
 

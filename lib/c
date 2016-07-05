@@ -17,13 +17,14 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -p            Path to search, default is current directory
+    -t            Reuse temporary file if exists
 
 
     This program is maintained by Alejandro Gallo.
 EOF
 }    # ----------  end of function usage  ----------
 
-while getopts ":hvp:" opt
+while getopts ":hvp:t" opt
 do
   case $opt in
 
@@ -33,6 +34,9 @@ do
 
   p )
     PATH_TO_SEARCH=$OPTARG
+    ;;
+  t )
+    TEMP_NOREDO=1
     ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
@@ -44,7 +48,11 @@ shift $(($OPTIND-1))
 
 SEARCH_NAMES=$@
 
-OUTPUT=$(f $SEARCH_NAMES)
+if [[ -n ${TEMP_NOREDO} ]]; then
+  TEMP_FLAG='-t'
+fi
+
+OUTPUT=$(f ${TEMP_FLAG} $SEARCH_NAMES)
 
 
 FOLDERS=
@@ -70,3 +78,5 @@ else
 fi
 
 }
+
+# vim: ft=sh :
