@@ -233,6 +233,8 @@ vnoremap <localleader>t :Tabularize /
 " paste adding a blank space
 "nnoremap <localleader>p :normal! a <ESC>p " For cnext now 
 
+nnoremap <localleader><localleader>re :source $MYVIMRC<cr>
+
 
 
 " Folding stuff {{{1 "
@@ -364,15 +366,21 @@ nnoremap <C-w>f :call ToggleWindowZoom()<cr>
 
 let s:CONTACT_AUTOCOMPLETION=""
 let s:CONTACT_FILE="~/contacts/contacts.header"
-let s:CONTACT_COMMAND="~/contacts/query"
+"let s:CONTACT_COMMAND="~/contacts/query"
+let g:CONTACT_COMMAND="~/contacts/query"
 
-function! QueryContact()
-  let CONTACT_AUTOCOMPLETION = expand("<cword>")
-  echo CONTACT_AUTOCOMPLETION
-  exec ".!".s:CONTACT_COMMAND." ".CONTACT_AUTOCOMPLETION
-endfunction
+"function! QueryContact()
+  "let CONTACT_AUTOCOMPLETION = expand("<cword>")
+  "echo CONTACT_AUTOCOMPLETION
+  "exec ".!".s:CONTACT_COMMAND." ".CONTACT_AUTOCOMPLETION." ".l:pipe
+"endfunction
 
-nnoremap <localleader>mq :call QueryContact()<cr>
+"Nice and simple
+"get all results
+nnoremap <localleader>mmq :exec ".!".g:CONTACT_COMMAND." <cword> "<cr>
+"get only first result
+nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
+
 
 function! GetContact(name)
   exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
