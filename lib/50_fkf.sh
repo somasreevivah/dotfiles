@@ -34,5 +34,8 @@ PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 
 # ALIASES
 alias aba="ssh abakus01"
+function abac() {
+  ssh abakus01 "cd ${PWD} ; $@"
+}
 
 export OMP_NUM_THREADS=1

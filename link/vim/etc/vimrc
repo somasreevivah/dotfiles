@@ -233,7 +233,7 @@ vnoremap <localleader>t :Tabularize /
 " paste adding a blank space
 "nnoremap <localleader>p :normal! a <ESC>p " For cnext now 
 
-nnoremap <localleader><localleader>re :source $MYVIMRC<cr>
+nnoremap <localleader><localleader>s :source $MYVIMRC<cr>
 
 
 
