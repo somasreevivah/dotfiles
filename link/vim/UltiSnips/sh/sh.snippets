@@ -2,6 +2,14 @@ snippet shbang "Shebang #!" b
 #! /usr/bin/env bash
 endsnippet
 
+snippet debug "Debug function" b
+function echo_debug() {
+	if [[ -n ${DEBUG} ]]; then
+		echo $@
+	fi
+}
+endsnippet
+
 snippet scriptDir "Variable w script directory" b
 ${1:SCRIPT_DIR}=$(dirname \$0) $0
 endsnippet
