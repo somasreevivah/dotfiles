@@ -3,11 +3,8 @@ snippet shbang "Shebang #!" b
 endsnippet
 
 snippet debug "Debug function" b
-function echo_debug() {
-	if [[ -n ${DEBUG} ]]; then
-		echo $@
-	fi
-}
+DEBUG=${1:1}
+function echo_debug() { if [[ -n ${DEBUG} ]]; then echo -ne "\033[0;105mDEBUG::\033[0m "; echo $@ ; fi }
 endsnippet
 
 snippet scriptDir "Variable w script directory" b
