@@ -17,10 +17,10 @@ if ! exists("NO_SPARTAN")
   ""I have CtrlP, which deprecates this..
     "Plugin 'jlanzarotta/bufexplorer'
   "endif
-  Plugin 'easymotion/vim-easymotion'
   Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
 endif
+Plugin 'easymotion/vim-easymotion'
 if has("lua") " it needs lua!
   Plugin 'Shougo/neocomplete.vim'
 endif
