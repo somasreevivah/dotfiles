@@ -6,8 +6,6 @@ function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
 function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 USER_NAME=$USER
-which llq > /dev/null || ( error "What should I say? You have no llq command, I recommend seeing a doctor, for real."; exit 1 )
-JOBS_IDS=$(llq | grep $USER | awk '{print $1}')
 
 
 __SCRIPT_VERSION="0.0.1"
@@ -49,6 +47,21 @@ do
 done
 shift $(($OPTIND-1))
 
+########################
+#  Check if on abakus  #
+########################
+
+if [[ ! $HOSTNAME =~ abakus ]]; then
+  echo You are not in abakus, oh well nevermind ...
+  ABA="ssh abakus01"
+else
+  ABA=
+fi
+
+LLQ="${ABA} llq"
+LLCANCEL="${ABA} llcancel"
+
+JOBS_IDS=$(${LLQ} | grep $USER | awk '{print $1}')
 
 if [[ -z $JOBS_IDS ]]; then
   success "User $USER_NAME has no jobs running in this cluster"
@@ -67,7 +80,7 @@ read jobs_to_cancel
 if [[ $jobs_to_cancel = "all" ]]; then
   arrow "Cancelling all jobs"
   for id in $JOBS_IDS; do
-    llcancel $id && success "$id cancelled"
+    ${LLCANCEL} $id && success "$id cancelled"
   done
 fi
 
@@ -75,7 +88,7 @@ for n in $jobs_to_cancel; do
   number=1
   for id in $JOBS_IDS; do
     if [[ $n = $number ]]; then
-      llcancel $id && success "$id cancelled"
+      ${LLCANCEL} $id && success "$id cancelled"
     fi
     number=$((number+1))
   done
