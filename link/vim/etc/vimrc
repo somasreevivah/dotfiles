@@ -13,9 +13,10 @@ if ! exists("NO_SPARTAN")
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
-  if v:version >= 730
-    Plugin 'jlanzarotta/bufexplorer'
-  endif
+  "if v:version >= 730
+  ""I have CtrlP, which deprecates this..
+    "Plugin 'jlanzarotta/bufexplorer'
+  "endif
   Plugin 'easymotion/vim-easymotion'
   Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
