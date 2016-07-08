@@ -1,0 +1,20 @@
+
+
+set terminal unkwnown
+
+
+set xlabel "${xlabel}" 
+set ylabel "${ylabel}" 
+set title "${title}" 
+
+
+plot "${datafile}" u 1:2 with linespoint pt 7
+
+
+
+set terminal pdfcairo enhanced
+set output $(basename ${datafile} .dat).pdf
+
+
+
+# vim:ft=gnuplot:
