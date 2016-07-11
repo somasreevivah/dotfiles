@@ -1,8 +1,40 @@
 
+
+snippet modeline "Modeline for latex" b
+% vim:spell ft=tex spelllang=en fdm=marker:
+endsnippet
+
+snippet double-space "Double space command" b
+\linespread{1.5}
+endsnippet
+
+snippet tmp-basic "Basic latex template" b
+\documentclass[A4paper, 12pt]{article}
+
+\usepackage[]{amsmath}
+\usepackage[]{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+%\usepackage[margin=0.5cm]{geometry}
+
+\linespread{1.5}
+
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+
+
+\end{document}
+% vim: spell ft=tex
+endsnippet
+
 #  math stuff {{{1  #
 #####################
-
-
 snippet d "Subindex (down)" i
 _{${1:${VISUAL}}}${0}
 endsnippet
@@ -329,3 +361,4 @@ snippet cha "Chapter" b
 ${0}
 endsnippet
 
+# vim:set ft=snippets:

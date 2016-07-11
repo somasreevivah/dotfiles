@@ -1,21 +1,25 @@
-snippet #! "Env bang" b
+snippet shbang "Env bang" b
 #! /usr/bin/env gnuplot
 endsnippet
 
+snippet so "Standard out" b
+print ${1:"${2:something}"}
+endsnippet
+
 snippet xran "Set xrange" b
-set xrange [$1:$2] $0
+set xrange [$1:$2]$0
 endsnippet
 
 snippet yran "Set yrange" b
-set yrange [$1:$2] $0
+set yrange [$1:$2]$0
 endsnippet
 
 snippet title "set title" b
-set title "$1" $0
+set title "$1"$0
 endsnippet
 
 snippet xlab "x label" b
-set xlabel "$1" $0
+set xlabel "$1"$0
 endsnippet
 
 snippet xtics "Set x tics" b
@@ -27,7 +31,7 @@ set ytics (${1: "label" coord, ... })
 endsnippet
 
 snippet ylab "y label" b
-set ylabel "$1" $0
+set ylabel "$1"$0
 endsnippet
 
 snippet fit "Fit" b
@@ -36,7 +40,7 @@ fit $1 ${3:data} using ${4:1:2} via ${5:lambda}
 endsnippet
 
 snippet out "Set output" b
-set terminal ${1:format}
+set terminal ${1:pdfcairo}
 set output "${2:filename}.$1"
 $0
 endsnippet
