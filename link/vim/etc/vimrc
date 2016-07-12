@@ -494,6 +494,9 @@ nnoremap <F3> :bd<cr>
   "inoremap C-d _{}
 "endif
 
+function! AsciiTex()
+  exec ".!asciiTeX '".getline(".")."'"
+endfunction
 nnoremap <localleader>ll :VimtexLabelsOpen<cr>
 "let g:vimtex_view_method='mupdf'
 
