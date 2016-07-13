@@ -57,6 +57,43 @@ call vundle#end()
 
 " GENERAL STUFF {{{1 "
 
+function! AutoCompleteParentheses()
+  let symbs_begin = ["(", "{", "\"", "'", "["]
+  let symbs_end = [")", "}", "\"", "'", "]"]
+  let current_line = getline(".")
+  let cursor_pos=getcurpos()
+  let cursor_column=cursor_pos[2]
+  "let c=0
+  let c=cursor_column
+  while c >=0
+    let counter=0
+    for s in symbs_begin
+      if current_line[c] =~ s
+        exec "normal! a".symbs_end[counter]
+        return
+      endif
+      let counter+=1
+    endfor
+    let c-=1
+  endwhile
+  "for s in symbs_begin
+    "if current_line[cursor_column-1] =~ s
+      "exec "normal! a".symbs_end[c]
+      "echo "yee"
+    "endif
+    "let c+=1
+  "endfor
+  "while c < len(current_line)
+    "for s in symbs_begin
+      "if current_line[c] =~ s
+        "echo current_line[c]
+      "endif
+    "endfor
+    "let c+=1
+  "endwhile
+endfunction
+
+
 function! s:get_visual_selection()
   " Why is this not a built-in Vim script function?!
   " from
@@ -346,6 +383,7 @@ nnoremap <localleader><cr> :vsp<cr>
 "split horizontally like in i3
 nnoremap <localleader><localleader><cr> :sp<cr>
 
+nnoremap <localleader>c :call AutoCompleteParentheses()<cr>
 let g:WINDOW_IS_ZOOMED=0
 function! ToggleWindowZoom()
   "a very simple and stupid function to maximize some windows, it messes
