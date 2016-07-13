@@ -314,8 +314,21 @@ nnoremap <localleader>m :Silent make<cr>
 " Some General commands {{{1
 
 "Run actual script being edited
-command! -nargs=0 Run execute ':!./%'
-nnoremap <localleader><localleader>r :Run <cr>
+function! VIMRun()
+  let magic_word = "vim-run:"
+  try
+    exec "vimgrep ".magic_word."dd %"
+    let qflist = getqflist()
+    let whole_text = qflist[0]['text']
+    let command_to_run=substitute(whole_text, "^.*".magic_word." *", "","")
+    "echo whole_text
+  catch
+    let command_to_run = './%'
+  endtry
+  echo command_to_run
+  exec ":!".command_to_run
+endfunction
+nnoremap <localleader><localleader>r :call VIMRun()<cr>
 
 
 "  Airline  {{{1"
