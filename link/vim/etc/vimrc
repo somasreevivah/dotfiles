@@ -317,7 +317,7 @@ nnoremap <localleader>m :Silent make<cr>
 function! VIMRun()
   let magic_word = "vim-run:"
   try
-    exec "vimgrep ".magic_word."dd %"
+    exec "vimgrep ".magic_word." %"
     let qflist = getqflist()
     let whole_text = qflist[0]['text']
     let command_to_run=substitute(whole_text, "^.*".magic_word." *", "","")
