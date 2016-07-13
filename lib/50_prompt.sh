@@ -66,7 +66,7 @@ function prompt_jobs() {
   #I have because more often than never I
   #forget about everything
   number_of_jobs=$(jobs | wc -l)
-  [[ ! ${number_of_jobs} = 0 ]] && echo "(${number_of_jobs})"
+  [[ ! ${number_of_jobs} -eq 0 ]] && echo "($(tr -d " " <<<${number_of_jobs}))"
 }
 
 function prompt_command() {

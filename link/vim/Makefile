@@ -1,6 +1,6 @@
 CONFIGURATION_FILES=vimrc
 
-init:  link-config-files install-plugins
+init:  install-plugins
 
 install-plugins:
 	./bin/install-plugins.sh
