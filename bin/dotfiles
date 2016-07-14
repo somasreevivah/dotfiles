@@ -10,7 +10,7 @@ __DESCRIPTION="General configuration files"
 
 
 function usage_head() {
-echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"
+echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] <COMMAND>"
 }
 function usage ()
 {
@@ -22,6 +22,9 @@ $(usage_head)
     Options:
     -h|help       Display this message
     -v|version    Display script version"
+
+    COMMAND:
+    compile       Compile the projects in ${DOTFILES}/compile
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
@@ -106,7 +109,8 @@ function prompt_menu() {
   exitcode=0
   if [[ "$2" ]]; then
     _prompt_menu_draws "$1"
-    read -t $2 -n 1 -sp "To edit this list, press any key within $2 seconds. "
+    #read -t $2 -n 1 -sp "To edit this list, press any key within $2 seconds. "
+    read -t 0 -n 1 -sp "To edit this list, press any key within $2 seconds. "
     exitcode=$?
     echo ""
   fi 1>&2
@@ -267,6 +271,45 @@ function link_do() {
   ln -sf ${2#$HOME/} ~/.$1
 }
 
+
+# Compile files
+#function compile_test() {
+  #[[ "$1" -ef "$2" ]] && echo "same file"
+#}
+function compile_header() { dfs_header "Compiling projects"; }
+function compile_do() {
+  #remember $2 is the full path and $1 the basename
+  # for example $2=/home/gallo/.dotfiles/compile/hello_world
+  dfs_success "Compiling ~/.$1."
+  #change directory for security because you never know
+  #what the configuration scripts presuppose
+  cd $2
+  if [[ -x ${2}/configure ]]; then
+    dfs_arrow "Configuration script detected, compiling the gnu way.."
+    ./configure --prefix=${DOTFILES}
+    make
+    make install
+  else
+    dfs_arrow "Makefile detected (and no configuration script)"
+    dfs_arrow "Compiling..."
+    make
+    for binary in bin/* ; do
+      if [[ -x ${DOTFILES}/${binary} ]]; then
+        dfs_success "${binary} already linked"
+      else
+        if [[ -x ${binary} ]]; then
+          dfs_success "Linking binary ${binary}"
+          echo ${PWD}
+          ln -s ${PWD}/${binary} ${DOTFILES}/${binary}
+        fi
+      fi
+    done
+  fi
+  #come back from there
+  cd -
+}
+
+
 # Copy, link, init, etc.
 function do_stuff() {
   local base dest skip
@@ -347,6 +390,9 @@ do_stuff "copy"
 do_stuff "link"
 do_stuff "link_config"
 do_stuff "init"
+if [[ $1 == compile ]]; then
+  do_stuff "compile"
+fi
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
