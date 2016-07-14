@@ -313,8 +313,7 @@ if [[ ! "$(type -P gcc)" ]] && dfs_is_osx; then
   exit 1
 fi
 
-# If Git is not installed, install it (Ubuntu only, since Git comes standard
-# with recent XCode or CLT)
+# If Git is not installed, install it
 if [[ ! "$(type -P git)" ]] && dfs_is_ubuntu; then
   dfs_header "Installing Git"
   sudo apt-get -qq install git-core
