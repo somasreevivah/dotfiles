@@ -25,6 +25,7 @@ $(usage_head)
 
     COMMAND:
     compile       Compile the projects in ${DOTFILES}/compile
+    source        Source the main functions in ${__SCRIPT_NAME}
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
