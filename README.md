@@ -1,9 +1,8 @@
 
 # DOTFILES #
 
-These   are    my   dotfiles,    I   got   a    lot   of    stuff   from
-[here](https://github.com/cowboy/dotfiles), it  remains to see if  it is
-reallz useful.
+**WARNING:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
+
 
 Information about the order of scripts sourcing
 -----------------------------------------------
@@ -44,3 +43,11 @@ Table 2: For zsh.
 | ~/.zlogin        | H                  |                        |        |
 | ~/.zlogout       | I                  |                        |        |
 | /etc/zlogout     | J                  |                        |        |
+
+
+## Inspiration ##
+
+I   got   a    lot   of    stuff   from
+[here](https://github.com/cowboy/dotfiles), it  remains to see if  it is reallz
+useful.
+
