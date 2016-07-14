@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-[[ "$1" == "source" ]] || \
 
-# help message {{{1 #
+
+#  help message {{{1  #
+#######################
+
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=dotfiles
 __DESCRIPTION="General configuration files"
@@ -41,9 +43,8 @@ do
 done
 shift $(($OPTIND-1))
 
-###########################################
 # GENERAL PURPOSE EXPORTED VARS / FUNCTIONS {{{1 #
-###########################################
+##################################################
 
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
@@ -63,7 +64,10 @@ function dfs_assert() {
   ${modes[success]} "\"$actual\" ${equals[success]} \"$expected\""
 }
 
-# OS Detection {{{1 #
+
+#  os detection {{{1  #
+#######################
+
 function dfs_is_osx() {
   [[ "$OSTYPE" =~ ^darwin ]] || return 1
 }
@@ -322,26 +326,7 @@ if [[ ! "$(type -P git)" ]]; then
   exit 1
 fi
 
-# Initialize.
-if [[ ! -d $DOTFILES ]]; then
-  # $DOTFILES directory doesn't exist? Clone it!
-  new_dotfiles_install=1
-  prompt_delay=15
-  dfs_header "Downloading dotfiles"
-  git clone --recursive git://github.com/${github_user:-alejandrogallo}/dotfiles.git $DOTFILES
-  cd $DOTFILES
-elif [[ "$1" != "restart" ]]; then
-  # Make sure we have the latest files.
-  dfs_header "Updating dotfiles"
-  cd $DOTFILES
-  prev_head="$(git rev-parse HEAD)"
-  git pull
-  git submodule update --init --recursive --quiet
-  if [[ "$(git rev-parse HEAD)" != "$prev_head" ]]; then
-    dfs_header "Changes detected, restarting script"
-    exec "$0" "restart"
-  fi
-fi
+
 
 # Add binaries into the path
 [[ -d $DOTFILES/bin ]] && PATH=$DOTFILES/bin:$PATH
