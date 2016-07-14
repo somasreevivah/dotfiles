@@ -92,7 +92,6 @@ INTEGRAL = %s
 
 
 
-
 # vim-run: clear;python % -v --low 12 --high 13
 # vim-run: clear;python % -h
 
