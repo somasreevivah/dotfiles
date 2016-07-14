@@ -12,7 +12,7 @@ import sys
 parser = argparse.ArgumentParser(description="Get a list of nearest neighbours for the number of an atom")
 
 parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f", help="Input file.", action="store")
+parser.add_argument("-f", help="Input file.", action="store", default="POSCAR")
 parser.add_argument("-n", help="Atom number", action="store", type=int)
 
 def printv(arg1):
@@ -57,6 +57,8 @@ class POSCAR(object):
     def numberOfAtoms(self):
         return int(sum(self.atoms_number_header))
     def echo(self):
+        print("POSCAR")
+        print("======")
         print("%s  %s"%("comment",self.comment))
         print("%s  %s"%("basis",self.basis))
         print("%s  %s"%("constant",self.constant))
@@ -87,10 +89,10 @@ def parsePoscar(filepath):
             elif line_number == 6:
                 poscar.atoms_header = re.sub(r"\s+"," ", line).split()
             elif line_number == 7:
-                poscar.atoms_number_header = [float(x) for x in re.sub(r"\s+"," ", line).split()]
+                poscar.atoms_number_header = [int(x) for x in re.sub(r"\s+"," ", line).split()]
             elif line_number == 8:
                 poscar.mode=line
-            else:
+            elif poscar.numberOfAtoms()+9>=line_number>=9:
                 poscar.atoms.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
     return poscar
 
@@ -161,7 +163,8 @@ if __name__=="__main__" :
     printv("Searching for atom number %s"%args.n)
 
     poscar=parsePoscar(args.f)
-    # poscar.echo()
+    if  VERBOSE:
+        poscar.echo()
     ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
 
     for item in ordered_distances:
@@ -169,7 +172,6 @@ if __name__=="__main__" :
         atom_distance = item[1]
         atom_symbol = poscar.getAtomSymbol(atom_number)
         print("%s %s %s"%(atom_number, atom_symbol, atom_distance))
-
 
 
 
