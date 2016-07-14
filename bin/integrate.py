@@ -27,7 +27,7 @@ def integrate(points,low=False,high=False,x=0,y=1):
         if high!=False:
             if left_point[x]>high:
                 continue
-        print(left_point)
+        printv(left_point)
         integral_up   = (right_point[x]-left_point[x])*right_point[y]
         integral_down = (right_point[x]-left_point[x])*left_point[y]
     return integral_down
@@ -48,6 +48,7 @@ parser = argparse.ArgumentParser(description="Integrate a 2d datafile")
 
 parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
 parser.add_argument("-f", help="Input file.", action="store", default="average.dat")
+parser.add_argument("-o", help="Output file.", action="store", default=False)
 parser.add_argument("--low", help="Low cut", action="store", type=float, default=False)
 parser.add_argument("--high", help="High cut", action="store", type=float, default=False)
 
@@ -64,7 +65,6 @@ if __name__=="__main__" :
 
     points=read_data(args.f)
 
-    # printv(points)
 
     if args.low != False:
         printv(args.low)
@@ -73,6 +73,18 @@ if __name__=="__main__" :
     integral = integrate(points,low=args.low,high=args.high)
 
     print(integral)
+
+    if args.o:
+        printv("Output file %s"%args.o)
+        with open(args.o,"w") as f:
+            f.write(
+            """\
+FILE     = %s
+LOWCUT   = %s
+HIGHCUT  = %s
+INTEGRAL = %s
+            """%(args.f,args.low,args.high,integral)
+            )
 
 
 
