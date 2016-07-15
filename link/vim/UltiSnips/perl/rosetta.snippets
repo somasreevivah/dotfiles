@@ -166,16 +166,21 @@ endsnippet
 #endsnippet
 #snippet read "Stdin read" b
 #endsnippet
-#snippet cd "Change dir" b
-#endsnippet
-#snippet ls "List directory" b
-#endsnippet
+snippet cd "Change dir" b
+chdir ${1:"${2:path/to/dir}"};$0
+endsnippet
+snippet ls "List directory" i
+glob ${1:"${2:path/*}"};$0
+endsnippet
 #snippet sys "Talk to the shell" b
 #endsnippet
-#snippet mkdir "Create directory" b
-#endsnippet
-#snippet cp "Copy a file" b
-#endsnippet
+snippet mkdir "Create directory" b
+mkdir ${1:"${2:path/to/dir}"};$0
+endsnippet
+snippet cp "Copy a file" b
+copy(${2:'${1:path/to/file}'},${4:'${3:path/to/file}'})
+	or die "Copy failed: $!";$0
+endsnippet
 #snippet cpr "Copy dir" b
 #endsnippet
 snippet fopen "File open" b
