@@ -28,20 +28,29 @@ endsnippet
 #endsnippet
 #snippet macro "C-like macro" b
 #endsnippet
-#snippet int "Simple integer definition" b
-#endsnippet
-#snippet float "Simple floating point definition" b
-#endsnippet
-#snippet double "Double precission" b
-#endsnippet
-#snippet char "Character definition" b
-#endsnippet
-#snippet str "String definition" b
-#endsnippet
-#snippet dic "Relational array" b
-#endsnippet
-#snippet arr "List of values" b
-#endsnippet
+snippet int "Simple integer definition" b
+my \$${1:varname} = ${2:42};
+endsnippet
+snippet float "Simple floating point definition" b
+my \$${1:varname} = ${2:42.0};
+endsnippet
+snippet double "Double precission" b
+my \$${1:varname} = ${2:42.0};
+endsnippet
+snippet char "Character definition" b
+my \$${1:varname} = "${2:t}";
+endsnippet
+snippet str "String definition" b
+my \$${1:varname} = "${2:text}";
+endsnippet
+snippet dic "Relational array" b
+my %${1:varname} = {
+	${2:key => "value",}
+};
+endsnippet
+snippet arr "List of values" b
+my @${1:varname} = (${2:3,4,5});
+endsnippet
 #snippet pointer "Pointer-like variable" b
 #endsnippet
 #snippet reference "Reference-like variable" b
@@ -114,8 +123,11 @@ foreach ${1:my $${2:x}} (@${3:array}) {
 	${4:# body...}
 }
 endsnippet
-#snippet ford "For in dictionary/table form" b
-#endsnippet
+snippet ford "For in dictionary/table form" b
+foreach my $${1:key} (keys %${2:hash}) {
+	${3:print "The value of $1 is $2{$1}\n";}
+}
+endsnippet
 snippet while "While loop" b
 while ($1) {
 	${2:# body...}
@@ -144,10 +156,12 @@ endsnippet
 snippet so "Print to stdout" b
 print ${1:"${2:text}"};$0
 endsnippet
-#snippet serr "Print to stderr" b
-#endsnippet
-#snippet sex "Raise exception" b
-#endsnippet
+snippet serr "Print to stderr" b
+print STDERR ${1:"${2:text}"};$0
+endsnippet
+snippet sex "Raise exception" b
+die ${1:"${2:error..}"};$0
+endsnippet
 #snippet sof "Printf to stdout (formated)" b
 #endsnippet
 #snippet read "Stdin read" b
@@ -164,18 +178,27 @@ endsnippet
 #endsnippet
 #snippet cpr "Copy dir" b
 #endsnippet
-#snippet fopen "File open" b
-#endsnippet
-#snippet fclose "File open" b
-#endsnippet
-#snippet fwrite "File write" b
-#endsnippet
-#snippet fread "File read" b
-#endsnippet
-#snippet exit "Exit a program with status" b
-#endsnippet
-#snippet ret "Return a value in function" b
-#endsnippet
+snippet fopen "File open" b
+open(my $fd, "${3:/</>/>>}",  "${2:output.txt}") or die "Can't open $2: $!";
+endsnippet
+snippet fclose "File open" b
+close $${1:fd} or die "$1: $!";
+endsnippet
+snippet fwrite "File write" b
+print $${1:fd} ${2:$${3:variable}};
+endsnippet
+snippet fread "File read" b
+while (<$${1:fd}>) {
+	my $${3:line}=$_
+	${4: print "Just read in this line: $3"; }
+}
+endsnippet
+snippet exit "Exit a program with status" b
+exit ${1:1};
+endsnippet
+snippet ret "Return a value in function" b
+return ${1:something};
+endsnippet
 #snippet argc "Get arguments number" b
 #endsnippet
 #snippet argvi "Get ith argument" b
@@ -189,22 +212,27 @@ endsnippet
 ### CONSTANTS {{{1
 
 
-#snippet true "True variable" b
-#endsnippet
-#snippet false "False keyword" b
-#endsnippet
-#snippet and "And operator" b
-#endsnippet
-#snippet or "Or operator" b
-#endsnippet
+snippet true "True variable" i
+1
+endsnippet
+snippet false "False keyword" i
+0
+endsnippet
+snippet and "And operator" b
+&&
+endsnippet
+snippet or "Or operator" b
+||
+endsnippet
 #snippet bor "Bitwise or" b
 #endsnippet
 #snippet band "Bitwise and" b
 #endsnippet
 #snippet nan "Not a number" b
 #endsnippet
-#snippet null "Undefined variable" b
-#endsnippet
+snippet null "Undefined variable" i
+undef
+endsnippet
 #snippet eof "End of file character" b
 #endsnippet
 
