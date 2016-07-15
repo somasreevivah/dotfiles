@@ -81,3 +81,7 @@ function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
 function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
 function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
 endsnippet
+
+snippet vimrun "Vim-run code snippet" b
+#vim-run: bash %$0
+endsnippet

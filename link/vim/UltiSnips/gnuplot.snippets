@@ -66,3 +66,7 @@ snippet line-style "General line style" b
 set style line ${1:1} linecolor rgb '#${2:0060ad}' linetype ${3:1} linewidth ${4:2}
 $0
 endsnippet
+
+snippet vimrun "Vim-run code snippet" b
+#vim-run: gnuplot -p %$0
+endsnippet

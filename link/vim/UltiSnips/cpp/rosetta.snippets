@@ -180,8 +180,9 @@ endsnippet
 #endsnippet
 #snippet clear "stdout clear" b
 #endsnippet
-#snippet sleep "Sleep for some time" b
-#endsnippet
+snippet sleep "Sleep for some time" b
+std::this_thread::sleep_for(std::chrono::seconds(${1:1}));$0
+endsnippet
 #snippet shbang "Shbang for some scripting languages" b
 #endsnippet
 #snippet slurp "Slurp, read a whole file at once" b

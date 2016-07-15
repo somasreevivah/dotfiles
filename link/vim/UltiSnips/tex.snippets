@@ -361,4 +361,8 @@ snippet cha "Chapter" b
 ${0}
 endsnippet
 
+snippet vimrun "Vim-run code snippet" b
+%vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
+endsnippet
+
 # vim:set ft=snippets:
