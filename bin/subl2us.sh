@@ -53,7 +53,8 @@ for file in $FILES ; do
     error "File $file does not exist"
     continue
   fi
-  SNIPPET_FILE="$FOLDER/${file}.snippets"
+  filename_base=$(basename ${file} .sublime-snippet)
+  SNIPPET_FILE="$FOLDER/${filename_base}.snippets"
   header "Processing $file"
   tabTrigger=$(sed -n "
   /<tabTrigger>/,/<\/tabTrigger>/ {
@@ -80,7 +81,7 @@ for file in $FILES ; do
   #echo ${description}
   #echo ${content}
 
-  cat >${SNIPPET_FILE} <<EOF
+  cat | tee ${SNIPPET_FILE} <<EOF
 snippet ${tabTrigger} "${description}" b
 ${content}
 endsnippet
