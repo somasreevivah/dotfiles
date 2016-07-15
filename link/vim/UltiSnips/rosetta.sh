@@ -70,10 +70,11 @@ get_rosetta_snippets() {
 check_triggers() {
   declare -x -r path=$1
   declare -x -r TRIGGERS_DB="./rosetta/triggers.db"
-  cat $TRIGGERS_DB | while read trigger_line ; do
+  while read -u3 trigger_line ; do #read from fd 3
 
-  trigger=$(echo $trigger_line | cut -d " " -f 1)
-  description=$(echo $trigger_line | cut -d " " -f 2-)
+  trigger=$(echo $trigger_line | cut -d "%" -f 1 | sed "s/^\s\+//g; s/\s\+$//g;" )
+  description=$(echo $trigger_line | cut -d "%" -f 2 | sed "s/^\s\+//g; s/\s\+$//g;" )
+  ultisnips_mode=$(echo $trigger_line | cut -d "%" -f 3 | sed "s/^\s\+//g; s/\s\+$//g;" )
 
   if [[ $description = $trigger ]]; then
     header $trigger
@@ -84,19 +85,40 @@ check_triggers() {
   if [[ -n ${snippet_line} ]]  ; then
     success "\033[0;36m$trigger\033[0m found"
   else
-    error "\033[0;36m$trigger\033[0m not found"
+    #check if it is there but not initialised
+    snippet_line=$(sed -n "/^#snippet\s\+${trigger}/p" ${path} )
+    if [[ -z ${snippet_line} ]]  ; then
+      error "\033[0;36m$trigger\033[0m not found at all, do you want to add it?"
+      echo ${old_trigger}
+      read -p "(y/N)" -n 1 -r
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sed "/snippet\s\+${old_trigger}/,/endsnippet/ {
+/endsnippet/a \
+#snippet $trigger \"$description\" $ultisnips_mode\n\
+#endsnippet
+}" ${path}
+      fi
+      REPLY= # unset REPLY after using it
+    else
+      error "\033[0;36m$trigger\033[0m not found"
+    fi
   fi
+
+  old_trigger=$trigger
+  old_description=$description
+  old_ultisnips_mode=$ultisnips_mode
 
   description=""
 
-  done
+  done 3< ${TRIGGERS_DB}
 }
 
 create_template() {
   declare -x -r TRIGGERS_DB="./rosetta/triggers.db"
   cat ${TRIGGERS_DB} | while read line; do
-  trigger=$(echo $line | cut -d " " -f 1)
-  description=$(echo $line | cut -d " " -f 2-)
+  trigger=$(echo $line | cut -d "%" -f 1 | sed "s/^\s\+//g; s/\s\+$//g;" )
+  description=$(echo $line | cut -d "%" -f 2 | sed "s/^\s\+//g; s/\s\+$//g;" )
+  ultisnips_mode=$(echo $line | cut -d "%" -f 3 | sed "s/^\s\+//g; s/\s\+$//g;" )
   if [[ $description = $trigger && -n ${description} ]]; then
     #main separator
     echo -e "\n\n### ${trigger} {{{1\n\n"
@@ -106,7 +128,7 @@ create_template() {
     continue
   fi
   cat <<EOF
-#snippet ${trigger} "${description}" b
+#snippet ${trigger} "${description}" ${ultisnips_mode}
 #endsnippet
 EOF
 
