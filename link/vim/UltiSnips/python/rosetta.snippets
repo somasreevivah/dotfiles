@@ -1,0 +1,233 @@
+
+
+### TYPES {{{1
+
+
+#snippet fun "Simple function definition" b
+#endsnippet
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+#snippet met "Method of a class" b
+#endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+#snippet const "Readonly variale" b
+#endsnippet
+#snippet macro "C-like macro" b
+#endsnippet
+#snippet int "Simple integer definition" b
+#endsnippet
+#snippet float "Simple floating point definition" b
+#endsnippet
+#snippet double "Double precission" b
+#endsnippet
+#snippet char "Character definition" b
+#endsnippet
+#snippet str "String definition" b
+#endsnippet
+#snippet dic "Relational array" b
+#endsnippet
+#snippet arr "List of values" b
+#endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+#snippet struct "Structure construct" b
+#endsnippet
+#snippet type "Define custom type" b
+#endsnippet
+#snippet bin "Binary numbers" b
+#endsnippet
+#snippet hex "Hexadecimal numbers" b
+#endsnippet
+#snippet octal "Octal numbers" b
+#endsnippet
+#snippet bool "Boolean variables" b
+#endsnippet
+#snippet name "Namespace" b
+#endsnippet
+#snippet module "Define module, package etc.." b
+#endsnippet
+#snippet c<TYPE> "Constant type definition" b
+#endsnippet
+#snippet t<TYPE> "Type safe definition" b
+#endsnippet
+#snippet ct<TYPE> "Constant type safe definition" b
+#endsnippet
+#snippet a<TYPE> "Array 1D type definition" b
+#endsnippet
+#snippet ca<TYPE> "Array 1D type definition" b
+#endsnippet
+
+
+### BRANCHING {{{1
+
+
+snippet if "If construct" b
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+endsnippet
+snippet ife "If else construct" b
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+else:
+	${3:pass}
+endsnippet
+snippet elif "Else if construct" b
+elif ${1:condition}:
+	${2:pass}
+endsnippet
+#snippet ifsh "If construct, short form" b
+#endsnippet
+#snippet if3 "If construct tertiary form" b
+#endsnippet
+#snippet for "For with index" b
+#endsnippet
+snippet fori "For in iterator form" b
+for ${1:item} in ${2:iterable}:
+	${3:${VISUAL:pass}}
+endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
+snippet while "While loop" b
+while ${1:condition}:
+	${2:pass}
+endsnippet
+#snippet until "Until loop" b
+#endsnippet
+#snippet case "Case construct" b
+#endsnippet
+snippet try "Try/catch" b
+try:
+	${1:${VISUAL:pass}}
+except ${2:Exception} as ${3:e}:
+	${4:raise $3}
+else:
+	${5:pass}
+endsnippet
+#snippet ifm "If regex match" b
+#endsnippet
+
+
+### UTILS {{{1
+
+
+#snippet new "Instantiate object" b
+#endsnippet
+#snippet pac "Include some package" b
+#endsnippet
+snippet so "Print to stdout" b
+print(${1:"${2:text}"})$0
+endsnippet
+#snippet serr "Print to stderr" b
+#endsnippet
+#snippet sex "Raise exception" b
+#endsnippet
+#snippet sof "Printf to stdout (formated)" b
+#endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+snippet cd "Change dir" b
+os.chdir(${1:"${2:path/to/dir}"})$0
+endsnippet
+snippet ls "List directory" b
+os.listdir(${1:"."})$0
+endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+snippet mkdir "Create directory" b
+os.mkdir(${1:"${2:path/to/dir}"}, mode=0777)$0
+endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+#snippet fopen "File open" b
+#endsnippet
+#snippet fclose "File open" b
+#endsnippet
+#snippet fwrite "File write" b
+#endsnippet
+snippet fread "File read" b
+for ${1:line} in ${2:file_descriptor}:
+	${3:pass}
+endsnippet
+snippet exit "Exit a program with status" b
+sys.exit(${1:1})$0
+endsnippet
+snippet ret "Return a value in function" b
+return
+endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+#snippet argvi "Get ith argument" b
+#endsnippet
+#snippet match "Regex match" b
+#endsnippet
+#snippet sizeof "Get size of variables or types" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+#snippet true "True variable" b
+#endsnippet
+#snippet false "False keyword" b
+#endsnippet
+#snippet and "And operator" b
+#endsnippet
+#snippet or "Or operator" b
+#endsnippet
+#snippet bor "Bitwise or" b
+#endsnippet
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
+#endsnippet
+
+
+### TEMPLATES {{{1
+
+
+snippet argv-parse "Parse command line" b
+############################
+#  COMMAND LINE INTERFACE  #
+############################
+import argparse
+
+parser = argparse.ArgumentParser(description="$1")
+$0
+parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+parser.add_argument("-f", help="Input file.", action="store")
+
+def printv(arg1):
+	"""
+	Verbose print
+	"""
+	if VERBOSE:
+		print(arg1)
+
+if __name__=="__main__" :
+	# Parse arguments
+	args = parser.parse_args()
+
+	if args.verbose:
+		print("Making the command verbose...")
+		VERBOSE=True
+	else:
+		VERBOSE=False
+endsnippet
+snippet main "Main template" b
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	${1:${VISUAL:main()}}
+endsnippet

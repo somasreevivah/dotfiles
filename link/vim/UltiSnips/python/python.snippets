@@ -22,35 +22,6 @@ snippet shbang "Shebang #!" b
 # -*- coding: utf-8 -*-
 endsnippet
 
-snippet argv-parse "Parse command line arguments" b
-############################
-#  COMMAND LINE INTERFACE  #
-############################
-import argparse
-
-parser = argparse.ArgumentParser(description="$1")
-$0
-parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f", help="Input file.", action="store")
-
-def printv(arg1):
-	"""
-	Verbose print
-	"""
-	if VERBOSE:
-		print(arg1)
-
-if __name__=="__main__" :
-	# Parse arguments
-	args = parser.parse_args()
-
-	if args.verbose:
-		print("Making the command verbose...")
-		VERBOSE=True
-	else:
-		VERBOSE=False
-endsnippet
-
 snippet subparser "Add a subparser to your cli" b
 SUBPARSER_HELP="For further information for every command, type in '${1:your_progamn_name} <command> -h'"
 subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest="command")
@@ -73,12 +44,6 @@ ${1:parser}.add_argument("${2:name}", help="${3:Do some stuff}", action="${4:sto
 endsnippet
 
 
-snippet so "Stdout function in python" b
-print(${1:"${2:text}"})$0
-endsnippet
-
-
-
 
 
 
@@ -88,30 +53,14 @@ endsnippet
 
 
 
-snippet readlines "Read line by line of a file descriptro" b
-for ${1:line} in ${2:file_descriptor}:
-	${3:pass}
-endsnippet
 
-snippet exit "exit function" b
-sys.exit(${1:1})$0
-endsnippet
 
-snippet mkdir "Make directory" b
-os.mkdir(${1:"${2:path/to/dir}"}, mode=0777)$0
-endsnippet
 
-snippet cd "Change directory" b
-os.chdir(${1:"${2:path/to/dir}"})$0
-endsnippet
 
 snippet env "Environment variable" i
 os.environ[ ${1:"${2:VAR_NAME}"} ]$0
 endsnippet
 
-snippet ls "List of files" b
-os.listdir(${1:"."})$0
-endsnippet
 
 snippet basename "Bash basename" i
 os.path.basename(${1:"${2:path}"})$0
