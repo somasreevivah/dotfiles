@@ -156,7 +156,7 @@ endsnippet
 #snippet pac "Include some package" b
 #endsnippet
 snippet so "Print to stdout" b
-print ${1:"${2:text}"};$0
+print ${1:"${2:text}${3:\n}"};$0
 endsnippet
 snippet serr "Print to stderr" b
 print STDERR ${1:"${2:text}"};$0
