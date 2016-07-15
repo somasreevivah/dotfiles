@@ -92,7 +92,7 @@ check_triggers() {
       echo ${old_trigger}
       read -p "(y/N)" -n 1 -r
       if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sed "/snippet\s\+${old_trigger}/,/endsnippet/ {
+        sed -i "/snippet\s\+${old_trigger}/,/endsnippet/ {
 /endsnippet/a \
 #snippet $trigger \"$description\" $ultisnips_mode\n\
 #endsnippet
