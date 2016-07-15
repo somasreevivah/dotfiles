@@ -108,8 +108,11 @@ elsif ($3) {
 	${4:# elsif...}
 }
 endsnippet
-#snippet else "Just else" b
-#endsnippet
+snippet else "Just else" b
+else {
+	${1:# body...}
+}
+endsnippet
 snippet ifsh "If construct, short form" b
 ${1:expression} if ${2:condition};
 endsnippet
