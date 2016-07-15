@@ -122,7 +122,9 @@ endf
 "set undo stuff, it needs VIM 7.3 at least
 if has("persistent_undo")
   " src: http://stackoverflow.com/questions/17936130/vim-undo-undo-changes-after-file-write
-  set undofile
+  if exists('+undofile')
+    set undofile
+  endif
   set undodir=$MYVIMRC/etc/undo
 endif
 
@@ -278,6 +280,18 @@ nnoremap <localleader><localleader>s :source $MYVIMRC<cr>
 " Folding stuff {{{1 "
 nnoremap <localleader>zmm :set foldmethod=marker<cr>
 nnoremap <localleader>zmi :set foldmethod=indent<cr>
+
+
+"  Autocommands {{{1  "
+"""""""""""""""""""""""
+if has("autocmd")
+    "autocmd !
+  augroup Misc " {{{2
+    autocmd!
+    autocmd FileType tex,mail      set spell
+    autocmd BufNewFile *.tex       set ft=tex
+  augroup END " }}}2
+end
 
 " Quickfix stff {{{1 "
 
@@ -610,7 +624,9 @@ endif
 
 "English as a default languages, needless to say
 "it is the default language of vim
-set spelllang=en_gb
+if exists("+spelllang")
+  set spelllang=en_gb
+endif
 " This should be after the color theme
 hi clear SpellBad
 hi SpellBad guibg=#ff2929 ctermbg=160
