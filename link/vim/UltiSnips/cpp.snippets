@@ -1,25 +1,8 @@
 
-snippet so "System stdout" b
-std::cout << ${1:"${2:Default}"} << std::endl;$0
-endsnippet
 
 snippet sleep "Sleep with thread library" b
 std::this_thread::sleep_for(std::chrono::seconds(${1:1}));$0
 endsnippet
 
-snippet fopen "Open file stream" b
-std::ofstream ${1:file};$0
-endsnippet
 
 
-snippet class "class .. (class)"
-class ${1:`!p snip.rv = snip.basename or "name"`}
-{
-public:
-	${1/(\w+).*/$1/} (${2:arguments});
-	virtual ~${1/(\w+).*/$1/} ();
-
-private:
-	${0:/* data */}
-};
-endsnippet
