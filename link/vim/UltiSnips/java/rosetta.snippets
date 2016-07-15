@@ -1,0 +1,248 @@
+
+
+### TYPES {{{1
+
+
+#snippet fun "Simple function definition" b
+#endsnippet
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+snippet met "Method of a class" b
+${1:private} ${2:void} ${3:method}(${4}) {
+	$0
+}
+endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+snippet const "Readonly variale" b
+public static final ${1:String} ${2:var} = $3;$0
+endsnippet
+#snippet macro "C-like macro" b
+#endsnippet
+snippet int "Simple integer definition" b
+${1:int} ${2:i} = ${3:1};$0
+endsnippet
+#snippet float "Simple floating point definition" b
+#endsnippet
+#snippet double "Double precission" b
+#endsnippet
+snippet char "Character definition" b
+String ${2:varname} = "${3:something}";$0
+endsnippet
+snippet str "String definition" b
+String ${2:varname} = "${3:something}";$0
+endsnippet
+snippet dic "Relational array" b
+Map<${1:String}, ${2:String}> ${3:map} = new ${4:Hash}Map<$1, $2>();
+endsnippet
+snippet arr "List of values" b
+List<${1:String}> ${2:list} = new ${3:Array}List<$1>();
+endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+#snippet struct "Structure construct" b
+#endsnippet
+#snippet type "Define custom type" b
+#endsnippet
+#snippet bin "Binary numbers" b
+#endsnippet
+#snippet hex "Hexadecimal numbers" b
+#endsnippet
+#snippet octal "Octal numbers" b
+#endsnippet
+#snippet bool "Boolean variables" b
+#endsnippet
+#snippet name "Namespace" b
+#endsnippet
+#snippet module "Define module, package etc.." b
+#endsnippet
+#snippet c<TYPE> "Constant type definition" b
+#endsnippet
+#snippet t<TYPE> "Type safe definition" b
+#endsnippet
+#snippet ct<TYPE> "Constant type safe definition" b
+#endsnippet
+#snippet a<TYPE> "Array 1D type definition" b
+#endsnippet
+#snippet ca<TYPE> "Array 1D type definition" b
+#endsnippet
+
+
+### BRANCHING {{{1
+
+
+#snippet if "If construct" 
+#endsnippet
+snippet ife "If else construct" b
+if ($1){
+	$0${VISUAL}
+}
+endsnippet
+snippet elif "Else if construct" b
+else if ($1){
+	$0${VISUAL}
+}
+endsnippet
+snippet else "Just else" b
+else {
+	$0${VISUAL}
+}
+endsnippet
+#snippet ifsh "If construct, short form" b
+#endsnippet
+#snippet if3 "If construct tertiary form" b
+#endsnippet
+snippet for "For with index" b
+for (int ${1:i} = 0; $1 < ${2:10}; $1++){
+	$0
+}
+endsnippet
+snippet fori "For in iterator form" b
+for (${1:element} : ${2:iterable}){
+	$0
+}
+endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
+snippet while "While loop" b
+while ($1){
+	$0
+}
+endsnippet
+#snippet until "Until loop" b
+#endsnippet
+snippet case "Case construct" b
+switch ($1){
+	case $2:
+	$0
+	default:
+	$0
+}
+endsnippet
+snippet try "Try/catch" b
+try {
+	${1}
+} catch(${2:Exception} ${3:e}) {
+} finally {
+$0
+}
+endsnippet
+#snippet ifm "If regex match" b
+#endsnippet
+
+
+### UTILS {{{1
+
+
+snippet new "Instantiate object" b
+${1:Object} ${2:var} = new $1(${3});
+endsnippet
+#snippet pac "Include some package" b
+#endsnippet
+snippet so "Print to stdout" b
+System.out.print(${1:"${2:text}"});
+endsnippet
+snippet serr "Print to stderr" b
+System.err.println("${1:Message}");
+endsnippet
+snippet sex "Raise exception" b
+throw new $0;
+endsnippet
+snippet sof "Printf to stdout (formated)" b
+System.out.printf("${1:Message}", ${2:args});$0
+endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+#snippet cd "Change dir" b
+#endsnippet
+#snippet ls "List directory" b
+#endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+#snippet mkdir "Create directory" b
+#endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+#snippet fopen "File open" b
+#endsnippet
+#snippet fclose "File open" b
+#endsnippet
+#snippet fwrite "File write" b
+#endsnippet
+#snippet fread "File read" b
+#endsnippet
+#snippet exit "Exit a program with status" b
+#endsnippet
+snippet ret "Return a value in function" b
+return $1;
+endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+#snippet argvi "Get ith argument" b
+#endsnippet
+#snippet match "Regex match" b
+#endsnippet
+#snippet sizeof "Get size of variables or types" b
+#endsnippet
+#snippet basename "Bash basename" b
+#endsnippet
+#snippet genv "Get Environment variables" b
+#endsnippet
+#snippet senv "Set Environment variables" b
+#endsnippet
+#snippet clear "stdout clear" b
+#endsnippet
+snippet sleep "Sleep for some time" b
+try {
+	Thread.sleep(${1:1000});
+} catch (InterruptedException e){
+	e.printStackTrace();
+}
+endsnippet
+#snippet shbang "Shbang for some scripting languages" b
+#endsnippet
+#snippet slurp "Slurp, read a whole file at once" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+#snippet true "True variable" b
+#endsnippet
+#snippet false "False keyword" b
+#endsnippet
+#snippet and "And operator" b
+#endsnippet
+#snippet or "Or operator" b
+#endsnippet
+#snippet bor "Bitwise or" b
+#endsnippet
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
+#endsnippet
+
+
+### TEMPLATES {{{1
+
+
+#snippet argv-parse "Parse command line" b
+#endsnippet
+snippet main "Main template" b
+public static void main (String[] args) {
+	${0}
+}
+endsnippet
