@@ -1,92 +1,101 @@
 TYPES
 
-fun           Simple function definition
-lambda        Lambda expression
-class         Class definition
-met           Method of a class
-attr          Attribute of a class
-const         Readonly variale
-macro         C-like macro
-int           Simple integer definition
-float         Simple floating point definition
-double        Double precission
-char          Character definition
-str           String definition
-dic           Relational array
-arr           List of values
-pointer       Pointer-like variable
-reference     Reference-like variable
-enum          Enumeration definition
-struct        Structure construct
-type          Define custom type
-bin           Binary numbers
-hex           Hexadecimal numbers
-octal         Octal numbers
-bool          Boolean variables
-name          Namespace
-module        Define module, package etc..
-c<TYPE>       Constant type definition
-t<TYPE>       Type safe definition
-ct<TYPE>      Constant type safe definition
-a<TYPE>       Array 1D type definition
-ca<TYPE>      Array 1D type definition
+
+fun       % Simple function definition       % b
+lambda    % Lambda expression                % b
+class     % Class definition                 % b
+met       % Method of a class                % b
+attr      % Attribute of a class             % b
+const     % Readonly variale                 % b
+macro     % C-like macro                     % b
+int       % Simple integer definition        % b
+float     % Simple floating point definition % b
+double    % Double precission                % b
+char      % Character definition             % b
+str       % String definition                % b
+dic       % Relational array                 % b
+arr       % List of values                   % b
+pointer   % Pointer-like variable            % b
+reference % Reference-like variable          % b
+enum      % Enumeration definition           % b
+struct    % Structure construct              % b
+type      % Define custom type               % b
+bin       % Binary numbers                   % b
+hex       % Hexadecimal numbers              % b
+octal     % Octal numbers                    % b
+bool      % Boolean variables                % b
+name      % Namespace                        % b
+module    % Define module, package etc..     % b
+c<TYPE>   % Constant type definition         % b
+t<TYPE>   % Type safe definition             % b
+ct<TYPE>  % Constant type safe definition    % b
+a<TYPE>   % Array 1D type definition         % b
+ca<TYPE>  % Array 1D type definition         % b
 
 BRANCHING
 
-if            If construct
-ife           If else construct
-elif          Else if construct
-ifsh          If construct, short form
-if3           If construct tertiary form
-for           For with index
-fori          For in iterator form
-ford          For in dictionary/table form
-while         While loop
-until         Until loop
-case          Case construct
-try           Try/catch
-ifm           If regex match
+if    % If construct
+ife   % If else construct            % b
+elif  % Else if construct            % b
+else  % Just else                    % b
+ifsh  % If construct, short form     % b
+if3   % If construct tertiary form   % b
+for   % For with index               % b
+fori  % For in iterator form         % b
+ford  % For in dictionary/table form % b
+while % While loop                   % b
+until % Until loop                   % b
+case  % Case construct               % b
+try   % Try/catch                    % b
+ifm   % If regex match               % b
 
 UTILS
 
-new           Instantiate object
-pac           Include some package
-so            Print to stdout
-serr          Print to stderr
-sex           Raise exception
-sof           Printf to stdout (formated)
-read          Stdin read
-cd            Change dir
-ls            List directory
-sys           Talk to the shell
-mkdir         Create directory
-cp            Copy a file
-cpr           Copy dir
-fopen         File open
-fclose        File open
-fwrite        File write
-fread         File read
-exit          Exit a program with status
-ret           Return a value in function
-argc          Get arguments number
-argvi         Get ith argument
-match         Regex match
-sizeof        Get size of variables or types
+new      % Instantiate object                  % b
+pac      % Include some package                % b
+so       % Print to stdout                     % b
+serr     % Print to stderr                     % b
+sex      % Raise exception                     % b
+sof      % Printf to stdout (formated)         % b
+read     % Stdin read                          % b
+cd       % Change dir                          % b
+ls       % List directory                      % b
+sys      % Talk to the shell                   % b
+mkdir    % Create directory                    % b
+cp       % Copy a file                         % b
+cpr      % Copy dir                            % b
+fopen    % File open                           % b
+fclose   % File open                           % b
+fwrite   % File write                          % b
+fread    % File read                           % b
+exit     % Exit a program with status          % b
+ret      % Return a value in function          % b
+argc     % Get arguments number                % b
+argvi    % Get ith argument                    % b
+match    % Regex match                         % b
+sizeof   % Get size of variables or types      % b
+basename % Bash basename                       % b
+genv     % Get Environment variables           % b
+senv     % Set Environment variables           % b
+clear    % stdout clear                        % b
+sleep    % Sleep for some time                 % b
+shbang   % Shbang for some scripting languages % b
+slurp    % Slurp, read a whole file at once    % b
 
 CONSTANTS
 
-true          True variable
-false         False keyword
-and           And operator
-or            Or operator
-bor           Bitwise or
-band          Bitwise and
-nan           Not a number
-null          Undefined variable
-eof           End of file character
+true  % True variable         % b
+false % False keyword         % b
+and   % And operator          % b
+or    % Or operator           % b
+bor   % Bitwise or            % b
+band  % Bitwise and           % b
+nan   % Not a number          % b
+null  % Undefined variable    % b
+eof   % End of file character % b
 
 TEMPLATES
 
-argv-parse    Parse command line
-main          Main template
+argv-parse % Parse command line % b
+main       % Main template      % b
 
