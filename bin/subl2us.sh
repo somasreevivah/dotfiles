@@ -55,15 +55,39 @@ for file in $FILES ; do
   fi
   SNIPPET_FILE="$FOLDER/${file}.snippets"
   header "Processing $file"
-  cat $file \
-    | sed "s/$/NEW_LINE/" \
-    | tr -d "\n" \
-    | sed "s/.*<\s*content\s*>\(.*\)<\/content>.*<tabTrigger>\(.*\)<\/tabTrigger>.*/snippet \2 b\n \1 \nendsnippet/" \
-    | sed "s/NEW_LINE/\n/g" \
-    | sed "s/<!\[CDATA\[//"\
-    | sed "s/\]\]>//" \
-    | sed "s/snippet\s\+\(\S*\)\s\(.*\+\)\s\+b/snippet \1 \"\2\" b/" \
-    | sed "s/snippet\s\+\(\S*\)\s\+b/snippet \1 \"\" b/" \
-    > $SNIPPET_FILE
+  tabTrigger=$(sed -n "
+  /<tabTrigger>/,/<\/tabTrigger>/ {
+  s/<tabTrigger>//
+  s/^\s*//
+  s/<\/tabTrigger>//p
+} " ${file})
+  description=$(sed -n "
+  /<description>/,/<\/description>/ {
+  s/<description>//
+  s/^\s*//
+  s/<\/description>//p
+} " ${file})
+  content=$(sed -n "
+  /<content>/,/<\/content>/ {
+  s/<content>//
+  s/]]><\/content>//
+  s/<!\[CDATA\[//
+  /^\s*$/d
+  p
+} " ${file})
+
+  #echo ${tabTrigger}
+  #echo ${description}
+  #echo ${content}
+
+  cat >${SNIPPET_FILE} <<EOF
+snippet ${tabTrigger} "${description}" b
+${content}
+endsnippet
+EOF
+
 
 done
+
+
+#vim-run: bash % functor.sublime-snippet
