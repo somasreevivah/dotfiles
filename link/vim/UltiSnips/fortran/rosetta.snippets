@@ -1,293 +1,250 @@
-#######################################################################
-#                                TYPES                                #
-#######################################################################
-
-snippet const "Constant value" b
-${1:TYPE}, PARAMETER :: $2 = $0
-endsnippet
 
 
-# int
-########
-
-snippet int "Definition of int type" b
-INTEGER :: ${1:variable_name} ${2:=42}
-endsnippet
-snippet cint "Definition of constants of int type" b
-INTEGER, PARAMETER :: ${1:variable_name} ${2:=42}
-endsnippet
-
-# bool
-########
-
-snippet bool "Definition of bool type" b
-LOGICAL :: ${1:variable_name} ${2:=.TRUE.}
-endsnippet
-snippet cbool "Definition of constants of bool type" b
-LOGICAL, PARAMETER :: ${1:variable_name} ${2:=.TRUE.}
-endsnippet
-
-# float
-########
-
-snippet float "Definition of real type" b
-REAL :: ${1:variable_name} ${2:=42}
-endsnippet
-snippet cfloat "Definition of constants of real type" b
-REAL, PARAMETER :: ${1:variable_name} ${2:=42}
-endsnippet
-
-# double
-########
-
-snippet double "Definition of double type" b
-DOUBLE PRECISION :: ${1:variable_name} ${2:=42}
-endsnippet
-snippet cdouble "Definition of constants of double type" b
-DOUBLE PRECISION, PARAMETER :: ${1:variable_name} ${2:=42}
-endsnippet
-
-# str
-########
-
-snippet str "Definition of str type" b
-CHARACTER(LEN=*) :: ${1:variable_name} ${2:="AAAAA"}
-endsnippet
-snippet cstr "Definition of constants of str type" b
-CHARACTER(LEN=*), PARAMETER :: ${1:variable_name} ${2:="AAAAAA"}
-endsnippet
+### TYPES {{{1
 
 
-# char
-########
-
-snippet char "Definition of char type" b
-CHARACTER(LEN=1) :: ${1:variable_name} ${2:="A"}
-endsnippet
-snippet cchar "Definition of constants of char type" b
-CHARACTER(LEN=1), PARAMETER :: ${1:variable_name} ${2:="A"}
-endsnippet
-
-
-# arr
-########
-
-snippet arr
-${1:TYPE}, ALLOCATABLE, DIMENSION(${2::}) :: $0
-endsnippet
-snippet carr "Definition of constants of arr type" b
-${1:TYPE}, ALLOCATABLE, DIMENSION(${2::}), PARAMETER :: $0
-endsnippet
-
-
-# Structs
-########
-
-snippet struct
-TYPE(${1:NAME})
-! ${2:e.g: TYPE ($1) :: var}
-$0
-END TYPE $1
-endsnippet
-
-
-# fun
-########
-
-snippet fun "Definition of fun type" b
+snippet fun "Simple function definition" b
 FUNCTION ${1:function_name}(${2:arguments}) RESULT(${3:result_variables})
 	${4:${5:input_type}, INTENT(IN)  :: $2} ! input
 	${6:${7:output_type}, INTENT(OUT):: $3} ! output$0
 END FUNCTION $1
 endsnippet
-
-# hex
-########
-snippet hex "hex number" b
-z'${1:aef123}'
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+#snippet met "Method of a class" b
+#endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+snippet const "Readonly variale" b
+${1:TYPE}, PARAMETER :: $2 = $0
 endsnippet
-
-# bin
-########
-snippet bin "Binary digit" i
+#snippet macro "C-like macro" b
+#endsnippet
+snippet int "Simple integer definition" b
+INTEGER :: ${1:variable_name} ${2:=42}
+endsnippet
+snippet float "Simple floating point definition" b
+REAL :: ${1:variable_name} ${2:=42}
+endsnippet
+snippet double "Double precission" b
+DOUBLE PRECISION :: ${1:variable_name} ${2:=42}
+endsnippet
+snippet char "Character definition" b
+CHARACTER(LEN=1) :: ${1:variable_name} ${2:="A"}
+endsnippet
+snippet str "String definition" b
+CHARACTER(LEN=*) :: ${1:variable_name} ${2:="AAAAA"}
+endsnippet
+#snippet dic "Relational array" b
+#endsnippet
+snippet arr "List of values" b
+${1:TYPE}, ALLOCATABLE, DIMENSION(${2::}) :: $0
+endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+snippet struct "Structure construct" b
+TYPE(${1:NAME})
+! ${2:e.g: TYPE ($1) :: var}
+$0
+END TYPE $1
+endsnippet
+#snippet type "Define custom type" b
+#endsnippet
+snippet bin "Binary numbers" b
 b'${1:11111}'
 endsnippet
-
-# octal
-########
-snippet octal "Octal number" b
+snippet hex "Hexadecimal numbers" b
+z'${1:aef123}'
+endsnippet
+snippet octal "Octal numbers" b
 o'${1:123674}'
 endsnippet
-
-
-# module
-#######
-
-snippet module
+snippet bool "Boolean variables" b
+LOGICAL :: ${1:variable_name} ${2:=.TRUE.}
+endsnippet
+#snippet name "Namespace" b
+#endsnippet
+snippet module "Define module, package etc.." b
 MODULE ${1:MODULENAME}
 IMPLICIT NONE
 	$0
 END MODULE $1
 endsnippet
-
-#######################################################################
-#                                UTILS                                #
-#######################################################################
-
-snippet so "Stdout" b
-WRITE(*,*) $0
-endsnippet
-
-snippet so "Stdout" b
-WRITE(2,*) $0
-endsnippet
-
-snippet fread
-READ( UNIT = ${1:FP}, FILE = ${2:FILENAME}${3:, IOSTAT = IERR }) $0
-endsnippet
-
-
-snippet fwrite
-WRITE( UNIT = ${1:FP}, FILE = ${2:FILENAME}${3:, IOSTAT = IERR }) $0
-endsnippet
-
-
-snippet fopen
-OPEN (UNIT = ${1:FP}, FILE = ${2:FILENAME}, STATUS = UNKNOWN${3:, IOSTAT = IERR }) $0
-endsnippet
-
-
-snippet fclose
-CLOSE ( UNIT = ${1:FP} ) $0
-endsnippet
-
-#snippet read "Stdin read" b
-#read ${1:-p ${2:"Prompt message:"}} ${3:variable_name}$0
+#snippet c<TYPE> "Constant type definition" b
 #endsnippet
-
-#snippet cd "Change directory" b
-#cd ${1:folder}$0
+#snippet t<TYPE> "Type safe definition" b
 #endsnippet
-
-#snippet mkdir "Make directory" b
-#mkdir -p ${1:/path/to/dir}$0
+#snippet ct<TYPE> "Constant type safe definition" b
 #endsnippet
-
-#snippet exit "Exit function" b
-#exit ${1:0}$0
+#snippet a<TYPE> "Array 1D type definition" b
 #endsnippet
-
-snippet ret "Return statement" b
-RETURN
-endsnippet
-
-#snippet pac "Import package" b
-#source ${1:path/to/package.sh}$0
-#endsnippet
-
-#snippet argc "Get arguments number" i
-#$#$0
-#endsnippet
-
-#snippet argvi "Get ith argument" i
-#\$${1:i}$0
+#snippet ca<TYPE> "Array 1D type definition" b
 #endsnippet
 
 
+### BRANCHING {{{1
 
-#######################################################################
-#                              BRANCHING                              #
-#######################################################################
 
-snippet if
+snippet if "If construct" 
 IF (${1:CONDITION}) THEN
 	$2
 END IF
 endsnippet
-
-#snippet elif "If branching" b
-#elif ${2:[[ ${1:condition} ]]}; then
-	#${0:#statements}
-#endsnippet
-
-snippet ife "If else" b
+snippet ife "If else construct" b
 IF (${1:CONDITION}) THEN
 	$2
 ELSE
 	$3
 END IF
 endsnippet
-
-#snippet ifsh "If branching" b
-#if ${2:[[ ${1:condition} ]]}; then ${0:#statements} fi
+#snippet elif "Else if construct" b
 #endsnippet
-
-#snippet if3 "If branching" b
-#${2:[[ ${1:condition} ]]} && ${3:success statements} || ${3:error statements}
+#snippet else "Just else" b
 #endsnippet
-
-#snippet until "until ... (done)" b
-#until ${2:[[ ${1:condition} ]]}; do
-	#${0:#statements}
-#done
+#snippet ifsh "If construct, short form" b
 #endsnippet
-
+#snippet if3 "If construct tertiary form" b
+#endsnippet
+snippet for "For with index" b
+DO ${1:I} = ${2:START},${3:END}, ${4:INCR}
+	$4
+END DO
+endsnippet
+#snippet fori "For in iterator form" b
+#endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
 snippet while "While loop" b
 DO WHILE (${1:condition})
 	$2
 END DO
 endsnippet
-
-snippet for
-DO ${1:I} = ${2:START},${3:END}, ${4:INCR}
-	$4
-END DO
-endsnippet
-
-snippet case
+#snippet until "Until loop" b
+#endsnippet
+snippet case "Case construct" b
 SELECT CASE (${1:expr})
 	CASE ($2)
 	CASE DEFAULT
 	$3
 END SELECT $0
 endsnippet
-
-#snippet fori "for something in somewhere" b
-#for ${1:needle} in ${2:haystack} ; do
-	#${0:#statements}
-#done
+#snippet try "Try/catch" b
+#endsnippet
+#snippet ifm "If regex match" b
 #endsnippet
 
 
+### UTILS {{{1
 
-#######################################################################
-#                              CONSTANTS                              #
-#######################################################################
 
-snippet true "True value" i
+#snippet new "Instantiate object" b
+#endsnippet
+#snippet pac "Include some package" b
+#endsnippet
+snippet so "Print to stdout" b
+WRITE(*,*) $0
+endsnippet
+snippet serr "Print to stderr" b
+WRITE(2,*) $0
+endsnippet
+#snippet sex "Raise exception" b
+#endsnippet
+#snippet sof "Printf to stdout (formated)" b
+#endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+#snippet cd "Change dir" b
+#endsnippet
+#snippet ls "List directory" b
+#endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+#snippet mkdir "Create directory" b
+#endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+snippet fopen "File open" b
+OPEN (UNIT = ${1:FP}, FILE = ${2:FILENAME}, STATUS = UNKNOWN${3:, IOSTAT = IERR }) $0
+endsnippet
+snippet fclose "File open" b
+CLOSE ( UNIT = ${1:FP} ) $0
+endsnippet
+snippet fwrite "File write" b
+WRITE( UNIT = ${1:FP}, FILE = ${2:FILENAME}${3:, IOSTAT = IERR }) $0
+endsnippet
+snippet fread "File read" b
+READ( UNIT = ${1:FP}, FILE = ${2:FILENAME}${3:, IOSTAT = IERR }) $0
+endsnippet
+#snippet exit "Exit a program with status" b
+#endsnippet
+snippet ret "Return a value in function" b
+RETURN
+endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+#snippet argvi "Get ith argument" b
+#endsnippet
+#snippet match "Regex match" b
+#endsnippet
+#snippet sizeof "Get size of variables or types" b
+#endsnippet
+#snippet basename "Bash basename" b
+#endsnippet
+#snippet genv "Get Environment variables" b
+#endsnippet
+#snippet senv "Set Environment variables" b
+#endsnippet
+#snippet clear "stdout clear" b
+#endsnippet
+#snippet sleep "Sleep for some time" b
+#endsnippet
+#snippet shbang "Shbang for some scripting languages" b
+#endsnippet
+#snippet slurp "Slurp, read a whole file at once" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+snippet true "True variable" b
 .TRUE.
 endsnippet
-snippet false "True value" i
+snippet false "False keyword" b
 .FALSE.
 endsnippet
-snippet and "and operator" i
+snippet and "And operator" b
 .AND.
 endsnippet
-snippet or "Or operator" i
+snippet or "Or operator" b
 .OR.
 endsnippet
-#snippet bor "Bitwise or" i
-#|
+#snippet bor "Bitwise or" b
 #endsnippet
-#snippet band "Bitwise and" i
-#&
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
 #endsnippet
 
-#######################################################################
-#                              TEMPLATES                              #
-#######################################################################
 
-snippet main
+### TEMPLATES {{{1
+
+
+#snippet argv-parse "Parse command line" b
+#endsnippet
+snippet main "Main template" b
 PROGRAM ${1:MAIN}
 IMPLICIT NONE
 	$0
