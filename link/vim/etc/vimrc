@@ -541,12 +541,13 @@ endfunction
 
 " Set default tags filename as 'tags' 
 set tags=tags
+"I should use the default stuff
 " Go to definition of something
-nnoremap <F1> <C-]>
+"nnoremap <F1> <C-]>
 " Get back from definition
-nnoremap <F2> <C-t>
+"nnoremap <F2> <C-t>
 " Get back plus delete buffer
-nnoremap <F3> :bd<cr>
+"nnoremap <F3> :bd<cr>
 
 
 
