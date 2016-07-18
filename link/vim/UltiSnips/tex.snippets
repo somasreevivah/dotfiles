@@ -1,4 +1,9 @@
 
+# General {{{1 %
+
+snippet vimrun "Vim-run code snippet" b
+%vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
+endsnippet
 
 snippet modeline "Modeline for latex" b
 % vim:spell ft=tex spelllang=en fdm=marker:
@@ -33,10 +38,11 @@ snippet tmp-basic "Basic latex template" b
 % vim: spell ft=tex
 endsnippet
 
+
 #  math stuff {{{1  #
 #####################
 snippet d "Subindex (down)" i
-_{${1:${VISUAL}}}${0}
+_{ ${1:${VISUAL}}}${0}
 endsnippet
 
 snippet u "Superindex (upper)" i
@@ -50,7 +56,7 @@ endsnippet
 snippet mm
 \[
 ${1:${VISUAL}}
-\] ${0}
+\]${0}
 endsnippet
 
 snippet qu
@@ -337,6 +343,22 @@ endsnippet
 ############################
 
 snippet sec "Section" b
+
+#  Beamer {{{1  #
+#################
+
+snippet ord "order for some beamer object" i
+<${1:slide_begin}-${2:slide_end}>
+endsnippet
+
+snippet sli "On slide" !b
+\onslide<${1:slide_begin}-${2:slide_end}>{
+${3:${VISUAL:some object}}
+}
+endsnippet
+
+
+
 \section{${1:${VISUAL:section_name}}} %{{{1
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
@@ -361,8 +383,5 @@ snippet cha "Chapter" b
 ${0}
 endsnippet
 
-snippet vimrun "Vim-run code snippet" b
-%vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
-endsnippet
 
-# vim:set ft=snippets:
+# vim:set ft=snippets :
