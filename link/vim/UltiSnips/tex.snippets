@@ -337,25 +337,25 @@ endsnippet
 ############################
 
 snippet sec "Section" b
-\section{${1:section name}} %{{{1
+\section{${1:${VISUAL:section_name}}} %{{{1
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
 snippet sub "Subsection" b
-\subsection{${1:subsection name}} %{{{1
+\subsection{${1:${VISUAL:subsection_name}}} %{{{1
 \label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
 snippet ssub "Subsubsection" b
-\subsubsection{${1:subsubsection name}} %{{{1
+\subsubsection{${1:${VISUAL:subsubsection_name}}} %{{{1
 \label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
 snippet cha "Chapter" b
-\chapter{${1:chapter name}} %{{{1
+\chapter{${1:${VISUAL:chapter_name}}} %{{{1
 \label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
