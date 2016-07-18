@@ -31,6 +31,11 @@ snippet arg-positional "Add positional argument" b
 ${1:parser}.add_argument("${2:name}", help="${3:Do some stuff}", action="${4:store}")
 endsnippet
 
+snippet is_windows "check if is windows" b
+if os.name == "nt":
+	${1:pass}
+endsnippet
+
 
 
 
