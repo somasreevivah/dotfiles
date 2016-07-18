@@ -4,4 +4,6 @@ continue
 min
 max
 dirname
+not
 now
+exists

@@ -7,18 +7,8 @@ if sys.version_info < (${1:major_number}, ${2:minor_number}):
 	sys.exit(1)
 endsnippet
 
-snippet utf-8 "utf 8 declaration" b
-# -*- coding: utf-8 -*-
-endsnippet
 
-snippet clear "clear terminal" b
-os.system("clear")
-endsnippet
 
-snippet shbang "Shebang #!" b
-#! /usr/bin/env python
-# -*- coding: utf-8 -*-
-endsnippet
 
 snippet subparser "Add a subparser to your cli" b
 SUBPARSER_HELP="For further information for every command, type in '${1:your_progamn_name} <command> -h'"
@@ -55,14 +45,8 @@ endsnippet
 
 
 
-snippet env "Environment variable" i
-os.environ[ ${1:"${2:VAR_NAME}"} ]$0
-endsnippet
 
 
-snippet basename "Bash basename" i
-os.path.basename(${1:"${2:path}"})$0
-endsnippet
 
 snippet exists "If a path exists" i
 os.path.exists(${1:"${2:path}"})
@@ -101,11 +85,11 @@ endsnippet
 #  General stuff  #
 ###################
 
-snippet "im(port)?(\S+)" "Description" r
-import ${1:`!p
-snip.rv = match.group(2)
-`}
-endsnippet
+#snippet "im(port)?(\S+)" "Description" r
+#import ${1:`!p
+#snip.rv = match.group(2)
+#`}
+#endsnippet
 
 
 

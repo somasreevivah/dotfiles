@@ -29,8 +29,9 @@
 #endsnippet
 #snippet dic "Relational array" b
 #endsnippet
-#snippet arr "List of values" b
-#endsnippet
+snippet arr "List of values" b
+${1:variable_name} = [${2:1,2,3}]
+endsnippet
 #snippet pointer "Pointer-like variable" b
 #endsnippet
 #snippet reference "Reference-like variable" b
@@ -80,16 +81,20 @@ else:
 endsnippet
 snippet elif "Else if construct" b
 elif ${1:condition}:
-	${2:pass}
+	${2:${VISUAL:pass}}
 endsnippet
-#snippet else "Just else" b
-#endsnippet
+snippet else "Just else" b
+else:
+	${1:${VISUAL:pass}}
+endsnippet
 #snippet ifsh "If construct, short form" b
 #endsnippet
 #snippet if3 "If construct tertiary form" b
 #endsnippet
-#snippet for "For with index" b
-#endsnippet
+snippet for "For with index" b
+for ${1:item_index},${2:item} in enumerate(${3:iterable}):
+	${4:${VISUAL:pass}}
+endsnippet
 snippet fori "For in iterator form" b
 for ${1:item} in ${2:iterable}:
 	${3:${VISUAL:pass}}
@@ -119,10 +124,12 @@ endsnippet
 ### UTILS {{{1
 
 
-#snippet new "Instantiate object" b
-#endsnippet
-#snippet pac "Include some package" b
-#endsnippet
+snippet new "Instantiate object" b
+${1:object_name} = ${2:ClassName}(${3:args})
+endsnippet
+snippet pac "Include some package" b
+import ${1:os}$0
+endsnippet
 snippet so "Print to stdout" b
 print(${1:"${2:text}"})$0
 endsnippet
@@ -173,18 +180,25 @@ endsnippet
 #endsnippet
 #snippet sizeof "Get size of variables or types" b
 #endsnippet
-#snippet basename "Bash basename" b
-#endsnippet
-#snippet genv "Get Environment variables" b
-#endsnippet
-#snippet senv "Set Environment variables" b
-#endsnippet
-#snippet clear "stdout clear" b
-#endsnippet
-#snippet sleep "Sleep for some time" b
-#endsnippet
-#snippet shbang "Shbang for some scripting languages" b
-#endsnippet
+snippet basename "Bash basename" b
+os.path.basename(${1:"${2:path}"})$0
+endsnippet
+snippet genv "Get Environment variables" b
+os.environ[${1:"${2:VAR_NAME}"}]$0
+endsnippet
+snippet senv "Set Environment variables" b
+os.environ[${1:"${2:VAR_NAME}"}]=${3:"${4:something}"}$0
+endsnippet
+snippet clear "stdout clear" b
+os.system("clear")#NO_WINDOWS
+endsnippet
+snippet sleep "Sleep for some time" b
+time.sleep(${1:1})
+endsnippet
+snippet shbang "Shbang for some scripting languages" b
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+endsnippet
 #snippet slurp "Slurp, read a whole file at once" b
 #endsnippet
 
@@ -192,14 +206,18 @@ endsnippet
 ### CONSTANTS {{{1
 
 
-#snippet true "True variable" b
-#endsnippet
-#snippet false "False keyword" b
-#endsnippet
-#snippet and "And operator" b
-#endsnippet
-#snippet or "Or operator" b
-#endsnippet
+snippet true "True variable" b
+True
+endsnippet
+snippet false "False keyword" b
+False
+endsnippet
+snippet and "And operator" b
+and
+endsnippet
+snippet or "Or operator" b
+or
+endsnippet
 #snippet bor "Bitwise or" b
 #endsnippet
 #snippet band "Bitwise and" b
