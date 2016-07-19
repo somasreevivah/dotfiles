@@ -1,6 +1,3 @@
-snippet shbang "Shebang #!" b
-#! /usr/bin/env bash
-endsnippet
 
 snippet debug "Debug function" b
 DEBUG=${1:1}
@@ -35,45 +32,6 @@ select ${2:opt} in ${3:\$some_options}; do
 done
 endsnippet
 
-snippet argv-parse "Parse command line arguments" b
-__SCRIPT_VERSION="${1:0.0.1}"
-__SCRIPT_NAME=$( basename \$0 )
-__DESCRIPTION="${2:Description_one_liner}"
-__OPTIONS=":hv"
-
-
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
-{
-cat <<EOF
-$(usage_head)
-
-		$__DESCRIPTION
-
-		Options:
-		-h|help       Display this message
-		-v|version    Display script version
-
-
-		This program is maintained by Alejandro Gallo.
-EOF
-}    # ----------  end of function usage  ----------
-
-while getopts $__OPTIONS opt
-do
-	case $opt in
-
-	h|help     )  usage; exit 0   ;;
-
-	v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
-
-	* )  echo -e "\n  Option does not exist : $OPTARG\n"
-			usage_head; exit 1   ;;
-
-	esac    # --- end of case ---
-done
-shift $(($OPTIND-1))
-endsnippet
 
 snippet color-echos "Some color echos to locally use in scripts" b
 function header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -85,3 +43,102 @@ endsnippet
 snippet vimrun "Vim-run code snippet" b
 #vim-run: bash %$0
 endsnippet
+# int
+########
+
+snippet tint "Definition of int type safely" b
+declare -i ${1:variable_name}=${2:42}
+endsnippet
+snippet cint "Definition of constants of int type" b
+declare -r -i ${1:variable_name}=${2:42}
+endsnippet
+snippet aint "Definition of one dimensional array of int type" b
+${1:variable_name}=${2:(1 2 3 4 5)}
+endsnippet
+
+# float
+########
+
+snippet tfloat "Definition of float type safely" b
+declare -x ${1:variable_name}${2:=${3:3.14}}
+endsnippet
+snippet cfloat "Definition of constants of float type" b
+declare -x -r ${1:variable_name}${2:=${3:3.14}}
+endsnippet
+snippet afloat "Definition of one dimensional array of float type" b
+declare -x -r ${1:variable_name}${2:=${3:(3.14 3.14 3.14 3.14 3.14)}}
+endsnippet
+
+# str
+########
+
+snippet tstr "Definition of str type safely" b
+declare -x ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet cstr "Definition of constants of str type" b
+declare -x -r ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet astr "Definition of one dimensional array of str type" b
+declare -x -r ${1:variable_name}${2:=${3:(a b c d e)}}
+endsnippet
+
+
+# char
+########
+
+snippet tchar "Definition of char type safely" b
+declare -x ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet cchar "Definition of constants of char type" b
+declare -x -r ${1:variable_name}${2:=${3:a}}
+endsnippet
+snippet achar "Definition of one dimensional array of char type" b
+declare -x -r ${1:variable_name}${2:=${3:(a b c d e)}}
+endsnippet
+
+
+
+# arr
+########
+
+snippet tarr "Definition of arr type safely" b
+declare -a ${1:variable_name}${2:=${3:(hello world array)}}
+endsnippet
+snippet carr "Definition of constants of arr type" b
+declare -a -r ${1:variable_name}${2:=${3:(hello world array)}}
+endsnippet
+
+
+# fun
+########
+
+snippet tfun "Definition of fun type safely" b
+declare -f function ${1:function_name}() {
+	${0:#function_body}
+}
+endsnippet
+snippet cfun "Definition of constants of fun type" b
+declare -f -r function ${1:function_name}() {
+	${0:#function_body}
+}
+endsnippet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+snippet not "not operator" i
+!
+endsnippet
+
