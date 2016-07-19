@@ -12,6 +12,7 @@ import argparse
 import configparser
 import os
 import time
+import json
 
 
 VERBOSE=False
@@ -81,6 +82,12 @@ class Database(object):
         folder        = self.getDir()
         self.filepath = os.path.join(folder,self.conf.get("file"))
         self.fd       = open(self.filepath,"a+")
+    def json2dict(self, json_string):
+        return json.loads(json_string)
+    def dict2json(self, dictionary):
+        return json.dumps(dictionary)
+    def append(self, dictionary):
+        self.fd.write(self.dict2json(dictionary))
 
 
 #  Expense class {{{1  #
@@ -88,12 +95,19 @@ class Database(object):
 
 class Expense(object):
     def __init__(self, dictionary=dict()):
-        self.concept=""
-        self.expense=True
-        self.amount=0
-        self.timestamp=time.time()
+        self.concept   = ""
+        self.expense   = True
+        self.amount    = 0
+        self.timestamp = time.time()
+        self.tags      = []
+        self.currency  = "EUR"
         for key in dictionary:
             setattr(self, key, dictionary[key])
+    def getProps(self):
+        return [x for x in dir(a) if not x.startswith("__")]
+    def pretty_print(self):
+        for key in self.getProps():
+            print("%s %s"%(key, getattr(self, key)))
 
 
 
@@ -109,6 +123,18 @@ if __name__=="__main__" :
     parser = argparse.ArgumentParser(description="Led(ger), my expenses controler")
     parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
     # Parse arguments
+
+    SUBPARSER_HELP="For further information for every command, type in 'led <command> -h'"
+    subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest="command")
+
+    add_parser = subparsers.add_parser("add", help="Add expense")
+
+    add_parser.add_argument("-a","--amount", help="Amount of money, negative for expense, positive for earning", action="store", type=float)
+    add_parser.add_argument("-c","--currency", help="Currency of the amount", action="store", type=str)
+    add_parser.add_argument("-n","--name", help="Concept of the expense", action="store", type=str)
+    add_parser.add_argument("-d","--date", help="Format: day month year. E.g.: 1 1 15", action="store", type=int, nargs="*")
+
+
     args = parser.parse_args()
 
     if args.verbose:
@@ -118,12 +144,18 @@ if __name__=="__main__" :
         VERBOSE=False
 
 
+
+    printv("Getting configuration")
     config = Configuration()
+
+    printv("Instantiating database")
     db = Database(config["expenses"], config["general"])
 
+    if args.commmand == "add":
+        pass
 
 
 
 
 # vim: ft=python
-#vim-run: python3 % -v
+#vim-run: clear; python3 % -v
