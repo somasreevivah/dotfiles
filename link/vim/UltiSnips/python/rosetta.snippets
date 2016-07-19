@@ -117,8 +117,10 @@ except ${2:Exception} as ${3:e}:
 else:
 	${5:pass}
 endsnippet
-#snippet ifm "If regex match" b
-#endsnippet
+snippet ifm "If regex match" b
+if re.match(r"${1:regex}", ${2:"${3:to match}"}):
+	${4:pass}
+endsnippet
 
 
 ### UTILS {{{1
@@ -139,16 +141,18 @@ endsnippet
 #endsnippet
 #snippet sof "Printf to stdout (formated)" b
 #endsnippet
-#snippet read "Stdin read" b
-#endsnippet
+snippet read "Stdin read" b
+${1:var} = input(${2:"${3:Type in something: }"})
+endsnippet
 snippet cd "Change dir" b
 os.chdir(${1:"${2:path/to/dir}"})$0
 endsnippet
 snippet ls "List directory" b
 os.listdir(${1:"."})$0
 endsnippet
-#snippet sys "Talk to the shell" b
-#endsnippet
+snippet sys "Talk to the shell" b
+os.system(${1:"${2:command}"})
+endsnippet
 snippet mkdir "Create directory" b
 os.mkdir(${1:"${2:path/to/dir}"}, mode=0777)$0
 endsnippet
@@ -172,10 +176,12 @@ endsnippet
 snippet ret "Return a value in function" b
 return
 endsnippet
-#snippet argc "Get arguments number" b
-#endsnippet
-#snippet argvi "Get ith argument" b
-#endsnippet
+snippet argc "Get arguments number" b
+len(sys.argv)
+endsnippet
+snippet argvi "Get ith argument" b
+sys.argv[${1:i}]$0
+endsnippet
 #snippet match "Regex match" b
 #endsnippet
 #snippet sizeof "Get size of variables or types" b
@@ -234,15 +240,8 @@ endsnippet
 
 
 snippet argv-parse "Parse command line" b
-############################
-#  COMMAND LINE INTERFACE  #
-############################
 import argparse
 
-parser = argparse.ArgumentParser(description="$1")
-$0
-parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f", help="Input file.", action="store")
 
 def printv(arg1):
 	"""
@@ -251,7 +250,11 @@ def printv(arg1):
 	if VERBOSE:
 		print(arg1)
 
-if __name__=="__main__" :
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser(description="$1")
+	$0
+	parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+	parser.add_argument("-f", help="Input file.", action="store")
 	# Parse arguments
 	args = parser.parse_args()
 

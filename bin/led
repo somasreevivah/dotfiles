@@ -118,7 +118,7 @@ class Expense(object):
 #  Main {{{1  #
 ###############
 
-if __name__=="__main__" :
+if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Led(ger), my expenses controler")
     parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
@@ -151,11 +151,11 @@ if __name__=="__main__" :
     printv("Instantiating database")
     db = Database(config["expenses"], config["general"])
 
-    if args.commmand == "add":
+    if args.command == "add":
         pass
 
 
 
 
 # vim: ft=python
-#vim-run: clear; python3 % -v
+#vim-run: clear; python3 % -v add
