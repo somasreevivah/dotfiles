@@ -26,6 +26,7 @@ def init():
     main_screen=curses.initscr()
     curses.noecho()
     curses.cbreak()
+    curses.curs_set(0)
     return main_screen
 def getHistory():
     history=open(os.path.join(os.path.expanduser("~"),".bash_history"),"r").readlines()
@@ -39,9 +40,18 @@ def regexize(SEARCH):
 
     """
     REGEX_SEARCH=""
-    for i in len(SEARCH):
+    for i in range(len(SEARCH)):
         REGEX_SEARCH+=".*"+SEARCH[i]
-    return SEARCH
+    return REGEX_SEARCH
+def print_debug(main_screen, text):
+    """TODO: Docstring for print_debug.
+
+    :main_screen: TODO
+    :text: TODO
+    :returns: TODO
+
+    """
+    main_screen.addstr(maximum_lines+2,0,"Debug: "+text)
 
 
 maximum_lines=20
@@ -62,21 +72,21 @@ SEARCH=""
 # curses.setsyx(20,20)
 
 
-selected_match=3
+selected_match=1
 matches=[]
 while 1:
     c = main_screen.getch()
 
     #clean every time
     for j in range(len(matches)):
-        main_screen.addstr(j+1,0," "*(len(matches[j])+1))
+        main_screen.addstr(j+1,0," "*(len(matches[j])+2))
     main_screen.addstr(0, len(PROMPT)+1," "*len(SEARCH))
     # curses.KEY_UP
     if c==127:
         SEARCH=SEARCH[:-1]
-    elif chr(c)=="j":
+    elif chr(c)=="J" or c==curses.KEY_DOWN:
         selected_match= (selected_match+1) if selected_match-len(matches) else len(matches)
-    elif chr(c)=="k":
+    elif chr(c)=="K":
         selected_match= (selected_match-1) if selected_match-1 else 1
     elif c == 27: # ESC
         terminate(main_screen)
@@ -86,13 +96,14 @@ while 1:
         terminate(main_screen)
         os.system(matches[selected_match-1])
         sys.exit(0)
-    else:
+    elif 126>=c>=32:
         SEARCH+=chr(c)
     matches=[]
     main_screen.addstr(selected_match, 1,">")
     main_screen.addstr(0, len(PROMPT)+1,SEARCH)
+    print_debug(main_screen,str(c))
     for j,line in enumerate(history_buffer):
-        if re.match(SEARCH,line):
+        if re.match(regexize(SEARCH),line):
             matches.append(line)
             main_screen.addstr(len(matches),3,line)
             if len(matches)>maximum_lines:
