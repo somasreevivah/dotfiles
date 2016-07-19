@@ -1,0 +1,103 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import curses
+# import time
+import os
+import re
+import sys
+
+
+def terminate(main_screen):
+    """
+    :returns: TODO
+
+    """
+    curses.nocbreak();
+    main_screen.keypad(0);
+    curses.echo()
+    curses.endwin()
+
+def init():
+    """
+    :returns: TODO
+
+    """
+    main_screen=curses.initscr()
+    curses.noecho()
+    curses.cbreak()
+    return main_screen
+def getHistory():
+    history=open(os.path.join(os.path.expanduser("~"),".bash_history"),"r").readlines()
+    cleaned_history=[line for line in history if not line.startswith("#")]
+    return cleaned_history
+def regexize(SEARCH):
+    """TODO: Docstring for regexize.
+
+    :SEARCH: TODO
+    :returns: TODO
+
+    """
+    REGEX_SEARCH=""
+    for i in len(SEARCH):
+        REGEX_SEARCH+=".*"+SEARCH[i]
+    return SEARCH
+
+
+maximum_lines=20
+
+main_screen = init()
+
+history_buffer = getHistory()
+
+# print(history_buffer)
+
+PROMPT="Search:"
+main_screen.addstr(0, 0,PROMPT, curses.A_REVERSE)
+main_screen.refresh()
+
+SEARCH=""
+
+# curses.curs_set(20,20)
+# curses.setsyx(20,20)
+
+
+selected_match=3
+matches=[]
+while 1:
+    c = main_screen.getch()
+
+    #clean every time
+    for j in range(len(matches)):
+        main_screen.addstr(j+1,0," "*(len(matches[j])+1))
+    main_screen.addstr(0, len(PROMPT)+1," "*len(SEARCH))
+    # curses.KEY_UP
+    if c==127:
+        SEARCH=SEARCH[:-1]
+    elif chr(c)=="j":
+        selected_match= (selected_match+1) if selected_match-len(matches) else len(matches)
+    elif chr(c)=="k":
+        selected_match= (selected_match-1) if selected_match-1 else 1
+    elif c == 27: # ESC
+        terminate(main_screen)
+        sys.exit(0)
+    elif c == 10: # ENTER
+        # curses.flash()
+        terminate(main_screen)
+        os.system(matches[selected_match-1])
+        sys.exit(0)
+    else:
+        SEARCH+=chr(c)
+    matches=[]
+    main_screen.addstr(selected_match, 1,">")
+    main_screen.addstr(0, len(PROMPT)+1,SEARCH)
+    for j,line in enumerate(history_buffer):
+        if re.match(SEARCH,line):
+            matches.append(line)
+            main_screen.addstr(len(matches),3,line)
+            if len(matches)>maximum_lines:
+                break
+
+terminate(main_screen)
+
+#vim-run: python3 %
