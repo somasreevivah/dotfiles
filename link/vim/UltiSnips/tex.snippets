@@ -10,6 +10,7 @@ snippet modeline "Modeline for latex" b
 endsnippet
 
 snippet double-space "Double space command" b
+%double space
 \linespread{1.5}
 endsnippet
 
@@ -41,8 +42,15 @@ endsnippet
 
 #  math stuff {{{1  #
 #####################
+
+
+snippet dim
+\mathsf{dim}
+endsnippet
+
+
 snippet d "Subindex (down)" i
-_{ ${1:${VISUAL}}}${0}
+_{${1:${VISUAL}}}${0}
 endsnippet
 
 snippet u "Superindex (upper)" i
@@ -177,7 +185,10 @@ snippet diff "Integral differential" i
 \ \mathrm{d} ${1:\\mathbf{r}}$0
 endsnippet
 
-#SPINS
+
+#  Quantum {{{1  #
+##################
+
 snippet Spin2
 S_{${1:${VISUAL}}}^{$2} $0
 endsnippet
@@ -206,6 +217,11 @@ endsnippet
 snippet braket
 \left \langle $1 \right .
 \left | $2 \right \rangle $0
+endsnippet
+
+snippet proj
+\left | $1 \right \rangle
+\left \langle $2 \right | $0
 endsnippet
 
 #  Greek letters  {{{1 #
