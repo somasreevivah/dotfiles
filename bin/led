@@ -11,6 +11,7 @@ if sys.version_info < (3, 0):
 import argparse
 import configparser
 import os
+import time
 
 
 VERBOSE=False
@@ -58,7 +59,7 @@ class Database(object):
     def __init__(self, conf, general):
         self.conf = conf
         self.general = general
-        self.initDir()
+        self.initFile()
 
     def initDir(self):
         try:
@@ -66,13 +67,17 @@ class Database(object):
         except KeyError:
             self.folder = os.path.expanduser(self.general["dir"])
         printv(self.folder)
-        if not os.path.isdir(self.folder):
+        if not os.path.exists(self.folder):
+            printv("Creating folder %s"%self.folder)
             os.mkdir(self.folder)
-    def getDir(sel):
+        else:
+            printv("Folder %s found"%self.folder)
+    def getDir(self):
         self.initDir()
         return self.folder
 
     def initFile(self):
+        printv("Initialising files")
         folder        = self.getDir()
         self.filepath = os.path.join(folder,self.conf.get("file"))
         self.fd       = open(self.filepath,"a+")
@@ -82,7 +87,11 @@ class Database(object):
 ########################
 
 class Expense(object):
-    def __init__(self, dictionary):
+    def __init__(self, dictionary=dict()):
+        self.concept=""
+        self.expense=True
+        self.amount=0
+        self.timestamp=time.time()
         for key in dictionary:
             setattr(self, key, dictionary[key])
 
