@@ -37,6 +37,33 @@ if os.name == "nt":
 endsnippet
 
 
+snippet configparser "Configuration parser" b
+class Configuration(configparser.ConfigParser):
+
+	default_info={
+		"general": {
+			'dir' : '~/.led'
+		},
+		"led-general": {
+			'file' : 'general.led'
+		}
+	}
+
+	DEFAULT_FILE_LOCATION= os.path.join(os.path.expanduser("~"), ".${1:name}.conf")
+	def __init__(self):
+		configparser.ConfigParser.__init__(self)
+		self.initialize()
+	def initialize(self):
+		if os.path.exists(self.DEFAULT_FILE_LOCATION):
+			self.read(self.DEFAULT_FILE_LOCATION)
+		else:
+			for section in self.default_info:
+				self[section] = {}
+				for field in self.default_info[section]:
+					self[section][field] = self.default_info[section][field]
+			with open(self.DEFAULT_FILE_LOCATION, "w") as configfile:
+				self.write(configfile)
+endsnippet
 
 
 
