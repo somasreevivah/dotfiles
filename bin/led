@@ -2,13 +2,24 @@
 # -*- coding: utf-8 -*-
 
 
+import sys
+
+if sys.version_info < (3, 0):
+    raise Exception("This script must use python 3.0 or greater")
+    sys.exit(1)
+
 import argparse
 import configparser
+import os
 
 
-
-
-
+VERBOSE=False
+def printv(arg1):
+    """
+    Verbose print
+    """
+    if VERBOSE:
+        print(arg1)
 
 #  Configuration class {{{1  #
 ##############################
@@ -19,8 +30,8 @@ class Configuration(configparser.ConfigParser):
         "general": {
             'dir' : '~/.led'
         },
-        "led-general": {
-            'file' : 'general.led'
+        "expenses": {
+            'file' : 'general.json'
         }
     }
 
@@ -44,20 +55,41 @@ class Configuration(configparser.ConfigParser):
 
 class Database(object):
 
-    def __init__(self, filepath):
-        pass
+    def __init__(self, conf, general):
+        self.conf = conf
+        self.general = general
+        self.initDir()
+
+    def initDir(self):
+        try:
+            self.folder = os.path.expanduser(self.conf["dir"])
+        except KeyError:
+            self.folder = os.path.expanduser(self.general["dir"])
+        printv(self.folder)
+        if not os.path.isdir(self.folder):
+            os.mkdir(self.folder)
+    def getDir(sel):
+        self.initDir()
+        return self.folder
+
+    def initFile(self):
+        folder        = self.getDir()
+        self.filepath = os.path.join(folder,self.conf.get("file"))
+        self.fd       = open(self.filepath,"a+")
+
+
+#  Expense class {{{1  #
+########################
+
+class Expense(object):
+    def __init__(self, dictionary):
+        for key in dictionary:
+            setattr(self, key, dictionary[key])
 
 
 
 
 
-
-def printv(arg1):
-    """
-    Verbose print
-    """
-    if VERBOSE:
-        print(arg1)
 
 
 #  Main {{{1  #
@@ -67,7 +99,6 @@ if __name__=="__main__" :
 
     parser = argparse.ArgumentParser(description="Led(ger), my expenses controler")
     parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-    parser.add_argument("-f", help="Input file.", action="store")
     # Parse arguments
     args = parser.parse_args()
 
@@ -79,10 +110,11 @@ if __name__=="__main__" :
 
 
     config = Configuration()
+    db = Database(config["expenses"], config["general"])
 
 
 
 
 
-#vim-run: python %
 # vim: ft=python
+#vim-run: python3 % -v
