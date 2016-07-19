@@ -339,10 +339,7 @@ endsnippet
 
 
 
-#  Sections override {{{1  #
-############################
 
-snippet sec "Section" b
 
 #  Beamer {{{1  #
 #################
@@ -351,14 +348,17 @@ snippet ord "order for some beamer object" i
 <${1:slide_begin}-${2:slide_end}>
 endsnippet
 
-snippet sli "On slide" !b
+snippet sli "On slide" b
 \onslide<${1:slide_begin}-${2:slide_end}>{
 ${3:${VISUAL:some object}}
 }
 endsnippet
 
+#  Sections override {{{1  #
+############################
 
 
+snippet sec "Section" b
 \section{${1:${VISUAL:section_name}}} %{{{1
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
