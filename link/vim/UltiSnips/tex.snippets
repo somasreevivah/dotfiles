@@ -377,8 +377,22 @@ snippet for "Foreach loop" b
 	}
 endsnippet
 
-snippet var-tikz "Variable in tikz" b
+snippet tikz-var "Variable in tikz" b
 \pgfmathsetmacro{\\${1:varname}}{${2:value}}
+endsnippet
+
+snippet tikz-coord "Description" b
+\coordinate (${1:POINT_NAME}) at (${2:x}, ${3:y});
+endsnippet
+
+snippet tikz-draw "Draw" b
+\draw${1:[${2:style}]} (${3:point_begin}) -- (${4:point_end});
+endsnippet
+
+snippet tikz-draw-text "Draw" b
+\node${1:[${2:style}]} at (${3:point_begin}) {
+${5:Text}
+};
 endsnippet
 
 
