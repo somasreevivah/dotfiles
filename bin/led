@@ -12,6 +12,7 @@ import argparse
 import configparser
 import os
 import time
+import json
 
 
 VERBOSE=False
@@ -29,7 +30,8 @@ class Configuration(configparser.ConfigParser):
 
     default_info={
         "general": {
-            'dir' : '~/.led'
+            'dir' : '~/.led',
+            'default' : 'expenses'
         },
         "expenses": {
             'file' : 'general.json'
@@ -81,6 +83,12 @@ class Database(object):
         folder        = self.getDir()
         self.filepath = os.path.join(folder,self.conf.get("file"))
         self.fd       = open(self.filepath,"a+")
+    def json2dict(self, json_string):
+        return json.loads(json_string)
+    def dict2json(self, dictionary):
+        return json.dumps(dictionary)
+    def append(self, dictionary):
+        self.fd.write(self.dict2json(dictionary)+"\n")
 
 
 #  Expense class {{{1  #
@@ -88,26 +96,120 @@ class Database(object):
 
 class Expense(object):
     def __init__(self, dictionary=dict()):
-        self.concept=""
-        self.expense=True
-        self.amount=0
-        self.timestamp=time.time()
+        self.concept   = ""
+        self.expense   = True
+        self.amount    = 0
+        self.timestamp = time.time()
+        self.tags      = []
+        self.currency  = "EUR"
         for key in dictionary:
             setattr(self, key, dictionary[key])
+    def getProps(self):
+        return [x for x in dir(a) if not x.startswith("__")]
+    def pretty_print(self):
+        for key in self.getProps():
+            print("%s %s"%(key, getattr(self, key)))
 
 
 
 
+def interactiveAdd(**kwargs):
+    data = dict()
+    for key in kwargs:
+        value = kwargs[key]
+        if value:
+            data[key] = value
+        else:
+            if key == "tags":
+                data[key] = input("%s: "%key).split()
+            elif key == "date":
+                buf = input("%s: "%key).split()
+                data[key] = [ int(x) for x in buf ]
+                if len(data[key]) == 1:
+                    month = int(time.strftime("%m"))
+                    year = int(time.strftime("%Y"))
+                    data[key]+=[month, year]
+                elif len(data[key]) == 2:
+                    year = int(time.strftime("%Y"))
+                    data[key]+=[month, year]
+                elif len(data[key]) == 3:
+                    if data[key][2]<100:
+                        data[key][2]+=2000
+            elif key == "amount":
+                data[key] = float(amount)
+
+            data[key] = input("%s: "%key)
+    return data
 
 
 
 #  Main {{{1  #
 ###############
 
-if __name__=="__main__" :
+if __name__ == "__main__":
+
+    printv("Getting configuration")
+    config = Configuration()
 
     parser = argparse.ArgumentParser(description="Led(ger), my expenses controler")
-    parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+    parser.add_argument(
+            "-v", "--verbose", 
+            help="Make the output verbose", action="store_true"
+            )
+    parser.add_argument(
+            "-c", "--config", 
+            help="Use config section, default is %s"%config.default_info.get("general").get("default"),
+            default=config.default_info.get("general").get("default"),
+            action="store"
+            )
+
+
+    SUBPARSER_HELP="For further information for every command, type in 'led <command> -h'"
+    subparsers = parser.add_subparsers(help=SUBPARSER_HELP,
+            metavar="command",
+            dest="command"
+            )
+
+    add_parser = subparsers.add_parser("add",
+            help="Add expense"
+            )
+
+    add_parser.add_argument(
+            "-a","--amount",
+            help="Amount of money, negative for expense, positive for earning",
+            action="store",
+            type=float,
+            default=False
+            )
+    add_parser.add_argument(
+            "-c","--currency",
+            help="Currency of the amount",
+            action="store",
+            type=str,
+            default="EUR"
+            )
+    add_parser.add_argument(
+            "-n","--concept", help="Concept of the expense",
+            action="store",
+            type=str,
+            default=False
+            )
+    add_parser.add_argument(
+            "-d","--date", help="Format: day month year. E.g.: 1 1 15",
+            action="store",
+            type=int,
+            nargs="*",
+            default=[int(x) for x in time.strftime("%d %m %Y").split()]
+            )
+    add_parser.add_argument(
+            "-t","--tags", help="Tags",
+            action="store",
+            type=str,
+            nargs="*",
+            default=False
+            )
+
+
     # Parse arguments
     args = parser.parse_args()
 
@@ -117,13 +219,25 @@ if __name__=="__main__" :
     else:
         VERBOSE=False
 
+    printv(args)
 
-    config = Configuration()
-    db = Database(config["expenses"], config["general"])
 
+
+    printv("Instantiating database")
+    db = Database(config[args.config], config["general"])
+
+    if args.command == "add":
+        entry = interactiveAdd(
+                amount=args.amount,
+                currency=args.currency,
+                concept=args.concept,
+                date=args.date,
+                tags=args.tags
+                )
+        db.append(entry)
 
 
 
 
 # vim: ft=python
-#vim-run: python3 % -v
+#vim-run: clear; python3 % -v add
