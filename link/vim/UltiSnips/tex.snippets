@@ -165,8 +165,16 @@ snippet it "Text italics with visual support"
 \textit{${1:${VISUAL}}}$0
 endsnippet
 
-snippet (( "normal parenthesis" i
+snippet ( "normal parenthesis" i
 ( $1 )$0
+endsnippet
+
+snippet { "Curly braces" i
+{ $1 }$0
+endsnippet
+
+snippet [ "Braces" i
+[ $1 ]$0
 endsnippet
 
 
@@ -177,12 +185,16 @@ ${VISUAL}
 endsnippet
 
 # DIFFERENTIAL OPERATORS
-snippet nab "Nabla operator" i
+snippet nab "Nabla operator" w
 \nabla
 endsnippet
 
-snippet diff "Integral differential" i
+snippet diff "Integral differential" w
 \ \mathrm{d} ${1:\\mathbf{r}}$0
+endsnippet
+
+snippet int "Integral" w
+\int${1:_{${2:\mathbb{R}}}} $0 ${3:\ \mathrm{d} ${4:x}}
 endsnippet
 
 
@@ -371,29 +383,34 @@ endsnippet
 #####################
 
 snippet for "Foreach loop" b
-\foreach \\${1:val} {${1:hello,world}}
+\foreach \\${1:val} in {${1:hello,world}}
 	{
 	${2:%statements}
 	}
 endsnippet
 
-snippet tikz-var "Variable in tikz" b
+snippet var-tikz "Variable in tikz" b
 \pgfmathsetmacro{\\${1:varname}}{${2:value}}
 endsnippet
 
-snippet tikz-coord "Description" b
+snippet coord-tikz "Coordinate in tikz" b
 \coordinate (${1:POINT_NAME}) at (${2:x}, ${3:y});
 endsnippet
 
-snippet tikz-draw "Draw" b
+snippet op-tikz "Coordinate operation in tikz" w
+(\$(${1:point})+(${2:point})\$)
+endsnippet
+
+snippet draw-tikz "Draw" b
 \draw${1:[${2:style}]} (${3:point_begin}) -- (${4:point_end});
 endsnippet
 
-snippet tikz-draw-text "Draw" b
+snippet draw-text-tikz "Draw" b
 \node${1:[${2:style}]} at (${3:point_begin}) {
 ${5:Text}
 };
 endsnippet
+
 
 
 
