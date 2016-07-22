@@ -15,6 +15,15 @@ parser.add_argument("-v", "--verbose", help="Make the output verbose", action="s
 parser.add_argument("-f", help="Input file.", action="store", default="POSCAR")
 parser.add_argument("-n", help="Atom number", action="store", type=int)
 
+SUBPARSER_HELP="For further information for every command, type in 'poscar.py <command> -h'"
+subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest="command")
+
+asy_parser = subparsers.add_parser("asy", help="Prepare an asy plot with the poscar atoms")
+
+asy_parser.add_argument("-l", help="Minimum length", action="store")
+asy_parser.add_argument("-L", help="Maximum length", action="store")
+asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=1.0)
+
 def printv(arg1):
     """
     Verbose print
@@ -165,22 +174,20 @@ if __name__=="__main__" :
     poscar=parsePoscar(args.f)
     if  VERBOSE:
         poscar.echo()
-    ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
 
-    for item in ordered_distances:
-        atom_number = item[0]
-        atom_distance = item[1]
-        atom_symbol = poscar.getAtomSymbol(atom_number)
-        print("%s %s %s"%(atom_number, atom_symbol, atom_distance))
-
-
-
-
-
-
-
-
-
+    if args.command == "asy":
+        print("import atoms;")
+        for atom_index,atom in enumerate(poscar.atoms):
+            symbol = poscar.getAtomSymbol(atom_index+1)
+            coords = str(atom).strip("[]")
+            print("Atom(\"%s\", (%s)).draw(radius_scale=%s);"%(symbol, coords, args.radius_scale))
+    else:
+        ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
+        for item in ordered_distances:
+            atom_number = item[0]
+            atom_distance = item[1]
+            atom_symbol = poscar.getAtomSymbol(atom_number)
+            print("%s %s %s"%(atom_number, atom_symbol, atom_distance))
 
 
 
@@ -190,5 +197,15 @@ if __name__=="__main__" :
 
 
 
+
+
+
+
+
+
+
+
+
+# vim-run: poscar.py -f POSCAR asy
 # vim-run: clear;python2 %  -f POSCAR -n 14
 # vim-run: python2 % -v  -f POSCAR -n 14

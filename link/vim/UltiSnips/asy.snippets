@@ -1,3 +1,5 @@
+priority 0
+
 snippet shbang "Shebang #!" b
 #! /usr/bin/env asy
 endsnippet
@@ -128,5 +130,6 @@ ${4://statements}
 endsnippet
 
 snippet vimrun "Vim-run code snippet" b
-#vim-run: asy -f pdf %$0
+//vim-run: asy -f pdf %$0
+//vim-run: asy -batchView %$0
 endsnippet
