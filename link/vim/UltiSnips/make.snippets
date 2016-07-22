@@ -40,6 +40,18 @@ snippet ife "Bash if else" b
 	fi
 endsnippet
 
+snippet else "Bash else" b
+	@if ${1:Cond}; then \
+		${3:#Body}; \
+	fi
+endsnippet
+
+snippet if "Bash if" b
+	@if ${1:Cond}; then \
+		${3:#Body}; \
+	fi
+endsnippet
+
 snippet so "Stdout" b
 @echo $1
 endsnippet
@@ -50,6 +62,14 @@ endsnippet
 
 snippet modeline "Modeline" b
 # vim: nospell fdm=marker
+endsnippet
+
+snippet target "File to be made" w
+$<
+endsnippet
+
+snippet source "File the target depends on" w
+$@
 endsnippet
 
 snippet info-var "Information about normally used shortcurs" b
