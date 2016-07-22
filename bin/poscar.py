@@ -20,9 +20,10 @@ subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest=
 
 asy_parser = subparsers.add_parser("asy", help="Prepare an asy plot with the poscar atoms")
 
-asy_parser.add_argument("-l", help="Minimum length", action="store")
-asy_parser.add_argument("-L", help="Maximum length", action="store")
+asy_parser.add_argument("-l", help="Minimum length", action="store", default=0, type=float)
+asy_parser.add_argument("-L", help="Maximum length", action="store", default=10000, type=float)
 asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=1.0)
+asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 0.15", action="store", default=0.15, type=float)
 
 def printv(arg1):
     """
@@ -176,11 +177,34 @@ if __name__=="__main__" :
         poscar.echo()
 
     if args.command == "asy":
-        print("import atoms;")
+        # print("//! /usr/bin/env asy -batchView")
+        print("""\
+import atoms;
+unitsize(1cm);
+//currentprojection  = perspective(1,1,1);
+settings.prc       = false;
+settings.render    = 10; //quality
+settings.outformat = "pdf"; //output """)
+        print("real bond_radius = %s;"%args.bond_radius)
+        print("real radius_scale = %s;\n"%args.radius_scale)
+        min_length = args.l
+        max_length = args.L
         for atom_index,atom in enumerate(poscar.atoms):
             symbol = poscar.getAtomSymbol(atom_index+1)
             coords = str(atom).strip("[]")
-            print("Atom(\"%s\", (%s)).draw(radius_scale=%s);"%(symbol, coords, args.radius_scale))
+            print("Atom ATOM_%s = Atom(\"%s\", (%s));"%(atom_index+1, symbol, coords))
+        # draw atomic bonds
+
+        for i in range(1,poscar.numberOfAtoms()+1):
+            print("ATOM_%s.draw(radius_scale = radius_scale);"%(i))
+        for i in range(1,poscar.numberOfAtoms()+1):
+            for j in range(i+1, poscar.numberOfAtoms()+1):
+                atom_pos_1 = poscar.atoms[i-1]
+                atom_pos_2 = poscar.atoms[j-1]
+                distance = dist3d(atom_pos_1, atom_pos_2)
+                if min_length<= distance and distance <= max_length:
+                    print("//"+str(distance))
+                    print("Bond(ATOM_%s, ATOM_%s).draw(radius=bond_radius);"%(i,j))
     else:
         ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
         for item in ordered_distances:
@@ -206,6 +230,6 @@ if __name__=="__main__" :
 
 
 
-# vim-run: poscar.py -f POSCAR asy
+# vim-run: poscar.py -f POSCAR asy -L 1.2 --radius-scale 0.2 --bond-radius 3 > siv.asy
 # vim-run: clear;python2 %  -f POSCAR -n 14
 # vim-run: python2 % -v  -f POSCAR -n 14
