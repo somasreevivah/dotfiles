@@ -286,7 +286,9 @@ settings.outformat = "pdf"; //output """)
                     print("Bond(ATOM_%s, ATOM_%s).draw(radius=bond_radius);"%(i,j))
         if args.chgcar:
             chgcar = parseChgcar(poscar)
-            print(chgcar.getCellVolume())
+            nx = chgcar.partition[0]
+            ny = chgcar.partition[1]
+            nz = chgcar.partition[2]
     #  normal mode {{{1  #
     ######################
     else:
