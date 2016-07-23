@@ -1,29 +1,12 @@
 #! /usr/bin/env python2
 # -*- coding: utf-8 -*-
 
-
-
-############################
-#  COMMAND LINE INTERFACE  #
-############################
 import argparse
 import sys
+import re
 
-parser = argparse.ArgumentParser(description="Get a list of nearest neighbours for the number of an atom")
-
-parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-parser.add_argument("-f", help="Input file.", action="store", default="POSCAR")
-parser.add_argument("-n", help="Atom number", action="store", type=int)
-
-SUBPARSER_HELP="For further information for every command, type in 'poscar.py <command> -h'"
-subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest="command")
-
-asy_parser = subparsers.add_parser("asy", help="Prepare an asy plot with the poscar atoms")
-
-asy_parser.add_argument("-l", help="Minimum length", action="store", default=0, type=float)
-asy_parser.add_argument("-L", help="Maximum length", action="store", default=10000, type=float)
-asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=1.0)
-asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 0.15", action="store", default=0.15, type=float)
+#  Helper functions {{{1  #
+###########################
 
 def printv(arg1):
     """
@@ -31,6 +14,10 @@ def printv(arg1):
     """
     if VERBOSE:
         print(arg1)
+
+
+
+#  Main classes {{{1  #
 
 class POSCAR(object):
 
@@ -42,6 +29,7 @@ class POSCAR(object):
         self.atoms_number_header=[]
         self.atoms=[]
         self.mode=False
+        self.fd=None
     def getAtomSymbol(self, atom_number):
         buffer=0
         for j, atoms in enumerate(self.atoms_number_header):
@@ -78,6 +66,26 @@ class POSCAR(object):
         print("%s  %s"%("Mode",self.mode))
         print("%s  %s"%("Atoms",self.atoms))
 
+class CHGCAR(POSCAR):
+    def __init__(self,poscar):
+        """TODO: to be defined1. """
+        POSCAR.__init__(self)
+        self.comment=poscar.comment
+        self.basis=poscar.basis
+        self.constant=poscar.constant
+        self.atoms_header=poscar.atoms_header
+        self.atoms_number_header=poscar.atoms_number_header
+        self.atoms=poscar.atoms
+        self.mode=poscar.mode
+        self.fd=poscar.fd
+
+        self.data = []
+        self.partition = []
+
+
+#  Parsing {{{1  #
+##################
+
 def parsePoscar(filepath):
     """TODO: Docstring for parsePoscar.
 
@@ -85,26 +93,60 @@ def parsePoscar(filepath):
     :returns: TODO
 
     """
-    import re
-    poscar = POSCAR()
-    with open(filepath, "r") as f:
-        for j,line in enumerate(f):
-            line_number=j+1
-            if line_number == 1:
-                poscar.comment=line
-            elif line_number == 2:
-                poscar.constant = float(line)
-            elif 5>=line_number >= 3:
-                poscar.basis.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
-            elif line_number == 6:
-                poscar.atoms_header = re.sub(r"\s+"," ", line).split()
-            elif line_number == 7:
-                poscar.atoms_number_header = [int(x) for x in re.sub(r"\s+"," ", line).split()]
-            elif line_number == 8:
-                poscar.mode=line
-            elif poscar.numberOfAtoms()+9>=line_number>=9:
-                poscar.atoms.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
+    f         = open(filepath, "r")
+    poscar    = POSCAR()
+    poscar.fd = f
+    for j,line in enumerate(f):
+        line_number=j+1
+        if re.match(r"^\s*$",line):
+            continue
+        if line_number == 1:
+            poscar.comment=line
+        elif line_number == 2:
+            poscar.constant = float(line)
+        elif 5>=line_number >= 3:
+            poscar.basis.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
+        elif line_number == 6:
+            poscar.atoms_header = re.sub(r"\s+"," ", line).split()
+        elif line_number == 7:
+            poscar.atoms_number_header = [int(x) for x in re.sub(r"\s+"," ", line).split()]
+        elif line_number == 8:
+            poscar.mode=line
+        elif poscar.numberOfAtoms()+9>=line_number>=9:
+            poscar.atoms.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
+        if line_number > poscar.numberOfAtoms()+9:
+            break
     return poscar
+
+def parseChgcar(poscar):
+    """
+    Normally chgcar files bear inside POSCAR information too.
+    """
+    printv("Parsing chgcar")
+    chgcar = CHGCAR(poscar)
+    f      = chgcar.fd
+    f.seek(9)
+    chgcar_part=False
+    chgcgar_begin=0
+    for j,line in enumerate(f):
+        if re.match(r"^\s*$",line):
+            chgcar_part=True
+            chgcar_begin=j
+            continue
+        if not chgcar_part:
+            continue
+        chgcar_line=j-chgcar_begin
+        # print(chgcar_line)
+        if chgcar_line == 1:
+            chgcar.partition = [int(x) for x in re.sub(r"\s+"," ", line).split()]
+        elif chgcar_line>1:
+            chgcar.data+=[float(x) for x in re.sub(r"\s+"," ", line).split()]
+    # open("chgcar.text","w+").write(str(chgcar.data))
+    return chgcar
+
+
+#  Vector operations {{{1  #
+############################
 
 def vec_times_scalar(vec, scalar):
     return [scalar*x for x in vec]
@@ -157,9 +199,34 @@ def calculateIncrementalEntfernteAtoms(poscar,atomNumber):
 
 
 
-
+#  Main {{{1  #
+###############
 
 if __name__=="__main__" :
+
+    #  CLI parser {{{1  #
+    #####################
+    parser = argparse.ArgumentParser(description="Get a list of nearest neighbours for the number of an atom")
+
+    parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
+    parser.add_argument("-f", help="Input file.", action="store", default="POSCAR")
+    parser.add_argument("-n", help="Atom number", action="store", type=int)
+
+
+    SUBPARSER_HELP="For further information for every command, type in 'poscar.py <command> -h'"
+    subparsers = parser.add_subparsers(help=SUBPARSER_HELP, metavar="command", dest="command")
+
+    asy_parser = subparsers.add_parser("asy", help="Prepare an asy plot with the poscar atoms")
+    asy_parser.add_argument(
+    "--chgcar",
+    help="Print volumetric data in chgcar format",
+    action="store_true",
+    )
+
+    asy_parser.add_argument("-l", help="Minimum length", action="store", default=0, type=float)
+    asy_parser.add_argument("-L", help="Maximum length", action="store", default=10000, type=float)
+    asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=1.0)
+    asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 0.15", action="store", default=0.15, type=float)
     # Parse arguments
     args = parser.parse_args()
 
@@ -176,6 +243,10 @@ if __name__=="__main__" :
     if  VERBOSE:
         poscar.echo()
 
+
+    #  asy part {{{1  #
+    ###################
+
     if args.command == "asy":
         # print("//! /usr/bin/env asy -batchView")
         print("""\
@@ -189,6 +260,7 @@ settings.outformat = "pdf"; //output """)
         print("real radius_scale = %s;\n"%args.radius_scale)
         min_length = args.l
         max_length = args.L
+        # printv(poscar.atoms)
         for atom_index,atom in enumerate(poscar.atoms):
             symbol = poscar.getAtomSymbol(atom_index+1)
             coords = str(atom).strip("[]")
@@ -205,6 +277,10 @@ settings.outformat = "pdf"; //output """)
                 if min_length<= distance and distance <= max_length:
                     print("//"+str(distance))
                     print("Bond(ATOM_%s, ATOM_%s).draw(radius=bond_radius);"%(i,j))
+        if args.chgcar:
+            chgcar = parseChgcar(poscar)
+    #  normal mode {{{1  #
+    ######################
     else:
         ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
         for item in ordered_distances:
@@ -230,6 +306,11 @@ settings.outformat = "pdf"; //output """)
 
 
 
+#  VIMRUN {{{1  #
+#################
+
+
+# vim-run: poscar.py -v -f CHGCAR asy --chgcar -L 0.1
 # vim-run: poscar.py -f POSCAR asy -L 1.2 --radius-scale 0.2 --bond-radius 3 > siv.asy
 # vim-run: clear;python2 %  -f POSCAR -n 14
 # vim-run: python2 % -v  -f POSCAR -n 14
