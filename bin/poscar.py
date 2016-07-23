@@ -4,6 +4,7 @@
 import argparse
 import sys
 import re
+import numpy
 
 #  Helper functions {{{1  #
 ###########################
@@ -36,6 +37,12 @@ class POSCAR(object):
             buffer+=atoms
             if atom_number<=buffer:
                 return self.atoms_header[j]
+    def getCellVolume(self):
+        main_volume=numpy.linalg.det(self.basis)
+        if self.isCartesian():
+            return main_volume*self.constant
+        else:
+            return main_volume
     def getAtomCoord(self, atom_number):
         """TODO: Docstring for getAtomCoord.
 
@@ -43,16 +50,17 @@ class POSCAR(object):
         :returns: TODO
 
         """
-        if atom_number>self.numberOfAtoms():
-            raise Exception("There are only %s atoms, please choose a number between 1 and %s"%(self.numberOfAtoms(), self.numberOfAtoms()))
+        if atom_number>self.getNumberOfAtoms():
+            raise Exception("There are only %s atoms, please choose a number between 1 and %s"%(self.getNumberOfAtoms(), self.getNumberOfAtoms()))
             sys.exit(1)
         coords=self.atoms[atom_number-1]
-        if self.mode[0] in ["C","c"]:
+        if self.isCartesian():
             return vec_times_scalar(coords,self.constant)
         else:
             return [self.basis[0][i]*coords[i] +self.basis[1][i]*coords[i] +self.basis[2][i]*coords[i] for i in range(3)]
-
-    def numberOfAtoms(self):
+    def isCartesian(self):
+        return True if self.mode[0] in ["C","c"] else False
+    def getNumberOfAtoms(self):
         return int(sum(self.atoms_number_header))
     def echo(self):
         print("POSCAR")
@@ -62,7 +70,7 @@ class POSCAR(object):
         print("%s  %s"%("constant",self.constant))
         print("%s  %s"%("atoms_header",self.atoms_header))
         print("%s  %s"%("atoms_number_header",self.atoms_number_header))
-        print("%s  %s"%("Atoms Number",self.numberOfAtoms()))
+        print("%s  %s"%("Atoms Number",self.getNumberOfAtoms()))
         print("%s  %s"%("Mode",self.mode))
         print("%s  %s"%("Atoms",self.atoms))
 
@@ -112,9 +120,9 @@ def parsePoscar(filepath):
             poscar.atoms_number_header = [int(x) for x in re.sub(r"\s+"," ", line).split()]
         elif line_number == 8:
             poscar.mode=line
-        elif poscar.numberOfAtoms()+9>=line_number>=9:
+        elif poscar.getNumberOfAtoms()+9>=line_number>=9:
             poscar.atoms.append([float(i) for i in re.sub(r"\s+"," ", line).split()])
-        if line_number > poscar.numberOfAtoms()+9:
+        if line_number > poscar.getNumberOfAtoms()+9:
             break
     return poscar
 
@@ -180,7 +188,7 @@ def calculateIncrementalEntfernteAtoms(poscar,atomNumber):
     base_coord = poscar.getAtomCoord(atomNumber)
     all_distances= []
     ordered_distances= []
-    for atom_number in range(1,int(poscar.numberOfAtoms()+1)):
+    for atom_number in range(1,int(poscar.getNumberOfAtoms()+1)):
         # print(atom_number)
         distance = dist3d(base_coord, poscar.getAtomCoord(atom_number))
         all_distances.append([atom_number, distance])
@@ -266,11 +274,10 @@ settings.outformat = "pdf"; //output """)
             coords = str(atom).strip("[]")
             print("Atom ATOM_%s = Atom(\"%s\", (%s));"%(atom_index+1, symbol, coords))
         # draw atomic bonds
-
-        for i in range(1,poscar.numberOfAtoms()+1):
+        for i in range(1,poscar.getNumberOfAtoms()+1):
             print("ATOM_%s.draw(radius_scale = radius_scale);"%(i))
-        for i in range(1,poscar.numberOfAtoms()+1):
-            for j in range(i+1, poscar.numberOfAtoms()+1):
+        for i in range(1,poscar.getNumberOfAtoms()+1):
+            for j in range(i+1, poscar.getNumberOfAtoms()+1):
                 atom_pos_1 = poscar.atoms[i-1]
                 atom_pos_2 = poscar.atoms[j-1]
                 distance = dist3d(atom_pos_1, atom_pos_2)
@@ -279,6 +286,7 @@ settings.outformat = "pdf"; //output """)
                     print("Bond(ATOM_%s, ATOM_%s).draw(radius=bond_radius);"%(i,j))
         if args.chgcar:
             chgcar = parseChgcar(poscar)
+            print(chgcar.getCellVolume())
     #  normal mode {{{1  #
     ######################
     else:
