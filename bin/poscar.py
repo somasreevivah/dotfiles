@@ -233,8 +233,8 @@ if __name__=="__main__" :
 
     asy_parser.add_argument("-l", help="Minimum length", action="store", default=0, type=float)
     asy_parser.add_argument("-L", help="Maximum length", action="store", default=10000, type=float)
-    asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=1.0)
-    asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 0.15", action="store", default=0.15, type=float)
+    asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=0.2)
+    asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 2", action="store", default=2, type=float)
     # Parse arguments
     args = parser.parse_args()
 
@@ -264,10 +264,12 @@ unitsize(1cm);
 settings.prc       = false;
 settings.render    = 10; //quality
 settings.outformat = "pdf"; //output """)
-        print("real bond_radius = %s;"%args.bond_radius)
-        print("real radius_scale = %s;\n"%args.radius_scale)
         min_length = args.l
         max_length = args.L
+        print("real bond_radius = %s;"%args.bond_radius)
+        print("real radius_scale = %s;\n"%args.radius_scale)
+        print("real max_bond_dist = %s;\n"%max_length)
+        print("real min_bond_dist = %s;\n"%min_length)
         # printv(poscar.atoms)
         for atom_index,atom in enumerate(poscar.atoms):
             symbol = poscar.getAtomSymbol(atom_index+1)
@@ -282,8 +284,8 @@ settings.outformat = "pdf"; //output """)
                 atom_pos_2 = poscar.atoms[j-1]
                 distance = dist3d(atom_pos_1, atom_pos_2)
                 if min_length<= distance and distance <= max_length:
-                    print("//"+str(distance))
-                    print("Bond(ATOM_%s, ATOM_%s).draw(radius=bond_radius);"%(i,j))
+                    print("// distance: "+str(distance))
+                    print("Bond(ATOM_%s, ATOM_%s).draw(max_dist=max_bond_dist, min_dist=min_bond_dist,radius=bond_radius);"%(i,j))
         if args.chgcar:
             chgcar = parseChgcar(poscar)
             nx = chgcar.partition[0]
