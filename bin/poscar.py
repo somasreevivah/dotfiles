@@ -1,6 +1,7 @@
 #! /usr/bin/env python2
 # -*- coding: utf-8 -*-
 
+
 import argparse
 import sys
 import re
@@ -21,7 +22,6 @@ def printv(arg1):
 #  Main classes {{{1  #
 
 class POSCAR(object):
-
     def __init__(self):
         self.comment=""
         self.basis=[]
@@ -43,23 +43,40 @@ class POSCAR(object):
             return main_volume*self.constant
         else:
             return main_volume
+    def getScaledBasis(self):
+        if self.isCartesian():
+            return [[self.constant, 0,0],[0,self.constant,0],[0,0,self.constant]]
+        else:
+            vec0 = [self.constant * x for x in [ v for v in self.basis[0] ] ]
+            vec1 = [self.constant * x for x in [ v for v in self.basis[1] ] ]
+            vec2 = [self.constant * x for x in [ v for v in self.basis[2] ] ]
+            return [vec0,vec1,vec2]
     def getAtomCoord(self, atom_number):
-        """TODO: Docstring for getAtomCoord.
-
-        :atom_number: TODO
-        :returns: TODO
-
-        """
         if atom_number>self.getNumberOfAtoms():
             raise Exception("There are only %s atoms, please choose a number between 1 and %s"%(self.getNumberOfAtoms(), self.getNumberOfAtoms()))
             sys.exit(1)
         coords=self.atoms[atom_number-1]
-        if self.isCartesian():
-            return vec_times_scalar(coords,self.constant)
-        else:
-            return [self.basis[0][i]*coords[i] +self.basis[1][i]*coords[i] +self.basis[2][i]*coords[i] for i in range(3)]
+        basis = self.getScaledBasis()
+        # print(basis)
+        return [basis[0][i]*coords[i] + basis[1][i]*coords[i] + basis[2][i]*coords[i] for i in range(3)]
+        # if self.isCartesian():
+            # return vec_times_scalar(coords,self.constant)
+        # else:
+            # vec0 = vec_times_scalar(self.basis[0], self.constant/norm3d(self.basis[0]))
+            # vec1 = vec_times_scalar(self.basis[1], self.constant/norm3d(self.basis[1]))
+            # vec2 = vec_times_scalar(self.basis[2], self.constant/norm3d(self.basis[2]))
+            # vec0 = vec_times_scalar(self.basis[0], self.constant**2)
+            # vec1 = vec_times_scalar(self.basis[1], self.constant**2)
+            # vec2 = vec_times_scalar(self.basis[2], self.constant**2)
+            # vec0 = vec_times_scalar(self.basis[0], self.constant)
+            # vec1 = vec_times_scalar(self.basis[1], self.constant)
+            # vec2 = vec_times_scalar(self.basis[2], self.constant)
+            # vec0 = vec_times_scalar(self.basis[0], 1)
+            # vec1 = vec_times_scalar(self.basis[1], 1)
+            # vec2 = vec_times_scalar(self.basis[2], 1)
+            # return [vec0[i]*coords[i] +vec1[i]*coords[i] + vec2[i]*coords[i] for i in range(3)]
     def isCartesian(self):
-        return True if self.mode[0] in ["C","c"] else False
+        return self.mode[0] in "CcKk"
     def getNumberOfAtoms(self):
         return int(sum(self.atoms_number_header))
     def echo(self):
@@ -95,12 +112,6 @@ class CHGCAR(POSCAR):
 ##################
 
 def parsePoscar(filepath):
-    """TODO: Docstring for parsePoscar.
-
-    :filepath: TODO
-    :returns: TODO
-
-    """
     f         = open(filepath, "r")
     poscar    = POSCAR()
     poscar.fd = f
@@ -233,8 +244,8 @@ if __name__=="__main__" :
 
     asy_parser.add_argument("-l", help="Minimum length", action="store", default=0, type=float)
     asy_parser.add_argument("-L", help="Maximum length", action="store", default=10000, type=float)
-    asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=0.2)
-    asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 2", action="store", default=2, type=float)
+    asy_parser.add_argument("--radius-scale", help="Radius scale for all", action="store", default=0.5)
+    asy_parser.add_argument("--bond-radius", help="Radius scale for all, default 2", action="store", default=5, type=float)
     # Parse arguments
     args = parser.parse_args()
 
@@ -263,29 +274,38 @@ unitsize(1cm);
 //currentprojection  = perspective(1,1,1);
 settings.prc       = false;
 settings.render    = 10; //quality
-settings.outformat = "pdf"; //output """)
+//settings.outformat = "pdf"; //output """)
         min_length = args.l
         max_length = args.L
         print("real bond_radius = %s;"%args.bond_radius)
-        print("real radius_scale = %s;\n"%args.radius_scale)
-        print("real max_bond_dist = %s;\n"%max_length)
-        print("real min_bond_dist = %s;\n"%min_length)
-        # printv(poscar.atoms)
-        for atom_index,atom in enumerate(poscar.atoms):
-            symbol = poscar.getAtomSymbol(atom_index+1)
+        print("real radius_scale = %s;"%args.radius_scale)
+        print("real max_bond_dist = %s;"%max_length)
+        print("real min_bond_dist = %s;"%min_length)
+
+        print("\n// - Atoms - {{{1")
+        for i in range(poscar.getNumberOfAtoms()+1):
+            symbol = poscar.getAtomSymbol(i)
+            atom   = poscar.getAtomCoord(i)
             coords = str(atom).strip("[]")
-            print("Atom ATOM_%s = Atom(\"%s\", (%s));"%(atom_index+1, symbol, coords))
+            print("Atom ATOM_%s = Atom(\"%s\", (%s));"%(i, symbol, coords))
+        print("\n// - Atoms - 1}}}")
+
         # draw atomic bonds
+        print("\n// - Atom drawing - {{{1")
         for i in range(1,poscar.getNumberOfAtoms()+1):
             print("ATOM_%s.draw(radius_scale = radius_scale);"%(i))
+        print("\n// - Atoms drawing - 1}}}")
+
+        print("\n// - Bonds - {{{1")
         for i in range(1,poscar.getNumberOfAtoms()+1):
             for j in range(i+1, poscar.getNumberOfAtoms()+1):
-                atom_pos_1 = poscar.atoms[i-1]
-                atom_pos_2 = poscar.atoms[j-1]
+                atom_pos_1 = poscar.getAtomCoord(i)
+                atom_pos_2 = poscar.getAtomCoord(j)
                 distance = dist3d(atom_pos_1, atom_pos_2)
                 if min_length<= distance and distance <= max_length:
                     print("// distance: "+str(distance))
                     print("Bond(ATOM_%s, ATOM_%s).draw(max_dist=max_bond_dist, min_dist=min_bond_dist,radius=bond_radius);"%(i,j))
+        print("\n// - Bonds - 1}}}")
         if args.chgcar:
             chgcar = parseChgcar(poscar)
             nx = chgcar.partition[0]
@@ -322,6 +342,8 @@ settings.outformat = "pdf"; //output """)
 #################
 
 
+# vim-run: poscar.py -v -f contcar__si_minux_definitiv_1 asy | less
+# vim-run: poscar.py -v -f poscar__si_minux_definitiv_1 asy | less
 # vim-run: poscar.py -v -f CHGCAR asy --chgcar -L 0.1
 # vim-run: poscar.py -f POSCAR asy -L 1.2 --radius-scale 0.2 --bond-radius 3 > siv.asy
 # vim-run: clear;python2 %  -f POSCAR -n 14
