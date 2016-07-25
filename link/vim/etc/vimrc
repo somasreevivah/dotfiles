@@ -288,8 +288,9 @@ if has("autocmd")
     "autocmd !
   augroup Misc " {{{2
     autocmd!
-    autocmd FileType tex,mail      set spell
-    autocmd BufNewFile *.tex       set ft=tex
+    autocmd FileType tex,mail     set spell
+    autocmd FileType asy,gnuplot  set nospell
+    autocmd BufNewFile *.tex      set ft=tex
   augroup END " }}}2
 end
 

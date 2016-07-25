@@ -1,6 +1,9 @@
 
 # General {{{1 %
 
+snippet multicolumn "Description" w
+\multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}
+endsnippet
 snippet vimrun "Vim-run code snippet" b
 %vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
 endsnippet
@@ -14,6 +17,42 @@ snippet double-space "Double space command" b
 \linespread{1.5}
 endsnippet
 
+snippet tmp-letter "letter" b
+\documentclass{letter}
+\usepackage{hyperref}
+%\signature{Alejandro Gallo}
+%\address{}
+\begin{document}
+
+\begin{letter}{Director \\ Doe \& Co \\ 35 Anthony Road
+\\ Newport \\ Ipswich IP3 5RT}
+
+\opening{Dear Sir or Madam:}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+
+
+Thank you for your time and consideration.
+
+I look forward to your reply.
+
+\closing{Yours Faithfully,}
+
+%\ps
+
+%P.S. You can find the full text of GFDL license at
+%\url{http://www.gnu.org/copyleft/fdl.html}.
+
+%\encl{Copyright permission form}
+
+\end{letter}
+\end{document}
+
+endsnippet
 snippet tmp-basic "Basic latex template" b
 \documentclass[A4paper, 12pt]{article}
 
@@ -387,6 +426,10 @@ snippet for "Foreach loop" b
 	{
 	${2:%statements}
 	}
+endsnippet
+
+snippet tikz-rec "Rectangle in tikz" b
+\fill [${1:orange}] (${2:lower_corner}) rectangle (${3:upper_corner});
 endsnippet
 
 snippet var-tikz "Variable in tikz" b
