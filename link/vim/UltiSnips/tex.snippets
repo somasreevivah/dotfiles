@@ -12,6 +12,16 @@ snippet modeline "Modeline for latex" b
 % vim:spell ft=tex spelllang=en fdm=marker:
 endsnippet
 
+snippet ... "ldots" w
+\ldots$0
+endsnippet
+
+snippet note "Beamer note" b
+\note{
+	$0${VISUAL}
+}
+endsnippet
+
 snippet double-space "Double space command" b
 %double space
 \linespread{1.5}
