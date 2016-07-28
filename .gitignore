@@ -1,3 +1,9 @@
+link/vimperator/info/default/macros
+bin/hello_world
+link/templi/templi
+link/vimperator/colors/
+link_config/feh/feh
+
 # Lots of junk goes in here.
 /caches/
 /backups/
