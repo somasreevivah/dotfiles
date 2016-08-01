@@ -301,14 +301,14 @@ bar {
         status_command i3status --config ~/.i3/i3status.conf
         #status_command py3status -c ~/.i3/i3status.conf
         colors {
-                background #2c3e50
-                statusline #ffffff
+                #background #2c3e50
+                #statusline #ffffff
 
-                separator #666666
-                active_workspace   #2c3e50 #2c3e50 #1abc9c
-                focused_workspace  #2c3e50 #2c3e50 #1abc9c
-                inactive_workspace #2c3e50 #2c3e50 #ecf0f1
-                urgent_workspace   #e74c3c #e74c3c #ecf0f1
+                #separator #666666
+                #active_workspace   #2c3e50 #2c3e50 #1abc9c
+                #focused_workspace  #2c3e50 #2c3e50 #1abc9c
+                #inactive_workspace #2c3e50 #2c3e50 #ecf0f1
+                #urgent_workspace   #e74c3c #e74c3c #ecf0f1
         }
 }
 
@@ -319,8 +319,8 @@ bar {
 # Colors
 # # class                 border  backgr. text    indicator
 #client.focused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
-client.focused          #2c3e50 #aa3e50 #00009c #2e9ef4
-client.unfocused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
-client.urgent           #e74c3c #e74c3c #ffffff #900000
+#client.focused          #2c3e50 #aa3e50 #00009c #2e9ef4
+#client.unfocused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
+#client.urgent           #e74c3c #e74c3c #ffffff #900000
 
 # vim:foldmethod=marker
