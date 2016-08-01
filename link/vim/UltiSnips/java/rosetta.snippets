@@ -24,10 +24,12 @@ endsnippet
 snippet int "Simple integer definition" b
 ${1:int} ${2:i} = ${3:1};$0
 endsnippet
-#snippet float "Simple floating point definition" b
-#endsnippet
-#snippet double "Double precission" b
-#endsnippet
+snippet float "Simple floating point definition" b
+${1:public static} double ${2:varname} = ${3:value};$0
+endsnippet
+snippet double "Double precission" b
+${1:public static} double ${2:varname} = ${3:value};$0
+endsnippet
 snippet char "Character definition" b
 String ${2:varname} = "${3:something}";$0
 endsnippet
@@ -220,10 +222,12 @@ endsnippet
 #endsnippet
 #snippet false "False keyword" b
 #endsnippet
-#snippet and "And operator" b
-#endsnippet
-#snippet or "Or operator" b
-#endsnippet
+snippet and "And operator" w
+&&
+endsnippet
+snippet or "Or operator" w
+||
+endsnippet
 #snippet bor "Bitwise or" b
 #endsnippet
 #snippet band "Bitwise and" b
