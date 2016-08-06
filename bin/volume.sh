@@ -1,4 +1,4 @@
-__OPTIONS=":hv"
+__OPTIONS=":hvu:d:"
 
 
 function header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -16,6 +16,8 @@ $(usage_head)
     Options:
     -h|help       Display this message
     -v|version    Display script version
+    -u            Up by some percent
+    -d            Down by some percent
 
 
     This program is maintained by Alejandro Gallo.
@@ -30,6 +32,10 @@ do
 
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
+  u ) UP_VOLUME=${OPTARG} ;;
+
+  d ) DOWN_VOLUME=${OPTARG} ;;
+
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
 
@@ -37,10 +43,16 @@ do
 done
 shift $(($OPTIND-1))
 
+function getVolume() {
+amixer get Master | sed -n "s/.*\([0-9]\+\)%.*/\1/p"
+}
 
 VOLUME_LEVEL=$1
 
 
+CURRENT_VOLUME=$(getVolume)
+
+arrow "Current volume is ${CURRENT_VOLUME}%"
 
 if [[ ! $VOLUME_LEVEL = *% ]]; then
   VOLUME_LEVEL=$VOLUME_LEVEL'%'

@@ -1,0 +1,11 @@
+snippet var "Variable or parameter definition" b
+.PARAM ${1:variableName}=${2:variableValue}
+endsnippet
+
+snippet r "Resistance" b
+R${1:1} ${2:pos} ${3:neg} ${4:val}ohm
+endsnippet
+
+snippet vccs "Voltage-controlled current source" 
+G${1:1} ${2:pos} ${3:neg} (${4:dependent_node}) ${5:constant} ; Voltage-controlled current-source
+endsnippet
