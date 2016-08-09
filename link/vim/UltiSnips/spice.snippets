@@ -6,6 +6,18 @@ snippet r "Resistance" b
 R${1:1} ${2:pos} ${3:neg} ${4:val}ohm
 endsnippet
 
+snippet c "Resistance" b
+C${1:1} ${2:pos} ${3:neg} ${4:val}F
+endsnippet
+
 snippet vccs "Voltage-controlled current source" 
 G${1:1} ${2:pos} ${3:neg} (${4:dependent_node}) ${5:constant} ; Voltage-controlled current-source
+endsnippet
+
+snippet vimrun "vim run" b
+*vim-run: ngspice -b %
+endsnippet
+
+snippet tran "Transient" b
+.tran ${1:step} ${2:final} ${3:initial(default 0)}
 endsnippet

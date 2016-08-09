@@ -535,6 +535,24 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf     " Linux/MacOSX
 
 
 
+
+"  Plot {{{1  "
+"""""""""""""""
+
+function! Plot(...)
+  "echo getline(".")
+  let s:currentLineN = line(".")
+  let s:lastLineN = line("'>")
+  if len(a:000) == 0
+    let plot_options="u 1:2"
+  else
+    let plot_options=join(a:000," ")
+  endif
+  if s:currentLineN == s:lastLineN
+    exec "'<,'>!gnuplot -e \"set terminal dumb ; plot '<cat' ".plot_options."\""
+  endif
+endfunction
+
 " Ctags {{{1 "
 "TODO :
 function! FindInCtagsVisualSelection()
