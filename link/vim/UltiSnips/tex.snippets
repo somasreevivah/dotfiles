@@ -22,6 +22,18 @@ snippet note "Beamer note" b
 }
 endsnippet
 
+snippet red "Description" b
+\color{red}$0
+endsnippet
+
+snippet blue "Description" b
+\color{blue}$0
+endsnippet
+
+snippet color "color" w
+\color{${1:red}}$0
+endsnippet
+
 snippet double-space "Double space command" b
 %double space
 \linespread{1.5}
@@ -214,17 +226,6 @@ snippet it "Text italics with visual support"
 \textit{${1:${VISUAL}}}$0
 endsnippet
 
-snippet ( "normal parenthesis" i
-( $1 )$0
-endsnippet
-
-snippet { "Curly braces" i
-{ $1 }$0
-endsnippet
-
-snippet [ "Braces" i
-[ $1 ]$0
-endsnippet
 
 
 snippet center "Center with visual" b
@@ -239,7 +240,11 @@ snippet nab "Nabla operator" w
 endsnippet
 
 snippet diff "Integral differential" w
-\ \mathrm{d} ${1:\\mathbf{r}}$0
+\mathrm{d} ${1:\\mathbf{r}}$0
+endsnippet
+
+snippet pdiff "Integral differential" w
+\partial ${1:\\mathbf{r}}$0
 endsnippet
 
 snippet int "Integral" w
@@ -267,6 +272,12 @@ snippet Spinz2
 endsnippet
 
 #brakets..
+snippet braket-def "Braket commands" b
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|
+	\left. #2 \vphantom{#1} \right>} % for Dirac brackets
+endsnippet
 snippet ket
 \left | ${1:${VISUAL}} \right \rangle $0
 endsnippet
