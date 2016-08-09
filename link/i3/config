@@ -23,7 +23,7 @@ bindsym $mod+Return exec "which gnome-terminal && gnome-terminal || xterm"
 
 
 #exec "setxkbmap -layout 'us,gr' -option 'grp:alt_shift_toggle'"
-bindsym $mod+c exec firefox
+bindsym $mod+Tab exec ~/.dotfiles/bin/change_kb.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
