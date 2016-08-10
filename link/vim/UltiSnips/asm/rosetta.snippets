@@ -139,8 +139,8 @@ snippet exit "Exit a program with status" b
 	; rax conains syscall number
 	mov    rax, 60
 	; rdi conains first parameter to syscall
-	mov    rdi, 0
-	syscall
+	mov    rdi, ${1:0}
+	syscall$0
 endsnippet
 #snippet ret "Return a value in function" b
 #endsnippet
@@ -196,5 +196,13 @@ endsnippet
 
 #snippet argv-parse "Parse command line" b
 #endsnippet
-#snippet main "Main template" b
-#endsnippet
+snippet main "Main template" b
+section .text
+	global _start
+
+_start:
+	; exit 0
+	mov    rax, 60
+	mov    rdi, 0
+	syscall
+endsnippet
