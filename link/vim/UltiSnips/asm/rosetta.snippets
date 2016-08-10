@@ -1,0 +1,200 @@
+
+
+### TYPES {{{1
+
+
+#snippet fun "Simple function definition" b
+#endsnippet
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+#snippet met "Method of a class" b
+#endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+#snippet const "Readonly variale" b
+#endsnippet
+#snippet macro "C-like macro" b
+#endsnippet
+#snippet int "Simple integer definition" b
+#endsnippet
+#snippet float "Simple floating point definition" b
+#endsnippet
+#snippet double "Double precission" b
+#endsnippet
+#snippet char "Character definition" b
+#endsnippet
+#snippet str "String definition" b
+#endsnippet
+#snippet dic "Relational array" b
+#endsnippet
+#snippet arr "List of values" b
+#endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+#snippet struct "Structure construct" b
+#endsnippet
+#snippet type "Define custom type" b
+#endsnippet
+#snippet bin "Binary numbers" b
+#endsnippet
+#snippet hex "Hexadecimal numbers" b
+#endsnippet
+#snippet octal "Octal numbers" b
+#endsnippet
+#snippet bool "Boolean variables" b
+#endsnippet
+#snippet name "Namespace" b
+#endsnippet
+#snippet module "Define module, package etc.." b
+#endsnippet
+#snippet c<TYPE> "Constant type definition" b
+#endsnippet
+#snippet t<TYPE> "Type safe definition" b
+#endsnippet
+#snippet ct<TYPE> "Constant type safe definition" b
+#endsnippet
+#snippet a<TYPE> "Array 1D type definition" b
+#endsnippet
+#snippet ca<TYPE> "Array 1D type definition" b
+#endsnippet
+
+
+### BRANCHING {{{1
+
+
+#snippet if "If construct" 
+#endsnippet
+#snippet ife "If else construct" b
+#endsnippet
+#snippet elif "Else if construct" b
+#endsnippet
+#snippet else "Just else" b
+#endsnippet
+#snippet ifsh "If construct, short form" b
+#endsnippet
+#snippet if3 "If construct tertiary form" b
+#endsnippet
+#snippet for "For with index" b
+#endsnippet
+#snippet fori "For in iterator form" b
+#endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
+#snippet while "While loop" b
+#endsnippet
+#snippet until "Until loop" b
+#endsnippet
+#snippet case "Case construct" b
+#endsnippet
+#snippet try "Try/catch" b
+#endsnippet
+#snippet ifm "If regex match" b
+#endsnippet
+
+
+### UTILS {{{1
+
+
+#snippet new "Instantiate object" b
+#endsnippet
+#snippet pac "Include some package" b
+#endsnippet
+#snippet so "Print to stdout" b
+#endsnippet
+#snippet serr "Print to stderr" b
+#endsnippet
+#snippet sex "Raise exception" b
+#endsnippet
+#snippet sof "Printf to stdout (formated)" b
+#endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+#snippet cd "Change dir" b
+#endsnippet
+#snippet ls "List directory" b
+#endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+#snippet mkdir "Create directory" b
+#endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+#snippet fopen "File open" b
+#endsnippet
+#snippet fclose "File open" b
+#endsnippet
+#snippet fwrite "File write" b
+#endsnippet
+#snippet fread "File read" b
+#endsnippet
+snippet exit "Exit a program with status" b
+	; rax conains syscall number
+	mov    rax, 60
+	; rdi conains first parameter to syscall
+	mov    rdi, 0
+	syscall
+endsnippet
+#snippet ret "Return a value in function" b
+#endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+#snippet argvi "Get ith argument" b
+#endsnippet
+#snippet match "Regex match" b
+#endsnippet
+#snippet sizeof "Get size of variables or types" b
+#endsnippet
+#snippet basename "Bash basename" b
+#endsnippet
+#snippet genv "Get Environment variables" b
+#endsnippet
+#snippet senv "Set Environment variables" b
+#endsnippet
+#snippet clear "stdout clear" b
+#endsnippet
+#snippet sleep "Sleep for some time" b
+#endsnippet
+#snippet shbang "Shbang for some scripting languages" b
+#endsnippet
+#snippet slurp "Slurp, read a whole file at once" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+#snippet true "True variable" b
+#endsnippet
+#snippet false "False keyword" b
+#endsnippet
+#snippet and "And operator" b
+#endsnippet
+#snippet or "Or operator" b
+#endsnippet
+#snippet bor "Bitwise or" b
+#endsnippet
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
+#endsnippet
+
+
+### TEMPLATES {{{1
+
+
+#snippet argv-parse "Parse command line" b
+#endsnippet
+#snippet main "Main template" b
+#endsnippet
