@@ -8,8 +8,8 @@ call vundle#begin()
 if ! exists("NO_SPARTAN")
   "Plugins that are not loaded 
   "when I want to be spartan
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'bling/vim-airline'
+  "Plugin 'vim-airline/vim-airline-themes'
+  "Plugin 'bling/vim-airline'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
