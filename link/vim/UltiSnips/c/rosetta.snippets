@@ -3,8 +3,12 @@
 ### TYPES {{{1
 
 
-#snippet fun "Simple function definition" b
-#endsnippet
+snippet fun "Simple function definition" b
+${1:void} ${2:function_name}(${3})
+{
+	${VISUAL}${0}
+}
+endsnippet
 #snippet lambda "Lambda expression" b
 #endsnippet
 #snippet class "Class definition" b
@@ -37,8 +41,11 @@
 #endsnippet
 #snippet enum "Enumeration definition" b
 #endsnippet
-#snippet struct "Structure construct" b
-#endsnippet
+snippet struct "Structure construct" b
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
+	${0:/* data */}
+};
+endsnippet
 #snippet type "Define custom type" b
 #endsnippet
 #snippet bin "Binary numbers" b
@@ -68,30 +75,58 @@
 ### BRANCHING {{{1
 
 
-#snippet if "If construct" 
-#endsnippet
-#snippet ife "If else construct" b
-#endsnippet
-#snippet elif "Else if construct" b
-#endsnippet
-#snippet else "Just else" b
-#endsnippet
+snippet if "If construct" 
+if (${1:true}) {
+	${0}
+}
+endsnippet
+snippet ife "If else construct" b
+if (${1:true}) {
+	${2}
+} else {
+	${0}
+}
+endsnippet
+snippet elif "Else if construct" b
+else if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+snippet else "Just else" b
+else {
+	${0}
+}
+endsnippet
 #snippet ifsh "If construct, short form" b
 #endsnippet
-#snippet if3 "If construct tertiary form" b
-#endsnippet
-#snippet for "For with index" b
-#endsnippet
+snippet if3 "If construct tertiary form" b
+${1:/* condition */} ? ${2:a} : ${3:b}
+endsnippet
+snippet for "For with index" b
+for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}${0}
+}
+endsnippet
 #snippet fori "For in iterator form" b
 #endsnippet
 #snippet ford "For in dictionary/table form" b
 #endsnippet
-#snippet while "While loop" b
-#endsnippet
+snippet while "While loop" b
+while (${1:/* condition */}) {
+	${2}
+}
+endsnippet
 #snippet until "Until loop" b
 #endsnippet
-#snippet case "Case construct" b
-#endsnippet
+snippet case "Case construct" b
+switch (${1:/* variable */}) {
+	case ${2:/* variable case */}:
+		${3}
+		${4:break;}${5}
+	default:
+		${6}
+}
+endsnippet
 #snippet try "Try/catch" b
 #endsnippet
 #snippet ifm "If regex match" b
@@ -105,14 +140,17 @@
 #endsnippet
 #snippet pac "Include some package" b
 #endsnippet
-#snippet so "Print to stdout" b
-#endsnippet
+snippet so "Print to stdout" b
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
 #snippet serr "Print to stderr" b
 #endsnippet
 #snippet sex "Raise exception" b
 #endsnippet
-#snippet sof "Printf to stdout (formated)" b
-#endsnippet
+snippet sof "Printf to stdout (formated)" b
+snippet fprintf "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
 #snippet read "Stdin read" b
 #endsnippet
 #snippet cd "Change dir" b
@@ -137,8 +175,9 @@
 #endsnippet
 #snippet exit "Exit a program with status" b
 #endsnippet
-#snippet ret "Return a value in function" b
-#endsnippet
+snippet ret "Return a value in function" b
+return ${1:0};$0
+endsnippet
 #snippet argc "Get arguments number" b
 #endsnippet
 #snippet argvi "Get ith argument" b
@@ -189,7 +228,67 @@
 ### TEMPLATES {{{1
 
 
-#snippet argv-parse "Parse command line" b
-#endsnippet
-#snippet main "Main template" b
-#endsnippet
+snippet argv-parse "Parse command line" b
+int choice;
+while (1)
+{
+	static struct option long_options[] =
+	{
+		/* Use flags like so:
+		{"verbose",	no_argument,	&verbose_flag, 'V'}*/
+		/* Argument styles: no_argument, required_argument, optional_argument */
+		{"version", no_argument,	0,	'v'},
+		{"help",	no_argument,	0,	'h'},
+		${1}
+		{0,0,0,0}
+	};
+
+	int option_index = 0;
+
+	/* Argument parameters:
+		no_argument: " "
+		required_argument: ":"
+		optional_argument: "::" */
+
+	choice = getopt_long( argc, argv, "vh",
+				long_options, &option_index);
+
+	if (choice == -1)
+		break;
+
+	switch( choice )
+	{
+		case 'v':
+			${2}
+			break;
+
+		case 'h':
+			${3}
+			break;
+
+		case '?':
+			/* getopt_long will have already printed an error */
+			break;
+
+		default:
+			/* Not sure how to get here... */
+			return EXIT_FAILURE;
+	}
+}
+
+/* Deal with non-option arguments here */
+if ( optind < argc )
+{
+	while ( optind < argc )
+	{
+		${0}
+	}
+}
+endsnippet
+snippet main "Main template" b
+int main(int argc, char *argv[])
+{
+	${VISUAL}${0}
+	return 0;
+}
+endsnippet
