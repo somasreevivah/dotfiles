@@ -1,0 +1,7 @@
+snippet vimrunmpi "MPI vimrun" b
+//vim-run: mpicc -o $(basename % .c) %; mpirun -n 4 ./$(basename % .c)
+endsnippet
+
+snippet vimrun "Normal vimrun" b
+//vim-run: gcc -o $(basename % .c) %; ./$(basename % .c)
+endsnippet
