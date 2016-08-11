@@ -175,19 +175,22 @@ endsnippet
 #endsnippet
 #snippet fread "File read" b
 #endsnippet
-#snippet exit "Exit a program with status" b
-#endsnippet
+snippet exit "Exit a program with status" b
+exit(${1:1});
+endsnippet
 snippet ret "Return a value in function" b
 return ${1:0};$0
 endsnippet
 #snippet argc "Get arguments number" b
 #endsnippet
-#snippet argvi "Get ith argument" b
-#endsnippet
+snippet argvi "Get ith argument" b
+argv[${1:i}]
+endsnippet
 #snippet match "Regex match" b
 #endsnippet
-#snippet sizeof "Get size of variables or types" b
-#endsnippet
+snippet sizeof "Get size of variables or types" b
+sizeof(${1:int});
+endsnippet
 #snippet basename "Bash basename" b
 #endsnippet
 #snippet genv "Get Environment variables" b
@@ -231,59 +234,50 @@ endsnippet
 
 
 snippet argv-parse "Parse command line" b
+char __SCRIPT_VERSION[] = "${1:0.0.1}";
+char *__SCRIPT_NAME     = argv[0];
+char __DESCRIPTION[]    = "${2:Description_one_liner}";
+char __OPTIONS[]        = "hvV";
 int choice;
+int option_index = 0;
 while (1)
 {
 	static struct option long_options[] =
 	{
-		/* Use flags like so:
-		{"verbose",	no_argument,	&verbose_flag, 'V'}*/
 		/* Argument styles: no_argument, required_argument, optional_argument */
-		{"version", no_argument,	0,	'v'},
-		{"help",	no_argument,	0,	'h'},
-		${1}
+		{"verbose", no_argument, 0, 'V'},
+		{"version", no_argument, 0, 'v'},
+		{"help", no_argument, 0, 'h'},
 		{0,0,0,0}
 	};
-
-	int option_index = 0;
-
-	/* Argument parameters:
-		no_argument: " "
-		required_argument: ":"
-		optional_argument: "::" */
-
-	choice = getopt_long( argc, argv, "vh",
+	choice = getopt_long( argc, argv, __OPTIONS,
 				long_options, &option_index);
-
 	if (choice == -1)
 		break;
-
 	switch( choice )
 	{
 		case 'v':
-			${2}
+			printf("%s -- Version %s",__SCRIPT_NAME, __SCRIPT_VERSION);
+			exit(0);
 			break;
-
 		case 'h':
-			${3}
+			printf("Usage: %s [-h|--help] [-v|--version] [-V|--verbose]\n",__SCRIPT_NAME);
+			printf("\t%s\n",__DESCRIPTION);
+			printf("\n");
+			printf("\tOptions:\n");
+			printf("\t-h|--help\t\tDisplay this message and exit.\n");
+			printf("\t-v|--version\t\tDisplay version and exit.\n");
+			printf("\t-V|--verbose\t\tBe verbose in the output.\n");
+			printf("\n");
+			printf("This program is maintained by Alejandro Gallo\n");
+			exit(0);
 			break;
-
 		case '?':
 			/* getopt_long will have already printed an error */
 			break;
-
 		default:
 			/* Not sure how to get here... */
 			return EXIT_FAILURE;
-	}
-}
-
-/* Deal with non-option arguments here */
-if ( optind < argc )
-{
-	while ( optind < argc )
-	{
-		${0}
 	}
 }
 endsnippet
