@@ -46,8 +46,9 @@ struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
 	${0:/* data */}
 };
 endsnippet
-#snippet type "Define custom type" b
-#endsnippet
+snippet type "Define custom type" b
+typedef ${1:int} ${2:MyCustomType};
+endsnippet
 #snippet bin "Binary numbers" b
 #endsnippet
 #snippet hex "Hexadecimal numbers" b
@@ -138,8 +139,9 @@ endsnippet
 
 #snippet new "Instantiate object" b
 #endsnippet
-#snippet pac "Include some package" b
-#endsnippet
+snippet pac "Include some package" b
+#include <${1:stdio}.h>
+endsnippet
 snippet so "Print to stdout" b
 printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
