@@ -451,34 +451,31 @@ nnoremap <localleader>mmq :exec ".!".g:CONTACT_COMMAND." <cword> "<cr>
 nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
 
 
-function! GetContact(name)
-  exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
-  let result = {}
-  let croppedResults=[]
-  for result in getqflist()
-    call add(croppedResults, result.text)
-  endfor
-  return croppedResults
-endfunction
-
-fun! CompleteContacts(findstart, base)
-  if a:findstart
-
-    " locate the start of the word
-    let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
-
-    let line = getline('.')
-    let start = col('.') - 1
-    while start > 0 && line[start - 1] =~ '\a'
-      let start -= 1
-    endwhile
-    return start
-  else
-    let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
-    return contacts
-  endif
-endfun
-set completefunc=CompleteContacts
+"function! GetContact(name)
+  "exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
+  "let result = {}
+  "let croppedResults=[]
+  "for result in getqflist()
+    "call add(croppedResults, result.text)
+  "endfor
+  "return croppedResults
+"endfunction
+"fun! CompleteContacts(findstart, base)
+  "if a:findstart
+    "" locate the start of the word
+    "let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
+    "let line = getline('.')
+    "let start = col('.') - 1
+    "while start > 0 && line[start - 1] =~ '\a'
+      "let start -= 1
+    "endwhile
+    "return start
+  "else
+    "let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
+    "return contacts
+  "endif
+"endfun
+"set completefunc=CompleteContacts
 
 
 
