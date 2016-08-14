@@ -72,21 +72,17 @@ function dfs_assert() {
 #  os detection {{{1  #
 #######################
 
-function dfs_is_osx() {
-  [[ "$OSTYPE" =~ ^darwin ]] || return 1
-}
-function dfs_is_ubuntu() {
-  [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
-}
+function dfs_is_osx() { [[ "$OSTYPE" =~ ^darwin ]] || return 1; }
+function dfs_is_linux() { [[ "$OSTYPE" =~ linux ]] || return 1; }
+function dfs_is_debian() { [[ "$(cat /etc/issue 2> /dev/null)" =~ Debian ]] || return 1; }
+function dfs_is_ubuntu() { [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1; }
 function dfs_is_on_mpi_fkf() {
   #If the computer is at the mpi
   [[ $(hostname) = pccq* || $(hostname) = abakus* ]] || return 1
 }
-function dfs_is_cluster_abakus() {
-  [[ $(hostname) = abakus* ]] || return 1
-}
+function dfs_is_cluster_abakus() { [[ $(hostname) = abakus* ]] || return 1; }
 function get_os() {
-  for os in osx ubuntu; do
+  for os in osx ubuntu linux; do
     is_$os; [[ $? == ${1:-0} ]] && echo $os
   done
 }
@@ -205,38 +201,41 @@ function setdiff() {
 
 # Initialize.
 init_file=$DOTFILES/caches/init/selected
-function init_files() {
-  local i f dirname oses os opt remove
-  dirname="$(dirname "$1")"
-  f=("$@")
-  menu_options=(); menu_selects=()
-  for i in "${!f[@]}"; do menu_options[i]="$(basename "${f[i]}")"; done
-  if [[ -e "$init_file" ]]; then
-    # Read cache file if possible
-    IFS=$'\n' read -d '' -r -a menu_selects < "$init_file"
-  else
-    # Otherwise default to all scripts not specifically for other OSes
-    oses=($(get_os 1))
-    for opt in "${menu_options[@]}"; do
-      remove=
-      for os in "${oses[@]}"; do
-        [[ "$opt" =~ (^|[^a-z])$os($|[^a-z]) ]] && remove=1 && break
-      done
-      [[ "$remove" ]] || menu_selects=("${menu_selects[@]}" "$opt")
-    done
-  fi
-  prompt_menu "Run the following init scripts?" $prompt_delay
-  # Write out cache file for future reading.
-  rm "$init_file" 2>/dev/null
-  for i in "${!menu_selects[@]}"; do
-    echo "${menu_selects[i]}" >> "$init_file"
-    echo "$dirname/${menu_selects[i]}"
-  done
-}
+
+#function init_files() {
+  #local i f dirname oses os opt remove
+  #dirname="$(dirname "$1")"
+  #f=("$@")
+  #menu_options=(); menu_selects=()
+  #for i in "${!f[@]}"; do menu_options[i]="$(basename "${f[i]}")"; done
+  #if [[ -e "$init_file" ]]; then
+    ## Read cache file if possible
+    #IFS=$'\n' read -d '' -r -a menu_selects < "$init_file"
+  #else
+    ## Otherwise default to all scripts not specifically for other OSes
+    #oses=($(get_os 1))
+    #for opt in "${menu_options[@]}"; do
+      #remove=
+      #for os in "${oses[@]}"; do
+        #[[ "$opt" =~ (^|[^a-z])$os($|[^a-z]) ]] && remove=1 && break
+      #done
+      #[[ "$remove" ]] || menu_selects=("${menu_selects[@]}" "$opt")
+    #done
+  #fi
+  #prompt_menu "Run the following init scripts?" $prompt_delay
+  ## Write out cache file for future reading.
+  #rm "$init_file" 2>/dev/null
+  #for i in "${!menu_selects[@]}"; do
+    #echo "${menu_selects[i]}" >> "$init_file"
+    #echo "$dirname/${menu_selects[i]}"
+  #done
+#}
+
 function init_do() {
-  dfs_header "Sourcing $(basename "$2")"
+  dfs_arrow "Sourcing $(basename "$2")"
   source "$2"
 }
+function init_header() { dfs_header "Sourcing initialisation files"; }
 
 # Copy files.
 function copy_header() { dfs_header "Copying files into home directory"; }
@@ -252,7 +251,7 @@ function copy_do() {
   cp "$2" ~/
 }
 
-# Link files.
+# Link files in config directory
 function link_config_header() { dfs_header "Linking files into config directory"; }
 function link_config_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
@@ -390,7 +389,9 @@ backup=
 do_stuff "copy"
 do_stuff "link"
 do_stuff "link_config"
-do_stuff "init"
+if [[ $1 == init ]]; then
+  do_stuff "init"
+fi
 if [[ $1 == compile ]]; then
   do_stuff "compile"
 fi

@@ -99,10 +99,11 @@ if [[ $? ]]; then
     timeout .5 dzen2 -p\
     -fg green\
     -bg black\
+    -x 20\
+    -y 20\
     -w 100\
     -h 100\
-    -x 20\
-    -y 20
+    -ta c
 fi
 
 
