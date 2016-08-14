@@ -221,10 +221,10 @@ exec_always ~/.dotfiles/bin/set_wallpaper.sh
 bindsym XF86Tools exec espeak tools
 
 bindsym XF86PowerOff exec espeak 'brightness down'
-bindsym XF86MonBrightnessDown exec espeak 'brightness down'
-bindsym XF86MonBrightnessUp exec  espeak 'brightness up'
-bindsym XF86AudioLowerVolume exec "xterm -C alsamixer"
-bindsym XF86AudioRaiseVolume exec espeak 'raise volume'
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec  xbacklight -inc 10
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
 bindsym XF86Search exec espeak search
 
 #  Workspaces {{{1  #
