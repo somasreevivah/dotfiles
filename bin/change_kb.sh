@@ -93,9 +93,9 @@ arrow "Next layout ${layout}  -  ${variant}"
 setxkbmap -layout ${layout} $([[ ! ${variant} = none ]] && echo "-variant ${variant}")
 
 if [[ $? ]]; then
-  echo ${layout} > ${KEYBOARD_CURRENT_LANGUAGE}
+  echo "${layout}-${variant}" > ${KEYBOARD_CURRENT_LANGUAGE}
   #zenity --notification --text "${layout}" --timeout 1
-  echo ${layout} |\
+  cat ${KEYBOARD_CURRENT_LANGUAGE}|\
     timeout .5 dzen2 -p\
     -fg green\
     -bg black\
