@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+on_compaq() { if [[ $(hostname) =~ compaq ]]; then return 0; else return 1; fi }
+on_acer() { if [[ $(hostname) =~ acer ]]; then return 0; else return 1; fi }
+on_lenovo() { if [[ $(hostname) =~ lenovo ]]; then return 0; else return 1; fi }
 
 STATUS_FILE=$HOME/.i3/i3status.conf
 
@@ -51,20 +54,40 @@ volume master {
     mixer = "Master"
     mixer_idx = 0
 }
+EOF_I3STATUS
 
-#battery 0 {
-        #format = "%percentage"
-        #path   = /sys/class/power_supply/BAT1/uevent
-#}
 
+#  Battery {{{1  #
+##################
+
+if on_compaq; then
+
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
 battery 1 {
         format = "%status %percentage %remaining"
 }
+EOF_I3STATUS
 
+else
+
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
+
+#battery 0 {
+        #format = "%percentage %remaining"
+        #path   = /sys/class/power_supply/BAT1/uevent
+#}
+battery 1 {
+        format = "%status %percentage %remaining"
+}
 battery 0 {
         format = "%status %percentage %remaining"
 }
 
+EOF_I3STATUS
+
+fi
+
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
 run_watch DHCP {
         pidfile = "/var/run/dhclient*.pid"
 }
@@ -72,17 +95,38 @@ run_watch DHCP {
 run_watch VPN {
         pidfile = "/var/run/vpnc/pid"
 }
+EOF_I3STATUS
 
+
+
+#  time {{{1  #
+###############
+
+if on_compaq; then
+
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
+tztime local {
+        format = "%H:%M:%S"
+}
+EOF_I3STATUS
+else
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
 tztime local {
         format = "%d-%m-%Y %H:%M:%S"
 }
+EOF_I3STATUS
+fi
 
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
 load {
         format = "%1min"
 }
+EOF_I3STATUS
 
+if ! on_compaq; then
+cat >> ${STATUS_FILE} <<EOF_I3STATUS
 disk "/" {
         format = "%avail"
 }
-
 EOF_I3STATUS
+fi
