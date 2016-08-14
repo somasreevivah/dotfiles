@@ -26,6 +26,7 @@ cat >> ${STATUS_FILE} <<EOF_I3STATUS
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
+        #output_format="dzen2"
         colors = true
         interval = 5
 }

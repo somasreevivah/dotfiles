@@ -48,6 +48,7 @@ function getLayout() {
 }
 
 LAYOUT_INFO_FILE=/usr/share/X11/xkb/rules/base.lst
+KEYBOARD_CURRENT_LANGUAGE=${HOME}/.keyboard_current_language
 
 LANGUAGES=(
 de-none
@@ -63,8 +64,8 @@ il-phonetic
 LANGUAGES_LENGTH=${#LANGUAGES[@]}
 
 
-if ! which zenity &>/dev/null; then
-  error "Please install zenity..."
+if ! which dzen2 &>/dev/null; then
+  error "Please install dzen2..."
   exit 1
 fi
 
@@ -92,7 +93,16 @@ arrow "Next layout ${layout}  -  ${variant}"
 setxkbmap -layout ${layout} $([[ ! ${variant} = none ]] && echo "-variant ${variant}")
 
 if [[ $? ]]; then
-  zenity --notification --text "${layout}" --timeout 1
+  echo ${layout} > ${KEYBOARD_CURRENT_LANGUAGE}
+  #zenity --notification --text "${layout}" --timeout 1
+  echo ${layout} |\
+    timeout .5 dzen2 -p\
+    -fg green\
+    -bg black\
+    -w 100\
+    -h 100\
+    -x 20\
+    -y 20
 fi
 
 
