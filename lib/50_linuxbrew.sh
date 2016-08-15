@@ -10,7 +10,7 @@ export PATH=$LINUXBREWHOME/bin:$PATH
 export PATH=/home/gallo/.linuxbrew/sbin:$PATH
 export MANPATH=$LINUXBREWHOME/man:$MANPATH
 export PKG_CONFIG_PATH=$LINUXBREWHOME/lib64/pkgconfig:$LINUXBREWHOME/lib/pkgconfig:$PKG_CONFIG_PATH
-export LD_LIBRARY_PATH=$LINUXBREWHOME/lib64:$LINUXBREWHOME/lib:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=$LINUXBREWHOME/lib64:$LINUXBREWHOME/lib:$LD_LIBRARY_PATH
 
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
