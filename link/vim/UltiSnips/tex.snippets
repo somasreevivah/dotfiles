@@ -5,23 +5,23 @@ snippet c "General command" w
 \\${1:command}${2:{${3:arg}}}
 endsnippet
 snippet large "large text" w
-{ \large ${1:${VISUAL}} }
+{ \large ${1:${VISUAL}} }$0
 endsnippet
 
 snippet Large "large text" w
-{ \Large ${1:${VISUAL}} }
+{ \Large ${1:${VISUAL}} }$0
 endsnippet
 
 snippet huge "large text" w
-{ \huge ${1:${VISUAL}} }
+{ \huge ${1:${VISUAL}} }$0
 endsnippet
 
 snippet Huge "large text" w
-{ \Huge ${1:${VISUAL}} }
+{ \Huge ${1:${VISUAL}} }$0
 endsnippet
 
 snippet multicolumn "Description" w
-\multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}
+\multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}$0
 endsnippet
 snippet vimrun "Vim-run code snippet" b
 %vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
@@ -41,11 +41,11 @@ snippet note "Beamer note" b
 }
 endsnippet
 
-snippet red "Description" b
+snippet red "red" b
 \color{red}$0
 endsnippet
 
-snippet blue "Description" b
+snippet blue "Blue" b
 \color{blue}$0
 endsnippet
 
@@ -55,7 +55,7 @@ endsnippet
 
 snippet double-space "Double space command" b
 %double space
-\linespread{1.5}
+\linespread{1.5}$0
 endsnippet
 
 snippet tmp-letter "letter" b
@@ -106,13 +106,14 @@ snippet tmp-basic "Basic latex template" b
 
 \linespread{1.5}
 
-\title{}
-\author{}
+\title{${2:Title}}
+\author{${1:Alejandro Gallo}}
 
 \begin{document}
 
 \maketitle
 
+$0
 
 
 \end{document}
@@ -125,41 +126,41 @@ endsnippet
 
 
 snippet dim
-\mathsf{dim}
+\mathsf{dim}$0
 endsnippet
 
 
 snippet d "Subindex (down)" i
-_{${1:${VISUAL}}}${0}
+_{${1:${VISUAL}}}$0
 endsnippet
 
 snippet u "Superindex (upper)" i
-^{${1:${VISUAL}}}${0}
+^{${1:${VISUAL}}}$0
 endsnippet
 
 snippet m
-$ ${1:${VISUAL}} $ ${0}
+$ ${1:${VISUAL}} $$0
 endsnippet
 
 snippet mm
 \[
 ${1:${VISUAL}}
-\]${0}
+\]$0
 endsnippet
 
 snippet qu
-\quad
+\quad$0
 endsnippet
 
 snippet qqu
-\qquad
+\qquad$0
 endsnippet
 snippet hat
 \hat{${1:${VISUAL}}}$0
 endsnippet
 
 snippet sqr
-\sqrt{${1:${VISUAL}}} $0
+\sqrt{${1:${VISUAL}}}$0
 endsnippet
 
 snippet set
@@ -170,7 +171,7 @@ snippet mrm
 \mathrm{${1:${VISUAL}}}$0
 endsnippet
 
-snippet bb
+snippet mbb
 \mathbb{${1:${VISUAL}}}$0
 endsnippet
 
@@ -195,7 +196,7 @@ snippet document "documentclass" b
 endsnippet
 
 snippet graphic "Include graphic" b
-\includegraphics[]{${1:filePath}}
+\includegraphics[${2:width=${3:\\textwidth}, height=${4:$3}}]{${1:filePath}}
 endsnippet
 snippet twidth "text width" b
 \textwidth
@@ -223,7 +224,7 @@ ${3:${VISUAL}}
 \end{align$1}
 endsnippet
 snippet toc "Table of contents" b
-\tableofcontents
+\tableofcontents$0
 endsnippet
 snippet minipage "Minipage" b
 \begin{minipage}[${1:t}]{${2:0.5}\textwidth}
@@ -233,10 +234,10 @@ endsnippet
 snippet centeri "Centering" b
 \centering
 endsnippet
-snippet vspace "vertical space" b
+snippet vspace "vertical space" w
 \vspace{${1:1cm}}
 endsnippet
-snippet hspace "horizontal space" b
+snippet hspace "horizontal space" w
 \hspace{${1:1cm}}
 endsnippet
 
@@ -297,20 +298,31 @@ snippet braket-def "Braket commands" b
 \newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|\!\!
 	\left. #2 \vphantom{#1} \right>} % for Dirac brackets
 endsnippet
-snippet ket
+
+snippet ket "ket predefined" w
+\ket{${1:\psi}}$0
+endsnippet
+snippet bra "bra predefined" w
+\bra{${1:\psi}}$0
+endsnippet
+snippet braket "bra predefined" w
+\braket{${1:\psi}}{${2:\psi}}$0
+endsnippet
+
+snippet rket "ket raw format" w
 \left | ${1:${VISUAL}} \right \rangle $0
 endsnippet
 
-snippet bra
+snippet rbra "bra raw format" w
 \left \langle ${1:${VISUAL}} \right | $0
 endsnippet
 
-snippet braket
+snippet rbraket "braket raw format" w
 \left \langle $1 \right .
 \left | $2 \right \rangle $0
 endsnippet
 
-snippet proj
+snippet rproj "projector raw format" w
 \left | $1 \right \rangle
 \left \langle $2 \right | $0
 endsnippet
@@ -410,7 +422,6 @@ snippet kappa "kappa" w
 \kappa $0
 endsnippet
 snippet Kappa "Kappa" w
-\Kappa $0
 endsnippet
 snippet chi "chi" w
 \chi $0
@@ -579,4 +590,4 @@ ${0}
 endsnippet
 
 
-# vim:set ft=snippets :
+# vim: ft=snippets
