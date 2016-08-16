@@ -35,3 +35,5 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 export PATH=$HOME/local/bin:$PATH
+
+
