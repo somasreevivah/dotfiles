@@ -27,7 +27,7 @@ function source_lib_files() {
 
 # Run dotfiles script, then source.
 function dotfiles() {
-  $DOTFILES/bin/dotfiles "$@" && src
+  $DOTFILES/bin/dotfiles "$@" && source_lib_files
 }
 
 if [ -f /etc/bash_completion ]; then
