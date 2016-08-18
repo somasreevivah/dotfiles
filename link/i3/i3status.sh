@@ -9,6 +9,12 @@ on_lenovo() { if [[ $(hostname) =~ lenovo ]]; then return 0; else return 1; fi }
 # Clean config file
 echo "" > ${STATUS_FILE}
 
+if on_lenovo; then
+  INTERVAL=1
+else
+  INTERVAL=5
+fi
+
 
 #  general {{{1  #
 ##################
@@ -28,7 +34,7 @@ cat >> ${STATUS_FILE} <<EOF_I3STATUS
 general {
         #output_format="dzen2"
         colors = true
-        interval = 5
+        interval = ${INTERVAL}
 }
 
 #order += "ipv6"
