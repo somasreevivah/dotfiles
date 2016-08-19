@@ -263,9 +263,9 @@ function link_config_do() {
   LINK=~/.config/$1
   dfs_arrow "Linking ${TO_LINK} to ${LINK}."
   if [[ -L ${LINK} ]]; then
-    dfs_warning "already linked"
+    dfs_warning "Already linked..."
   else
-    ln -s ${TO_LINK} ${LINK} && dfs_success "Linked"
+    ln -s ${TO_LINK} ${LINK} && dfs_success "Linked!"
   fi
 }
 
