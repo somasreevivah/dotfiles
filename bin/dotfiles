@@ -58,6 +58,7 @@ function dfs_header()   { echo -e "\n\033[1m$@\033[0m"; }
 function dfs_success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
 function dfs_error()    { echo -e " \033[1;31mX\033[0m  $@"; }
 function dfs_arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+function dfs_warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
 # For testing.
 function dfs_assert() {
@@ -257,8 +258,15 @@ function link_config_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
 function link_config_do() {
-  dfs_success "Linking ~/.config/$1."
-  ln -sf ../${2#$HOME/} ~/.config/$1
+  local TO_LINK LINK
+  TO_LINK=../${2#$HOME/}
+  LINK=~/.config/$1
+  dfs_arrow "Linking ${TO_LINK} to ${LINK}."
+  if [[ -L ${LINK} ]]; then
+    dfs_warning "already linked"
+  else
+    ln -s ${TO_LINK} ${LINK} && dfs_success "Linked"
+  fi
 }
 
 # Link files.
