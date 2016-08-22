@@ -414,3 +414,4 @@ dfs_header "All done!"
 
 
 # vim:fdm=marker
+#vim-run: bash %
