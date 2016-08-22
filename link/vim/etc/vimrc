@@ -18,7 +18,7 @@ if ! exists("NO_SPARTAN")
   ""I have CtrlP, which deprecates this..
     "Plugin 'jlanzarotta/bufexplorer'
   "endif
-  Plugin 'takac/vim-hardtime'
+  "Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
 endif
 Plugin 'easymotion/vim-easymotion'
@@ -39,7 +39,7 @@ Plugin 'alejandrogallo/vim-asymptote'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdcommenter'
 if v:version >= 704
   "it needs vim 7.04..
@@ -49,7 +49,6 @@ endif
 Plugin 'mattn/emmet-vim'
 " Track the engine.
 Plugin 'VundleVim/Vundle.vim'
-
 " All of your Plugins must be added before the following line
 call vundle#end()
 
