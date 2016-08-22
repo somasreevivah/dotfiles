@@ -15,6 +15,12 @@ else
   INTERVAL=5
 fi
 
+if on_lenovo || on_compaq; then
+  WIRELESS_INTERFACE=wlan0
+else
+  WIRELESS_INTERFACE=wlan1
+fi
+
 
 #  general {{{1  #
 ##################
@@ -41,7 +47,7 @@ general {
 order += "disk /"
 #order += "run_watch DHCP"
 #order += "run_watch VPN"
-order += "wireless wlan0"
+order += "wireless ${WIRELESS_INTERFACE}"
 order += "ethernet eth0"
 order += "battery 0"
 order += "battery 1"
@@ -49,7 +55,7 @@ order += "load"
 order += "tztime local"
 order += "volume master"
 
-wireless wlan0 {
+wireless ${WIRELESS_INTERFACE} {
         format_up = "W: (%quality at %essid) %ip"
         format_down = "W: down"
 }
