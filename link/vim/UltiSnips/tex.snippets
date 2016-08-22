@@ -473,7 +473,17 @@ snippet bibtex-add "Insert bibtex document in latex document" b
 endsnippet
 
 snippet lab "Label" w
-%label for ${2:label for }
+%`!p 
+title=t[1]
+if title == "eq":
+    snip.rv="Equation"
+elif title == "fig":
+    snip.rv="Figure"
+elif title == "tab":
+    snip.rv="Table"
+else:
+    snip.rv="Environment"
+` for ${2:label name}
 \label{${1:fig}:${2/\s+/_/g}}
 endsnippet
 
