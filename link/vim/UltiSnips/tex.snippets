@@ -4,8 +4,28 @@
 snippet def "General latex defintio" w
 \def\\${1:nameOfVariable}{${2:value}}
 endsnippet
+
+snippet c "General command" w
+\\${1:command}${2:{${3:arg}}}
+endsnippet
+snippet large "large text" w
+{ \large ${1:${VISUAL}} }$0
+endsnippet
+
+snippet Large "large text" w
+{ \Large ${1:${VISUAL}} }$0
+endsnippet
+
+snippet huge "large text" w
+{ \huge ${1:${VISUAL}} }$0
+endsnippet
+
+snippet Huge "large text" w
+{ \Huge ${1:${VISUAL}} }$0
+endsnippet
+
 snippet multicolumn "Description" w
-\multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}
+\multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}$0
 endsnippet
 snippet vimrun "Vim-run code snippet" b
 %vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
@@ -25,9 +45,21 @@ snippet note "Beamer note" b
 }
 endsnippet
 
+snippet red "red" b
+\color{red}$0
+endsnippet
+
+snippet blue "Blue" b
+\color{blue}$0
+endsnippet
+
+snippet color "color" w
+\color{${1:red}}$0
+endsnippet
+
 snippet double-space "Double space command" b
 %double space
-\linespread{1.5}
+\linespread{1.5}$0
 endsnippet
 
 snippet tmp-letter "letter" b
@@ -67,24 +99,34 @@ I look forward to your reply.
 
 endsnippet
 snippet tmp-basic "Basic latex template" b
+%  Preamble {{{1 %
+%%%%%%%%%%%%%%%%%%
 \documentclass[A4paper, 12pt]{article}
 
-\usepackage[]{amsmath}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage[]{hyperref}
+%\usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[]{graphicx}
-\usepackage[]{color}
+\usepackage{xcolor}
 %\usepackage[margin=0.5cm]{geometry}
 
 \linespread{1.5}
 
-\title{}
-\author{}
+\title{${2:Title}}
+\author{${1:Alejandro Gallo}}
 
+
+
+%  Document {{{1 %
+%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \maketitle
 
+$0
 
 
 \end{document}
@@ -97,41 +139,41 @@ endsnippet
 
 
 snippet dim
-\mathsf{dim}
+\mathsf{dim}$0
 endsnippet
 
 
 snippet d "Subindex (down)" i
-_{${1:${VISUAL}}}${0}
+_{${1:${VISUAL}}}$0
 endsnippet
 
 snippet u "Superindex (upper)" i
-^{${1:${VISUAL}}}${0}
+^{${1:${VISUAL}}}$0
 endsnippet
 
 snippet m
-$ ${1:${VISUAL}} $ ${0}
+$ ${1:${VISUAL}} $$0
 endsnippet
 
 snippet mm
 \[
 ${1:${VISUAL}}
-\]${0}
+\]$0
 endsnippet
 
 snippet qu
-\quad
+\quad$0
 endsnippet
 
 snippet qqu
-\qquad
+\qquad$0
 endsnippet
 snippet hat
 \hat{${1:${VISUAL}}}$0
 endsnippet
 
 snippet sqr
-\sqrt{${1:${VISUAL}}} $0
+\sqrt{${1:${VISUAL}}}$0
 endsnippet
 
 snippet set
@@ -142,7 +184,7 @@ snippet mrm
 \mathrm{${1:${VISUAL}}}$0
 endsnippet
 
-snippet bb
+snippet mbb
 \mathbb{${1:${VISUAL}}}$0
 endsnippet
 
@@ -166,8 +208,8 @@ snippet document "documentclass" b
 \documentclass[a4paper]{${1:article}}$0
 endsnippet
 
-snippet graphic "Include graphic" b
-\includegraphics[]{${1:filePath}}
+snippet graph "Include graphic" b
+\includegraphics[${2:width=${3:\\textwidth}, height=${4:$3}}]{${1:filePath}}
 endsnippet
 snippet twidth "text width" b
 \textwidth
@@ -195,7 +237,7 @@ ${3:${VISUAL}}
 \end{align$1}
 endsnippet
 snippet toc "Table of contents" b
-\tableofcontents
+\tableofcontents$0
 endsnippet
 snippet minipage "Minipage" b
 \begin{minipage}[${1:t}]{${2:0.5}\textwidth}
@@ -205,10 +247,10 @@ endsnippet
 snippet centeri "Centering" b
 \centering
 endsnippet
-snippet vspace "vertical space" b
+snippet vspace "vertical space" w
 \vspace{${1:1cm}}
 endsnippet
-snippet hspace "horizontal space" b
+snippet hspace "horizontal space" w
 \hspace{${1:1cm}}
 endsnippet
 
@@ -217,17 +259,6 @@ snippet it "Text italics with visual support"
 \textit{${1:${VISUAL}}}$0
 endsnippet
 
-snippet ( "normal parenthesis" i
-( $1 )$0
-endsnippet
-
-snippet { "Curly braces" i
-{ $1 }$0
-endsnippet
-
-snippet [ "Braces" i
-[ $1 ]$0
-endsnippet
 
 
 snippet center "Center with visual" b
@@ -242,11 +273,15 @@ snippet nab "Nabla operator" w
 endsnippet
 
 snippet diff "Integral differential" w
-\ \mathrm{d} ${1:\\mathbf{r}}$0
+\mathrm{d} ${1:\\mathbf{r}}$0
+endsnippet
+
+snippet pdiff "Integral differential" w
+\partial ${1:\\mathbf{r}}$0
 endsnippet
 
 snippet int "Integral" w
-\int${1:_{${2:\mathbb{R}}}} $0 ${3:\ \mathrm{d} ${4:x}}
+\int${1:_{${2:\mathbb{R}}}} $0 ${3:\mathrm{d} ${4:x}}
 endsnippet
 
 
@@ -270,20 +305,37 @@ snippet Spinz2
 endsnippet
 
 #brakets..
-snippet ket
+snippet braket-def "Braket commands" b
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|\!\!
+	\left. #2 \vphantom{#1} \right>} % for Dirac brackets
+endsnippet
+
+snippet ket "ket predefined" w
+\ket{${1:\psi}}$0
+endsnippet
+snippet bra "bra predefined" w
+\bra{${1:\psi}}$0
+endsnippet
+snippet braket "bra predefined" w
+\braket{${1:\psi}}{${2:\psi}}$0
+endsnippet
+
+snippet rket "ket raw format" w
 \left | ${1:${VISUAL}} \right \rangle $0
 endsnippet
 
-snippet bra
+snippet rbra "bra raw format" w
 \left \langle ${1:${VISUAL}} \right | $0
 endsnippet
 
-snippet braket
+snippet rbraket "braket raw format" w
 \left \langle $1 \right .
 \left | $2 \right \rangle $0
 endsnippet
 
-snippet proj
+snippet rproj "projector raw format" w
 \left | $1 \right \rangle
 \left \langle $2 \right | $0
 endsnippet
@@ -291,122 +343,121 @@ endsnippet
 #  Greek letters  {{{1 #
 ########################
 
-snippet alpha "alpha" i
+snippet alpha "alpha" w
 \alpha $0
 endsnippet
-snippet nu "nu" i
+snippet nu "nu" w
 \nu $0
 endsnippet
-snippet beta "beta" i
+snippet beta "beta" w
 \beta $0
 endsnippet
-snippet Xi "Xi" i
+snippet Xi "Xi" w
 \Xi $0
 endsnippet
-snippet xi "xi" i
+snippet xi "xi" w
 \xi $0
 endsnippet
-snippet gamma "gamma" i
+snippet gamma "gamma" w
 \gamma $0
 endsnippet
-snippet Gamma "Gamma" i
+snippet Gamma "Gamma" w
 \Gamma $0
 endsnippet
-snippet delta "delta" i
+snippet delta "delta" w
 \delta $0
 endsnippet
-snippet Delta "Delta" i
+snippet Delta "Delta" w
 \Delta $0
 endsnippet
-snippet pi "pi" i
+snippet pi "pi" w
 \pi $0
 endsnippet
-snippet Pi "Pi" i
+snippet Pi "Pi" w
 \Pi $0
 endsnippet
-snippet epsilon "epsilon" i
+snippet epsilon "epsilon" w
 \epsilon $0
 endsnippet
-snippet varepsilon "varepsilon" i
+snippet vepsilon "varepsilon" w
 \varepsilon $0
 endsnippet
-snippet rho "rho" i
+snippet rho "rho" w
 \rho $0
 endsnippet
-snippet varrho "varrho" i
+snippet vrho "varrho" w
 \varrho $0
 endsnippet
 #zeta is b for itemize
-snippet zeta "zeta" b
+snippet zeta "zeta" w
 \zeta $0
 endsnippet
-snippet sigma "sigma" i
+snippet sigma "sigma" w
 \sigma $0
 endsnippet
-snippet Sigma "Sigma" i
+snippet Sigma "Sigma" w
 \Sigma $0
 endsnippet
-snippet eta "eta" i
+snippet eta "eta" w
 \eta $0
 endsnippet
-snippet tau "tau" i
+snippet tau "tau" w
 \tau $0
 endsnippet
-snippet theta "theta" i
+snippet theta "theta" w
 \theta $0
 endsnippet
-snippet vartheta "vartheta" i
+snippet vtheta "vartheta" w
 \vartheta $0
 endsnippet
-snippet Theta "Theta" i
+snippet Theta "Theta" w
 \Theta $0
 endsnippet
-snippet upsilon "upsilon" i
+snippet upsilon "upsilon" w
 \upsilon $0
 endsnippet
-snippet Upsilon "Upsilon" i
+snippet Upsilon "Upsilon" w
 \Upsilon $0
 endsnippet
-snippet iota "iota" i
+snippet iota "iota" w
 \iota $0
 endsnippet
-snippet phi "phi" i
+snippet phi "phi" w
 \phi $0
 endsnippet
-snippet varphi "varphi" i
+snippet vphi "varphi" w
 \varphi $0
 endsnippet
-snippet Phi "Phi" i
+snippet Phi "Phi" w
 \Phi $0
 endsnippet
-snippet kappa "kappa" i
+snippet kappa "kappa" w
 \kappa $0
 endsnippet
-snippet Kappa "Kappa" i
-\Kappa $0
+snippet Kappa "Kappa" w
 endsnippet
-snippet chi "chi" i
+snippet chi "chi" w
 \chi $0
 endsnippet
-snippet lambda "lambda" i
+snippet lambda "lambda" w
 \lambda $0
 endsnippet
-snippet Lambda "Lambda" i
+snippet Lambda "Lambda" w
 \Lambda $0
 endsnippet
-snippet psi "psi" i
+snippet psi "psi" w
 \psi $0
 endsnippet
-snippet Psi "Psi" i
+snippet Psi "Psi" w
 \Psi $0
 endsnippet
-snippet mu "mu" i
+snippet mu "mu" w
 \mu $0
 endsnippet
-snippet omega "omega" i
+snippet omega "omega" w
 \omega $0
 endsnippet
-snippet Omega "Omega" i
+snippet Omega "Omega" w
 \Omega $0
 endsnippet
 
@@ -425,9 +476,20 @@ snippet bibtex-add "Insert bibtex document in latex document" b
 \bibliography{${1:file_name(without extension)}}
 endsnippet
 
-#snippet label "Label" b
-#\label{sec:${1:something}${1/\s+/_/g}
-#endsnippet
+snippet lab "Label" w
+%`!p 
+title=t[1]
+if title == "eq":
+    snip.rv="Equation"
+elif title == "fig":
+    snip.rv="Figure"
+elif title == "tab":
+    snip.rv="Table"
+else:
+    snip.rv="Environment"
+` for ${2:label name}
+\label{${1:fig}:${2/\s+/_/g}}
+endsnippet
 
 
 
@@ -552,4 +614,4 @@ ${0}
 endsnippet
 
 
-# vim:set ft=snippets :
+# vim: ft=snippets

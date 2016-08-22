@@ -2,6 +2,28 @@ snippet $ "Snippet variable" i
 $\{${1:n}:${2:Default}\}$0
 endsnippet
 
+snippet $v "VISUAL OPT" i
+$\{${1:n}:${VISUAL}\}$0
+endsnippet
 
+snippet visual "VSUAL ALONE" i
+${VISUAL}$0
+endsnippet
 
+snippet python "Python interpolation" w
+\`!p
+${1:#code here}
+\`
+endsnippet
 
+snippet bash "Bash interpolation" w
+\`
+${1:#code here}
+\`
+endsnippet
+
+snippet vim "Vim interpolation" w
+\`!v
+${1:"code here}
+\`
+endsnippet

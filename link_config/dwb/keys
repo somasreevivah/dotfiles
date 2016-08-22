@@ -1,5 +1,4 @@
 [default]
-tabopen= t
 save_search_field= gs
 tab_new= ga
 allow_session_cookie_tmp= CT
@@ -168,6 +167,7 @@ hints_images_tab= ;It
 hints_url_tab= ;Ot
 tab_bookmarks= gB
 tabopen_url= gO
+tabopen= O
 hints_win= wf
 hints_rapid_win= ;R
 win_bookmarks= wB

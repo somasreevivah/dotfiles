@@ -34,7 +34,10 @@ EOF
 #  constants {{{1  #
 ####################
 
-TEMPLI_PATH="${TEMPLI_PATH}:$HOME/.templi:$HOME/.local/templi"
+if [[ -z ${TEMPLI_PATH} ]]; then
+  TEMPLI_PATH="$HOME/.templi:$HOME/.local/templi"
+  export TEMPLI_PATH
+fi
 TEMPLI_META_HEADER="_TEMPLI"
 TMP_FILE=/tmp/templi.tmp
 FILE_FOUND=

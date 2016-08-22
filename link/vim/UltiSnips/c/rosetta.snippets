@@ -1,0 +1,290 @@
+
+
+### TYPES {{{1
+
+
+snippet fun "Simple function definition" b
+${1:void} ${2:function_name}(${3})
+{
+	${VISUAL}${0}
+}
+endsnippet
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+#snippet met "Method of a class" b
+#endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+#snippet const "Readonly variale" b
+#endsnippet
+#snippet macro "C-like macro" b
+#endsnippet
+#snippet int "Simple integer definition" b
+#endsnippet
+#snippet float "Simple floating point definition" b
+#endsnippet
+#snippet double "Double precission" b
+#endsnippet
+#snippet char "Character definition" b
+#endsnippet
+#snippet str "String definition" b
+#endsnippet
+#snippet dic "Relational array" b
+#endsnippet
+#snippet arr "List of values" b
+#endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+snippet struct "Structure construct" b
+struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
+	${0:/* data */}
+};
+endsnippet
+snippet type "Define custom type" b
+typedef ${1:int} ${2:MyCustomType};
+endsnippet
+#snippet bin "Binary numbers" b
+#endsnippet
+#snippet hex "Hexadecimal numbers" b
+#endsnippet
+#snippet octal "Octal numbers" b
+#endsnippet
+#snippet bool "Boolean variables" b
+#endsnippet
+#snippet name "Namespace" b
+#endsnippet
+#snippet module "Define module, package etc.." b
+#endsnippet
+#snippet c<TYPE> "Constant type definition" b
+#endsnippet
+#snippet t<TYPE> "Type safe definition" b
+#endsnippet
+#snippet ct<TYPE> "Constant type safe definition" b
+#endsnippet
+#snippet a<TYPE> "Array 1D type definition" b
+#endsnippet
+#snippet ca<TYPE> "Array 1D type definition" b
+#endsnippet
+
+
+### BRANCHING {{{1
+
+
+snippet if "If construct" 
+if (${1:true}) {
+	${0}
+}
+endsnippet
+snippet ife "If else construct" b
+if (${1:true}) {
+	${2}
+} else {
+	${0}
+}
+endsnippet
+snippet elif "Else if construct" b
+else if (${1:/* condition */}) {
+	${VISUAL}${0}
+}
+endsnippet
+snippet else "Just else" b
+else {
+	${0}
+}
+endsnippet
+#snippet ifsh "If construct, short form" b
+#endsnippet
+snippet if3 "If construct tertiary form" b
+${1:/* condition */} ? ${2:a} : ${3:b}
+endsnippet
+snippet for "For with index" b
+for (${2:i} = 0; $2 < ${1:count}; ${3:++$2}) {
+	${VISUAL}${0}
+}
+endsnippet
+#snippet fori "For in iterator form" b
+#endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
+snippet while "While loop" b
+while (${1:/* condition */}) {
+	${2}
+}
+endsnippet
+#snippet until "Until loop" b
+#endsnippet
+snippet case "Case construct" b
+switch (${1:/* variable */}) {
+	case ${2:/* variable case */}:
+		${3}
+		${4:break;}${5}
+	default:
+		${6}
+}
+endsnippet
+#snippet try "Try/catch" b
+#endsnippet
+#snippet ifm "If regex match" b
+#endsnippet
+
+
+### UTILS {{{1
+
+
+#snippet new "Instantiate object" b
+#endsnippet
+snippet pac "Include some package" b
+#include <${1:stdio}.h>
+endsnippet
+snippet so "Print to stdout" b
+printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+#snippet serr "Print to stderr" b
+#endsnippet
+#snippet sex "Raise exception" b
+#endsnippet
+snippet sof "Printf to stdout (formated)" b
+snippet fprintf "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+#snippet cd "Change dir" b
+#endsnippet
+#snippet ls "List directory" b
+#endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+#snippet mkdir "Create directory" b
+#endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+#snippet fopen "File open" b
+#endsnippet
+#snippet fclose "File open" b
+#endsnippet
+#snippet fwrite "File write" b
+#endsnippet
+#snippet fread "File read" b
+#endsnippet
+snippet exit "Exit a program with status" b
+exit(${1:1});
+endsnippet
+snippet ret "Return a value in function" b
+return ${1:0};$0
+endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+snippet argvi "Get ith argument" b
+argv[${1:i}]
+endsnippet
+#snippet match "Regex match" b
+#endsnippet
+snippet sizeof "Get size of variables or types" b
+sizeof(${1:int});
+endsnippet
+#snippet basename "Bash basename" b
+#endsnippet
+#snippet genv "Get Environment variables" b
+#endsnippet
+#snippet senv "Set Environment variables" b
+#endsnippet
+#snippet clear "stdout clear" b
+#endsnippet
+#snippet sleep "Sleep for some time" b
+#endsnippet
+#snippet shbang "Shbang for some scripting languages" b
+#endsnippet
+#snippet slurp "Slurp, read a whole file at once" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+#snippet true "True variable" b
+#endsnippet
+#snippet false "False keyword" b
+#endsnippet
+#snippet and "And operator" b
+#endsnippet
+#snippet or "Or operator" b
+#endsnippet
+#snippet bor "Bitwise or" b
+#endsnippet
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
+#endsnippet
+
+
+### TEMPLATES {{{1
+
+
+snippet argv-parse "Parse command line" b
+char __SCRIPT_VERSION[] = "${1:0.0.1}";
+char *__SCRIPT_NAME     = argv[0];
+char __DESCRIPTION[]    = "${2:Description_one_liner}";
+char __OPTIONS[]        = "hvV";
+int choice;
+int option_index = 0;
+while (1)
+{
+	static struct option long_options[] =
+	{
+		/* Argument styles: no_argument, required_argument, optional_argument */
+		{"verbose", no_argument, 0, 'V'},
+		{"version", no_argument, 0, 'v'},
+		{"help", no_argument, 0, 'h'},
+		{0,0,0,0}
+	};
+	choice = getopt_long( argc, argv, __OPTIONS,
+				long_options, &option_index);
+	if (choice == -1)
+		break;
+	switch( choice )
+	{
+		case 'v':
+			printf("%s -- Version %s",__SCRIPT_NAME, __SCRIPT_VERSION);
+			exit(0);
+			break;
+		case 'h':
+			printf("Usage: %s [-h|--help] [-v|--version] [-V|--verbose]\n",__SCRIPT_NAME);
+			printf("\t%s\n",__DESCRIPTION);
+			printf("\n");
+			printf("\tOptions:\n");
+			printf("\t-h|--help\t\tDisplay this message and exit.\n");
+			printf("\t-v|--version\t\tDisplay version and exit.\n");
+			printf("\t-V|--verbose\t\tBe verbose in the output.\n");
+			printf("\n");
+			printf("This program is maintained by Alejandro Gallo\n");
+			exit(0);
+			break;
+		case '?':
+			/* getopt_long will have already printed an error */
+			break;
+		default:
+			/* Not sure how to get here... */
+			return EXIT_FAILURE;
+	}
+}
+endsnippet
+snippet main "Main template" b
+int main(int argc, char *argv[])
+{
+	${VISUAL}${0}
+	return 0;
+}
+endsnippet

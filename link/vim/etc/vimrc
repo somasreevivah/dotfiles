@@ -8,16 +8,17 @@ call vundle#begin()
 if ! exists("NO_SPARTAN")
   "Plugins that are not loaded 
   "when I want to be spartan
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'bling/vim-airline'
+  "Plugin 'vim-airline/vim-airline-themes'
+  "Plugin 'bling/vim-airline'
   Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
+  Plugin 'dhruvasagar/vim-table-mode'
   "if v:version >= 730
   ""I have CtrlP, which deprecates this..
     "Plugin 'jlanzarotta/bufexplorer'
   "endif
-  Plugin 'takac/vim-hardtime'
+  "Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
 endif
 Plugin 'easymotion/vim-easymotion'
@@ -33,12 +34,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/gnuplot.vim'
 Plugin 'alejandrogallo/vasp.vim'
+Plugin 'alejandrogallo/vim-spice'
 Plugin 'alejandrogallo/vim-asymptote'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdcommenter'
 if v:version >= 704
   "it needs vim 7.04..
@@ -48,7 +49,6 @@ endif
 Plugin 'mattn/emmet-vim'
 " Track the engine.
 Plugin 'VundleVim/Vundle.vim'
-
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -290,6 +290,7 @@ if has("autocmd")
     autocmd!
     autocmd FileType tex,mail     set spell
     autocmd FileType asy,gnuplot  set nospell
+    autocmd FileType python       set tabstop=2
     autocmd BufNewFile *.tex      set ft=tex
   augroup END " }}}2
 end
@@ -450,34 +451,31 @@ nnoremap <localleader>mmq :exec ".!".g:CONTACT_COMMAND." <cword> "<cr>
 nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
 
 
-function! GetContact(name)
-  exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
-  let result = {}
-  let croppedResults=[]
-  for result in getqflist()
-    call add(croppedResults, result.text)
-  endfor
-  return croppedResults
-endfunction
-
-fun! CompleteContacts(findstart, base)
-  if a:findstart
-
-    " locate the start of the word
-    let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
-
-    let line = getline('.')
-    let start = col('.') - 1
-    while start > 0 && line[start - 1] =~ '\a'
-      let start -= 1
-    endwhile
-    return start
-  else
-    let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
-    return contacts
-  endif
-endfun
-set completefunc=CompleteContacts
+"function! GetContact(name)
+  "exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
+  "let result = {}
+  "let croppedResults=[]
+  "for result in getqflist()
+    "call add(croppedResults, result.text)
+  "endfor
+  "return croppedResults
+"endfunction
+"fun! CompleteContacts(findstart, base)
+  "if a:findstart
+    "" locate the start of the word
+    "let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
+    "let line = getline('.')
+    "let start = col('.') - 1
+    "while start > 0 && line[start - 1] =~ '\a'
+      "let start -= 1
+    "endwhile
+    "return start
+  "else
+    "let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
+    "return contacts
+  "endif
+"endfun
+"set completefunc=CompleteContacts
 
 
 
@@ -533,6 +531,24 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf     " Linux/MacOSX
 
 
 
+
+
+"  Plot {{{1  "
+"""""""""""""""
+
+function! Plot(...)
+  "echo getline(".")
+  let s:currentLineN = line(".")
+  let s:lastLineN = line("'>")
+  if len(a:000) == 0
+    let plot_options="u 1:2"
+  else
+    let plot_options=join(a:000," ")
+  endif
+  if s:currentLineN == s:lastLineN
+    exec "'<,'>!gnuplot -e \"set terminal dumb ; plot '<cat' ".plot_options."\""
+  endif
+endfunction
 
 " Ctags {{{1 "
 "TODO :

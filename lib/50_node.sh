@@ -8,7 +8,6 @@ return 0
 # Global npm modules to install.
 npm_globals=(
   bower
-  yo
 )
 
 # Update npm and install global modules.

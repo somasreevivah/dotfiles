@@ -1,3 +1,15 @@
+
+
+
+link/i3/i3
+link_config/lilyterm/lilyterm
+
+link/vim/spell/de.utf-8.add.spl
+link/vim/spell/de.utf-8.spl
+link/vim/spell/fr.utf-8.spl
+link/vim/spell/ru.utf-8.spl
+link/vim/spell/ru.utf-8.sug
+
 link/vimperator/info/default/macros
 bin/hello_world
 link/templi/templi

@@ -34,23 +34,3 @@ function node_ver() {
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-
-
-################
-#  TIMETAGGER  #
-################
-
-export PYTHONPATH=$PYTHONPATH:$HOME/software/timetagger/backend/
-export PATH=$PATH:$HOME/lib/FrontPanel-FC15-64-4.0.8/API/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/lib/FrontPanel-FC15-64-4.0.8/API/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/software/timetagger/backend/
-
-
-
-
-
-
-
-
-

@@ -32,3 +32,8 @@ Ernzerhof
 PBE
 Zeeman
 vibronic
+config
+mk
+gcc
+icc
+spinor

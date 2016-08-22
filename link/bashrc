@@ -6,11 +6,15 @@
 export DOTFILES=~/.dotfiles
 
 # Add binaries into the path
+PATH=$HOME/local/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/bin:$PATH
 PATH=$DOTFILES/bin:$PATH
 export PATH
 
+
 # Source all files in "lib"
-function src() {
+function source_lib_files() {
   local file
   if [[ "$1" ]]; then
     source "$DOTFILES/lib/$1.sh"
@@ -23,15 +27,13 @@ function src() {
 
 # Run dotfiles script, then source.
 function dotfiles() {
-  $DOTFILES/bin/dotfiles "$@" && src
+  $DOTFILES/bin/dotfiles "$@" && source_lib_files
 }
-
-src
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/bin:$PATH
 
 if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-export PATH=$HOME/local/bin:$PATH
+source_lib_files
+
+
