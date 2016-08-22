@@ -473,7 +473,8 @@ snippet bibtex-add "Insert bibtex document in latex document" b
 endsnippet
 
 snippet lab "Label" w
-\label{${1:fig}:${1/\s+/_/g}
+%label for ${2:label for }
+\label{${1:fig}:${2/\s+/_/g}}
 endsnippet
 
 
