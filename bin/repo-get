@@ -5,6 +5,11 @@ __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Silly github project getter"
 __OPTIONS=":hvu:m:d:s:"
 
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+
 SERVER=github
 DESTINATION=
 
@@ -37,11 +42,20 @@ do
 
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
-  u )  GH_USER=$OPTARG   ;;
+  u )
+    GH_USER=$OPTARG
+    echo $GH_USER
+    ;;
 
-  d )  DESTINATION=$OPTARG   ;;
+  d )
+    DESTINATION=$OPTARG
+    echo $DESTINATION
+    ;;
 
-  s )  SERVER=$OPTARG   ;;
+  s )
+    SERVER=$OPTARG
+    echo $SERVER
+    ;;
 
   m )  echo "Method: $OPTARG"; GH_METHOD=$OPTARG   ;;
 
@@ -54,7 +68,7 @@ shift $(($OPTIND-1))
 
 REPO_NAME=$1
 
-if [[ -z $REPO_NAME ]]; then 
+if [[ -z $REPO_NAME ]]; then
   usage_head;
   exit 1;
 fi
@@ -63,8 +77,11 @@ GH_USER=${GH_USER:-alejandrogallo}
 GH_METHOD=${GH_METHOD:-ssh}
 
 if [[ $GH_METHOD = https ]]; then
-  git clone https://${SERVER}/$GH_USER/$REPO_NAME.git $DESTINATION
+  GIT_COMMAND="git clone https://${SERVER}.com/$GH_USER/$REPO_NAME.git $DESTINATION"
 else
-  git clone git@${SERVER}:$GH_USER/$REPO_NAME.git $DESTINATION
+  GIT_COMMAND="git clone git@${SERVER}.com:$GH_USER/$REPO_NAME.git $DESTINATION"
 fi
+
+echo ${GIT_COMMAND}
+${GIT_COMMAND}
 
