@@ -3,8 +3,10 @@
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Silly github project getter"
-__OPTIONS=":hvu:m:d"
+__OPTIONS=":hvu:m:d:s:"
 
+SERVER=github
+DESTINATION=
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] REPO_NAME"; }
 function usage ()
@@ -18,6 +20,7 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -u            User
+    -s            Server or service (default $SERVER)
     -m            Method: https, ssh. (default ssh)
     -d            Destination folder
 
@@ -35,6 +38,10 @@ do
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
   u )  GH_USER=$OPTARG   ;;
+
+  d )  DESTINATION=$OPTARG   ;;
+
+  s )  SERVER=$OPTARG   ;;
 
   m )  echo "Method: $OPTARG"; GH_METHOD=$OPTARG   ;;
 
@@ -56,8 +63,8 @@ GH_USER=${GH_USER:-alejandrogallo}
 GH_METHOD=${GH_METHOD:-ssh}
 
 if [[ $GH_METHOD = https ]]; then
-  git clone https://github.com/$GH_USER/$REPO_NAME.git $DESTINATION
+  git clone https://${SERVER}/$GH_USER/$REPO_NAME.git $DESTINATION
 else
-  git clone git@github.com:$GH_USER/$REPO_NAME.git $DESTINATION
+  git clone git@${SERVER}:$GH_USER/$REPO_NAME.git $DESTINATION
 fi
 
