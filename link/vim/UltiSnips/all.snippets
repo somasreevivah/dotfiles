@@ -36,6 +36,19 @@ endsnippet
 #vim-run: $0
 #endsnippet
 
+snippet "(\w+).par" "Parenthesis (postfix)" r
+(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+snippet "(\w+).bra" "Braces (postfix)" r
+[`!p snip.rv = match.group(1)`$1]$0
+endsnippet
+
+snippet "(\w+).cur" "Curly braces (postfix)" r
+[`!p snip.rv = match.group(1)`$1]$0
+endsnippet
+
+
 
 snippet license-general "License general" b
 Copyright (c) ${1:2016}, Alejandro A. Martínez-Soria Gallo
