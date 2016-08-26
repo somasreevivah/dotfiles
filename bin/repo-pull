@@ -1,8 +1,9 @@
 #! /usr/bin/env bash
 
-REPOSITORIES=" \
-  $HOME/.dotfiles \
-  ";
+REPOSITORIES=(
+$HOME/.dotfiles
+$HOME/contacts
+)
 
 function header()   { echo -e "\n\033[1m$@\033[0m"; }
 function success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
@@ -55,7 +56,7 @@ shift $(($OPTIND-1))
 #  Pulling part  #
 ##################
 
-for repository in $REPOSITORIES
+for repository in ${REPOSITORIES[@]} ;
 do
   header "Pulling from repository $repository"
   cd $repository && arrow "Changing directory"
