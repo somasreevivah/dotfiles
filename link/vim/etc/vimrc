@@ -256,7 +256,7 @@ vnoremap <localleader>r :s/
 nnoremap <localleader>rr :.s/
 
 "Toggle NERDTree file structure easily
-noremap <localleader>ne :NERDTreeToggle<cr>
+"noremap <localleader>ne :NERDTreeToggle<cr>
 
 " Toggle Tagbar
 noremap <localleader>tg :TagbarToggle<cr>
