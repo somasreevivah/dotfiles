@@ -32,7 +32,26 @@ snippet for "Embedded shell for" b
 	done
 endsnippet
 
-snippet ife "Bash if else" b
+snippet if
+ifeq (${1:cond0}, ${2:cond1})
+	${0}
+endif
+endsnippet
+
+snippet ife
+ifeq (${1:cond0}, ${2:cond1})
+	${3}
+else
+	${0}
+endif
+endsnippet
+# else ...
+snippet el
+else
+	${0}
+endsnippet
+
+snippet bife "Bash if else" b
 	@if ${1:Cond}; then \
 		${2:#Body}; \
 	else \
@@ -40,13 +59,13 @@ snippet ife "Bash if else" b
 	fi
 endsnippet
 
-snippet else "Bash else" b
+snippet belse "Bash else" b
 	@if ${1:Cond}; then \
 		${3:#Body}; \
 	fi
 endsnippet
 
-snippet if "Bash if" b
+snippet bif "Bash if" b
 	@if ${1:Cond}; then \
 		${3:#Body}; \
 	fi
@@ -72,7 +91,14 @@ snippet source "File the target depends on" w
 $@
 endsnippet
 
-snippet info-var "Information about normally used shortcurs" b
+# help target for self-documented Makefile
+snippet help
+help: ## Prints help for targets with comments
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $\$1, $\$2}'
+${0}
+endsnippet
+
+snippet info "Information about normally used shortcurs" b
 # make info {{{ #
 ################################################################
 # $@  the name of the file to be ``made''
