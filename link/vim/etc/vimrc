@@ -135,6 +135,9 @@ set modeline
 "No compatibility with vi
 set nocompatible
 
+" standart column 72 width
+set textwidth=72
+
 "Go to normal mode typing  kj in insert mode
 inoremap kj <ESC>
 vnoremap kj <ESC>
@@ -322,7 +325,7 @@ command! -nargs=1 Silent
 
 "Make shortcut
 " First for general make
-nnoremap <localleader>M :make
+nnoremap <localleader>M :make 
 " do a quick make mainly for latex stuff
 nnoremap <localleader>m :Silent make<cr>
 
