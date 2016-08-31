@@ -45,7 +45,7 @@ function hubble() {
   echo "$number"
   echo "${tmp}"
   url="http://imgsrc.hubblesite.org/hu/db/images/hs-${year}-${number}-a-${resolution}_wallpaper.jpg"
-  wget ${url} -O ${IMAGE_PATH}
+  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
 }
 
 PARSERS=(
@@ -62,7 +62,7 @@ wall_notify $parse
 
 ${parse}
 
-feh --bg-max $IMAGE_PATH
+feh --bg-max $IMAGE_PATH || wall_notify "Failure setting wallpaper"
 
 #vim-run: bash %
 
