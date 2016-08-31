@@ -1,39 +1,38 @@
+#! /usr/bin/env bash
 
-SCRIPT_DIR=$(dirname $0)
-IMAGE_PATH=~/.dotfiles/wallpapers/temporary.jpg
+WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
+IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
 
-function notify() {
+function wall_notify() {
   type dzen2 > /dev/null || return 1
   local message=$1
-  echo $1|\
+  echo ${message}|\
     timeout 1 dzen2 -p\
     -fg red\
     -bg black\
     -x 20\
     -y 20\
-    -w 100\
+    -w 200\
     -h 100\
     -ta c
 }
 
 function local_wallpaper() {
-  local WALLPAPERS_DIR="${SCRIPT_DIR}/../wallpapers"
-  local IMAGE_FILE=$(ls $WALLPAPERS_DIR \
+  local imageFile=$(ls $WALLPAPERS_DIR \
     | sort -R \
     | grep -v ${IMAGE_PATH} \
     | tail -1)
-  IMAGE_PATH=$WALLPAPERS_DIR/$IMAGE_FILE
+  IMAGE_PATH=$WALLPAPERS_DIR/$imageFile
 }
 
 function hubble() {
   #fetch images from
-  #http://hubblesite.org/gallery/wallpaper/pr2006010a/2560x1024_wallpaper/
+  #http://hubblesite.org/gallery/wallpaper
   local names
   local year
   local number
   local url
   local resolution
-  local tmp=$(mktemp).jpg
   names=$(curl -s http://hubblesite.org/gallery/wallpaper/ \
     | sed -n "s/.*href=\"\/gallery\/wallpaper\/\([0-9a-z]\+\)\/.*/\1/p"\
     | sort -R | tail -1)
@@ -56,10 +55,10 @@ hubble
 
 parse=$(echo ${PARSERS[@]} | tr " " "\n" | sort -R | tail -1)
 
-which feh &> /dev/null || exit 1
+type feh 2>&1 > /dev/null || exit 1
 
 
-notify $parse
+wall_notify $parse
 
 ${parse}
 
