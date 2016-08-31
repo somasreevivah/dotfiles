@@ -10,7 +10,7 @@ function wall_notify() {
     timeout 1 dzen2 -p\
     -fg red\
     -bg black\
-    -x 20\
+    -x 0\
     -y 20\
     -w 200\
     -h 100\
