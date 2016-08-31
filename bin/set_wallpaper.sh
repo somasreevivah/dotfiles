@@ -6,7 +6,7 @@ function notify() {
   type dzen2 > /dev/null || return 1
   local message=$1
   echo $1|\
-    timeout .5 dzen2 -p\
+    timeout 1 dzen2 -p\
     -fg red\
     -bg black\
     -x 20\
@@ -18,7 +18,10 @@ function notify() {
 
 function local_wallpaper() {
   local WALLPAPERS_DIR="${SCRIPT_DIR}/../wallpapers"
-  local IMAGE_FILE=$(ls $WALLPAPERS_DIR | sort -R | tail -1)
+  local IMAGE_FILE=$(ls $WALLPAPERS_DIR \
+    | sort -R \
+    | grep -v ${IMAGE_PATH} \
+    | tail -1)
   IMAGE_PATH=$WALLPAPERS_DIR/$IMAGE_FILE
 }
 
@@ -36,6 +39,7 @@ function hubble() {
     | sort -R | tail -1)
   year=$(sed "s/^[a-z][a-z]\([0-9]\{4\}\).*/\1/" <<<$names)
   number=$(sed "s/^[a-z][a-z][0-9]\{4\}0\([0-9]\{2\}\).*/\1/" <<<$names)
+  letter=$(sed "s/^[a-z][a-z][0-9]\{4\}0[0-9]\{2\}\([a-z]\).*/\1/" <<<$names)
   resolution="2560x1024"
   echo ${names}
   echo "$year"
