@@ -3,11 +3,11 @@ SCRIPT_DIR=$(dirname $0)
 IMAGE_PATH=~/.dotfiles/wallpapers/temporary.jpg
 
 function notify() {
-  type dzen2 > /dev/null|| return 1
+  type dzen2 > /dev/null || return 1
   local message=$1
   echo $1|\
     timeout .5 dzen2 -p\
-    -fg green\
+    -fg red\
     -bg black\
     -x 20\
     -y 20\
@@ -59,7 +59,7 @@ notify $parse
 
 ${parse}
 
-feh --bg-fill $IMAGE_PATH
+feh --bg-max $IMAGE_PATH
 
 #vim-run: bash %
 
