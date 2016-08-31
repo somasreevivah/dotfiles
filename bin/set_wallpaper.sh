@@ -2,6 +2,20 @@
 SCRIPT_DIR=$(dirname $0)
 IMAGE_PATH=~/.dotfiles/wallpapers/temporary.jpg
 
+function notify() {
+  type dzen2 > /dev/null|| return 1
+  local message=$1
+  echo $1|\
+    timeout .5 dzen2 -p\
+    -fg green\
+    -bg black\
+    -x 20\
+    -y 20\
+    -w 100\
+    -h 100\
+    -ta c
+}
+
 function local_wallpaper() {
   local WALLPAPERS_DIR="${SCRIPT_DIR}/../wallpapers"
   local IMAGE_FILE=$(ls $WALLPAPERS_DIR | sort -R | tail -1)
@@ -40,6 +54,8 @@ parse=$(echo ${PARSERS[@]} | tr " " "\n" | sort -R | tail -1)
 
 which feh &> /dev/null || exit 1
 
+
+notify $parse
 
 ${parse}
 
