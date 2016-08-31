@@ -634,7 +634,8 @@ if has("unix")
     set background=dark
   else
     let g:solarized_termcolors=256
-    colorscheme solarized
+    "colorscheme solarized
+    colorscheme default
     set background=dark
   endif
 else
