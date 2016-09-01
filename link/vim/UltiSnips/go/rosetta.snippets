@@ -1,0 +1,244 @@
+
+
+### TYPES {{{1
+
+
+snippet fun "Simple function definition" b
+func ${1:name}(${2:params})${3/(.+)/ /}${3:type} {
+	$0
+}
+endsnippet
+#snippet lambda "Lambda expression" b
+#endsnippet
+#snippet class "Class definition" b
+#endsnippet
+snippet met "Method of a class" b
+func (${1:receiver} ${2:type}) ${3:name}(${4:params})${5/(.+)/ /}${5:type} {
+	$0
+}
+endsnippet
+#snippet attr "Attribute of a class" b
+#endsnippet
+snippet const "Readonly variale" b
+const ${1:name}${2/(.+)/ /}${2:type} = $0
+endsnippet
+#snippet macro "C-like macro" b
+#endsnippet
+#snippet int "Simple integer definition" b
+#endsnippet
+#snippet float "Simple floating point definition" b
+#endsnippet
+#snippet double "Double precission" b
+#endsnippet
+#snippet char "Character definition" b
+#endsnippet
+snippet str "String definition" b
+var ${1:t} $0
+endsnippet
+#snippet dic "Relational array" b
+#endsnippet
+#snippet arr "List of values" b
+#endsnippet
+#snippet pointer "Pointer-like variable" b
+#endsnippet
+#snippet reference "Reference-like variable" b
+#endsnippet
+#snippet enum "Enumeration definition" b
+#endsnippet
+snippet struct "Structure construct" b
+type ${1:Struct} struct {
+	$0
+}
+endsnippet
+#snippet type "Define custom type" b
+#endsnippet
+#snippet bin "Binary numbers" b
+#endsnippet
+#snippet hex "Hexadecimal numbers" b
+#endsnippet
+#snippet octal "Octal numbers" b
+#endsnippet
+#snippet bool "Boolean variables" b
+#endsnippet
+#snippet name "Namespace" b
+#endsnippet
+snippet module "Define module, package etc.." b
+// Package $1 provides ...
+package ${1:main}
+endsnippet
+#snippet c<TYPE> "Constant type definition" b
+#endsnippet
+#snippet t<TYPE> "Type safe definition" b
+#endsnippet
+#snippet ct<TYPE> "Constant type safe definition" b
+#endsnippet
+#snippet a<TYPE> "Array 1D type definition" b
+#endsnippet
+#snippet ca<TYPE> "Array 1D type definition" b
+#endsnippet
+
+
+### BRANCHING {{{1
+
+
+snippet if "If construct" 
+if ${1:condition}${1/(.+)/ /}{
+	$0
+}
+endsnippet
+snippet ife "If else construct" b
+if ${1:/* condition */} {
+	${2}
+} else {
+	${0}
+}
+endsnippet
+#snippet elif "Else if construct" b
+#endsnippet
+snippet else "Just else" b
+else {
+	${1}
+}
+endsnippet
+#snippet ifsh "If construct, short form" b
+#endsnippet
+#snippet if3 "If construct tertiary form" b
+#endsnippet
+snippet for "For with index" b
+for ${2:i} := 0; $2 < ${1:count}; $2${3:++} {
+	${0}
+}
+endsnippet
+snippet fori "For in iterator form" b
+endsnippet
+#snippet ford "For in dictionary/table form" b
+#endsnippet
+#snippet while "While loop" b
+#endsnippet
+#snippet until "Until loop" b
+#endsnippet
+snippet case "Case construct" b
+switch ${1:var} {
+case ${2:value1}:
+	${3}
+case ${4:value2}:
+	${5}
+default:
+	${0}
+}
+endsnippet
+#snippet try "Try/catch" b
+#endsnippet
+#snippet ifm "If regex match" b
+#endsnippet
+
+
+### UTILS {{{1
+
+
+#snippet new "Instantiate object" b
+#endsnippet
+snippet pac "Include some package" b
+import (
+	"${1:package}"
+)
+endsnippet
+snippet so "Print to stdout" b
+fmt.Println("%${1:s}", ${2:var})
+endsnippet
+#snippet serr "Print to stderr" b
+#endsnippet
+snippet sex "Raise exception" b
+if err != nil {
+	log.${1:Fatal}(err)
+}
+endsnippet
+snippet sof "Printf to stdout (formated)" b
+fmt.Printf("%${1:s}\n", ${2:var})
+endsnippet
+#snippet read "Stdin read" b
+#endsnippet
+#snippet cd "Change dir" b
+#endsnippet
+#snippet ls "List directory" b
+#endsnippet
+#snippet sys "Talk to the shell" b
+#endsnippet
+#snippet mkdir "Create directory" b
+#endsnippet
+#snippet cp "Copy a file" b
+#endsnippet
+#snippet cpr "Copy dir" b
+#endsnippet
+#snippet fopen "File open" b
+#endsnippet
+#snippet fclose "File open" b
+#endsnippet
+#snippet fwrite "File write" b
+#endsnippet
+#snippet fread "File read" b
+#endsnippet
+#snippet exit "Exit a program with status" b
+#endsnippet
+snippet ret "Return a value in function" b
+return ${0}
+endsnippet
+#snippet argc "Get arguments number" b
+#endsnippet
+#snippet argvi "Get ith argument" b
+#endsnippet
+#snippet match "Regex match" b
+#endsnippet
+#snippet sizeof "Get size of variables or types" b
+#endsnippet
+#snippet basename "Bash basename" b
+#endsnippet
+#snippet genv "Get Environment variables" b
+#endsnippet
+#snippet senv "Set Environment variables" b
+#endsnippet
+#snippet clear "stdout clear" b
+#endsnippet
+#snippet sleep "Sleep for some time" b
+#endsnippet
+#snippet shbang "Shbang for some scripting languages" b
+#endsnippet
+#snippet slurp "Slurp, read a whole file at once" b
+#endsnippet
+
+
+### CONSTANTS {{{1
+
+
+snippet true "True variable" b
+true
+endsnippet
+snippet false "False keyword" b
+false
+endsnippet
+#snippet and "And operator" b
+#endsnippet
+#snippet or "Or operator" b
+#endsnippet
+#snippet bor "Bitwise or" b
+#endsnippet
+#snippet band "Bitwise and" b
+#endsnippet
+#snippet nan "Not a number" b
+#endsnippet
+#snippet null "Undefined variable" b
+#endsnippet
+#snippet eof "End of file character" b
+#endsnippet
+
+
+### TEMPLATES {{{1
+
+
+#snippet argv-parse "Parse command line" b
+#endsnippet
+snippet main "Main template" b
+func main() {
+	$0
+}
+endsnippet
