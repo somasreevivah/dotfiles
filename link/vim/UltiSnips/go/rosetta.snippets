@@ -37,8 +37,9 @@ var ${1:t} $0
 endsnippet
 #snippet dic "Relational array" b
 #endsnippet
-#snippet arr "List of values" b
-#endsnippet
+snippet arr "List of values" b
+var ${1:varName}[${2:dimension}]${3:float64}$0
+endsnippet
 #snippet pointer "Pointer-like variable" b
 #endsnippet
 #snippet reference "Reference-like variable" b
@@ -160,8 +161,13 @@ endsnippet
 #endsnippet
 #snippet cd "Change dir" b
 #endsnippet
-#snippet ls "List directory" b
-#endsnippet
+snippet ls "List directory" b
+files, _ := ioutil.ReadDir("${1:/path/to/dir}")
+fmt.Println(files)
+for _, f := range files {
+	fmt.Println(f.Name())
+}
+endsnippet
 #snippet sys "Talk to the shell" b
 #endsnippet
 #snippet mkdir "Create directory" b
@@ -170,14 +176,20 @@ endsnippet
 #endsnippet
 #snippet cpr "Copy dir" b
 #endsnippet
-#snippet fopen "File open" b
-#endsnippet
+snippet fopen "File open" b
+bs, err := ioutil.ReadFile("${1:FileName}")
+if err != nil {
+	fmt.Println("There was an error opening the file", err)
+	return
+}
+endsnippet
 #snippet fclose "File open" b
 #endsnippet
 #snippet fwrite "File write" b
 #endsnippet
-#snippet fread "File read" b
-#endsnippet
+snippet fread "File read" b
+bs, err := ioutil.ReadFile("${1:FileName}")
+endsnippet
 #snippet exit "Exit a program with status" b
 #endsnippet
 snippet ret "Return a value in function" b
@@ -203,8 +215,14 @@ endsnippet
 #endsnippet
 #snippet shbang "Shbang for some scripting languages" b
 #endsnippet
-#snippet slurp "Slurp, read a whole file at once" b
-#endsnippet
+snippet slurp "Slurp, read a whole file at once" b
+bs, err := ioutil.ReadFile("${1:FileName}")
+if err != nil {
+	fmt.Println("There was an error opening the file", err)
+	return
+}
+str := string(bs)
+endsnippet
 
 
 ### CONSTANTS {{{1
