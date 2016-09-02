@@ -1,4 +1,4 @@
-__OPTIONS=":hvu:d:"
+__OPTIONS=":hvud"
 
 
 function header()   { echo -e "\n\033[1m$@\033[0m"; }
@@ -24,6 +24,28 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
+function getVolume() {
+  amixer get Master | sed -n "s/.*\([0-9]\+\)%.*/\1/p"
+}
+
+function volumeUp() {
+  local down
+  up=3
+  arrow "Increasing volume by ${up}%"
+  amixer -q sset Master ${up}%+
+}
+
+function volumeDown() {
+  local down
+  down=3
+  arrow "Lowering volume by ${down}%"
+  amixer -q sset Master ${down}%-
+}
+
+function refreshInformations() {
+  pkill -RTMIN+10 i3blocks
+}
+
 while getopts $__OPTIONS opt
 do
   case $opt in
@@ -32,9 +54,9 @@ do
 
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
-  u ) UP_VOLUME=${OPTARG} ;;
+  u ) volumeUp ;;
 
-  d ) DOWN_VOLUME=${OPTARG} ;;
+  d ) volumeDown ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -43,25 +65,24 @@ do
 done
 shift $(($OPTIND-1))
 
-function getVolume() {
-amixer get Master | sed -n "s/.*\([0-9]\+\)%.*/\1/p"
-}
+if ! which amixer &> /dev/null; then
+  error "This script uses mixer in debian, please install it\n\t sudo apt-get install amixer"
+  exit 1
+fi
 
 VOLUME_LEVEL=$1
-
 
 CURRENT_VOLUME=$(getVolume)
 
 arrow "Current volume is ${CURRENT_VOLUME}%"
 
-if [[ ! $VOLUME_LEVEL = *% ]]; then
-  VOLUME_LEVEL=$VOLUME_LEVEL'%'
-  arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
+if [[ -n ${VOLUME_LEVEL} ]]; then
+  if [[ ! $VOLUME_LEVEL = *% ]]; then
+    VOLUME_LEVEL=$VOLUME_LEVEL'%'
+    arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
+  fi
+  amixer set Master $VOLUME_LEVEL
 fi
 
-if which amixer &> /dev/null; then
-  amixer set Master $VOLUME_LEVEL
-else
-  error "This script uses mixer in debian, please install it\n\t sudo apt-get install amixer"
-  exit 1
-fi
+refreshInformations
+

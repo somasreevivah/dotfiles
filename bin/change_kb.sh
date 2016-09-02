@@ -47,6 +47,10 @@ function getLayout() {
   setxkbmap -print -verbose 10 | grep layout | cut -d : -f2 | tr -d " "
 }
 
+function refreshInformations() {
+  pkill -RTMIN+10 i3blocks
+}
+
 LAYOUT_INFO_FILE=/usr/share/X11/xkb/rules/base.lst
 KEYBOARD_CURRENT_LANGUAGE=${HOME}/.keyboard_current_language
 
@@ -93,6 +97,7 @@ arrow "Next layout ${layout}  -  ${variant}"
 setxkbmap -layout ${layout} $([[ ! ${variant} = none ]] && echo "-variant ${variant}")
 
 if [[ $? ]]; then
+  refreshInformations
   echo "${layout}-${variant}" > ${KEYBOARD_CURRENT_LANGUAGE}
   #zenity --notification --text "${layout}" --timeout 1
   cat ${KEYBOARD_CURRENT_LANGUAGE}|\

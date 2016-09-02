@@ -224,8 +224,10 @@ bindsym XF86Tools exec espeak tools
 bindsym XF86PowerOff exec espeak 'brightness down'
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec  xbacklight -inc 10
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%-
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+
+#bindsym XF86AudioLowerVolume exec ~/.dotfiles/bin/volume.sh -d
+#bindsym XF86AudioRaiseVolume exec ~/.dotfiles/bin/volume.sh -u
+bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+ && pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%- && pkill -RTMIN+10 i3blocks
 bindsym XF86Search exec espeak search
 
 #  Workspaces {{{1  #
@@ -297,6 +299,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
+
 #  Status bar {{{1  #
 #####################
 
@@ -304,15 +307,17 @@ bindsym $mod+Shift+b bar mode toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        mode invisible
+        #mode invisible
         position top
-        status_command i3status --config ~/.i3/i3status.conf
+        #status_command i3status --config ~/.i3/i3status.conf
+        status_command i3blocks
+        #status_command py3status
         #status_command py3status -c ~/.i3/i3status.conf
         colors {
-                #background #2c3e50
+                background #000000
                 #statusline #ffffff
 
-                #separator #666666
+                separator #555555
                 #active_workspace   #2c3e50 #2c3e50 #1abc9c
                 #focused_workspace  #2c3e50 #2c3e50 #1abc9c
                 #inactive_workspace #2c3e50 #2c3e50 #ecf0f1
