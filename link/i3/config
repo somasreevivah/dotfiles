@@ -310,7 +310,7 @@ bar {
         #mode invisible
         position top
         #status_command i3status --config ~/.i3/i3status.conf
-        status_command i3blocks
+        status_command i3blocks -c ~/.i3/i3blocks.conf
         #status_command py3status
         #status_command py3status -c ~/.i3/i3status.conf
         colors {
