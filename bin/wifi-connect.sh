@@ -47,7 +47,7 @@ function list_wireless_connections() {
 
 list_configuration_files() {
   for file in /etc/wpa_supplicant/*.conf; do
-    echo $file
+    arrow $file
   done
 }
 
@@ -114,7 +114,6 @@ do
   w )  list_wireless_connections  ; exit 0;;
 
   s|ssid  )
-    echo $OPTARG
     connect $OPTARG
     exit 0
   ;;
@@ -135,7 +134,7 @@ shift $(($OPTIND-1))
 PS3="Which to connect to?  "
 if [[ -z $WITH_DIALOG ]]; then
   select ssid_path in $( list_configuration_files ); do
-    echo "You have selected $ssid_path, connecting to it..."
+    arrow "You have selected $ssid_path, connecting to it..."
     connect_wpa $ssid_path
     exit 0
   done
