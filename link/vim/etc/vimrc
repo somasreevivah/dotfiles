@@ -241,14 +241,11 @@ let maplocalleader = "\<Space>"
 let mapleader = ','
 
 "Save current buffer
-nnoremap <localleader>w :w<cr>
-
-"Close vim without saving
-nnoremap <localleader>q :q<cr>
+"nnoremap <localleader>w :w<cr>
+"Close vim
+"nnoremap <localleader>q :q<cr>
 
 "/ is way too far away, and I want case insensitive!
-nnoremap <localleader>f /\c
-nnoremap <localleader>F ?\c
 vnoremap <localleader>f /\c
 vnoremap <localleader>F ?\c
 
