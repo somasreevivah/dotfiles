@@ -275,8 +275,15 @@ function link_test() {
   [[ "$1" -ef "$2" ]] && echo "same file"
 }
 function link_do() {
-  dfs_success "Linking ~/.$1."
-  ln -sf ${2#$HOME/} ~/.$1
+  local TO_LINK LINK
+  TO_LINK=${2#$HOME/}
+  LINK=~/.$1
+  dfs_arrow "Linking ${TO_LINK} to ${LINK}."
+  if [[ -L ${LINK} ]]; then
+    dfs_warning "Already linked..."
+  else
+    ln -s ${TO_LINK} ${LINK} && dfs_success "Linked!"
+  fi
 }
 
 
