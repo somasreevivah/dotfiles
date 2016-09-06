@@ -51,7 +51,7 @@ do
 done
 shift $(($OPTIND-1))
 
-read -p "Password:" pass
+read -s -p "Password:" pass
 
 pasteClipboard $(${ENC_METHOD} <<<${pass})
 ${ENC_METHOD} <<<${pass}
