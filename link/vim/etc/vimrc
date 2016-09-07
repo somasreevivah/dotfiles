@@ -242,8 +242,7 @@ let mapleader = ','
 
 "Save current buffer
 nnoremap <localleader>w :w<cr>
-
-"Close vim without saving
+"Close vim
 nnoremap <localleader>q :q<cr>
 
 "/ is way too far away, and I want case insensitive!
