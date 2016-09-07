@@ -136,7 +136,7 @@ set modeline
 set nocompatible
 
 " standart column 72 width
-set textwidth=72
+"set textwidth=72
 
 "Go to normal mode typing  kj in insert mode
 inoremap kj <ESC>
