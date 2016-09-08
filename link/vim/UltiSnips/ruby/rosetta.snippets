@@ -152,8 +152,9 @@ endsnippet
 snippet pac "Include some package" b
 require '${1}'
 endsnippet
-#snippet so "Print to stdout" b
-#endsnippet
+snippet so "Print to stdout" b
+puts ${1:"${2:something}"}
+endsnippet
 #snippet serr "Print to stderr" b
 #endsnippet
 #snippet sex "Raise exception" b
@@ -199,8 +200,9 @@ endsnippet
 #endsnippet
 #snippet basename "Bash basename" b
 #endsnippet
-#snippet genv "Get Environment variables" b
-#endsnippet
+snippet genv "Get Environment variables" b
+ENV[${1:'${2:NAME}'}]
+endsnippet
 #snippet senv "Set Environment variables" b
 #endsnippet
 #snippet clear "stdout clear" b
