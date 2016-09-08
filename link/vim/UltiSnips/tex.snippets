@@ -28,7 +28,7 @@ snippet multicolumn "Description" w
 \multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}$0
 endsnippet
 snippet vimrun "Vim-run code snippet" b
-%vim-run: pdflatex % ; killall -s SIGHUP mupdf $0
+%vim-run: pdflatex % ; mupdf $(basename % .tex).pdf $0
 endsnippet
 
 snippet modeline "Modeline for latex" b
