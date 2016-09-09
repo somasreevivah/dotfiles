@@ -4,8 +4,9 @@ __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="ASCII periodic table for fast consulting"
 
+shopt -s nocasematch
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e <element_symbold_lowercase>]"; }
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e <element_symbol>]"; }
 function usage ()
 {
 cat <<EOF
@@ -16,8 +17,9 @@ $(usage_head)
     Options:
     -h|help       Display this message
     -v|version    Display script version"
-    -e            Display element information (lowercase elements):
+    -e <element>  Display element information:
                   Example: $__SCRIPT_NAME -e he > helium_info.txt
+    -l            List all element names
 
 
     This program is maintained by Alejandro Gallo.
@@ -27,7 +29,7 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
-while getopts ":hve:" opt
+while getopts ":hve:l" opt
 do
   case $opt in
 
@@ -37,12 +39,29 @@ do
 
   e  )  ELEMENT=$OPTARG   ;;
 
+  l  )  LIST_ELEMENTS=TRUE   ;;
+
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
 
   esac    # --- end of case ---
 done
 shift $(($OPTIND-1))
+
+ELEMENTS=(
+H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn
+Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba Hf
+Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm
+Yb Lu Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr
+)
+
+if [[ -n ${LIST_ELEMENTS} ]]; then
+  for element in ${ELEMENTS[@]} ; do
+    echo "${element}"
+  done
+  exit 0
+fi
+
 
 if [[ -z $ELEMENT ]]; then cat <<EOF
   __________________________________________________________________________
@@ -71,7 +90,11 @@ if [[ -z $ELEMENT ]]; then cat <<EOF
 EOF
 fi
 
-if [[ $ELEMENT = "ac" ]]; then
+
+case ${ELEMENT} in
+ 
+
+ "ac" )
 cat <<EOF
 
       Ac
@@ -114,8 +137,9 @@ reactor.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 406 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ag" ]]; then
+;;
+
+ "ag" )
 cat <<EOF
 
       Ag
@@ -160,8 +184,9 @@ expensive.
     Heat of vaporization: 257.7 kJ/mol
     Heat of atomization: 284.09 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "al" ]]; then
+;;
+
+ "al" )
 cat <<EOF
 
       Al
@@ -208,8 +233,9 @@ silicon or iron is added, which hardens and strengthens it.
     Heat of vaporization: 290.8 kJ/mol
     Heat of atomization: 324.01 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "am" ]]; then
+;;
+
+ "am" )
 cat <<EOF
 
       Am
@@ -251,8 +277,9 @@ Americium-241 is currently used in smoke detectors.
     Heat of vaporization: 238.5 kJ/mol
     Heat of atomization: 266 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ar" ]]; then
+;;
+
+ "ar" )
 cat <<EOF
 
       Ar
@@ -299,8 +326,9 @@ industry are grown in argon atmospheres.
     Heat of vaporization: 6.53 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "as" ]]; then
+;;
+
+ "as" )
 cat <<EOF
 
       As
@@ -346,8 +374,9 @@ semiconductors
     Heat of vaporization: 31.9 kJ/mol
     Heat of atomization: 301.42 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "at" ]]; then
+;;
+
+ "at" )
 cat <<EOF
 
       At
@@ -391,8 +420,9 @@ half-lives there are no commercially significant compounds of astatine.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 91 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "au" ]]; then
+;;
+
+ "au" )
 cat <<EOF
 
       Au
@@ -436,8 +466,9 @@ skyscrapers to reduce internal heating from sunlight.
     Heat of vaporization: 343.1 kJ/mol
     Heat of atomization: 365.93 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ba" ]]; then
+;;
+
+ "ba" )
 cat <<EOF
 
       Ba
@@ -484,8 +515,9 @@ brilliant green and is used in fireworks.
     Heat of vaporization: 150.9 kJ/mol
     Heat of atomization: 180.7 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "be" ]]; then
+;;
+
+ "be" )
 cat <<EOF
 
       Be
@@ -535,8 +567,9 @@ them their green colour.
     Heat of vaporization: 308.8 kJ/mol
     Heat of atomization: 320.3 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "bh" ]]; then
+;;
+
+ "bh" )
 cat <<EOF
 
       Bh
@@ -579,8 +612,9 @@ chromium-54.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "bi" ]]; then
+;;
+
+ "bi" )
 cat <<EOF
 
       Bi
@@ -625,8 +659,9 @@ as fuses.
     Heat of vaporization: 179.1 kJ/mol
     Heat of atomization: 207.36 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "bk" ]]; then
+;;
+
+ "bk" )
 cat <<EOF
 
       Bk
@@ -668,12 +703,14 @@ particles.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 291 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "b" ]]; then
+;;
+
+ "b" )
 cat <<EOF
 EOF
-fi
-if [[ $ELEMENT = "br" ]]; then
+;;
+
+ "br" )
 cat <<EOF
 
       Br
@@ -718,8 +755,9 @@ and photographic chemicals.
     Heat of vaporization: 30.5 kJ/mol
     Heat of atomization: 117.943 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ca" ]]; then
+;;
+
+ "ca" )
 cat <<EOF
 
       Ca
@@ -766,8 +804,9 @@ great demand by a number of industries.
     Heat of vaporization: 150.6 kJ/mol
     Heat of atomization: 177.74 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cd" ]]; then
+;;
+
+ "cd" )
 cat <<EOF
 
       Cd
@@ -817,8 +856,9 @@ and a wide variety of intense colours.
     Heat of vaporization: 100 kJ/mol
     Heat of atomization: 112.05 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ce" ]]; then
+;;
+
+ "ce" )
 cat <<EOF
 
       Ce
@@ -866,8 +906,9 @@ agents in special metals.
     Heat of vaporization: 398 kJ/mol
     Heat of atomization: 423.4 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cf" ]]; then
+;;
+
+ "cf" )
 cat <<EOF
 
       Cf
@@ -909,8 +950,9 @@ ions.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 175 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cl" ]]; then
+;;
+
+ "cl" )
 cat <<EOF
 
       Cl
@@ -955,8 +997,9 @@ and many, many other compounds such as chlorofluorocarbons (CFC).
     Heat of vaporization: 20.4033 kJ/mol
     Heat of atomization: 120 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "c" ]]; then
+;;
+
+ "c" )
 cat <<EOF
 
       C
@@ -1003,8 +1046,9 @@ isotope to date old objects.
     Heat of vaporization: 710.9 kJ/mol
     Heat of atomization: 711.2 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cm" ]]; then
+;;
+
+ "cm" )
 cat <<EOF
 
       Cm
@@ -1046,8 +1090,9 @@ ions.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 382 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cn" ]]; then
+;;
+
+ "cn" )
 cat <<EOF
 
       Cn
@@ -1090,8 +1135,9 @@ with accelerated zinc-70 nuclei in a heavy ion accelerator.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "co" ]]; then
+;;
+
+ "co" )
 cat <<EOF
 
       Co
@@ -1137,8 +1183,9 @@ glasses. Radioactive cobalt-60 is used in cancer therapy.
     Heat of vaporization: 382.4 kJ/mol
     Heat of atomization: 423.082 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cr" ]]; then
+;;
+
+ "cr" )
 cat <<EOF
 
       Cr
@@ -1185,8 +1232,9 @@ an incredible variety of the most important metals in modern technology.
     Heat of vaporization: 341.8 kJ/mol
     Heat of atomization: 394.51 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cs" ]]; then
+;;
+
+ "cs" )
 cat <<EOF
 
       Cs
@@ -1232,8 +1280,9 @@ readily, it is used as an ion rocket motor propellant.
     Heat of vaporization: 66.5 kJ/mol
     Heat of atomization: 77.58 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "cu" ]]; then
+;;
+
+ "cu" )
 cat <<EOF
 
       Cu
@@ -1279,8 +1328,9 @@ are used in jewellery and for coins.
     Heat of vaporization: 306.7 kJ/mol
     Heat of atomization: 337.15 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "db" ]]; then
+;;
+
+ "db" )
 cat <<EOF
 
       Db
@@ -1325,12 +1375,14 @@ with a half-life of 34 seconds.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ds" ]]; then
+;;
+
+ "ds" )
 cat <<EOF
 EOF
-fi
-if [[ $ELEMENT = "dy" ]]; then
+;;
+
+ "dy" )
 cat <<EOF
 
       Dy
@@ -1376,8 +1428,9 @@ are being considered for use in the control rods in nuclear reactors.
     Heat of vaporization: 293 kJ/mol
     Heat of atomization: 293.05 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "er" ]]; then
+;;
+
+ "er" )
 cat <<EOF
 
       Er
@@ -1421,8 +1474,9 @@ alloying agent for other exotic metals.
     Heat of vaporization: 280 kJ/mol
     Heat of atomization: 318.32 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "es" ]]; then
+;;
+
+ "es" )
 cat <<EOF
 
       Es
@@ -1463,8 +1517,9 @@ neutrons.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 150 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "eu" ]]; then
+;;
+
+ "eu" )
 cat <<EOF
 
       Eu
@@ -1507,8 +1562,9 @@ red phosphors for colour televisions.
     Heat of vaporization: 176 kJ/mol
     Heat of atomization: 177.11 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "fe" ]]; then
+;;
+
+ "fe" )
 cat <<EOF
 
       Fe
@@ -1558,8 +1614,9 @@ It's oxides are used in magnetic tapes and disks.
     Heat of vaporization: 340.2 kJ/mol
     Heat of atomization: 413.96 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "fl" ]]; then
+;;
+
+ "fl" )
 cat <<EOF
 
       Fl
@@ -1612,8 +1669,9 @@ plutonium-242 with calcium-48.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "f" ]]; then
+;;
+
+ "f" )
 cat <<EOF
 
       F
@@ -1660,8 +1718,9 @@ and in toothpaste as sodium fluoride (NaF).
     Heat of vaporization: 3.26 kJ/mol
     Heat of atomization: 76.9 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "fm" ]]; then
+;;
+
+ "fm" )
 cat <<EOF
 
       Fm
@@ -1702,8 +1761,9 @@ still lighter particles or by neutron capture.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 141 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "fr" ]]; then
+;;
+
+ "fr" )
 cat <<EOF
 
       Fr
@@ -1747,8 +1807,9 @@ francium.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 75 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ga" ]]; then
+;;
+
+ "ga" )
 cat <<EOF
 
       Ga
@@ -1792,8 +1853,9 @@ GaAs laser diodes.
     Heat of vaporization: 270.3 kJ/mol
     Heat of atomization: 276 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "gd" ]]; then
+;;
+
+ "gd" )
 cat <<EOF
 
       Gd
@@ -1837,8 +1899,9 @@ alloying agents and the manufacture of electronic components.
     Heat of vaporization: 301 kJ/mol
     Heat of atomization: 398.94 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ge" ]]; then
+;;
+
+ "ge" )
 cat <<EOF
 
       Ge
@@ -1882,8 +1945,9 @@ arsenic, gallium and antimony.
     Heat of vaporization: 327.6 kJ/mol
     Heat of atomization: 373.8 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "he" ]]; then
+;;
+
+ "he" )
 cat <<EOF
 
       He
@@ -1927,8 +1991,9 @@ low temperature research.
     Heat of vaporization: 0.082 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "hf" ]]; then
+;;
+
+ "hf" )
 cat <<EOF
 
       Hf
@@ -1972,8 +2037,9 @@ ability to absorb neutrons.
     Heat of vaporization: 570.7 kJ/mol
     Heat of atomization: 618.9 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "hg" ]]; then
+;;
+
+ "hg" )
 cat <<EOF
 
       Hg
@@ -2018,8 +2084,9 @@ also in electrical switches and mercury-vapour lighting products.
     Heat of vaporization: 59.11 kJ/mol
     Heat of atomization: 64.463 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "h" ]]; then
+;;
+
+ "h" )
 cat <<EOF
 
       H
@@ -2067,8 +2134,9 @@ refining. It is also used as fuel in rockets. Its two heavier isotopes
     Heat of vaporization: 0.46 kJ/mol
     Heat of atomization: 216.003 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ho" ]]; then
+;;
+
+ "ho" )
 cat <<EOF
 
       Ho
@@ -2113,8 +2181,9 @@ offer some hope for future applications.
     Heat of vaporization: 303 kJ/mol
     Heat of atomization: 302.63 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "hs" ]]; then
+;;
+
+ "hs" )
 cat <<EOF
 
       Hs
@@ -2157,8 +2226,9 @@ lead-208 with iron-58.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "i" ]]; then
+;;
+
+ "i" )
 cat <<EOF
 
       I
@@ -2203,8 +2273,9 @@ nature.
     Heat of vaporization: 41.67 kJ/mol
     Heat of atomization: 107.24 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "in" ]]; then
+;;
+
+ "in" )
 cat <<EOF
 
       In
@@ -2249,8 +2320,9 @@ electronic semiconductors.
     Heat of vaporization: 231.8 kJ/mol
     Heat of atomization: 243.72 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ir" ]]; then
+;;
+
+ "ir" )
 cat <<EOF
 
       Ir
@@ -2296,8 +2368,9 @@ hardening agent for platinum.
     Heat of vaporization: 612.1 kJ/mol
     Heat of atomization: 664.34 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "k" ]]; then
+;;
+
+ "k" )
 cat <<EOF
 
       K
@@ -2347,8 +2420,9 @@ nerve and muscle tissues.
     Heat of vaporization: 79.1 kJ/mol
     Heat of atomization: 90.14 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "kr" ]]; then
+;;
+
+ "kr" )
 cat <<EOF
 
       Kr
@@ -2393,8 +2467,9 @@ lamps that outline airport runways.
     Heat of vaporization: 9.05 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "la" ]]; then
+;;
+
+ "la" )
 cat <<EOF
 
       La
@@ -2440,8 +2515,9 @@ used in expensive camera lenses.
     Heat of vaporization: 402.1 kJ/mol
     Heat of atomization: 431.29 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "li" ]]; then
+;;
+
+ "li" )
 cat <<EOF
 
       Li
@@ -2489,8 +2565,9 @@ and in lubricants.
     Heat of vaporization: 147.7 kJ/mol
     Heat of atomization: 157.8 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "lr" ]]; then
+;;
+
+ "lr" )
 cat <<EOF
 
       Lr
@@ -2534,8 +2611,9 @@ lawrencium-256, which has a half-life of about 30 seconds.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 308 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "lu" ]]; then
+;;
+
+ "lu" )
 cat <<EOF
 
       Lu
@@ -2579,8 +2657,9 @@ polymerization.
     Heat of vaporization: 428 kJ/mol
     Heat of atomization: 427.37 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "lv" ]]; then
+;;
+
+ "lv" )
 cat <<EOF
 
       Lv
@@ -2630,8 +2709,9 @@ Livermorium was produced by bombarding curium-245 with calcium-48.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "md" ]]; then
+;;
+
+ "md" )
 cat <<EOF
 
       Md
@@ -2673,8 +2753,9 @@ Mendelevium was made by bombarding einsteinium with helium ions.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 116 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "mg" ]]; then
+;;
+
+ "mg" )
 cat <<EOF
 
       Mg
@@ -2721,8 +2802,9 @@ for light metals. It has structural properties similar to aluminium.
     Heat of vaporization: 127.6 kJ/mol
     Heat of atomization: 146.499 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "mn" ]]; then
+;;
+
+ "mn" )
 cat <<EOF
 
       Mn
@@ -2769,8 +2851,9 @@ crucial to the effectiveness of vitamin B1.
     Heat of vaporization: 220.5 kJ/mol
     Heat of atomization: 279.37 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "mo" ]]; then
+;;
+
+ "mo" )
 cat <<EOF
 
       Mo
@@ -2813,8 +2896,9 @@ protective coatings in boiler plate.
     Heat of vaporization: 589.9 kJ/mol
     Heat of atomization: 656.55 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "mt" ]]; then
+;;
+
+ "mt" )
 cat <<EOF
 
       Mt
@@ -2857,8 +2941,9 @@ with iron-58.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "na" ]]; then
+;;
+
+ "na" )
 cat <<EOF
 
       Na
@@ -2904,8 +2989,9 @@ reactors.
     Heat of vaporization: 99.2 kJ/mol
     Heat of atomization: 107.566 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "nb" ]]; then
+;;
+
+ "nb" )
 cat <<EOF
 
       Nb
@@ -2951,8 +3037,9 @@ aluminium or zirconium.
     Heat of vaporization: 680.19 kJ/mol
     Heat of atomization: 722.819 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "nd" ]]; then
+;;
+
+ "nd" )
 cat <<EOF
 
       Nd
@@ -3003,8 +3090,9 @@ magnets they consist of neodymium, iron, and boron.
     Heat of vaporization: 328 kJ/mol
     Heat of atomization: 328.57 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ne" ]]; then
+;;
+
+ "ne" )
 cat <<EOF
 
       Ne
@@ -3048,8 +3136,9 @@ neon gas is in advertising signs.
     Heat of vaporization: 1.736 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ni" ]]; then
+;;
+
+ "ni" )
 cat <<EOF
 
       Ni
@@ -3097,8 +3186,9 @@ in nickel-cadmium batteries, and as a catalyst and for coins.
     Heat of vaporization: 374.8 kJ/mol
     Heat of atomization: 427.659 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "n" ]]; then
+;;
+
+ "n" )
 cat <<EOF
 
       N
@@ -3145,8 +3235,9 @@ is also used in welding and enhanced oil recovery.
     Heat of vaporization: 5.577 kJ/mol
     Heat of atomization: 470.842 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "no" ]]; then
+;;
+
+ "no" )
 cat <<EOF
 
       No
@@ -3189,8 +3280,9 @@ carbon-13
     Heat of vaporization: - kJ/mol
     Heat of atomization: 108 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "np" ]]; then
+;;
+
+ "np" )
 cat <<EOF
 
       Np
@@ -3232,8 +3324,9 @@ with slow neutrons.
     Heat of vaporization: 336.6 kJ/mol
     Heat of atomization: 457 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "o" ]]; then
+;;
+
+ "o" )
 cat <<EOF
 
       O
@@ -3281,8 +3374,9 @@ radiation.
     Heat of vaporization: 6.82 kJ/mol
     Heat of atomization: 246.785 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "os" ]]; then
+;;
+
+ "os" )
 cat <<EOF
 
       Os
@@ -3329,8 +3423,9 @@ other element.
     Heat of vaporization: 738.06 kJ/mol
     Heat of atomization: 791 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pa" ]]; then
+;;
+
+ "pa" )
 cat <<EOF
 
       Pa
@@ -3374,8 +3469,9 @@ among fission products of uranium, thorium and plutonium.
     Heat of vaporization: 481 kJ/mol
     Heat of atomization: 607 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pb" ]]; then
+;;
+
+ "pb" )
 cat <<EOF
 
       Pb
@@ -3420,8 +3516,9 @@ against radiation and in batteries.
     Heat of vaporization: 177.8 kJ/mol
     Heat of atomization: 195.74 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pd" ]]; then
+;;
+
+ "pd" )
 cat <<EOF
 
       Pd
@@ -3467,8 +3564,9 @@ wristwatches. It is also used in surgical instruments and as a catalyst.
     Heat of vaporization: 361.5 kJ/mol
     Heat of atomization: 377.4 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "p" ]]; then
+;;
+
+ "p" )
 cat <<EOF
 
       P
@@ -3516,8 +3614,9 @@ other products.
     Heat of vaporization: 51.9 kJ/mol
     Heat of atomization: 314 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pm" ]]; then
+;;
+
+ "pm" )
 cat <<EOF
 
       Pm
@@ -3562,8 +3661,9 @@ thickness-measuring gages.
     Heat of vaporization: - kJ/mol
     Heat of atomization: 308 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "po" ]]; then
+;;
+
+ "po" )
 cat <<EOF
 
       Po
@@ -3608,8 +3708,9 @@ metal.
     Heat of vaporization: 100.8 kJ/mol
     Heat of atomization: 141 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pr" ]]; then
+;;
+
+ "pr" )
 cat <<EOF
 
       Pr
@@ -3658,8 +3759,9 @@ Ce:Nd:Pr:La:Other rare earth=50:18:6:22:4).
     Heat of vaporization: 357 kJ/mol
     Heat of atomization: 356.69 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pt" ]]; then
+;;
+
+ "pt" )
 cat <<EOF
 
       Pt
@@ -3704,8 +3806,9 @@ make standard weights and measures.
     Heat of vaporization: 469 kJ/mol
     Heat of atomization: 564.42 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "pu" ]]; then
+;;
+
+ "pu" )
 cat <<EOF
 
       Pu
@@ -3749,8 +3852,9 @@ reactors. Small quantities are used in thermo-electric generators.
     Heat of vaporization: 343.5 kJ/mol
     Heat of atomization: 348 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ra" ]]; then
+;;
+
+ "ra" )
 cat <<EOF
 
       Ra
@@ -3794,8 +3898,9 @@ it gives off.
     Heat of vaporization: 136.7 kJ/mol
     Heat of atomization: 159 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "rb" ]]; then
+;;
+
+ "rb" )
 cat <<EOF
 
       Rb
@@ -3840,8 +3945,9 @@ tubes, and as a catalyst.
     Heat of vaporization: 75.7 kJ/mol
     Heat of atomization: 82.17 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "re" ]]; then
+;;
+
+ "re" )
 cat <<EOF
 
       Re
@@ -3888,8 +3994,9 @@ forces.
     Heat of vaporization: 704.25 kJ/mol
     Heat of atomization: 769 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "rf" ]]; then
+;;
+
+ "rf" )
 cat <<EOF
 
       Rf
@@ -3933,8 +4040,9 @@ Rutherfordium-261, the longest-lived, has a half-life of 62 seconds.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "rg" ]]; then
+;;
+
+ "rg" )
 cat <<EOF
 
       Rg
@@ -3979,8 +4087,9 @@ chains were observed with position-sensitive detectors.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "rh" ]]; then
+;;
+
+ "rh" )
 cat <<EOF
 
       Rh
@@ -4023,8 +4132,9 @@ equipment and with platinum to make thermocouples.
     Heat of vaporization: 494.34 kJ/mol
     Heat of atomization: 555.59 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "rn" ]]; then
+;;
+
+ "rn" )
 cat <<EOF
 
       Rn
@@ -4068,8 +4178,9 @@ of radium in the earths crust. It is used to treat some forms of cancer.
     Heat of vaporization: 18.1 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ru" ]]; then
+;;
+
+ "ru" )
 cat <<EOF
 
       Ru
@@ -4113,8 +4224,9 @@ harden platinum and palladium, aircraft magnetos use platinum alloy with
     Heat of vaporization: 567 kJ/mol
     Heat of atomization: 641.031 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sb" ]]; then
+;;
+
+ "sb" )
 cat <<EOF
 
       Sb
@@ -4159,8 +4271,9 @@ over-the-counter cold and flu remedies use antimony compounds.
     Heat of vaporization: 165.8 kJ/mol
     Heat of atomization: 262.04 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sc" ]]; then
+;;
+
+ "sc" )
 cat <<EOF
 
       Sc
@@ -4207,8 +4320,9 @@ that produce light having a colour closely matching natural sunlight.
     Heat of vaporization: 376.1 kJ/mol
     Heat of atomization: 376.02 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "se" ]]; then
+;;
+
+ "se" )
 cat <<EOF
 
       Se
@@ -4255,8 +4369,9 @@ rectifiers, also colours glass red.
     Heat of vaporization: 90 kJ/mol
     Heat of atomization: 226.4 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sg" ]]; then
+;;
+
+ "sg" )
 cat <<EOF
 
       Sg
@@ -4298,8 +4413,9 @@ was made by bombarding californium-249 with oxygen-18.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "si" ]]; then
+;;
+
+ "si" )
 cat <<EOF
 
       Si
@@ -4347,8 +4463,9 @@ the more widely used semiconductor for electronics.
     Heat of vaporization: 383.3 kJ/mol
     Heat of atomization: 451.29 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "s" ]]; then
+;;
+
+ "s" )
 cat <<EOF
 
       S
@@ -4394,8 +4511,9 @@ for making sulfuric acid (H2SO4).
     Heat of vaporization: 9.62 kJ/mol
     Heat of atomization: 276.6 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sm" ]]; then
+;;
+
+ "sm" )
 cat <<EOF
 
       Sm
@@ -4440,8 +4558,9 @@ applications in solid-state and superconductor technologies.
     Heat of vaporization: 164.8 kJ/mol
     Heat of atomization: 206.1 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sn" ]]; then
+;;
+
+ "sn" )
 cat <<EOF
 
       Sn
@@ -4487,8 +4606,9 @@ steel cans since it is non-toxic and non-corrosive, also in solder
     Heat of vaporization: 296.2 kJ/mol
     Heat of atomization: 302 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "sr" ]]; then
+;;
+
+ "sr" )
 cat <<EOF
 
       Sr
@@ -4533,12 +4653,14 @@ atomic-bomb explosions.
     Heat of vaporization: 154.4 kJ/mol
     Heat of atomization: 164.4 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ta" ]]; then
+;;
+
+ "ta" )
 cat <<EOF
 EOF
-fi
-if [[ $ELEMENT = "tb" ]]; then
+;;
+
+ "tb" )
 cat <<EOF
 
       Tb
@@ -4582,8 +4704,9 @@ and solid-state devices.
     Heat of vaporization: 391 kJ/mol
     Heat of atomization: 390.62 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "tc" ]]; then
+;;
+
+ "tc" )
 cat <<EOF
 
       Tc
@@ -4629,8 +4752,9 @@ alloy.
     Heat of vaporization: 585.22 kJ/mol
     Heat of atomization: 678 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "te" ]]; then
+;;
+
+ "te" )
 cat <<EOF
 
       Te
@@ -4676,8 +4800,9 @@ ingredient in manufacturing blasting caps.
     Heat of vaporization: 104.6 kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "th" ]]; then
+;;
+
+ "th" )
 cat <<EOF
 
       Th
@@ -4722,8 +4847,9 @@ creates uranium-233, a nuclear fuel.
     Heat of vaporization: 513.67 kJ/mol
     Heat of atomization: 598.65 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "ti" ]]; then
+;;
+
+ "ti" )
 cat <<EOF
 
       Ti
@@ -4771,8 +4897,9 @@ in paint, rubber, paper and many others.
     Heat of vaporization: 425.5 kJ/mol
     Heat of atomization: 467.14 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "tl" ]]; then
+;;
+
+ "tl" )
 cat <<EOF
 
       Tl
@@ -4818,8 +4945,9 @@ ant poisons and for detecting infrared radiation.
     Heat of vaporization: 166.1 kJ/mol
     Heat of atomization: 182.845 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "tm" ]]; then
+;;
+
+ "tm" )
 cat <<EOF
 
       Tm
@@ -4863,8 +4991,9 @@ for electrical equipment.
     Heat of vaporization: 247 kJ/mol
     Heat of atomization: 233.43 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "u" ]]; then
+;;
+
+ "u" )
 cat <<EOF
 
       U
@@ -4908,8 +5037,9 @@ a fuel in nuclear reactors and in bombs.
     Heat of vaporization: 417.1 kJ/mol
     Heat of atomization: 535.43 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "uuo" ]]; then
+;;
+
+ "uuo" )
 cat <<EOF
 
       Uuo
@@ -4948,8 +5078,9 @@ used as a placeholder until the discovery is acknowledged by the IUPAC.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "uup" ]]; then
+;;
+
+ "uup" )
 cat <<EOF
 
       Uup
@@ -4988,8 +5119,9 @@ used as a placeholder until the discovery is acknowledged by the IUPAC.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "uus" ]]; then
+;;
+
+ "uus" )
 cat <<EOF
 
       Uus
@@ -5028,8 +5160,9 @@ used as a placeholder until the discovery is acknowledged by the IUPAC.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "uut" ]]; then
+;;
+
+ "uut" )
 cat <<EOF
 
       Uut
@@ -5068,8 +5201,9 @@ used as a placeholder until the discovery is acknowledged by the IUPAC.
     Heat of vaporization: - kJ/mol
     Heat of atomization: - kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "v" ]]; then
+;;
+
+ "v" )
 cat <<EOF
 
       V
@@ -5117,8 +5251,9 @@ other metals to make very strong and durable alloys. Vanadium pentoxide
     Heat of vaporization: 459.7 kJ/mol
     Heat of atomization: 510.95 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "w" ]]; then
+;;
+
+ "w" )
 cat <<EOF
 
       W
@@ -5163,8 +5298,9 @@ for making cutting tools and abrasives.
     Heat of vaporization: 824.2 kJ/mol
     Heat of atomization: 848.1 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "xe" ]]; then
+;;
+
+ "xe" )
 cat <<EOF
 
       Xe
@@ -5209,8 +5345,9 @@ reactors.
     Heat of vaporization: 12.65 kJ/mol
     Heat of atomization: 0 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "yb" ]]; then
+;;
+
+ "yb" )
 cat <<EOF
 
       Yb
@@ -5253,8 +5390,9 @@ in metallurgical and chemical experiments.
     Heat of vaporization: 159 kJ/mol
     Heat of atomization: 152.8 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "y" ]]; then
+;;
+
+ "y" )
 cat <<EOF
 
       Y
@@ -5298,8 +5436,9 @@ oxide combine to form a crystal garnet used in radar.
     Heat of vaporization: 367.4 kJ/mol
     Heat of atomization: 420.45 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "zn" ]]; then
+;;
+
+ "zn" )
 cat <<EOF
 
       Zn
@@ -5346,8 +5485,9 @@ devices, and many other products.
     Heat of vaporization: 114.2 kJ/mol
     Heat of atomization: 130.181 kJ/mol
 EOF
-fi
-if [[ $ELEMENT = "zr" ]]; then
+;;
+
+ "zr" )
 cat <<EOF
 
       Zr
@@ -5392,4 +5532,7 @@ Clear zircon (ZrSiO4) is a popular gemstone.
     Heat of vaporization: 566.7 kJ/mol
     Heat of atomization: 607.47 kJ/mol
 EOF
-fi
+;;
+
+
+esac
