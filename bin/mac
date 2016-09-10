@@ -72,7 +72,7 @@ function spinner()
 # mac script commands list - all commands
 #--------------------------------------------------------------------
 
-if [[ "$function" == "list" || "$function" == "help" ]]; then
+if [[ "$function" == "list" || "$function" == "help" || "${function}" == "-h" || "${function}" == "--help" ]]; then
 
     printf "\n${WHITEBOLD} mac CLI – OS X command line tools for developers\n"
     printf "${WHITEBOLD}====================================================\n"
