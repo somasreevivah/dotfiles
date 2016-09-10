@@ -24,6 +24,14 @@ void operator init(${1:args}){
 };
 endsnippet
 
+snippet light "Light definition" b
+light ${1:varname} = light(pen[] diffuse,
+pen[] ambient=array(diffuse.length,black),
+pen[] specular=diffuse, pen background=nullpen,
+real specularfactor=1,
+bool viewport=false, triple[] position)
+endsnippet
+
 snippet label "Simple label" b
 label("${1:text}", ${2:Point}, ${3:SW});$0
 endsnippet
