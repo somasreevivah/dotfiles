@@ -503,7 +503,7 @@ endsnippet
 #####################
 
 snippet for "Foreach loop" b
-\foreach \\${1:val} in {${1:hello,world}}
+\foreach \\${1:val} in {${1:hello,...,world}}
 	{
 	${2:%statements}
 	}
@@ -513,23 +513,23 @@ snippet tikz-rec "Rectangle in tikz" b
 \fill [${1:orange}] (${2:lower_corner}) rectangle (${3:upper_corner});
 endsnippet
 
-snippet var-tikz "Variable in tikz" b
+snippet tikz-var "Variable in tikz" b
 \pgfmathsetmacro{\\${1:varname}}{${2:value}}
 endsnippet
 
-snippet coord-tikz "Coordinate in tikz" b
+snippet tikz-coord "Coordinate in tikz" b
 \coordinate (${1:POINT_NAME}) at (${2:x}, ${3:y});
 endsnippet
 
-snippet op-tikz "Coordinate operation in tikz" w
+snippet tikz-sum "Coordinate operation in tikz" w
 (\$(${1:point})+(${2:point})\$)
 endsnippet
 
-snippet draw-tikz "Draw" b
+snippet tikz-draw "Draw" b
 \draw${1:[${2:style}]} (${3:point_begin}) -- (${4:point_end});
 endsnippet
 
-snippet draw-text-tikz "Draw" b
+snippet tikz-draw-text "Draw" b
 \node${1:[${2:style}]} at (${3:point_begin}) {
 ${5:Text}
 };
