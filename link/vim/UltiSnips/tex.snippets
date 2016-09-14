@@ -133,6 +133,14 @@ $0
 % vim: spell ft=tex
 endsnippet
 
+snippet subfig "Subfigure of subcaption package" b
+\begin{subfigure}[b]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{${1:path}}
+	\caption{${1/\// /ga}}
+	\label{fig:${1/\//_/ga}}
+\end{subfigure}
+endsnippet
+
 
 #  math stuff {{{1  #
 #####################
