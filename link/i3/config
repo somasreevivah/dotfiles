@@ -312,10 +312,7 @@ bindsym $mod+Shift+b bar mode toggle
 bar {
         #mode invisible
         position top
-        #status_command i3status --config ~/.i3/i3status.conf
-        status_command i3blocks -c ~/.i3/i3blocks.conf
-        #status_command py3status
-        #status_command py3status -c ~/.i3/i3status.conf
+        status_command ~/.dotfiles/bin/i3status.sh
         colors {
                 background #000000
                 #statusline #ffffff
