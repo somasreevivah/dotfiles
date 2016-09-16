@@ -608,13 +608,13 @@ snippet sec "Section" b
 
 ${0}
 endsnippet
-snippet sub "Subsection" b
+snippet ssec "Subsection" b
 \subsection{${1:${VISUAL:subsection_name}}} %{{{1
 \label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
-snippet ssub "Subsubsection" b
+snippet sssec "Subsubsection" b
 \subsubsection{${1:${VISUAL:subsubsection_name}}} %{{{1
 \label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
