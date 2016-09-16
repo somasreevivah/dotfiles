@@ -134,6 +134,14 @@ $0
 % vim-run: pdflatex % ; mupdf $(basename % .tex).pdf
 endsnippet
 
+snippet subfig "Subfigure of subcaption package" b
+\begin{subfigure}[b]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{${1:path}}
+	\caption{${1/\// /ga}}
+	\label{fig:${1/\//_/ga}}
+\end{subfigure}
+endsnippet
+
 
 #  math stuff {{{1  #
 #####################
@@ -504,7 +512,7 @@ endsnippet
 #####################
 
 snippet for "Foreach loop" b
-\foreach \\${1:val} in {${1:hello,world}}
+\foreach \\${1:val} in {${1:hello,...,world}}
 	{
 	${2:%statements}
 	}
@@ -514,23 +522,23 @@ snippet tikz-rec "Rectangle in tikz" b
 \fill [${1:orange}] (${2:lower_corner}) rectangle (${3:upper_corner});
 endsnippet
 
-snippet var-tikz "Variable in tikz" b
+snippet tikz-var "Variable in tikz" b
 \pgfmathsetmacro{\\${1:varname}}{${2:value}}
 endsnippet
 
-snippet coord-tikz "Coordinate in tikz" b
+snippet tikz-coord "Coordinate in tikz" b
 \coordinate (${1:POINT_NAME}) at (${2:x}, ${3:y});
 endsnippet
 
-snippet op-tikz "Coordinate operation in tikz" w
+snippet tikz-sum "Coordinate operation in tikz" w
 (\$(${1:point})+(${2:point})\$)
 endsnippet
 
-snippet draw-tikz "Draw" b
+snippet tikz-draw "Draw" b
 \draw${1:[${2:style}]} (${3:point_begin}) -- (${4:point_end});
 endsnippet
 
-snippet draw-text-tikz "Draw" b
+snippet tikz-draw-text "Draw" b
 \node${1:[${2:style}]} at (${3:point_begin}) {
 ${5:Text}
 };
@@ -601,13 +609,13 @@ snippet sec "Section" b
 
 ${0}
 endsnippet
-snippet sub "Subsection" b
+snippet ssec "Subsection" b
 \subsection{${1:${VISUAL:subsection_name}}} %{{{1
 \label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
-snippet ssub "Subsubsection" b
+snippet sssec "Subsubsection" b
 \subsubsection{${1:${VISUAL:subsubsection_name}}} %{{{1
 \label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 

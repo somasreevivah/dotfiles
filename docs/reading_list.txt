@@ -1,3 +1,6 @@
 http://journals.aps.org/pr/pdf/10.1103/PhysRev.52.1107
 http://www.brokenthorn.com/Resources/OSDevIndex.html
 http://joaquinlp.me/blog/your-guide-to-a-damn-light-arch-linux-with-i3-and-text-apps/
+http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=0549ABB858FBCAAD99A48377D9B79E8F?doi=10.1.1.132.3930&rep=rep1&type=pdf
+http://www.byclb.com/TR/Tutorials/volume_rendering/Index.aspx
+https://hackaday.io/project/4177-lvds-laptop-display-interfacing

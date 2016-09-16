@@ -327,6 +327,7 @@ command! -nargs=1 Silent
 nnoremap <localleader>M :make 
 " do a quick make mainly for latex stuff
 nnoremap <localleader>m :Silent make<cr>
+nnoremap <localleader>mt :make test<cr>
 
 
 

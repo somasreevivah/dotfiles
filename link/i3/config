@@ -12,7 +12,7 @@ set $windows Mod4
 font pango:DejaVu Sans Mono 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+floating_modifier Shift
 focus_follows_mouse no
 
 # start a terminal
@@ -31,11 +31,12 @@ bindsym $mod+Shift+q kill
 
 
 
-bindsym $mod+Shift+w exec ~/.dotfiles/bin/set_wallpaper.sh
 #scratchpad config 
 bindsym $mod+Shift+minus move scratchpad
 #show the first scratchpad window
 bindsym $mod+minus scratchpad show
+
+bindsym $mod+$windows+s exec "systemctl hybrid-sleep; i3lock"
 
 
 # lock session
@@ -75,10 +76,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+v split h
+bindsym $mod+Shift+v split v
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v split h
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
@@ -96,6 +97,7 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 bindsym $mod+b border toggle
 #borders of windows will be default a pixel wide
 new_window pixel
@@ -110,7 +112,8 @@ bindsym $mod+Shift+r exec "~/.i3/i3status.sh" ; restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 #wallpaper script
-exec_always ~/.dotfiles/bin/set_wallpaper.sh
+#exec_always ~/.dotfiles/bin/set_wallpaper.sh
+bindsym $mod+Shift+w exec ~/.dotfiles/bin/set_wallpaper.sh
 
 
 # focus the child container
@@ -309,10 +312,7 @@ bindsym $mod+Shift+b bar mode toggle
 bar {
         #mode invisible
         position top
-        #status_command i3status --config ~/.i3/i3status.conf
-        status_command i3blocks -c ~/.i3/i3blocks.conf
-        #status_command py3status
-        #status_command py3status -c ~/.i3/i3status.conf
+        status_command ~/.dotfiles/bin/i3status.sh
         colors {
                 background #000000
                 #statusline #ffffff

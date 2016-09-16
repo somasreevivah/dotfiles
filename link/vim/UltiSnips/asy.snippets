@@ -4,6 +4,10 @@ snippet shbang "Shebang #!" b
 #! /usr/bin/env asy
 endsnippet
 
+snippet ass "Assert" b
+assert(${1:condition}, "${2:message}");
+endsnippet
+
 snippet 3d-vector-render "Render 3d graphics in vector" b
 settings.prc       = false;
 settings.render    = 10;
@@ -22,6 +26,14 @@ snippet init "Struct init" b
 void operator init(${1:args}){
 	${2://content}
 };
+endsnippet
+
+snippet light "Light definition" b
+light ${1:varname} = light(pen[] diffuse,
+pen[] ambient=array(diffuse.length,black),
+pen[] specular=diffuse, pen background=nullpen,
+real specularfactor=1,
+bool viewport=false, triple[] position)
 endsnippet
 
 snippet label "Simple label" b
