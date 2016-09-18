@@ -65,7 +65,7 @@ class POSCAR(object):
     def getCartesian(self, atom_number):
         coords = self.getCoordinates(atom_number)
         basis  = self.getScaledBasis()
-        return [basis[0][i]*coords[i] + basis[1][i]*coords[i] + basis[2][i]*coords[i] for i in range(3)]
+        return [basis[0][i]*coords[0] + basis[1][i]*coords[1] + basis[2][i]*coords[2] for i in range(3)]
     def isCartesian(self):
         return self.mode[0] in "CcKk"
     def getNumberOfAtoms(self):
@@ -353,7 +353,6 @@ if __name__=="__main__" :
         VERBOSE=False
 
     printv("Input file %s"%args.f)
-    printv("Searching for atom number %s"%args.n)
 
     poscar=parsePoscar(args.f)
     if  VERBOSE:
@@ -365,7 +364,8 @@ if __name__=="__main__" :
 
     if args.command == "asy":
         poscar.printAsyAtoms(args.L, args.l, args.bond_radius, args.radius_scale, args.asy_atom, args.camera);
-    elif args.command == "orderasy":
+    elif args.command == "order":
+        printv("Searching for atom number %s"%args.n)
         ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
         for item in ordered_distances:
             atom_number = item[0]
