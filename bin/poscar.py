@@ -291,21 +291,21 @@ settings.render    = 10; //quality
         print("\n// - Atoms - 1}}}")
 
         # draw atomic bonds
-        print("\n// - Atom drawing - {{{1")
-        for i in range(1,poscar.getNumberOfAtoms()+1):
-            print("ATOM_%s.draw(radius_scale = radius_scale);"%(i))
-        print("\n// - Atoms drawing - 1}}}")
+        # print("\n// - Atom drawing - {{{1")
+        # for i in range(1,poscar.getNumberOfAtoms()+1):
+            # print("ATOM_%s.draw(radius_scale = radius_scale);"%(i))
+        # print("\n// - Atoms drawing - 1}}}")
 
-        print("\n// - Bonds - {{{1")
-        for i in range(1,poscar.getNumberOfAtoms()+1):
-            for j in range(i+1, poscar.getNumberOfAtoms()+1):
-                atom_pos_1 = poscar.getAtomCoord(i)
-                atom_pos_2 = poscar.getAtomCoord(j)
-                distance = dist3d(atom_pos_1, atom_pos_2)
-                if min_length<= distance and distance <= max_length:
-                    print("// distance: "+str(distance))
-                    print("Bond(ATOM_%s, ATOM_%s).draw(max_dist=max_bond_dist, min_dist=min_bond_dist,radius=bond_radius);"%(i,j))
-        print("\n// - Bonds - 1}}}")
+        # print("\n// - Bonds - {{{1")
+        # for i in range(1,poscar.getNumberOfAtoms()+1):
+            # for j in range(i+1, poscar.getNumberOfAtoms()+1):
+                # atom_pos_1 = poscar.getAtomCoord(i)
+                # atom_pos_2 = poscar.getAtomCoord(j)
+                # distance = dist3d(atom_pos_1, atom_pos_2)
+                # if min_length<= distance and distance <= max_length:
+                    # print("// distance: "+str(distance))
+                    # print("Bond(ATOM_%s, ATOM_%s).draw(max_dist=max_bond_dist, min_dist=min_bond_dist,radius=bond_radius);"%(i,j))
+        # print("\n// - Bonds - 1}}}")
         if args.chgcar:
             chgcar = parseChgcar(poscar)
             nx = chgcar.partition[0]
