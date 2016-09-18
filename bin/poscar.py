@@ -19,7 +19,9 @@ def printv(arg1):
 
 
 
-#  Main classes {{{1  #
+
+#  POSCAR {{{1  #
+#################
 
 class POSCAR(object):
     def __init__(self):
@@ -139,6 +141,9 @@ settings.render    = 10; //quality
 
 
 
+
+#  CHGCAR {{{1  #
+#################
 
 class CHGCAR(POSCAR):
     def __init__(self,poscar):
@@ -360,7 +365,7 @@ if __name__=="__main__" :
 
     if args.command == "asy":
         poscar.printAsyAtoms(args.L, args.l, args.bond_radius, args.radius_scale, args.asy_atom, args.camera);
-    elif args.command == "order":
+    elif args.command == "orderasy":
         ordered_distances = calculateIncrementalEntfernteAtoms(poscar,args.n)
         for item in ordered_distances:
             atom_number = item[0]
