@@ -1,6 +1,10 @@
 
-alias fkf="ssh gallo@mz4.fkf.mpg.de"
-alias aba="ssh abakus01"
+fkf() {
+  ssh gallo@mz4.fkf.mpg.de $@
+}
+aba() {
+  ssh abakus01 $@
+}
 
 dfs_is_on_mpi_fkf || return 1
 
