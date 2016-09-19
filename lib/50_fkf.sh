@@ -1,5 +1,6 @@
 
 alias fkf="ssh gallo@mz4.fkf.mpg.de"
+alias aba="ssh abakus01"
 
 dfs_is_on_mpi_fkf || return 1
 
@@ -34,7 +35,6 @@ export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/
 #PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 
 # ALIASES
-alias aba="ssh abakus01"
 function abacd() {
   echo "cd $PWD" > $HOME/.ssh_cd
 
