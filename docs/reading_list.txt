@@ -4,3 +4,4 @@ http://joaquinlp.me/blog/your-guide-to-a-damn-light-arch-linux-with-i3-and-text-
 http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=0549ABB858FBCAAD99A48377D9B79E8F?doi=10.1.1.132.3930&rep=rep1&type=pdf
 http://www.byclb.com/TR/Tutorials/volume_rendering/Index.aspx
 https://hackaday.io/project/4177-lvds-laptop-display-interfacing
+https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers

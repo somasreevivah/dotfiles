@@ -114,8 +114,11 @@ for ${1:needle} in ${2:${${3:array}[@]}} ; do
 	${0:#statements}
 done
 endsnippet
-#snippet ford "For in dictionary/table form" b
-#endsnippet
+snippet ford "For in dictionary/table form" b
+for ${1:key} in ${2:${!${3:dictionary}[@]}} ; do
+	${0:#statements}
+done
+endsnippet
 snippet while "While loop" b
 while ${2:[[ ${1:condition} ]]}; do
 	${0:#statements}
