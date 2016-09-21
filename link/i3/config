@@ -22,6 +22,8 @@ focus_follows_mouse no
 bindsym $mod+Return exec "which lilyterm && lilyterm || xterm"
 bindsym $windows+Return exec "xterm"
 
+#bindsym $mod+c move position mouse
+
 
 # small script to change the keyboard layout (de, ru, ara, il)
 bindsym $mod+Tab exec ~/.dotfiles/bin/change_kb.sh
