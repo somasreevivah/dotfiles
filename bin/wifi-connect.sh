@@ -47,7 +47,7 @@ function list_wireless_connections() {
 
 list_configuration_files() {
   for file in /etc/wpa_supplicant/*.conf; do
-    arrow $file
+    echo $file
   done
 }
 
