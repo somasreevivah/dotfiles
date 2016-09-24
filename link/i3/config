@@ -295,7 +295,7 @@ mode "move" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+m mode move
+bindsym $mod+m mode "move"
 
 #  Resize {{{1  #
 #################
