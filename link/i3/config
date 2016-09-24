@@ -22,7 +22,6 @@ focus_follows_mouse no
 bindsym $mod+Return exec "which lilyterm && lilyterm || xterm"
 bindsym $windows+Return exec "xterm"
 
-#bindsym $mod+c move position mouse
 
 
 # small script to change the keyboard layout (de, ru, ara, il)
@@ -273,6 +272,30 @@ bindsym $windows+i exec "xcalib -invert -alter"
 
 
 
+
+#  move mode {{{1  #
+####################
+
+mode "move" {
+
+    bindsym c move position center
+
+    bindsym Shift+h move left 10px
+    bindsym Shift+j move down 10px
+    bindsym Shift+k move up 10px
+    bindsym Shift+l move right 10px
+
+    bindsym h move left 10px
+    bindsym j move down 10px
+    bindsym k move up 10px
+    bindsym l move right 10px
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+m mode move
 
 #  Resize {{{1  #
 #################
