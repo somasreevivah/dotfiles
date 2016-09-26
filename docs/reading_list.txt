@@ -5,3 +5,4 @@ http://citeseerx.ist.psu.edu/viewdoc/download;jsessionid=0549ABB858FBCAAD99A4837
 http://www.byclb.com/TR/Tutorials/volume_rendering/Index.aspx
 https://hackaday.io/project/4177-lvds-laptop-display-interfacing
 https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
+netrc
