@@ -11,6 +11,16 @@ snippet todo "Set Todo" b
 }$0
 endsnippet
 
+snippet dit "Desctiption item" b
+\item[${1:key}]
+	$0
+endsnippet
+
+snippet iit "itemize and enumerate item" b
+\item
+	$0
+endsnippet
+
 snippet c "General command" w
 \\${1:command}${2:{${3:arg}}}
 endsnippet
@@ -409,7 +419,6 @@ endsnippet
 snippet vrho "varrho" w
 \varrho $0
 endsnippet
-#zeta is b for itemize
 snippet zeta "zeta" w
 \zeta $0
 endsnippet
