@@ -360,10 +360,10 @@ bar {
 ################
 
 # Colors
-# # class                 border  backgr. text    indicator
-#client.focused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
-#client.focused          #2c3e50 #aa3e50 #00009c #2e9ef4
-#client.unfocused          #2c3e50 #2c3e50 #1abc9c #2e9ef4
-#client.urgent           #e74c3c #e74c3c #ffffff #900000
+# # class          border  backgr. text    indicator
+#client.focused   #2c3e50 #2c3e50 #1abc9c #2e9ef4
+client.focused    #2c3e50 #ffffff #000000 #2e9ef4
+#client.unfocused #2c3e50 #2c3e50 #1abc9c #2e9ef4
+#client.urgent    #e74c3c #e74c3c #ffffff #900000
 
 # vim:foldmethod=marker
