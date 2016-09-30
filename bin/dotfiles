@@ -4,9 +4,9 @@
 #  help message {{{1  #
 #######################
 
-__SCRIPT_VERSION="0.0.1"
-__SCRIPT_NAME=dotfiles
-__DESCRIPTION="General configuration files"
+declare -r __SCRIPT_VERSION="0.0.1"
+declare -r __SCRIPT_NAME=dotfiles
+declare -r __DESCRIPTION="General configuration files"
 
 
 function usage_head() {
@@ -20,12 +20,12 @@ $(usage_head)
     $__DESCRIPTION
 
     Options:
-    -h|help       Display this message
-    -v|version    Display script version"
+      -h|help       Display this message
+      -v|version    Display script version"
 
-    COMMAND:
-    compile       Compile the projects in ${DOTFILES}/compile
-    source        Source the main functions in ${__SCRIPT_NAME}
+    Commands:
+      compile       Compile the projects in ${DOTFILES}/compile
+      source        Source the main functions in ${__SCRIPT_NAME}
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
