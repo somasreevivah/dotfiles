@@ -534,6 +534,20 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf     " Linux/MacOSX
 
 
 
+"  Binary {{{1  "
+"""""""""""""""""
+if has("autocmd")
+  augroup Binary
+    au!
+    au BufReadPost * if &binary | %!xxd
+    au BufReadPost * set ft=xxd | endif
+    au BufWritePre * if &binary | %!xxd -r
+    au BufWritePre * endif
+    au BufWritePost * if &binary | %!xxd
+    au BufWritePost * set nomod | endif
+  augroup END
+endif
+
 
 
 
