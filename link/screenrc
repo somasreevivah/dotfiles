@@ -6,8 +6,7 @@ shell -$SHELL
 hardstatus on
 hardstatus alwayslastline '%H:  %-Lw%34>[%n*%f %t]%+Lw'
 escape ^\\\ # Ctrl+\ as escape command.
-bindkey ^Q command
-bindkey ^Z command
+bindkey ^A command
 defnonblock on
 defscrollback 1024
 defflow off
