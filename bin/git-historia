@@ -1,5 +1,46 @@
 #! /usr/bin/env bash
 
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0 )
+__DESCRIPTION="Get all versions of a file in your editor"
+__OPTIONS=":hve:"
+
+EDITOR=${EDITOR:-vim}
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e EDITOR] FILE"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -e            Editor (Default ${EDITOR})
+
+
+    This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts $__OPTIONS opt; do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  e  )  EDITOR=$OPTARG ;;
+
+  * )  echo -e "\n  Option does not exist : $OPTARG\n"
+      usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
 FILE="$1"
 TMPDIR=$(mktemp -d)
 
@@ -24,7 +65,7 @@ EOF
 
 done
 
-ls -v ${TMPDIR} | xargs -n1 -I FF echo ${TMPDIR}/FF | xargs -n 100 vim
+ls -v ${TMPDIR} | xargs -n1 -I FF echo ${TMPDIR}/FF | xargs -n 100 ${EDITOR}
 
 rm -rf ${TMPDIR}
 
