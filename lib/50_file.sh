@@ -41,11 +41,6 @@ alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 # Aliasing eachdir like this allows you to use aliases/functions as commands.
 alias eachdir=". eachdir"
 
-# Create a new directory and enter it
-md() {
-  mkdir -p "$@" && cd "$@"
-}
-
 # Fast directory switching
 mkdir -p $DOTFILES/caches/z
 #_Z_NO_PROMPT_COMMAND=1
