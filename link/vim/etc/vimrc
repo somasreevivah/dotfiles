@@ -58,6 +58,11 @@ call vundle#end()
 
 " GENERAL STUFF {{{1 "
 
+function! GoogleLookUp()
+  let s:word = expand("<cword>")
+  exec "!elinks 'g ".s:word."'"
+endfunction
+
 function! AutoCompleteParentheses()
   let symbs_begin = ["(", "{", "\"", "'", "["]
   let symbs_end = [")", "}", "\"", "'", "]"]
