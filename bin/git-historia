@@ -5,7 +5,7 @@ TMPDIR=$(mktemp -d)
 
 let count=1
 
-for sha in $(git log --format="%H" ${FILE}) ; do
+for sha in $(git log --format="%H" ${FILE} | tac ) ; do
 
   TMPFILE=${TMPDIR}/${count}_${FILE}
 
@@ -24,7 +24,7 @@ EOF
 
 done
 
-find ${TMPDIR} | sort -n -r | grep -v ${TMPDIR}\$ | xargs -n 100 vim
+ls -v ${TMPDIR} | xargs -n1 -I FF echo ${TMPDIR}/FF | xargs -n 100 vim
 
 rm -rf ${TMPDIR}
 
