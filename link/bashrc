@@ -33,7 +33,7 @@ function source_lib_files() {
 }
 
 # Run dotfiles script, then source.
-function dotfiles() {
+dotfiles() {
   $DOTFILES/bin/dotfiles "$@" && source_lib_files
 }
 
