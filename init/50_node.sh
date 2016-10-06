@@ -1,5 +1,5 @@
 
-function install_node_npm_locally() {
+install_node_npm_locally() {
   local install_folder="$HOME/.local"
   echo 'export PATH=$HOME/local/bin:$PATH' >> ~/.bashrc
   . ~/.bashrc

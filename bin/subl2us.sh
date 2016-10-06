@@ -1,18 +1,18 @@
 #! /usr/bin/env bash
 
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
-function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Sublime snippets format to UltiSnips snippets format."
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] file1 file2 ..."; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] file1 file2 ..."; }
+usage ()
 {
 cat <<EOF
 $(usage_head)

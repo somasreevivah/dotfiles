@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
-function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 USER_NAME=$USER
 
@@ -13,8 +13,8 @@ __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Utility to cancel the jobs of the loadleveler llcancel command"
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)

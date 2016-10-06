@@ -21,7 +21,7 @@ export LD_LIBRARY_PATH
 
 
 # Source all files in "lib"
-function source_lib_files() {
+source_lib_files() {
   local file
   if [[ "$1" ]]; then
     source "$DOTFILES/lib/$1.sh"

@@ -3,7 +3,7 @@
 WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
 IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
 
-function wall_notify() {
+wall_notify() {
   type dzen2 > /dev/null || return 1
   local message=$1
   echo ${message}|\
@@ -17,7 +17,7 @@ function wall_notify() {
     -ta c
 }
 
-function local_wallpaper() {
+local_wallpaper() {
   local imageFile=$(ls $WALLPAPERS_DIR \
     | sort -R \
     | grep -v ${IMAGE_PATH} \
@@ -25,7 +25,7 @@ function local_wallpaper() {
   IMAGE_PATH=$WALLPAPERS_DIR/$imageFile
 }
 
-function hubble() {
+hubble() {
   #fetch images from
   #http://hubblesite.org/gallery/wallpaper
   local names

@@ -15,7 +15,7 @@ dfs_is_osx || return 0
 alias ss="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
 # Create a new Parallels VM from template, replacing the existing one.
-function vm_template() {
+vm_template() {
   local name="$@"
   local basename="$(basename "$name" ".zip")"
   local dest_dir="$HOME/Documents/Parallels"
@@ -46,7 +46,7 @@ function vm_template() {
 }
 
 # Export Localization.prefPane text substitution rules.
-function txt_sub_backup() {
+txt_sub_backup() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
   local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
   /usr/libexec/PlistBuddy -x -c "Print NSUserReplacementItems" "$prefs" > "$backup" &&
@@ -54,7 +54,7 @@ function txt_sub_backup() {
 }
 
 # Import Localization.prefPane text substitution rules.
-function txt_sub_restore() {
+txt_sub_restore() {
   local prefs=~/Library/Preferences/.GlobalPreferences.plist
   local backup=$DOTFILES/conf/osx/NSUserReplacementItems.plist
   if [[ ! -e "$backup" ]]; then

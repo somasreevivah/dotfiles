@@ -39,11 +39,11 @@ export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/
 #PERL_MM_OPT="INSTALL_BASE=/home/gallo/perl5"; export PERL_MM_OPT;
 
 # ALIASES
-function abacd() {
+abacd() {
   echo "cd $PWD" > $HOME/.ssh_cd
 
 }
-function abac() {
+abac() {
   ssh abakus01 "cd ${PWD} ; $@"
 }
 

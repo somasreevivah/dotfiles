@@ -11,7 +11,7 @@ npm_globals=(
 )
 
 # Update npm and install global modules.
-function npm_install() {
+npm_install() {
   local installed modules
   dfs_header "Updating npm"
   npm update -g npm
@@ -25,7 +25,7 @@ function npm_install() {
 
 # Publish module to Npm registry, but don't update "latest" unless the version
 # is an actual release version!
-function npm_publish() {
+npm_publish() {
   local version="$(node -pe 'require("./package.json").version' 2>/dev/null)"
   if [[ "${version#v}" =~ [a-z] ]]; then
     local branch="$(git branch | perl -ne '/^\* (.*)/ && print $1')"
@@ -43,7 +43,7 @@ function npm_publish() {
 # updated. While the "npm outdated" command only lists versions that are valid
 # per the version string in package.json, this looks at the @latest tag in npm.
 
-function npm_latest() {
+npm_latest() {
   if [[ -e 'node_modules' ]]; then
     echo 'Backing up node_modules directory.'
     mv "node_modules" "node_modules-$(date "+%Y_%m_%d-%H_%M_%S")"

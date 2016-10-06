@@ -5,8 +5,8 @@ __DESCRIPTION="Rosetta utility"
 __OPTIONS=":hvl:"
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-l language] <command>"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-l language] <command>"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)
@@ -57,10 +57,10 @@ PROG_LANGUAGE=${PROG_LANGUAGE:-'-E .'}
 ####################
 #  MAIN FUNCTIONS  #
 ####################
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32mO\033[0m  $@"; }
-function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m->>\033[0m  $@"; }
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32mO\033[0m  $@"; }
+error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m->>\033[0m  $@"; }
 
 get_rosetta_snippets() {
   declare -x -r SNIPPET_FILENAME=rosetta.snippets

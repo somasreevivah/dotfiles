@@ -7,12 +7,12 @@ __DESCRIPTION="Change layout of keyboard"
 __OPTIONS=":hv"
 
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
-function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)
@@ -43,11 +43,11 @@ do
 done
 shift $(($OPTIND-1))
 
-function getLayout() {
+getLayout() {
   setxkbmap -print -verbose 10 | grep layout | cut -d : -f2 | tr -d " "
 }
 
-function refreshInformations() {
+refreshInformations() {
   pkill -RTMIN+10 i3blocks
 }
 

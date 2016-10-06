@@ -10,19 +10,19 @@ VERBOSE="true"
 CONF_FILE=""
 INTERFACE="eth1"
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
-function error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 
-function vprint (){
+vprint (){
   if test -n $VERBOSE; then
     echo $@
   fi
 }
 
-function usage ()
+usage ()
 {
   echo "Usage :  $0 [options] [--]
 
@@ -41,7 +41,7 @@ function usage ()
 
 }    # ----------  end of function usage  ----------
 
-function list_wireless_connections() {
+list_wireless_connections() {
   sudo iwlist $INTERFACE scan | grep -e ESSID -e Quality | sed -e "s/\"//g" -e "s/ESSID:/\n\t/" 
 }
 
@@ -51,7 +51,7 @@ list_configuration_files() {
   done
 }
 
-function connect() {
+connect() {
   arrow "Trying to connect"
   if test -n "$1"; then
     check_ssid $1
@@ -61,7 +61,7 @@ function connect() {
   connect_wpa
 }
 
-function connect_wpa() {
+connect_wpa() {
   [[ -n $1 ]] && CONF_FILE=$1
   if test -n "$CONF_FILE"; then
     sudo wpa_supplicant -B -i $INTERFACE -D wext -c $CONF_FILE
@@ -72,7 +72,7 @@ function connect_wpa() {
   fi
 }
 
-function check_ssid() {
+check_ssid() {
   arrow "Checking the config file for network $1 is already in the system"
   ssid=$1
   for my_ssid in /etc/wpa_supplicant/*.conf; do
@@ -83,7 +83,7 @@ function check_ssid() {
   done
 }
 
-function check_wifi() {
+check_wifi() {
   arrow "Checking if a config file for current networks exists"
   for ssid in $( sudo iwlist scan | grep ESSID | sed -e "s/ESSID://" -e "s/\"//g" | cat); do
     check_ssid $ssid

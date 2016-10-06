@@ -2,7 +2,7 @@
 
 __ScriptVersion="0.0.1"
 
-function usage ()
+usage ()
 {
   echo "Usage :  $(basename $0) [-h|-help] [-v|-version] command
 

@@ -42,7 +42,7 @@ alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 alias eachdir=". eachdir"
 
 # Create a new directory and enter it
-function md() {
+md() {
   mkdir -p "$@" && cd "$@"
 }
 

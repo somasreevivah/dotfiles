@@ -6,8 +6,8 @@ __DESCRIPTION="ASCII periodic table for fast consulting"
 
 shopt -s nocasematch
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e <element_symbol>]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version] [-e <element_symbol>]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)

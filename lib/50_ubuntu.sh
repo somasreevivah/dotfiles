@@ -10,7 +10,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # Switch between already-downloaded node versions.
-function node_ver() {
+node_ver() {
   (
     ver="${1#v}"
     nodes=()

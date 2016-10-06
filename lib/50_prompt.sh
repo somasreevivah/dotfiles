@@ -29,13 +29,13 @@ fi
 alias prompt_getcolors='prompt_colors[9]=; local i; for i in ${!prompt_colors[@]}; do local c$i="\[\e[0;${prompt_colors[$i]}m\]"; done'
 
 # Exit code of previous command.
-function prompt_exitcode() {
+prompt_exitcode() {
   prompt_getcolors
   [[ $1 != 0 ]] && echo " $c2$1$c9"
 }
 
 # Git status.
-function prompt_git() {
+prompt_git() {
   prompt_getcolors
   local status output flags branch
   status="$(git status 2>/dev/null)"
@@ -61,7 +61,7 @@ function prompt_git() {
 prompt_stack=()
 trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
 
-function prompt_jobs() {
+prompt_jobs() {
   #to know how many jobs in the background
   #I have because more often than never I
   #forget about everything
@@ -69,7 +69,7 @@ function prompt_jobs() {
   [[ ! ${number_of_jobs} -eq 0 ]] && echo "($(tr -d " " <<<${number_of_jobs}))"
 }
 
-function prompt_command() {
+prompt_command() {
   local exit_code=$?
   # If the first command in the stack is prompt_command, no command was run.
   # Set exit_code to 0 and reset the stack.

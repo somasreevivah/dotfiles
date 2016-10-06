@@ -8,7 +8,7 @@
 #	-h, --help	Display this help-message and exit
 
 # help message
-function usage ()
+usage ()
 {
 cat << EOF
 Usage: $0 [-h] [URL]

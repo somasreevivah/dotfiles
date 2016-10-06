@@ -2,7 +2,7 @@
 # Git shortcuts
 
 alias g='git'
-function ga() { git add "${@:-.}"; } # Add all files by default
+ga() { git add "${@:-.}"; } # Add all files by default
 alias gp='git push'
 alias gpa='gp --all'
 alias gu='git pull'
@@ -16,7 +16,7 @@ alias gm='git commit'
 alias gma='git commit -a'
 alias gb='git branch'
 alias gba='git branch -a'
-function gc() { git checkout "${@:-master}"; } # Checkout master by default
+gc() { git checkout "${@:-master}"; } # Checkout master by default
 alias gco='gc'
 alias gcb='gc -b'
 alias gbc='gc -b' # Dyslexia
@@ -36,7 +36,7 @@ alias gp-all='eachdir git push'
 alias gs-all='eachdir git status'
 
 # open all changed files (that still actually exist) in the editor
-function ged() {
+ged() {
   local files=()
   for f in $(git diff --name-only "$@"); do
     [[ -e "$f" ]] && files=("${files[@]}" "$f")
@@ -48,7 +48,7 @@ function ged() {
 }
 
 # add a github remote by github username
-function gra() {
+gra() {
   if (( "${#@}" != 1 )); then
     echo "Usage: gra githubuser"
     return 1;
@@ -58,7 +58,7 @@ function gra() {
 }
 
 # GitHub URL for current repo.
-function gurl() {
+gurl() {
   local remotename="${@:-origin}"
   local remote="$(git remote -v | awk '/^'"$remotename"'.*\(push\)$/ {print $2}')"
   [[ "$remote" ]] || return
@@ -69,7 +69,7 @@ function gurl() {
 alias gurlp='echo $(gurl)/tree/$(gbs)/$(git rev-parse --show-prefix)'
 
 # git log with per-commit cmd-clickable GitHub URLs (iTerm)
-function gf() {
+gf() {
   git log $* --name-status --color | awk "$(cat <<AWK
     /^.*commit [0-9a-f]{40}/ {sha=substr(\$2,1,7)}
     /^[MA]\t/ {printf "%s\t$(gurl)/blob/%s/%s\n", \$1, sha, \$2; next}
@@ -79,7 +79,7 @@ AWK
 }
 
 # open last commit in GitHub, in the browser.
-function gfu() {
+gfu() {
   local n="${@:-1}"
   n=$((n-1))
   git web--browse  $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
@@ -90,11 +90,11 @@ alias gpu='git web--browse $(gurlp)'
 # Just the last few commits, please!
 for n in {1..5}; do alias gf$n="gf -n $n"; done
 
-function gj() { git-jump "${@:-next}"; }
+gj() { git-jump "${@:-next}"; }
 alias gj-='gj prev'
 
 # Combine diff --name-status and --stat
-function gstat() {
+gstat() {
   local file mode modes color lines range code line_regex
   local file_len graph_len e r c
   range="${1:-HEAD~}"

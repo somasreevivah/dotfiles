@@ -1,12 +1,12 @@
 #! /usr/bin/env bash
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
-function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
-function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
-function pasteClipboard() {
+pasteClipboard() {
   echo "$@" | xclip -i &&  arrow "Copying to clipboard" || error "Error occurred"
 }
 
@@ -17,8 +17,8 @@ __OPTIONS=":hv"
 
 ENC_METHOD=sha256sum
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)

@@ -6,8 +6,8 @@ __DESCRIPTION="Get Flash Videos path being streamed in your system."
 __OPTIONS=":hv"
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)

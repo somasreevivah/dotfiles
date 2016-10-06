@@ -6,8 +6,8 @@ __DESCRIPTION="Minimal template engine written in bash"
 __OPTIONS=":hvi:o:dl"
 
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)
@@ -45,18 +45,18 @@ FILE_FOUND=
 #  fucntion definition {{{1  #
 ##############################
 
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
-function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
-function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
-function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
-function printv() {
+header()   { echo -e "\n\033[1m$@\033[0m"; }
+success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+printv() {
   if [[ -n ${VERBOSE} ]]; then
     echo $@
   fi
 }
 
 
-function format_to_template() {
+format_to_template() {
   file_to_convert=$1
   sed '
   #s/\$/\\$/g #s/\([^ ]\)$ / \\$ /g
@@ -71,7 +71,7 @@ function format_to_template() {
     #s/[^}]*\([$][{].*[}]\)[^{$]*/\1/g
     #s/.*\([$][{].*[}]\).*/\1/g
 
-function list_templates() {
+list_templates() {
   for path_dir in $(tr ":" "\n" <<<${TEMPLI_PATH}) ;do
     [[ -d ${path_dir} ]] && for file in ${path_dir}/* ; do
     path=$(dirname $file)

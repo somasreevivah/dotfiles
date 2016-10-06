@@ -5,7 +5,7 @@
 
 __ScriptVersion="0.0.1"
 
-function usage ()
+usage ()
 {
   echo "Usage :  $(basename $0) [options] [--]
 
@@ -38,7 +38,7 @@ shift $(($OPTIND-1))
 
 
 
-function show-students(){
+show-students(){
   for user in $(ps aux | cut -d " " -f1 | sort ); do 
     if [[ $user != $last ]] ; then 
       if [[ $user = [st,ph]* ]]; then
