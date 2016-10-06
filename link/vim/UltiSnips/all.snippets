@@ -37,6 +37,19 @@ endsnippet
 #endsnippet
 
 
+snippet to "Contacts" w
+${1:contact}
+`!p
+import os
+if len(t[1])>2:
+	snip.rv = os.popen("~/contacts/query "+t[1]).read()
+`
+endsnippet
+
+
+
+
+
 
 
 snippet license-general "License general" b
