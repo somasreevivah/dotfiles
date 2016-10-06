@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+
+FILE="$1"
+TMPDIR=$(mktemp -d)
+
+let count=1
+
+for sha in $(git log --format="%H" ${FILE}) ; do
+  TMPFILE=${TMPDIR}/${count}_${FILE}
+  echo ${sha} > ${TMPFILE}
+  git show ${sha}:./${FILE} >> ${TMPFILE}
+  let count+=1
+done
+
+find ${TMPDIR} | sort -n | grep -v ${TMPDIR}\$ | xargs -n 100 vim
+
+rm -rf ${TMPDIR}
+
+reset
+
+
+
+
+
+
+
+# vim: ft=sh

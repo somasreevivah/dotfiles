@@ -1,14 +1,21 @@
 
 # General {{{1 %
 
+snippet texdiff "Texdiff preamble" b
+\usepackage{xcolor} \usepackage{ulem} \usepackage{changebar}
+\newcommand\TLSins[1]{\cbstart{}\textcolor{ins}{\uline{#1}}\cbend{}}
+\newcommand\TLSdel[1]{\cbdelete{}\textcolor{del}{\sout{#1}}}
+%Define editing colors "ins" and "del" with existing "xcolor" color names:
+\colorlet{ins}{blue} \colorlet{del}{red}
+endsnippet
 snippet def "General latex defintio" w
 \def\\${1:nameOfVariable}{${2:value}}
 endsnippet
 
 snippet todo "Set Todo" b
-\TODO{
+\TODO{%
 	${1:TODO MESSAGE}
-}$0
+}%$0
 endsnippet
 
 snippet dit "Desctiption item" b
