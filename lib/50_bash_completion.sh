@@ -1,11 +1,19 @@
 
+COMPLETION_PATHS=(
+/etc/
+$HOME/.local/etc/
+$HOME/.config/
+$HOME/local/etc/
+)
 
-COMPLETION_PATH=${HOME}/.config/bash_completion.d
-
-
-[[ ! -d ${COMPLETION_PATH} ]] && return 1
-
-
-for COMPLETION_FILE in ${COMPLETION_PATH}/* ; do
-  source ${COMPLETION_FILE}
+for path in ${COMPLETION_PATHS[@]} ; do
+  if [ -f ${path}/bash_completion ]; then
+    . ${path}/bash_completion
+  elif [ -d ${path}/bash_completion.d ]; then
+    . ${path}/bash_completion.d/*
+  fi
 done
+
+
+
+

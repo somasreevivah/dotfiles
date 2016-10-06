@@ -37,10 +37,6 @@ dotfiles() {
   $DOTFILES/bin/dotfiles "$@" && source_lib_files
 }
 
-if [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-fi
-
 source_lib_files
 
 
