@@ -10,7 +10,7 @@ if ! exists("NO_SPARTAN")
   "when I want to be spartan
   "Plugin 'vim-airline/vim-airline-themes'
   "Plugin 'bling/vim-airline'
-  Plugin 'scrooloose/nerdtree'
+  "Plugin 'scrooloose/nerdtree'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
   Plugin 'dhruvasagar/vim-table-mode'
