@@ -7,6 +7,13 @@ if sys.version_info < (${1:major_number}, ${2:minor_number}):
 	sys.exit(1)
 endsnippet
 
+snippet color-echos "Description" b
+def header(msg):    print("\n\033[1m"+str(msg)+"\033[0m")
+def success(msg):   print(" \033[1;32m==>\033[0m  "+str(msg))
+def error(msg):     print(" \033[1;31mX\033[0m  "+str(msg))
+def arrow(msg):     print(" \033[1;34m==>\033[0m  "+str(msg))
+def warning(msg):   print(" \033[0;93m==>\033[0m  "+str(msg))
+endsnippet
 
 
 
@@ -67,12 +74,35 @@ endsnippet
 
 
 
-########################
-#  BASH LIKE COMMANDS  #
-########################
 
 
 
+################
+#  matplotlib  #
+################
+
+
+
+
+snippet pltimp "import" b
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet plt "" b
+plt.plot($1, $2)
+endsnippet
+
+snippet pltxlab "" b
+plt.xlabel($1)
+endsnippet
+
+snippet pltylab "" b
+plt.ylabel($1)
+endsnippet
+
+snippet pltlegend "legend" b
+plt.legend($1)
+endsnippet
 
 
 
