@@ -6,28 +6,40 @@ function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
 function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
 function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
-WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
+WALLPAPERS_DIR=$HOME/.dotfiles/wallpapers
 IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
+
 mkdir -p ${WALLPAPERS_DIR}
 
+if [[ $(uname) = Linux ]]; then
+  SORT="sort"
+else
+  SORT="gsort"
+fi
+
+echo "WALLPAPERS_DIR = ${WALLPAPERS_DIR}"
+
 set_wallpaper() {
+  arrow "Setting wallpaper"
   if [[ $(uname) = Linux ]]; then
+    arrow "Trhough feh..."
     type feh 2>&1 > /dev/null || exit 1
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
      || wall_notify "Failure setting wallpaper"
   elif [[ $(uname) = Darwin ]]; then
-    osascript <<EOF
+    arrow "Trhough osascript..."
+    osascript -e '
     tell application "Finder"
-    set desktop picture to POSIX file "${IMAGE_PATH}"
+    set desktop picture to POSIX file "'${IMAGE_PATH}'"
     end tell
-EOF
+    '
   fi
 }
 
 wall_notify() {
   local message=$1
-  if type dzen2 > /dev/null ; then
+  if type dzen2 2>&1 > /dev/null ; then
     arrow ${message}
     echo ${message}|\
       timeout 1 dzen2 -p\
@@ -44,7 +56,7 @@ wall_notify() {
 
 wall_success() {
   local message=$1
-  if type dzen2 > /dev/null ; then
+  if type dzen2  2>&1 > /dev/null ; then
     success ${message}
     echo ${message}|\
       timeout 1 dzen2 -p\
@@ -61,7 +73,7 @@ wall_success() {
 
 local_wallpaper() {
   local imageFile=$(ls $WALLPAPERS_DIR \
-    | sort -R \
+    | ${SORT} -R \
     | grep -v ${IMAGE_PATH} \
     | tail -1)
   IMAGE_PATH=$WALLPAPERS_DIR/$imageFile
@@ -81,7 +93,7 @@ nasa_mars() {
     | sed -n "s/.*href\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"\
     | xargs -n1 -I FF echo ${url_base}FF \
   )
-  url=$(echo ${names} | tr " " "\n" | sort -R | head -1 )
+  url=$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )
   warning "Downloading ${url} ... "
   wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
 }
@@ -104,7 +116,7 @@ wallpaperscraft() {
   abstract
   textures
   )
-  local modality=$(echo ${modalities[@]} | tr " " "\n" | sort -R | head -1)
+  local modality=$(echo ${modalities[@]} | tr " " "\n" | ${SORT} -R | head -1)
   echo "Searching for modality ${modality}"
 
   names=$(curl -s "${url_base}/catalog/${modality}/${resolution}" \
@@ -114,7 +126,7 @@ wallpaperscraft() {
     | sed "s/[0-9]\+x[0-9]\+\.${fmt}/${resolution}.${fmt}/"
   )
   #base_url/image/black_background_red_color_paint_explosion_burst_9844_1600x1200.jpg
-  url=$(echo ${names} | tr " " "\n" | sort -R | head -1 )
+  url=$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )
   echo "Downloading ${url} ... "
   wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
 }
@@ -129,7 +141,7 @@ hubble() {
   local resolution
   names=$(curl -s http://hubblesite.org/gallery/wallpaper/ \
     | sed -n "s/.*href=\"\/gallery\/wallpaper\/\([0-9a-z]\+\)\/.*/\1/p"\
-    | sort -R | tail -1)
+    | ${SORT} -R | tail -1)
   year=$(sed "s/^[a-z][a-z]\([0-9]\{4\}\).*/\1/" <<<$names)
   number=$(sed "s/^[a-z][a-z][0-9]\{4\}0\([0-9]\{2\}\).*/\1/" <<<$names)
   letter=$(sed "s/^[a-z][a-z][0-9]\{4\}0[0-9]\{2\}\([a-z]\).*/\1/" <<<$names)
@@ -158,7 +170,7 @@ mars_as_art
 if [[ -n $1 ]]; then
   parse=$1
 else
-  parse=$(echo ${PARSERS[@]} | tr " " "\n" | sort -R | tail -1)
+  parse=$(echo ${PARSERS[@]} | tr " " "\n" | ${SORT} -R | tail -1)
 fi
 
 
@@ -169,7 +181,8 @@ ${parse}
 
 set_wallpaper
 
-#vim-run: bash % nasa_mars
-#vim-run: bash % mars_as_art
 #vim-run: bash % wallpaperscraft
+#vim-run: bash % nasa_mars
+#vim-run: bash % local_wallpaper
+#vim-run: bash % mars_as_art
 
