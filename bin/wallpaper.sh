@@ -10,6 +10,21 @@ WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
 IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
 mkdir -p ${WALLPAPERS_DIR}
 
+set_wallpaper() {
+  if [[ $(uname) = Linux ]]; then
+    type feh 2>&1 > /dev/null || exit 1
+    feh --bg-max ${IMAGE_PATH} \
+     && wall_success "Wallpaper set" \
+     || wall_notify "Failure setting wallpaper"
+  elif [[ $(uname) = Darwin ]]; then
+    osascript <<EOF
+    tell application "Finder"
+    set desktop picture to POSIX file "${IMAGE_PATH}"
+    end tell
+EOF
+  fi
+}
+
 wall_notify() {
   local message=$1
   if type dzen2 > /dev/null ; then
@@ -152,10 +167,7 @@ wall_notify $parse
 
 ${parse}
 
-type feh 2>&1 > /dev/null || exit 1
-feh --bg-max $IMAGE_PATH \
- && wall_success "Wallpaper set" \
- || wall_notify "Failure setting wallpaper"
+set_wallpaper
 
 #vim-run: bash % nasa_mars
 #vim-run: bash % mars_as_art
