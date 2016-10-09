@@ -10,17 +10,19 @@ WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
 IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
 
 wall_notify() {
-  type dzen2 > /dev/null || return 1
   local message=$1
-  echo ${message}|\
-    timeout 1 dzen2 -p\
-    -fg red\
-    -bg black\
-    -x 0\
-    -y 20\
-    -w 200\
-    -h 100\
-    -ta c
+  if type dzen2 > /dev/null ; then
+    arrow ${message}
+    echo ${message}|\
+      timeout 1 dzen2 -p\
+      -fg red\
+      -bg black\
+      -x 0\
+      -y 20\
+      -w 200\
+      -h 100\
+      -ta c
+  fi
 }
 
 local_wallpaper() {
@@ -39,8 +41,8 @@ wallpaperscraft() {
   local names
   local url
   local modalities=(
-  abstract
   space
+  3D
   abstract
   textures
   )
@@ -99,15 +101,13 @@ else
   parse=$(echo ${PARSERS[@]} | tr " " "\n" | sort -R | tail -1)
 fi
 
-arrow "Using ${parse}"
-
-type feh 2>&1 > /dev/null || exit 1
 
 
 wall_notify $parse
 
 ${parse}
 
+type feh 2>&1 > /dev/null || exit 1
 feh --bg-max $IMAGE_PATH || wall_notify "Failure setting wallpaper"
 
 #vim-run: bash % wallpaperscraft
