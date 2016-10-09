@@ -33,7 +33,8 @@ local_wallpaper() {
 
 wallpaperscraft() {
   local url_base="https://wallpaperscraft.com"
-  local resolution="1600x1200"
+  #local resolution="1600x1200"
+  local resolution="1920x1080"
   local fmt="jpg"
   local names
   local url
