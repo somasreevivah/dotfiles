@@ -8,6 +8,7 @@ function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
 WALLPAPERS_DIR=$(readlink -f ~/.dotfiles/wallpapers)
 IMAGE_PATH=${WALLPAPERS_DIR}/temporary.jpg
+mkdir -p ${WALLPAPERS_DIR}
 
 wall_notify() {
   local message=$1
