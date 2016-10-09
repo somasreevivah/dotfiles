@@ -24,6 +24,24 @@ wall_notify() {
       -h 100\
       -ta c
   fi
+  return 0
+}
+
+wall_success() {
+  local message=$1
+  if type dzen2 > /dev/null ; then
+    success ${message}
+    echo ${message}|\
+      timeout 1 dzen2 -p\
+      -fg green\
+      -bg black\
+      -x 0\
+      -y 20\
+      -w 200\
+      -h 100\
+      -ta c
+  fi
+  return 0
 }
 
 local_wallpaper() {
@@ -32,6 +50,30 @@ local_wallpaper() {
     | grep -v ${IMAGE_PATH} \
     | tail -1)
   IMAGE_PATH=$WALLPAPERS_DIR/$imageFile
+}
+
+nasa_mars() {
+  local cat=${1:-images}
+  local url_base="http://mars.jpl.nasa.gov/multimedia/${cat}/"
+  local fmt="jpg"
+  local names
+  local url
+  names=$(\
+  curl -s ${url_base} \
+    | sed "s/href/\rhref/g"\
+    | grep href \
+    | grep -i "Full resolution" \
+    | sed -n "s/.*href\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"\
+    | xargs -n1 -I FF echo ${url_base}FF \
+  )
+  url=$(echo ${names} | tr " " "\n" | sort -R | head -1 )
+  warning "Downloading ${url} ... "
+  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+}
+
+mars_as_art() {
+  #http://mars.jpl.nasa.gov/multimedia/marsasart/
+  nasa_mars "marsasart"
 }
 
 wallpaperscraft() {
@@ -93,6 +135,8 @@ PARSERS=(
 local_wallpaper
 hubble
 wallpaperscraft
+nasa_mars
+mars_as_art
 )
 
 
@@ -109,7 +153,11 @@ wall_notify $parse
 ${parse}
 
 type feh 2>&1 > /dev/null || exit 1
-feh --bg-max $IMAGE_PATH || wall_notify "Failure setting wallpaper"
+feh --bg-max $IMAGE_PATH \
+ && wall_success "Wallpaper set" \
+ || wall_notify "Failure setting wallpaper"
 
+#vim-run: bash % nasa_mars
+#vim-run: bash % mars_as_art
 #vim-run: bash % wallpaperscraft
 
