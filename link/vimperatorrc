@@ -2,6 +2,7 @@
 
 source! /home/gallo/.vimperatorrc.local
 
+set gui=tabs,nonavigation
 
 " go tp the last tab opened for toggling
 noremap g; <C-^>

@@ -21,7 +21,18 @@ Create plots using command line
             """)
 
     parser.add_argument("-v", "--verbose", help="Make the output verbose", action="store_true")
-    parser.add_argument("-f", help="Input file.", action="store")
+    parser.add_argument("-f", help="Input file.", nargs="*", action="store")
+    parser.add_argument("--backend", help="Backend for the plots", action="store", default="matplotlib")
+    parser.add_argument("--scatter", help="Scatter plot", action="store_true", default=True)
+    parser.add_argument("--hist", help="Histogram", action="store_true")
+    parser.add_argument("--3d", help="3D plots", action="store_true")
+    parser.add_argument("-u", help="Using columns", nargs="*",action="store")
+    parser.add_argument("-s", help="Styles", nargs="*",action="store")
+    parser.add_argument("-x", help="x label", nargs="*",action="store")
+    parser.add_argument("-y", help="y label", nargs="*",action="store")
+    parser.add_argument("-t", help="Title", nargs="*",action="store")
+    parser.add_argument("-l", help="Legend", nargs="*",action="store")
+
     # Parse arguments
     args = parser.parse_args()
 
@@ -35,4 +46,5 @@ Create plots using command line
 
 
 #vim-run: python % -h
+#vim-run: python % -f bash-colors bibsearch.sh
 # vim:ft=python
