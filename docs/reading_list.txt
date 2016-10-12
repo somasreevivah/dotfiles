@@ -7,3 +7,5 @@ https://hackaday.io/project/4177-lvds-laptop-display-interfacing
 https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
 netrc
 https://github.com/ssloy/tinyrenderer
+huang-rhys factor Adrius paper
+
