@@ -17,7 +17,6 @@ else
   SORT="gsort"
 fi
 
-echo "WALLPAPERS_DIR = ${WALLPAPERS_DIR}"
 
 set_wallpaper() {
   arrow "Setting wallpaper"
@@ -156,7 +155,10 @@ hubble() {
 }
 
 
-
+__SCRIPT_VERSION="0.0.1"
+__SCRIPT_NAME=$( basename $0 )
+__DESCRIPTION="Set wallpaper"
+__OPTIONS=":hvl"
 
 PARSERS=(
 local_wallpaper
@@ -165,6 +167,47 @@ wallpaperscraft
 nasa_mars
 mars_as_art
 )
+
+function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+function usage ()
+{
+cat <<EOF
+$(usage_head)
+
+    $__DESCRIPTION
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -l            List source names
+
+
+    This program is maintained by Alejandro Gallo.
+EOF
+}    # ----------  end of function usage  ----------
+
+while getopts $__OPTIONS opt; do
+  case $opt in
+
+  h|help     )  usage; exit 0   ;;
+
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  l  )
+    for s in ${PARSERS[@]} ; do
+      echo "${s}"
+    done
+    exit 0
+    ;;
+
+  * )  echo -e "\n  Option does not exist : $OPTARG\n"
+      usage_head; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+
 
 
 if [[ -n $1 ]]; then
