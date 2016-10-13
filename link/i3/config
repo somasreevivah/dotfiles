@@ -115,6 +115,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #wallpaper script
 #exec_always ~/.dotfiles/bin/wallpaper.sh
 bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
+bindsym $windows+Shift+w exec "~/.dotfiles/bin/wallpaper.sh $(~/.dotfiles/bin/wallpaper.sh -l | dmenu)"
 
 
 # focus the child container
