@@ -1,6 +1,6 @@
 
 /****************************************************
-*  Reload the whole thing with xrdb ~/.Xresources  *
+*  Reload the whole thing with xrdb -merge ~/.Xresources  *
 ****************************************************/
 
 /***********
