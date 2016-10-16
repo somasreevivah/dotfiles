@@ -8,4 +8,4 @@ https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Metho
 netrc
 https://github.com/ssloy/tinyrenderer
 huang-rhys factor Adrius paper
-
+https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/First_Steps

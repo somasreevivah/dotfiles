@@ -224,8 +224,8 @@ ${parse}
 
 set_wallpaper
 
-#vim-run: bash % wallpaperscraft
 #vim-run: bash % nasa_mars
+#vim-run: bash % wallpaperscraft
 #vim-run: bash % local_wallpaper
 #vim-run: bash % mars_as_art
 
