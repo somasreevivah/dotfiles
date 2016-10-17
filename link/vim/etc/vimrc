@@ -20,6 +20,7 @@ if ! exists("NO_SPARTAN")
   "endif
   "Plugin 'takac/vim-hardtime'
   Plugin 'burnettk/vim-angular'
+  Plugin 'jpalardy/vim-slime'
 endif
 Plugin 'easymotion/vim-easymotion'
 if has("lua") " it needs lua!
