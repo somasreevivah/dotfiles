@@ -74,18 +74,29 @@ endsnippet
 ### BRANCHING {{{1
 
 
-#snippet if "If construct" b
-#endsnippet
-#snippet ife "If else construct" b
-#endsnippet
+snippet if "If construct" b
+if (${1:condition}){
+	$0
+}
+endsnippet
+snippet ife "If else construct" b
+if (${1:condition}){
+	$2
+} else {
+	$0
+}
+endsnippet
 #snippet elif "Else if construct" b
 #endsnippet
 #snippet ifsh "If construct, short form" b
 #endsnippet
 #snippet if3 "If construct tertiary form" b
 #endsnippet
-#snippet for "For with index" b
-#endsnippet
+snippet for "For with index" b
+for (var ${1:i} = ${2:0}; $1 < ${3:len}; $1++){
+	$0
+}
+endsnippet
 snippet fori "For in iterator form" b
 ${1:object}.forEach(function(${2:element}, ${3:index}){
 ${4://Body}
@@ -93,8 +104,11 @@ ${4://Body}
 endsnippet
 #snippet ford "For in dictionary/table form" b
 #endsnippet
-#snippet while "While loop" b
-#endsnippet
+snippet while "While loop" b
+while (${1:condition}){
+	$0
+}
+endsnippet
 #snippet until "Until loop" b
 #endsnippet
 #snippet case "Case construct" b
