@@ -342,7 +342,7 @@ nnoremap <localleader>mt :make test<cr>
 
 
 
-" Some General commands {{{1
+" VimRun {{{1
 
 "Run actual script being edited
 function! VIMRun()
@@ -620,6 +620,7 @@ nnoremap <localleader>ll :VimtexLabelsOpen<cr>
 "go to the next parentheses
 nnoremap gp /(<CR>
 nnoremap gP ?(<CR>
+onoremap in( :<c-u>normal! f(vi(<cr>
 
 
 "  Syntastic  {{{1"
