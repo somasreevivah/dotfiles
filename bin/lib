@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
-function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function header()   { echo -e "\n\033[1m$@\033[0m";        }
 function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
-function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@";   }
 function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
 function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
 
@@ -16,8 +16,44 @@ __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Library searcher"
 __OPTIONS=":hv:"
 
-LIBPATH=${LIBPATH}:~/Documents/
-VIEWER="zathura --fork"
+PDF_VIEWER="zathura --fork"
+PS_VIEWER="zathura --fork"
+DOC_VIEWER="libreoffice"
+HTML_VIEWER="firefox"
+CONFIG_FILE="$HOME/.librc"
+TEXT_VIEWER="${EDITOR}"
+VIDEO_VIEWER="mplayer"
+MUSIC_VIEWER="mplayer"
+COMMANDS=(default)
+CURRENT_COMMAND=default
+default_PATH=${default_PATH}:~/Documents/
+
+sourceConfigFile() {
+  [[ -f ${CONFIG_FILE} ]] && source ${CONFIG_FILE}
+}
+
+registerCommand(){
+  local cmd=$1
+  COMMANDS=(${cmd} ${COMMANDS[@]})
+}
+
+openDocument() {
+  local document=$1
+  if file -b "${document}" | grep PDF; then
+    ${PDF_VIEWER} "${document}"
+  elif file -b "${document}" | grep PS; then
+    ${PS_VIEWER} "${document}"
+  elif file -b "${document}" | grep ASCII; then
+    ${TEXT_VIEWER} "${document}"
+  elif file -b "${document}" | grep ISO; then
+    ${VIDEO_VIEWER} "${document}"
+  elif file -b "${document}" | grep audio; then
+    ${MUSIC_VIEWER} "${document}"
+  else
+    error "I do not know how to open this file ..."
+    error "Could not open file ${document}"
+  fi
+}
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
 function usage ()
@@ -50,14 +86,23 @@ while getopts $__OPTIONS opt; do
 done
 shift $(($OPTIND-1))
 
+sourceConfigFile
 
-for path in $(tr ":" " " <<<${LIBPATH}) ; do
+for cmd in ${COMMANDS[@]} ; do
+  if [[ ${cmd} = $1 ]]; then
+    CURRENT_COMMAND=$1
+    shift
+  fi
+done
+
+CURRENT_PATH_VAR=${CURRENT_COMMAND}_PATH
+for path in $(tr ":" " " <<<"${!CURRENT_PATH_VAR}") ; do
   find ${path} -type f
 done \
   | pick $([[ -n "$@" ]] && echo '-q '"$@") \
   | {
-  read filePath; 
-  ${VIEWER} ${filePath};
+  read filePath;
+  openDocument "${filePath}";
   }
 
 

@@ -1,0 +1,17 @@
+
+LIBPATH=${LIBPATH}:~/Documents/
+
+PDF_VIEWER="zathura --fork"
+PS_VIEWER="zathura --fork"
+TEXT_VIEWER="v"
+PDF_VIEWER="zathura --fork"
+CONFIG_FILE="$HOME/.librc"
+VIDEO_VIEWER="mpv"
+MUSIC_VIEWER="mplayer"
+
+
+
+registerCommand papers
+papers_PATH=~/Documents/marcus_notes/
+
+# vim: ft=sh
