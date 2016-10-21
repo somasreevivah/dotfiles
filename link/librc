@@ -22,5 +22,19 @@ soft_PATH=~/software/
 registerCommand vid
 vid_PATH=~/Videos/
 
+registerCommand his
+his_PATH=~/.bash_history
+his_SEARCHER=historySearcher
+his_ACTION=historyAction
+
+historySearcher(){
+  cat $his_PATH \
+    | sed '/^[\.-]*$/d'\
+    | sed '/^\s*$/d'\
+    | sed '/#.*/d'\
+    | sort \
+    | uniq
+}
+
 
 # vim: ft=sh
