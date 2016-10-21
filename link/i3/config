@@ -114,6 +114,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 bindsym $mod+o exec firefox --search "$(dmenu -p Search)" 
 
+bindsym $mod+Shift+i exec ~/.dotfiles/bin/lib vid
+
 #wallpaper script
 #exec_always ~/.dotfiles/bin/wallpaper.sh
 bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh

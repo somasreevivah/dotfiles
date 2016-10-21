@@ -26,6 +26,7 @@ VIDEO_VIEWER="mplayer"
 MUSIC_VIEWER="mplayer"
 COMMANDS=(default)
 CURRENT_COMMAND=default
+CURRENT_PICKER=pickSearcher
 default_PATH=${default_PATH}:~/Documents/
 
 sourceConfigFile() {
@@ -35,6 +36,10 @@ sourceConfigFile() {
 registerCommand(){
   local cmd=$1
   COMMANDS=(${cmd} ${COMMANDS[@]})
+}
+
+setCurrentVariables() {
+  
 }
 
 openDocument() {
@@ -53,6 +58,29 @@ openDocument() {
     error "I do not know how to open this file ..."
     error "Could not open file ${document}"
   fi
+}
+
+pickSearcher() {
+  local terms="$@"
+  echo ${terms}
+  if [[ -n "${terms}" ]]; then
+    while read line; do
+      echo ${line}
+    done \
+      | pick -q "${terms}"
+  else
+    while read line; do
+      echo ${line}
+    done \
+      | pick
+  fi
+}
+
+dmenuSearcher() {
+  while read line; do
+    echo ${line}
+  done \
+    | dmenu -i -fn 30 -l 20
 }
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
@@ -99,12 +127,13 @@ CURRENT_PATH_VAR=${CURRENT_COMMAND}_PATH
 for path in $(tr ":" " " <<<"${!CURRENT_PATH_VAR}") ; do
   find ${path} -type f
 done \
-  | pick $([[ -n "$@" ]] && echo '-q '"$@") \
+  | ${CURRENT_PICKER} \
   | {
   read filePath;
   openDocument "${filePath}";
   }
 
 
+#vim-run: bash % s
 #vim-run: bash %
 # vim: ft=sh

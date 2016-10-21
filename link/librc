@@ -14,4 +14,13 @@ MUSIC_VIEWER="mplayer"
 registerCommand papers
 papers_PATH=~/Documents/marcus_notes/
 
+
+
+registerCommand soft
+soft_PATH=~/software/
+
+registerCommand vid
+vid_PATH=~/Videos/
+
+
 # vim: ft=sh
