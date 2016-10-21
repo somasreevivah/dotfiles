@@ -14,8 +14,10 @@ fi
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Library searcher"
-__OPTIONS=":hv"
+__OPTIONS=":hv:"
 
+LIBPATH=${LIBPATH}:~/Documents/
+VIEWER="zathura --fork"
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
 function usage ()
@@ -27,7 +29,7 @@ $(usage_head)
 
     Options:
     -h|help       Display this message
-    -v|version    Display script version
+    -v            Viewer program
 
 
     This program is maintained by Alejandro Gallo.
@@ -39,7 +41,7 @@ while getopts $__OPTIONS opt; do
 
   h|help     )  usage; exit 0   ;;
 
-  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+  v )  VIEWER=${OPTARG} ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -47,6 +49,16 @@ while getopts $__OPTIONS opt; do
   esac    # --- end of case ---
 done
 shift $(($OPTIND-1))
+
+
+for path in $(tr ":" " " <<<${LIBPATH}) ; do
+  find ${path} -type f
+done \
+  | pick $([[ -n "$@" ]] && echo '-q '"$@") \
+  | {
+  read filePath; 
+  ${VIEWER} ${filePath};
+  }
 
 
 #vim-run: bash %
