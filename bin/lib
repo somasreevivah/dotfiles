@@ -24,10 +24,26 @@ CONFIG_FILE="$HOME/.librc"
 TEXT_VIEWER="${EDITOR}"
 VIDEO_VIEWER="mplayer"
 MUSIC_VIEWER="mplayer"
+
 COMMANDS=(default)
-CURRENT_COMMAND=default
-CURRENT_PICKER=pickSearcher
+
 default_PATH=${default_PATH}:~/Documents/
+default_PICKER=dmenuSearcher
+default_PICKER=pickSearcher
+default_SEARCHER=defaultSearcher
+default_ACTION=defaultAction
+
+defaultAction() {
+  local filePath
+  read filePath
+  openDocument "${filePath}"
+}
+
+defaultSearcher(){
+  for path in $(tr ":" " " <<<"${!CURRENT_PATH}") ; do
+    find ${path} -type f
+  done
+}
 
 sourceConfigFile() {
   [[ -f ${CONFIG_FILE} ]] && source ${CONFIG_FILE}
@@ -39,21 +55,43 @@ registerCommand(){
 }
 
 setCurrentVariables() {
-  
+  local vars=(
+    _PATH
+    _PICKER
+    _SEARCHER
+    _ACTION
+  )
+  local variable
+  for var in ${vars[@]} ; do
+    variable=${CURRENT_COMMAND}${var}
+    if test ${!variable}; then
+      eval "CURRENT${var}=${variable}"
+    else
+      eval "CURRENT${var}=default${var}"
+    fi
+  done
 }
 
 openDocument() {
   local document=$1
-  if file -b "${document}" | grep PDF; then
+  [[ ! -f "${document}" ]] && { warning "Empty selection"; return ; }
+  if file -b "${document}" | grep PDF 2>&1 >/dev/null ; then
     ${PDF_VIEWER} "${document}"
-  elif file -b "${document}" | grep PS; then
+  elif file -b "${document}" | grep PS 2>&1 >/dev/null ; then
     ${PS_VIEWER} "${document}"
-  elif file -b "${document}" | grep ASCII; then
-    ${TEXT_VIEWER} "${document}"
-  elif file -b "${document}" | grep ISO; then
+  elif file -b "${document}" | grep ISO 2>&1 >/dev/null ; then
     ${VIDEO_VIEWER} "${document}"
-  elif file -b "${document}" | grep audio; then
+  elif file -b "${document}" | grep Flash 2>&1 >/dev/null ; then
+    ${VIDEO_VIEWER} "${document}"
+  elif file -b "${document}" | grep audio 2>&1 >/dev/null ; then
     ${MUSIC_VIEWER} "${document}"
+  elif [[ "${document}" =~ \.(doc|xls)$ ]]; then
+    ${DOC_VIEWER} "${document}"
+  elif \
+    file -b "${document}" | grep ASCII 2>&1 >/dev/null \
+    || [[ "${document}" =~ .(f90|py|c|cxx|html) ]] \
+    || [[ "${document}" =~ .(cpp|m|asm|rb|sh) ]]; then
+    ${TEXT_VIEWER} "${document}"
   else
     error "I do not know how to open this file ..."
     error "Could not open file ${document}"
@@ -62,29 +100,22 @@ openDocument() {
 
 pickSearcher() {
   local terms="$@"
-  echo ${terms}
-  if [[ -n "${terms}" ]]; then
-    while read line; do
-      echo ${line}
-    done \
-      | pick -q "${terms}"
-  else
-    while read line; do
-      echo ${line}
-    done \
-      | pick
-  fi
+  while read line; do
+    echo $line
+  done \
+    | pick $([[ -n "${@}" ]] && echo '-q '"$@")
 }
 
 dmenuSearcher() {
+  #urxvt.font: xft:Inconsolata:size=12
   while read line; do
     echo ${line}
   done \
-    | dmenu -i -fn 30 -l 20
+    | dmenu -i -fn '-bitstream-*-*-*-*-*-18-*-*-*-*-*-*-*' -l 20
 }
 
-function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
-function usage ()
+usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
+usage ()
 {
 cat <<EOF
 $(usage_head)
@@ -92,8 +123,8 @@ $(usage_head)
     $__DESCRIPTION
 
     Options:
-    -h|help       Display this message
-    -v            Viewer program
+      -h|help       Display this message
+      -v|version    Display script version
 
 
     This program is maintained by Alejandro Gallo.
@@ -105,7 +136,7 @@ while getopts $__OPTIONS opt; do
 
   h|help     )  usage; exit 0   ;;
 
-  v )  VIEWER=${OPTARG} ;;
+  v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -123,17 +154,14 @@ for cmd in ${COMMANDS[@]} ; do
   fi
 done
 
-CURRENT_PATH_VAR=${CURRENT_COMMAND}_PATH
-for path in $(tr ":" " " <<<"${!CURRENT_PATH_VAR}") ; do
-  find ${path} -type f
-done \
-  | ${CURRENT_PICKER} \
-  | {
-  read filePath;
-  openDocument "${filePath}";
-  }
+setCurrentVariables
+
+${!CURRENT_SEARCHER} \
+  | ${!CURRENT_PICKER} \
+  | ${!CURRENT_ACTION}
 
 
-#vim-run: bash % s
-#vim-run: bash %
+# vim-run: bash %
+# vim-run: bash % papers
+# vim-run: bash % vid
 # vim: ft=sh

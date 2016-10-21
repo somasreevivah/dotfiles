@@ -3,7 +3,7 @@ LIBPATH=${LIBPATH}:~/Documents/
 
 PDF_VIEWER="zathura --fork"
 PS_VIEWER="zathura --fork"
-TEXT_VIEWER="v"
+TEXT_VIEWER="vim"
 PDF_VIEWER="zathura --fork"
 CONFIG_FILE="$HOME/.librc"
 VIDEO_VIEWER="mpv"
