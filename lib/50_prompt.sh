@@ -58,7 +58,7 @@ prompt_git() {
 
 
 # Maintain a per-execution call stack.
-prompt_stack=()
+#prompt_stack=()
 #trap 'prompt_stack=("${prompt_stack[@]}" "$BASH_COMMAND")' DEBUG
 
 prompt_jobs() {

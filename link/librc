@@ -27,6 +27,12 @@ his_PATH=~/.bash_history
 his_SEARCHER=historySearcher
 his_ACTION=historyAction
 
+historyAction (){
+  local cmd
+  read -r cmd
+  eval "${cmd}"
+}
+
 historySearcher(){
   cat $his_PATH \
     | sed '/^[\.-]*$/d'\
