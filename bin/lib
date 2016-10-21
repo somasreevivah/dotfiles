@@ -89,8 +89,8 @@ openDocument() {
     ${DOC_VIEWER} "${document}"
   elif \
     file -b "${document}" | grep ASCII 2>&1 >/dev/null \
-    || [[ "${document}" =~ .(f90|py|c|cxx|html) ]] \
-    || [[ "${document}" =~ .(cpp|m|asm|rb|sh) ]]; then
+    || [[ "${document}" =~ \.(f90|py|c|cxx|html)$ ]] \
+    || [[ "${document}" =~ \.(cpp|m|asm|rb|sh)$ ]]; then
     ${TEXT_VIEWER} "${document}"
   else
     error "I do not know how to open this file ..."
