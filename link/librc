@@ -1,6 +1,4 @@
 
-LIBPATH=${LIBPATH}:~/Documents/
-
 PDF_VIEWER="zathura --fork"
 PS_VIEWER="zathura --fork"
 TEXT_VIEWER="vim"
@@ -11,17 +9,23 @@ MUSIC_VIEWER="mplayer"
 
 
 
-registerCommand papers
-papers_PATH=~/Documents/marcus_notes/
+# Papers stuff
+registerCommand pap
+pap_PATH=~/Documents/marcus_notes/
 
-
-
+# Software
 registerCommand soft
 soft_PATH=~/software/
 
+# Videos
 registerCommand vid
 vid_PATH=~/Videos/
 
+# Music
+registerCommand mus
+mus_PATH=~/Music/
+
+# Bash History
 registerCommand his
 his_PATH=~/.bash_history
 his_SEARCHER=historySearcher

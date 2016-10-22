@@ -14,7 +14,7 @@ fi
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Library searcher"
-__OPTIONS=":hv:"
+__OPTIONS=":hvl"
 
 PDF_VIEWER="zathura --fork"
 PS_VIEWER="zathura --fork"
@@ -37,6 +37,12 @@ defaultAction() {
   local filePath
   read filePath
   openDocument "${filePath}"
+}
+
+listCommands() {
+  for cmd in ${COMMANDS[@]} ; do
+    echo "${cmd}"
+  done
 }
 
 defaultSearcher(){
@@ -125,6 +131,7 @@ $(usage_head)
     Options:
       -h|help       Display this message
       -v|version    Display script version
+      -l            List registered commands
 
 
     This program is maintained by Alejandro Gallo.
@@ -137,6 +144,8 @@ while getopts $__OPTIONS opt; do
   h|help     )  usage; exit 0   ;;
 
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  l ) LIST_COMMANDS=1 ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -153,6 +162,11 @@ for cmd in ${COMMANDS[@]} ; do
     shift
   fi
 done
+
+if [[ -n ${LIST_COMMANDS} ]]; then
+  listCommands
+  exit 0
+fi
 
 setCurrentVariables
 
