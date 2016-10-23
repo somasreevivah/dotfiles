@@ -1,0 +1,2 @@
+application/pdf; test mupdf && mupdf %s || vim %s
+image/*; test feh && feh %s || vim %s

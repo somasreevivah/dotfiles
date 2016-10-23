@@ -562,6 +562,15 @@ endif
 
 
 
+
+"  Keymaps {{{1  "
+""""""""""""""""""
+if &arabic
+  set keymap=arabic-qwerty
+endif
+if &hkmap
+  "set keymap=hebrew-qwerty
+endif
 "  Plot {{{1  "
 """""""""""""""
 
