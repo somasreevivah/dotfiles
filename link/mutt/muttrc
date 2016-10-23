@@ -12,9 +12,10 @@ source ~/.mutt/aamsgallo.gmail'
 #set folder="mail/aamsgallo"
 #set folder="imaps://imap.gmail.com"
 set folder="imaps://aamsgallo@imap.gmail.com/"
+set alias_file = '~/contacts/aliases'
+source $alias_file
 
 
-# set alias_file = '~/.muttrc'
 # *************************************************************************
 # * see the wiki, there are 4 to choose from. mbox is here a way 'how' to *
 # * store mails. Below is mbox meant as a 'mailbox' where read mails are  *
