@@ -24,6 +24,7 @@ CONFIG_FILE="$HOME/.librc"
 TEXT_VIEWER="${EDITOR}"
 VIDEO_VIEWER="mplayer"
 MUSIC_VIEWER="mplayer"
+IMG_VIEWER="feh"
 
 COMMANDS=(default)
 
@@ -93,6 +94,8 @@ openDocument() {
     ${MUSIC_VIEWER} "${document}"
   elif [[ "${document}" =~ \.(doc|xls)$ ]]; then
     ${DOC_VIEWER} "${document}"
+  elif [[ "${document}" =~ \.(png|jpg|jpeg|gif)$ ]]; then
+    ${IMG_VIEWER} "${document}"
   elif \
     file -b "${document}" | grep ASCII 2>&1 >/dev/null \
     || [[ "${document}" =~ \.(f90|py|c|cxx|html)$ ]] \
