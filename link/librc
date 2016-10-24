@@ -11,7 +11,7 @@ MUSIC_VIEWER="mplayer"
 
 # Papers stuff
 registerCommand pap
-pap_PATH=~/Documents/marcus_notes/
+pap_PATH=~/Documents/papers/
 
 # Software
 registerCommand soft

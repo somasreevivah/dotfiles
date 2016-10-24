@@ -114,6 +114,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 #bindsym $mod+o exec firefox --search "$(dmenu -p Search)" 
 bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher'"
+bindsym $mod+Shift+o exec "~/.dotfiles/bin/lib -l | dmenu -fn '-bitstream-*-*-*-*-*-18-*-*-*-*-*-*-*' | xargs -n1 ~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' "
 
 bindsym $mod+Shift+i exec ~/.dotfiles/bin/lib vid
 
