@@ -12,16 +12,13 @@ _lib ()   #  By convention, the function name
   case "$cur" in
     -*)
       COMPREPLY=( $( compgen -W '-h -v -l -d' -- $cur ) );;
-    #*=*)
-      #COMPREPLY=($(compgen -W '=asdf =asdfe' -- $cur ));
-      #;;
     *)
       COMPREPLY=( $(compgen -W "$(lib -l)" -- $cur)) ;;
   esac
 
   case "$prev" in
     -d)
-      COMPREPLY=($(compgen -W "$(_complete_lib_variables)" -- $cur))
+      COMPREPLY=($(compgen -W "$(_complete_lib_variables $cur)" -- $cur))
       ;;
   esac
 
@@ -29,6 +26,7 @@ _lib ()   #  By convention, the function name
 }
 
 _complete_lib_variables() {
+  local cur=$1
   local modes=($(lib -l))
   local keywords=(
   _PATH
@@ -36,9 +34,18 @@ _complete_lib_variables() {
   _SEARCHER
   _ACTION
   )
+  local varName
+  local functionName
   for mode in ${modes[@]} ; do
     for keyword in ${keywords[@]} ; do
-      echo "${mode}${keyword}="
+      varName="${mode}${keyword}="
+      functionName=${cur%${varName}}
+      if [[ ! ${cur} == ${varName}* ]]; then
+        echo ${varName}
+      else
+        echo ${varName}_hello
+        echo ${varName}_world
+      fi
     done
   done
 }
