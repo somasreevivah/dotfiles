@@ -46,7 +46,7 @@ listCommands() {
   done
 }
 
-defaultSearcher(){
+defaultSearcher(){ #SEARCHER
   for path in $(tr ":" " " <<<"${!CURRENT_PATH}") ; do
     find ${path} -type f
   done
@@ -85,7 +85,7 @@ setCurrentVariables() {
   done
 }
 
-openDocument() {
+openDocument() { #ACTION
   local document=$1
   [[ ! -f "${document}" ]] && { warning "Empty selection"; return ; }
   if file -b "${document}" | grep PDF 2>&1 >/dev/null ; then
@@ -115,7 +115,7 @@ openDocument() {
   fi
 }
 
-pickSearcher() {
+pickSearcher() { #PICKER
   local terms="$@"
   while read line; do
     echo $line
@@ -123,8 +123,7 @@ pickSearcher() {
     | pick $([[ -n "${@}" ]] && echo '-q '"$@")
 }
 
-dmenuSearcher() {
-  #urxvt.font: xft:Inconsolata:size=12
+dmenuSearcher() { #PICKER
   while read line; do
     echo ${line}
   done \
