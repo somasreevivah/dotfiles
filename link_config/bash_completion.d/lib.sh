@@ -11,18 +11,36 @@ _lib ()   #  By convention, the function name
 
   case "$cur" in
     -*)
-      COMPREPLY=( $( compgen -W '-h -v -l' -- $cur ) );;
-     *)
-       COMPREPLY=( $(compgen -W "$(lib -l)" -- $cur))
+      COMPREPLY=( $( compgen -W '-h -v -l -d' -- $cur ) );;
+    #*=*)
+      #COMPREPLY=($(compgen -W '=asdf =asdfe' -- $cur ));
+      #;;
+    *)
+      COMPREPLY=( $(compgen -W "$(lib -l)" -- $cur)) ;;
   esac
 
-  #case "$prev" in
-    #-i)
-      #COMPREPLY=($(ls --color=never ${HOME}/.lib))
-      #;;
-  #esac
+  case "$prev" in
+    -d)
+      COMPREPLY=($(compgen -W "$(_complete_lib_variables)" -- $cur))
+      ;;
+  esac
 
   return 0
+}
+
+_complete_lib_variables() {
+  local modes=($(lib -l))
+  local keywords=(
+  _PATH
+  _PICKER
+  _SEARCHER
+  _ACTION
+  )
+  for mode in ${modes[@]} ; do
+    for keyword in ${keywords[@]} ; do
+      echo "${mode}${keyword}="
+    done
+  done
 }
 
 complete -F _lib lib
