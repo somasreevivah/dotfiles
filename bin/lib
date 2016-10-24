@@ -96,6 +96,8 @@ openDocument() {
     ${VIDEO_VIEWER} "${document}"
   elif file -b "${document}" | grep Flash 2>&1 >/dev/null ; then
     ${VIDEO_VIEWER} "${document}"
+  elif [[ "${document}" =~ \.(mkv|avi|mpg|flv)$ ]]; then
+    ${VIDEO_VIEWER} "${document}"
   elif file -b "${document}" | grep audio 2>&1 >/dev/null ; then
     ${MUSIC_VIEWER} "${document}"
   elif [[ "${document}" =~ \.(doc|xls)$ ]]; then
