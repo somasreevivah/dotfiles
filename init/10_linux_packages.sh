@@ -11,6 +11,7 @@ packages=(
   mutt
   vim-nox
   nasm
+  antiword
 )
 
 
