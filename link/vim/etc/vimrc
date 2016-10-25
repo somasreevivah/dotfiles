@@ -11,6 +11,7 @@ if ! exists("NO_SPARTAN")
   "Plugin 'vim-airline/vim-airline-themes'
   "Plugin 'bling/vim-airline'
   "Plugin 'scrooloose/nerdtree'
+  Plugin 'yuratomo/w3m.vim'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
   Plugin 'dhruvasagar/vim-table-mode'
@@ -560,6 +561,12 @@ if has("autocmd")
 endif
 
 
+
+
+"  W3M {{{1  "
+""""""""""""""
+
+nnoremap <localleader>o :W3m 
 
 
 
