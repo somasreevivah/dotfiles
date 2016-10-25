@@ -17,9 +17,9 @@ cmd_ACTION=runCommand
 runCommand() {
   read cmd
   if [[ -n $cmd ]]; then
-    ${__SCRIPT_NAME} -d \
-      "default_PICKER=${default_PICKER}" $cmd 
-    echo "${default_PICKER}"
+    # do $0 for i3/config
+    ${0} -d \
+      "default_PICKER=${default_PICKER}" $cmd
   fi
 }
 
