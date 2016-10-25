@@ -8,6 +8,20 @@ VIDEO_VIEWER="mpv"
 MUSIC_VIEWER="mplayer"
 
 
+registerCommand cmd
+
+cmd_SEARCHER=listCommands
+cmd_ACTION=runCommand
+#cmd_PICKER=${default_PICKER}
+
+runCommand() {
+  read cmd
+  if [[ -n $cmd ]]; then
+    ${__SCRIPT_NAME} -d \
+      "default_PICKER=${default_PICKER}" $cmd 
+    echo "${default_PICKER}"
+  fi
+}
 
 # Papers stuff
 registerCommand pap
