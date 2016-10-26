@@ -10,3 +10,4 @@ https://github.com/ssloy/tinyrenderer
 huang-rhys factor Adrius paper
 https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/First_Steps
 http://wiki.math.cmu.edu/iki/2014-372/
+http://suckless.org/rocks

@@ -10,3 +10,16 @@ endsnippet
 snippet fort "Fortune" b
 `fortune | cowsay`
 endsnippet
+
+snippet sig-junior "Junior signature" b
+`
+cat | cowsay -W 50 <<EOF
+    Cheers,
+
+Junior Seminar Administration Headquarters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$(fortune)
+EOF
+`
+endsnippet
