@@ -19,6 +19,7 @@ fi
 
 
 set_wallpaper() {
+  [[ -n $1 ]] && IMAGE_PATH=$1
   arrow "Setting wallpaper"
   if [[ $(uname) = Linux ]]; then
     arrow "Trhough feh..."
@@ -158,7 +159,7 @@ hubble() {
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Set wallpaper"
-__OPTIONS=":hvl"
+__OPTIONS=":hvls:"
 
 PARSERS=(
 local_wallpaper
@@ -180,6 +181,7 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -l            List source names
+    -s            Set wallpaper by filename
 
 
     This program is maintained by Alejandro Gallo.
@@ -197,6 +199,10 @@ while getopts $__OPTIONS opt; do
     for s in ${PARSERS[@]} ; do
       echo "${s}"
     done
+    exit 0
+    ;;
+  s )
+    set_wallpaper ${OPTARG}
     exit 0
     ;;
 
