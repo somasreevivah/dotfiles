@@ -285,11 +285,9 @@ nnoremap <localleader>B :edit $DOTFILES/link/bashrc<cr>
 " align stuff for =
 vnoremap <localleader>t :Tabularize /
 
-" paste adding a blank space
-"nnoremap <localleader>p :normal! a <ESC>p " For cnext now 
-
 nnoremap <localleader><localleader>s :source $MYVIMRC<cr>
 
+"nnoremap gpip execute :normal! vip:'<,'>!par j
 
 
 " Folding stuff {{{1 "
@@ -310,7 +308,7 @@ if has("autocmd")
   augroup END " }}}2
 end
 
-" Quickfix stff {{{1 "
+" Quickfix stuff {{{1 "
 
 " remap ccnext and cprevious, nice for grep, make etc...
 nnoremap <localleader>n :cnext<cr>
@@ -510,7 +508,8 @@ nnoremap <localleader>t~ :call CreateRsTTitle("~")<cr>
 "  emmet.vim  {{{1"
 "Remap emmet trigger jey ctrl + e (CTRL+EMMET)
 "let g:user_emmet_leader_key='<C-e>'
-let g:user_emmet_leader_key='<localleader>e'
+let g:user_emmet_leader_key='<C-k>'
+"let g:user_emmet_leader_key='<localleader>e'
 
 
 
@@ -635,8 +634,6 @@ nnoremap <localleader>ll :VimtexLabelsOpen<cr>
 "  Moving around  {{{1"
 
 "go to the next parentheses
-nnoremap gp /(<CR>
-nnoremap gP ?(<CR>
 onoremap in( :<c-u>normal! f(vi(<cr>
 
 

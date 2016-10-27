@@ -76,11 +76,11 @@ snippet note "Beamer note" b
 }
 endsnippet
 
-snippet red "red" b
+snippet red "red" w
 \color{red}$0
 endsnippet
 
-snippet blue "Blue" b
+snippet blue "Blue" w
 \color{blue}$0
 endsnippet
 
@@ -196,9 +196,13 @@ $ ${1:${VISUAL}} $$0
 endsnippet
 
 snippet mm
+%
+%
 \[
 ${1:${VISUAL}}
 \]$0
+%
+%
 endsnippet
 
 snippet qu
@@ -258,9 +262,13 @@ snippet theight "text height" b
 \textheight
 endsnippet
 snippet eq "equation" b
+%
+%
 \begin{equation${1:*}}
 ${3:${VISUAL}}
 \end{equation$1}
+%
+%
 endsnippet
 snippet hbar
 \hbar$0
@@ -278,9 +286,13 @@ snippet in
 \in$0
 endsnippet
 snippet align "align" b
+%
+%
 \begin{align${1:*}}
 ${3:${VISUAL}}
 \end{align$1}
+%
+%
 endsnippet
 snippet toc "Table of contents" b
 \tableofcontents$0

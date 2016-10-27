@@ -196,7 +196,10 @@ set charset = 'utf-8'
 # set narrow_tree = no
 # set pager_context = '0'
 # set pager_format = '-%Z- %C/%m: %-20.20n   %s%*  -- (%P)'
-# set pager_index_lines = '0'
+#
+# Display emails above pager
+set pager_index_lines = 5
+
 # set pager_stop = no
 # set sleep_time = '1'
 # set tilde = no
@@ -463,6 +466,11 @@ set history = '0'
 set shell = 'bash'
 
 ##########
+# my_hdrs {{{1
+##########
+my_hdr User-Agent: Every email client sucks, this one just sucks less.
+
+##########
 # macros {{{1
 ##########
 
@@ -487,7 +495,7 @@ bind index k previous-entry
 bind index J next-thread
 bind index K previous-thread
 
-bind index l display-message
+#bind index l display-message
 
 bind index / search
 bind index ? search-reverse
@@ -507,7 +515,7 @@ bind index r reply
 bind index a group-reply
 bind index L list-reply
 
-bind index h limit
+bind index l limit
 
 # '?' is used for search-opposite
 bind index \Ch help

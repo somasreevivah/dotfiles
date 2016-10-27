@@ -51,3 +51,9 @@ perturbative
 eV
 SCF
 OUTCAR
+Supercell
+supercell
+bandgap
+delocalized
+phonons
+supercells
