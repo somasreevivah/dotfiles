@@ -90,7 +90,9 @@ prompt_command() {
   # misc: [cmd#:hist#]
   # PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
   # path: [user@host:path]
-  PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
+  #PS1="$PS1$c1[$c0\u$c1@$c0\h$c1:$c0\w$c1]$c9"
+  # path: [host:path]
+  PS1="$PS1$c1[$c0\h$c1:$c0\w$c1]$c9"
   # jobs prompt
   PS1="$PS1$(prompt_jobs)"
   # newline
