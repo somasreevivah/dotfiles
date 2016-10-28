@@ -21,14 +21,17 @@ fi
 set_wallpaper() {
   [[ -n $1 ]] && IMAGE_PATH=$1
   arrow "Setting wallpaper"
-  if [[ $(uname) = Linux ]]; then
+  if type feh; then
     arrow "Trhough feh..."
     type feh 2>&1 > /dev/null || exit 1
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
      || wall_notify "Failure setting wallpaper"
-  elif [[ $(uname) = Darwin ]]; then
-    arrow "Trhough osascript..."
+  elif type xsetbgimg; then
+    arrow "Through xsetbgimg..."
+    xsetbgimg "${IMAGE_PATH}"
+  elif type osascript; then
+    arrow "Through osascript..."
     osascript -e '
     tell application "Finder"
     set desktop picture to POSIX file "'${IMAGE_PATH}'"
