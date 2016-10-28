@@ -1,0 +1,15 @@
+snippet relax-structure "Snippet to relax structure with dft" b
+LREAL=Auto
+#SIGMA=0.00001
+#NELECT=254
+ALGO=C
+# Electronic scf energy criterion
+EDIFF=1E-10
+# Ionic scf energy criterion
+EDIFFG=1E-10
+# Maximum ionic steps
+NSW=100
+ENCUT=900
+ISPIN=2
+IBRION=2
+endsnippet
