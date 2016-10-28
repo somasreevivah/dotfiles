@@ -1,11 +1,12 @@
 
-if type zathura; then
+if type zathura 2>&1 > /dev/null; then
   PDF_VIEWER="zathura --fork"
-if type mupdf; then
+elif type mupdf 2>&1 >/dev/null; then
   PDF_VIEWER="mupdf"
 else
   PDF_VIEWER="xdg-open"
 fi
+
 PS_VIEWER="zathura --fork"
 TEXT_VIEWER="vim"
 CONFIG_FILE="$HOME/.librc"

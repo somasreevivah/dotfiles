@@ -10,7 +10,7 @@
 XTerm*background:black
 XTerm*foreground:white
 XTerm*cursorColor:red
-xterm*font:     *-fixed-*-*-*-18-*
+xTerm*font:*-fixed-*-*-*-18-*
 
 
 
@@ -22,16 +22,23 @@ xterm*font:     *-fixed-*-*-*-18-*
 
 
 !URxvt.font: xft:*:size=15
-urxvt.font: xft:Inconsolata:size=12
+urxvt.font: xft:Monospace:size=12
 
-*background:black
 *foreground:white
+!*background:black
 
+!Real transparency
+!*background:rgba:0000/0000/0200/ffff
+!
+!Fake transparency
+urxvt*transparent: true
+urxvt*shading: 30
 
 URxvt.internalBorder:      0
 URxvt.externalBorder:      0
 
-URxvt.scrollBar:           false
+URxvt.scrollBar:   false
+URxvt.urgentOnBell:false
 
 URxvt*fading:              30
 
@@ -42,3 +49,5 @@ URxvt.resize-font.bigger:  C-Down
 
 URxvt.url-launcher:        /usr/bin/chromium
 URxvt.colorUL:             #7780a1
+
+!vim-run: xrdb -merge ~/.Xresources
