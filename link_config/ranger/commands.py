@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+
+#  Documentation {{{1  #
+########################
+
 # Copyright (C) 2009-2013  Roman Zimbelmann <hut@lavabit.com>
 # This configuration file is licensed under the same terms as ranger.
 # ===================================================================
@@ -90,20 +94,23 @@ class vesta(Command):
     fileName=""
     def getFileName(self):
         if not self.fileName:
-            return self.arg(1)
+            return str(self.fm.thisfile.path)
+        else:
+            return self.fileName
     def setFileName(self, name):
         self.fileName=name
     def checkFileName(self):
         import re
         import shutil
         fileName=self.getFileName()
-        if re.match("POSCAR.+",fileName):
+        if re.match(r".*POSCAR.+",fileName):
             newFileName=fileName+".vasp"
             shutil.copyfile(fileName, newFileName)
             self.setFileName(newFileName)
     def execute(self):
         self.checkFileName()
-        self.fm.execute_command("vesta "+self.fileName, flags="f")
+        self.fm.notify(self.getFileName())
+        self.fm.execute_command("vesta "+self.getFileName(), flags="f")
 
 
 #  Default commands {{{1  #
