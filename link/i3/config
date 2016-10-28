@@ -124,6 +124,10 @@ bindsym $mod+Shift+i exec ~/.dotfiles/bin/lib vid
 bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
 bindsym $windows+Shift+w exec "~/.dotfiles/bin/wallpaper.sh $(~/.dotfiles/bin/wallpaper.sh -l | dmenu -p 'Parser')"
 
+# composite manager
+
+exec 'type xcompmgr && xcompmgr'
+
 
 # focus the child container
 #bindsym $mod+d focus child

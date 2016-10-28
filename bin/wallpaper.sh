@@ -42,6 +42,7 @@ set_wallpaper() {
 
 wall_notify() {
   local message=$1
+  arrow ${message}
   if type dzen2 2>&1 > /dev/null ; then
     arrow ${message}
     echo ${message}|\

@@ -1,8 +1,13 @@
 
-PDF_VIEWER="zathura --fork"
+if type zathura; then
+  PDF_VIEWER="zathura --fork"
+if type mupdf; then
+  PDF_VIEWER="mupdf"
+else
+  PDF_VIEWER="xdg-open"
+fi
 PS_VIEWER="zathura --fork"
 TEXT_VIEWER="vim"
-PDF_VIEWER="zathura --fork"
 CONFIG_FILE="$HOME/.librc"
 VIDEO_VIEWER="mpv"
 MUSIC_VIEWER="mplayer"
