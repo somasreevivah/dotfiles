@@ -38,6 +38,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+$windows+s exec "systemctl hybrid-sleep; i3lock"
+bindsym $mod+$windows+l exec "i3lock"
+bindsym $mod+$windows+h exec "systemctl poweroff"
 
 
 # lock session
