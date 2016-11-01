@@ -188,6 +188,32 @@ hubble() {
   wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
 }
 
+wallpapercave() {
+  local fmt="jpg"
+  local names
+  local url
+  local sections=(
+  wildlife-wallpaper
+  wildlife-wallpapers
+  free-wildlife-wallpaper
+  wildlife-desktop-backgrounds
+  wildlife-backgrounds-for-desktop
+  )
+  local cat=$(echo ${sections[@]} | tr " " "\n" | ${SORT} -R | head -1)
+  local url_root="http://wallpapercave.com"
+  local url_base="${url_root}/${cat}"
+  names=$(
+  curl -s "${url_base}"\
+    | grep img \
+    | grep wpimg \
+    | sed -n "s/.*src\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"
+    )
+  url="$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )"
+  echo $names
+  arrow "Img url : ${url}"
+  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+}
+
 
 
 
@@ -274,6 +300,7 @@ ${parse}
 set_wallpaper
 
 
+#vim-run: bash % wallpapercave
 #vim-run: bash % wallpaperscraft
 #vim-run: bash % david_lloyd
 #vim-run: bash % nasa_mars
