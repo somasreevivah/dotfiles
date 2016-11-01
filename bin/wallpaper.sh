@@ -232,6 +232,7 @@ wallpaperscraft
 nasa_mars
 mars_as_art
 david_lloyd
+wallpapercave
 )
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
