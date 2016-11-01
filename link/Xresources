@@ -28,11 +28,12 @@ urxvt.font: xft:Monospace:size=12
 !*background:black
 
 !Real transparency
-!*background:rgba:0000/0000/0200/ffff
+!urxvt*background:rgba:0000/0000/0200/ffff
 !
-!Fake transparency
+! Fake transparency
 urxvt*transparent: true
-urxvt*shading: 30
+! Level of transparency
+urxvt*shading: 15
 
 URxvt.internalBorder:      0
 URxvt.externalBorder:      0
@@ -50,4 +51,5 @@ URxvt.resize-font.bigger:  C-Down
 URxvt.url-launcher:        /usr/bin/chromium
 URxvt.colorUL:             #7780a1
 
+!vim-run: xrdb -merge ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources
