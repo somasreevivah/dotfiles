@@ -21,16 +21,18 @@ fi
 set_wallpaper() {
   [[ -n $1 ]] && IMAGE_PATH=$1
   arrow "Setting wallpaper"
-  if type feh; then
+  #Using feh
+  if type feh 2>&1 > /dev/null; then
     arrow "Trhough feh..."
-    type feh 2>&1 > /dev/null || exit 1
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
      || wall_notify "Failure setting wallpaper"
-  elif type xsetbgimg; then
+  #Using xsetbgimg
+  elif type xsetbgimg 2>&1 > /dev/null; then
     arrow "Through xsetbgimg..."
     xsetbgimg "${IMAGE_PATH}"
-  elif type osascript; then
+  #Using osascript (osx)
+  elif type osascript 2>&1 > /dev/null; then
     arrow "Through osascript..."
     osascript -e '
     tell application "Finder"
@@ -44,7 +46,6 @@ wall_notify() {
   local message=$1
   arrow ${message}
   if type dzen2 2>&1 > /dev/null ; then
-    arrow ${message}
     echo ${message}|\
       timeout 1 dzen2 -p\
       -fg red\
@@ -75,6 +76,34 @@ wall_success() {
   return 0
 }
 
+
+#  Parsers {{{1  #
+##################
+
+david_lloyd(){
+  local fmt="jpg"
+  local names
+  local url
+  local sections=(
+  recent
+  colour
+  black-and-white
+  big-cat-photo-safari
+  great-migration-photo-safari
+  british
+  )
+  local cat=$(echo ${sections[@]} | tr " " "\n" | ${SORT} -R | head -1)
+  local url_root="http://davidlloyd.net"
+  local url_base="${url_root}/galleries/${cat}/"
+  names=$(
+  curl -s ${url_base}\
+    | grep img \
+    | sed -n "s/.*src\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"
+    )
+  url="${url_root}/$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )"
+  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+}
+
 local_wallpaper() {
   local imageFile=$(ls $WALLPAPERS_DIR \
     | ${SORT} -R \
@@ -95,7 +124,7 @@ nasa_mars() {
     | grep href \
     | grep -i "Full resolution" \
     | sed -n "s/.*href\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"\
-    | xargs -n1 -I FF echo ${url_base}FF \
+    | xargs -n1 -I FF echo ${url_base}FF
   )
   url=$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )
   warning "Downloading ${url} ... "
@@ -160,6 +189,11 @@ hubble() {
 }
 
 
+
+
+#  CLI parser {{{1  #
+#####################
+
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Set wallpaper"
@@ -171,6 +205,7 @@ hubble
 wallpaperscraft
 nasa_mars
 mars_as_art
+david_lloyd
 )
 
 function usage_head() { echo "Usage :  $__SCRIPT_NAME [-h|-help] [-v|-version]"; }
@@ -219,6 +254,10 @@ shift $(($OPTIND-1))
 
 
 
+#  Main {{{1  #
+###############
+
+
 
 if [[ -n $1 ]]; then
   parse=$1
@@ -234,8 +273,10 @@ ${parse}
 
 set_wallpaper
 
-#vim-run: bash % nasa_mars
+
 #vim-run: bash % wallpaperscraft
+#vim-run: bash % david_lloyd
+#vim-run: bash % nasa_mars
 #vim-run: bash % local_wallpaper
 #vim-run: bash % mars_as_art
 

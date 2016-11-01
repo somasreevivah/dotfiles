@@ -156,10 +156,12 @@ endsnippet
 snippet mkdir "Create directory" b
 os.mkdir(${1:"${2:path/to/dir}"}, mode=0777)$0
 endsnippet
-#snippet cp "Copy a file" b
-#endsnippet
-#snippet cpr "Copy dir" b
-#endsnippet
+snippet cp "Copy a file" b
+shutil.copy(${1:src}, ${2:dest})$0
+endsnippet
+snippet cpr "Copy dir" b
+shutil.copytree(${1:src}, ${2:dest})$0
+endsnippet
 #snippet fopen "File open" b
 #endsnippet
 #snippet fclose "File open" b
@@ -176,17 +178,18 @@ endsnippet
 snippet ret "Return a value in function" b
 return
 endsnippet
-snippet argc "Get arguments number" b
+snippet argc "Get arguments number" w
 len(sys.argv)
 endsnippet
-snippet argvi "Get ith argument" b
+snippet argvi "Get ith argument" w
 sys.argv[${1:i}]$0
 endsnippet
-#snippet match "Regex match" b
-#endsnippet
+snippet match "Regex match" w
+re.match(${1:r"${2:regex}"}, ${3:string})
+endsnippet
 #snippet sizeof "Get size of variables or types" b
 #endsnippet
-snippet basename "Bash basename" b
+snippet basename "Bash basename" w
 os.path.basename(${1:"${2:path}"})$0
 endsnippet
 snippet genv "Get Environment variables" b
