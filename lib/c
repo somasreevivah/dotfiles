@@ -54,10 +54,18 @@ fi
 
 OUTPUT=$(f ${TEMP_FLAG} $SEARCH_NAMES)
 
+LIMIT=50
 
 FOLDERS=
+let count=0
 for file in $OUTPUT; do
-  [[ -d $file ]] && FOLDERS="$FOLDERS $file"
+  if [[ $count -gt $LIMIT ]]; then
+    break
+  fi
+  if [[ -d $file ]]; then
+    FOLDERS="$FOLDERS $file"
+    let count+=1
+  fi
 done
 
 NUMBER_OF_LINES=$(echo $FOLDERS | tr " " "\n" | wc -l)
