@@ -4,6 +4,7 @@ REPOSITORIES=(
 $HOME/.dotfiles
 $HOME/contacts
 $HOME/.expenses
+$HOME/.calcurse
 )
 
 function header()   { echo -e "\n\033[1m$@\033[0m"; }

@@ -508,7 +508,7 @@ nnoremap <localleader>t~ :call CreateRsTTitle("~")<cr>
 "  emmet.vim  {{{1"
 "Remap emmet trigger jey ctrl + e (CTRL+EMMET)
 "let g:user_emmet_leader_key='<C-e>'
-let g:user_emmet_leader_key='<C-k>'
+"let g:user_emmet_leader_key='<C-k>'
 "let g:user_emmet_leader_key='<localleader>e'
 
 
