@@ -7,15 +7,17 @@
 #folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
 
 #source $HOME/.mutt/gpg.rc
-source ~/.mutt/aamsgallo.gmail'
+source ~/.mutt/aamsgallo.gmail
 
 #set folder="$HOME/.mail"
 #set folder="mail/aamsgallo"
 #set folder="imaps://imap.gmail.com"
 #set folder="$HOME/mail"
 set folder="imaps://aamsgallo@imap.gmail.com/"
-set alias_file = '~/contacts/aliases'
-source $alias_file
+
+# If you do not source this directly, it will not
+# be recognised by the autocompletion, bug?
+source ~/contacts/aliases
 
 
 # *************************************************************************
