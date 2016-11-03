@@ -26,7 +26,7 @@ set_wallpaper() {
     arrow "Trhough feh..."
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
-     || wall_notify "Failure setting wallpaper"
+     || wall_error "Failure setting wallpaper"
   #Using xsetbgimg
   elif type xsetbgimg 2>&1 > /dev/null; then
     arrow "Through xsetbgimg..."
@@ -42,9 +42,9 @@ set_wallpaper() {
   fi
 }
 
-wall_notify() {
+wall_error (){
   local message=$1
-  arrow ${message}
+  error ${message}
   if type dzen2 2>&1 > /dev/null ; then
     echo ${message}|\
       timeout 1 dzen2 -p\
@@ -55,6 +55,27 @@ wall_notify() {
       -w 200\
       -h 100\
       -ta c
+  elif type kdialog 2>&1 > /dev/null ; then
+    kdialog --error "${message}" 1
+  fi
+  return 0
+}
+
+wall_notify() {
+  local message=$1
+  if type dzen2  2>&1 > /dev/null ; then
+    success ${message}
+    echo ${message}|\
+      timeout 1 dzen2 -p\
+      -fg white\
+      -bg black\
+      -x 0\
+      -y 20\
+      -w 200\
+      -h 100\
+      -ta c
+  elif type kdialog 2>&1 > /dev/null ; then
+    kdialog --passivepopup "${message}" 1
   fi
   return 0
 }
@@ -72,6 +93,8 @@ wall_success() {
       -w 200\
       -h 100\
       -ta c
+  elif type kdialog 2>&1 > /dev/null ; then
+    kdialog --passivepopup "${message}" 1
   fi
   return 0
 }
@@ -101,7 +124,7 @@ david_lloyd(){
     | sed -n "s/.*src\s*=\s*\"\(.*\.${fmt}\)\".*/\1/p"
     )
   url="${url_root}/$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )"
-  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+  wget ${url} -O ${IMAGE_PATH} || wall_error "Failure"
 }
 
 local_wallpaper() {
@@ -128,7 +151,7 @@ nasa_mars() {
   )
   url=$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )
   warning "Downloading ${url} ... "
-  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+  wget ${url} -O ${IMAGE_PATH} || wall_error "Failure"
 }
 
 mars_as_art() {
@@ -161,7 +184,7 @@ wallpaperscraft() {
   #base_url/image/black_background_red_color_paint_explosion_burst_9844_1600x1200.jpg
   url=$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )
   echo "Downloading ${url} ... "
-  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+  wget ${url} -O ${IMAGE_PATH} || wall_error "Failure"
 }
 
 hubble() {
@@ -185,7 +208,7 @@ hubble() {
   echo "${tmp}"
   url="http://imgsrc.hubblesite.org/hu/db/images/hs-${year}-${number}-a-${resolution}_wallpaper.jpg"
   echo "Downloading ${url} ... "
-  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+  wget ${url} -O ${IMAGE_PATH} || wall_error "Failure"
 }
 
 wallpapercave() {
@@ -211,7 +234,7 @@ wallpapercave() {
   url="$(echo ${names} | tr " " "\n" | ${SORT} -R | head -1 )"
   echo $names
   arrow "Img url : ${url}"
-  wget ${url} -O ${IMAGE_PATH} || wall_notify "Failure"
+  wget ${url} -O ${IMAGE_PATH} || wall_error "Failure"
 }
 
 
