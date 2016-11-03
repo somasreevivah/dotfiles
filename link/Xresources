@@ -10,8 +10,12 @@
 XTerm*background:black
 XTerm*foreground:white
 XTerm*cursorColor:red
-xTerm*font:*-fixed-*-*-*-18-*
+!XTerm*font:*-fixed-*-*-*-18-*
+XTerm*font:-misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-*
+!Save more lines
+XTerm.saveLines:4096
 
+*scrollBar:   false
 
 
 
@@ -24,8 +28,8 @@ xTerm*font:*-fixed-*-*-*-18-*
 !URxvt.font: xft:*:size=15
 urxvt.font: xft:Monospace:size=12
 
-*foreground:white
-!*background:black
+urxvt*foreground:white
+urxvt*background:black
 
 !Real transparency
 !urxvt*background:rgba:0000/0000/0200/ffff
@@ -35,7 +39,7 @@ urxvt*transparent: true
 ! Level of transparency
 urxvt*shading: 15
 
-URxvt.internalBorder:      0
+URxvt.internalBorder:      10
 URxvt.externalBorder:      0
 
 URxvt.scrollBar:   false
@@ -43,13 +47,15 @@ URxvt.urgentOnBell:false
 
 URxvt*fading:              30
 
-URxvt.perl-ext-common:     resize-font
+!URxvt.perl-ext-common:     resize-font
 
-URxvt.resize-font.smaller: C-Up
-URxvt.resize-font.bigger:  C-Down
+!URxvt.resize-font.smaller: C-Up
+!URxvt.resize-font.bigger:  C-Down
 
-URxvt.url-launcher:        /usr/bin/chromium
+URxvt.url-launcher:        firefox
 URxvt.colorUL:             #7780a1
 
+!vim-run: xrdb ~/.Xresources; xterm
+!vim-run: xrdb ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources
