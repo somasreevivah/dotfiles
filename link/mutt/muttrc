@@ -11,6 +11,7 @@ source ~/.mutt/aamsgallo.gmail'
 #set folder="$HOME/.mail"
 #set folder="mail/aamsgallo"
 #set folder="imaps://imap.gmail.com"
+#set folder="$HOME/mail"
 set folder="imaps://aamsgallo@imap.gmail.com/"
 set alias_file = '~/contacts/aliases'
 source $alias_file
@@ -484,7 +485,8 @@ macro index gh '<enter-command>set content_type="text/html"<enter><enter-command
 # colors {{{1
 ##########
 
-source ~/.mutt/mutt-colors-contrejour-dark-16.muttrc
+#source ~/.mutt/mutt-colors-contrejour-dark-16.muttrc
+source $HOME/.mutt/colors.angdraug
 
 ##########
 # bindings {{{1
