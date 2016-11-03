@@ -419,7 +419,8 @@ set write_bcc = yes
 # sorting {{{1
 ##########
 
-# set sort = 'date'
+#set sort = 'reverse-date'
+set sort = 'date'
 # set sort_alias = 'alias'
 # set sort_aux = 'date'
 set sort_browser = 'date' # default: 'alpha'
