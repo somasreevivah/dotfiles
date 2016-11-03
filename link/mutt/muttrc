@@ -6,6 +6,7 @@
 #macro index <f2> '<change-folder>imaps://imap.gmail.com<enter>'
 #folder-hook 'gmail.com' 'source ~/.mutt/aamsgallo.gmail'
 
+#source $HOME/.mutt/gpg.rc
 source ~/.mutt/aamsgallo.gmail'
 
 #set folder="$HOME/.mail"

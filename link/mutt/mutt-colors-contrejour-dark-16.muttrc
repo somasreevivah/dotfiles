@@ -49,7 +49,7 @@ color index  brightgreen   default  "~v~(~U|~N)"  # collapsed thread with unread
 #color index  cyan     default  "~g"  # PGP signed messages
 #color index  cyan     default  "~G"  # PGP encrypted messages
 
-color index  default     default  "~b \"(alejandro|gallo|aamsgallo|agallo)\" !~p !~P" # messages which mention my name in the body
+color index  default     default  "~t \"(alejandro|ale|gallo)\" " # messages which mention my name in the body
 #
 ### Odd
 color index  yellow  default  "~E"  # past Expires: header date
