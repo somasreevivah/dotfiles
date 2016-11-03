@@ -57,6 +57,8 @@ wall_error (){
       -ta c
   elif type kdialog 2>&1 > /dev/null ; then
     kdialog --error "${message}" 1
+  elif type notify-send 2>&1 > /dev/null ; then
+    notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
 }
@@ -76,6 +78,8 @@ wall_notify() {
       -ta c
   elif type kdialog 2>&1 > /dev/null ; then
     kdialog --passivepopup "${message}" 1
+  elif type notify-send 2>&1 > /dev/null ; then
+    notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
 }
@@ -95,6 +99,8 @@ wall_success() {
       -ta c
   elif type kdialog 2>&1 > /dev/null ; then
     kdialog --passivepopup "${message}" 1
+  elif type notify-send 2>&1 > /dev/null ; then
+    notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
 }
