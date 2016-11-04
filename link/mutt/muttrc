@@ -188,6 +188,10 @@ set timeout = '10' # 10 seconds
 # display {{{1
 ##########
 
+
+# Display emails above pager
+set pager_index_lines = 5
+set tilde # show tildes like in vim
 set allow_ansi = yes # default: no
 set ascii_chars = no
 set charset = 'utf-8'
@@ -202,13 +206,9 @@ set charset = 'utf-8'
 # set narrow_tree = no
 # set pager_context = '0'
 # set pager_format = '-%Z- %C/%m: %-20.20n   %s%*  -- (%P)'
-#
-# Display emails above pager
-set pager_index_lines = 5
 
 # set pager_stop = no
 # set sleep_time = '1'
-# set tilde = no
 # set wait_key = yes
 # set write_inc = '10'
 
@@ -478,11 +478,22 @@ set shell = 'bash'
 my_hdr User-Agent: Every email client sucks, this one just sucks less.
 
 ##########
+# hooks {{{1
+##########
+
+#folder-hook . `touch ~/asdf.asdf`
+
+##########
 # macros {{{1
 ##########
 
 macro index gi '=INBOX' 'Go to inbox'
-macro index gh '<enter-command>set content_type="text/html"<enter><enter-command>exec mail<enter>' 'Compose an html email'
+macro index gh '<enter-command>set content_type="text/html"<enter>\
+<enter-command>exec mail<enter>' 'Compose an html email'
+
+# get the "index" like in zathura
+macro index \t "c?"
+
 
 
 ##########
@@ -498,8 +509,11 @@ source $HOME/.mutt/colors.angdraug
 
 
 # Index {{{2
-bind index j next-entry
-bind index k previous-entry
+
+# unbind
+bind index <space> noop
+
+# move around
 bind index J next-thread
 bind index K previous-thread
 
@@ -510,11 +524,6 @@ bind index ? search-reverse
 bind index n search-next
 bind index N search-opposite
 
-bind index gg first-entry
-bind index G last-entry
-
-bind index \Cd half-down
-bind index \Cu half-up
 
 bind index z collapse-thread
 bind index Z collapse-all
@@ -523,7 +532,9 @@ bind index r reply
 bind index a group-reply
 bind index L list-reply
 
+
 bind index l limit
+macro index <space>l '<limit>all<enter>'
 
 # '?' is used for search-opposite
 bind index \Ch help
@@ -536,10 +547,8 @@ bind pager j next-line
 bind pager k previous-line
 #bind pager h quit
 
-# The mouse wheel seems to send <up><up><up>/<down><down><down> by default with
-# GNOME Terminal. Use it to scroll through messages.
-bind pager <down> next-line
-bind pager <up>   previous-line
+#bind pager <down> next-line
+#bind pager <up>   previous-line
 
 bind pager / search
 bind pager ? search-reverse
@@ -549,12 +558,9 @@ bind pager N search-opposite
 bind pager gg top
 bind pager G bottom
 
-bind pager \Cd half-down
-bind pager \Cu half-up
-
 # from http://rhonda.deb.at/config/mutt/keys
 #bind editor \cT complete-query     # complete address with query
-bind editor \cx complete-query     # complete address with query
+bind editor \Cx complete-query     # complete address with query
 
 bind pager r reply
 bind pager a group-reply
@@ -563,6 +569,27 @@ bind pager l list-reply
 
 # '?' is used for search-opposite
 bind pager \Ch help
+
+# query {{{2
+# where for example we are selecting a contact
+# in the autocompletion menu
+
+bind query,alias,browser <Tab> next-entry
+bind query,alias,browser <BackTab> previous-entry
+
+
+# moving around with vi keys
+bind index,query,alias,browser j next-entry
+bind index,query,alias,browser k previous-entry
+bind index,query,alias,browser G last-entry
+bind index,query,alias,browser gg first-entry
+bind pager,index,query,alias,browser \cu half-up
+bind pager,index,query,alias,browser \cd half-down
+bind index,query,alias,browser \ce next-line
+bind index,query,alias,browser \cy previous-line
+# like in my vimrc
+bind pager,index,query,alias,browser <space>f search
+bind pager,index,query,alias,browser <space>F search-reverse
 
 #bind index G imap-fetch-mail
 
