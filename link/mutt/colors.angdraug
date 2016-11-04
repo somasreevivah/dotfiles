@@ -27,7 +27,7 @@ color body brightgreen default "(^| |[-.[:alnum:]]+:+)~?\(/[-_.'[:alnum:]]+\)+/?
 color body brightgreen	default "(^| +)[[:alpha:]]:[-_.[:alnum:]\]+" # DOS file path
 color body brightmagenta default "(^|[ '\"]+)\\$[[:alpha:]][-_[:alpha:]]+" # variable
 color body brightred default "(^| )[*_]+[-&[:alnum:]]+[*_]( |$)" # bold/underline
-color body yellow default "(^| )[;:8ö][-^o]?[)>(|/\\]+" # smiley
+color body yellow default "(^| )[;:8o][-^o]?[)>(|/\\]+" # smiley
 color body red default "[!?]{3,}" # exclamation
 color body green default "^ *[-+*o] +" # list item
 
