@@ -1,5 +1,9 @@
 link/vimperator/info/default/ignored-keys
 
+#emacs
+elpa
+eshell
+
 *swp
 no changes added to commit (use "git add" and/or "git commit -a")
 temporary.jpg
