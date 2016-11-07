@@ -15,6 +15,7 @@ if ! exists("NO_SPARTAN")
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
   Plugin 'dhruvasagar/vim-table-mode'
+  Plugin 'kchmck/vim-coffee-script'
   "if v:version >= 730
   ""I have CtrlP, which deprecates this..
     "Plugin 'jlanzarotta/bufexplorer'
