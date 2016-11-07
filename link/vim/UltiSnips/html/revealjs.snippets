@@ -1,0 +1,24 @@
+snippet rjs-frag "Reveal js fragment" b
+<${1:p} class="fragment">$0</${1/([^ ]+).*/$1/}>
+endsnippet
+
+snippet rjs-notes "Reveal js notes" b
+<aside class="notes">
+	$0
+</aside>
+endsnippet
+
+snippet rjs-slidecode "Reveal js code" b
+<pre>
+	<code data-trim contenteditable${1: class="${2:php}"}>
+$0
+	</code>
+</pre>
+endsnippet
+
+snippet rjs-slide "Reveal js slide" b
+<section>
+	<h2>${1:Slide Title}</h2>
+	<p>${2:Slide content}</p>
+</section>
+endsnippet
