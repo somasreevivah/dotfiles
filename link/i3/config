@@ -16,16 +16,11 @@ floating_modifier Shift
 focus_follows_mouse no
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-#bindsym $mod+Return exec "xterm"
-#bindsym $mod+Return exec "which urxvt && urxvt || xterm"
 bindsym $mod+Return exec ~/.dotfiles/bin/terminal.sh
 bindsym $windows+Return exec "xterm"
 
 
 
-# small script to change the keyboard layout (de, ru, ara, il)
-bindsym $mod+Tab exec ~/.dotfiles/bin/change_kb.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -119,7 +114,11 @@ bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher'"
 #bindsym $mod+Shift+o exec "~/.dotfiles/bin/lib -l | dmenu -fn '-bitstream-*-*-*-*-*-18-*-*-*-*-*-*-*' | xargs -n1 ~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' "
 bindsym $mod+Shift+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' cmd "
 
-bindsym $mod+Shift+i exec ~/.dotfiles/bin/lib vid
+# languages
+bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
+  # put default
+bindsym $mod+Tab exec ~/.dotfiles/bin/change_kb.sh de-none
+
 
 #wallpaper script
 #exec_always ~/.dotfiles/bin/wallpaper.sh
