@@ -9,7 +9,7 @@ endsnippet
 snippet check-version "Check python version code block" b
 import sys
 if sys.version_info < (${1:major_number}, ${2:minor_number}):
-	raise "This script must use python $1.$2 or greater"
+	raise Exception("This script must use python $1.$2 or greater")
 	sys.exit(1)
 endsnippet
 
