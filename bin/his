@@ -28,10 +28,12 @@ def init():
     curses.cbreak()
     curses.curs_set(0)
     return main_screen
+
 def getHistory():
     history=open(os.path.join(os.path.expanduser("~"),".bash_history"),"r").readlines()
     cleaned_history=[line for line in history if not line.startswith("#")]
     return cleaned_history
+
 def regexize(SEARCH):
     """TODO: Docstring for regexize.
 
@@ -51,25 +53,33 @@ def print_debug(main_screen, text):
     :returns: TODO
 
     """
-    main_screen.addstr(maximum_lines+2,0,"Debug: "+text)
+    main_screen.addstr(max_height+2,0,"Debug: "+text)
 
 
-maximum_lines=20
 
-main_screen = init()
+main_screen   = init() # main window
 
-history_buffer = getHistory()
+max_height = int(main_screen.getmaxyx()[1])
+buffer_height = max_height - 3
 
-# print(history_buffer)
+lineBuffer    = getHistory()
+
 
 PROMPT="Search:"
-main_screen.addstr(0, 0,PROMPT, curses.A_REVERSE)
+main_screen.addstr(0, 0, PROMPT, curses.A_REVERSE)
 main_screen.refresh()
 
 SEARCH=""
 
 # curses.curs_set(20,20)
 # curses.setsyx(20,20)
+
+ESC    = 27
+ENTER  = 10
+Ctrl_P = 16
+Ctrl_N = 14
+DOWN   = curses.KEY_DOWN
+UP     = curses.KEY_UP
 
 
 selected_match=1
@@ -84,14 +94,14 @@ while 1:
     # curses.KEY_UP
     if c==127:
         SEARCH=SEARCH[:-1]
-    elif chr(c)=="J" or c==curses.KEY_DOWN:
+    elif c == Ctrl_N or c == DOWN:
         selected_match= (selected_match+1) if selected_match-len(matches) else len(matches)
-    elif chr(c)=="K":
+    elif c == Ctrl_P or c == UP:
         selected_match= (selected_match-1) if selected_match-1 else 1
-    elif c == 27: # ESC
+    elif c == ESC: # ESC
         terminate(main_screen)
         sys.exit(0)
-    elif c == 10: # ENTER
+    elif c == ENTER: # ENTER
         # curses.flash()
         terminate(main_screen)
         os.system(matches[selected_match-1])
@@ -101,12 +111,12 @@ while 1:
     matches=[]
     main_screen.addstr(selected_match, 1,">")
     main_screen.addstr(0, len(PROMPT)+1,SEARCH)
-    print_debug(main_screen,str(c))
-    for j,line in enumerate(history_buffer):
-        if re.match(regexize(SEARCH),line):
+    # print_debug(main_screen,str(c))
+    for j,line in enumerate(lineBuffer):
+        if re.match(regexize(SEARCH),line, re.IGNORECASE):
             matches.append(line)
             main_screen.addstr(len(matches),3,line)
-            if len(matches)>maximum_lines:
+            if len(matches)>=buffer_height:
                 break
 
 terminate(main_screen)
