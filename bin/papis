@@ -1,0 +1,421 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Simple paper management program
+# Copyright © 2016 Alejandro Gallo
+
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+# DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+# OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+MANUAL =\
+"""
+Yeah... well
+"""
+
+
+#  Import modules {{{1  #
+#########################
+
+import os
+import re
+import sys
+import yaml
+import shutil
+import argparse
+import configparser
+
+if sys.version_info < (3, 0):
+    raise Exception("This script must use python 3.0 or greater")
+    sys.exit(1)
+
+
+#  data {{{1  #
+###############
+
+bibtexTypes = [
+  "article",
+  "book",
+  "booklet",
+  "conference",
+  "inbook",
+  "incollection",
+  "inproceedings",
+  "manual",
+  "mastersthesis",
+  "misc",
+  "phdthesis",
+  "proceedings",
+  "techreport",
+  "unpublished"
+]
+
+bibtexKeys = [
+  "address",
+  "annote",
+  "author",
+  "booktitle",
+  "chapter",
+  "crossref",
+  "edition",
+  "editor",
+  "howpublished",
+  "institution",
+  "journal",
+  "key",
+  "month",
+  "note",
+  "number",
+  "organization",
+  "pages",
+  "publisher",
+  "school",
+  "series",
+  "title",
+  "volume",
+  "year"
+  ]
+
+infoFileName = "info.yaml"
+
+#  Utility functions {{{1  #
+############################
+
+def header(msg):    print("\n\033[1m"+str(msg)+"\033[0m")
+def success(msg):   print(" \033[1;32m==>\033[0m  "+str(msg))
+def error(msg):     print(" \033[1;31mX\033[0m  "+str(msg))
+def arrow(msg):     print(" \033[1;34m==>\033[0m  "+str(msg))
+def warning(msg):   print(" \033[0;93m==>\033[0m  "+str(msg))
+
+def printv(arg1):
+    if VERBOSE:
+        print(arg1)
+
+def bibTexToDict(bibtexFile):
+    """
+    Convert bibtex file to dict
+    { type: "article ...", "ref": "example1960etAl", author:" ..."}
+
+    :bibtexFile: TODO
+    :returns: TODO
+
+    """
+    fd = open(bibtexFile, "r")
+    result = dict()
+    for line in fd:
+        m = re.match(r"\s*@([a-zA-Z]+){([0-9a-zA-Z\-_]*)\s*,\s*", line)
+        if m:
+            result["type"] = m.group(1)
+            result["ref"]  = m.group(2)
+        m = re.match(r"\s*,?\s*([0-9a-zA-Z\-_]*)\s*=\s*{(.*)}\s*,?\s*", line)
+        if m:
+            result[m.group(1)] = m.group(2)
+    return result
+
+def getFolders(folder, recursive=False):
+    """
+    Get papers from a containing folder
+
+    :folder: TODO
+    :returns: TODO
+
+    """
+    import glob
+    folders = list()
+    if recursive:
+        raise Exception("Recursively search is TODO")
+    for f in glob.glob(os.path.join(folder, "*")):
+        if os.path.isdir(f):
+            if os.path.exists(os.path.join(f,infoFileName)):
+                folders.append(f)
+    return folders
+
+def filterPaper(folders, paperInput):
+    """
+
+    :folders: TODO
+    :paperInput: TODO
+    :returns: TODO
+
+    """
+    results = []
+    regex   = r".*"+re.sub(r"([0-9a-zA-Z])", "\\1.*", paperInput.strip().replace(" ",""))
+    printv("Filter regex = %s"%regex)
+    for folder in folders:
+        if re.match(regex, folder, re.IGNORECASE):
+            results.append(folder)
+    return results
+
+
+class Paper(object):
+
+    """
+     Structure implementing all information inside a paper,
+     which should be yaml information with few methods
+    """
+
+    def __init__(self, folder):
+        self._folder       = folder
+        self._keys = []
+        self._infoFilePath = os.path.join(folder, infoFileName)
+        self.loadInformationFromFile()
+    def __setitem__(self, obj, value):
+        """
+        :obj: TODO
+        :returns: TODO
+        """
+        setattr(self, obj, value)
+    def __getitem__(self, obj):
+        """
+        :obj: TODO
+        :returns: TODO
+        """
+        return getattr(self, obj) if hasattr(self, obj) else None
+    def save(self):
+        """
+        :returns: TODO
+        """
+        fd = open(self._infoFilePath, "w")
+        structure = dict()
+        for key in self.keys():
+            structure[key] = self[key]
+        yaml.dump(structure, fd, default_flow_style=False)
+        fd.close()
+    def toBibtex(self):
+        """
+        :f: TODO
+        :returns: TODO
+        """
+        global bibtexTypes
+        global bibtexKeys
+        bibtexString = ""
+        bibtexType = ""
+        # First the type, article ....
+        if "type" in self.keys():
+            if self["type"] in bibtexTypes:
+                bibtexType = self["type"]
+        if not bibtexType:
+            bibtexType = "article"
+        if not self["ref"]:
+            ref = os.path.basename(self._folder)
+        else:
+            ref = self["ref"]
+        bibtexString += "@%s{%s,\n"%(bibtexType, ref)
+        for bibKey in bibtexKeys:
+            if bibKey in self.keys():
+                bibtexString += "\t%s = { %s },\n"%(bibKey, self[bibKey])
+        bibtexString += "}\n"
+        return bibtexString
+
+    def keys(self):
+        """TODO: Docstring for keys().
+
+        :arg1: TODO
+        :returns: TODO
+
+        """
+        return self._keys
+    def loadInformationFromFile(self):
+        """
+        load information from file
+        :returns: TODO
+        """
+        fd = open(self._infoFilePath, "r")
+        structure = yaml.load(fd)
+        fd.close()
+        for key in structure:
+            self._keys.append(key)
+            self[key] = structure[key]
+
+
+
+#  Configuration {{{1  #
+########################
+
+class Configuration(configparser.ConfigParser):
+
+    default_info={
+      "general": {
+        'dir'  : '~/Documents/papers'
+      }
+    }
+
+    DEFAULT_FILE_LOCATION= os.path.join(os.path.expanduser("~"), ".papis.conf")
+    def __init__(self):
+        configparser.ConfigParser.__init__(self)
+        self.initialize()
+    def initialize(self):
+        if os.path.exists(self.DEFAULT_FILE_LOCATION):
+            self.read(self.DEFAULT_FILE_LOCATION)
+        else:
+            for section in self.default_info:
+                self[section] = {}
+                for field in self.default_info[section]:
+                    self[section][field] = self.default_info[section][field]
+            with open(self.DEFAULT_FILE_LOCATION, "w") as configfile:
+                self.write(configfile)
+
+
+#  main {{{1  #
+###############
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
+    description="Simple papers administration program")
+
+    parser.add_argument("--manual",
+        help    = "Spit out the manual",
+        default = False,
+        action  = "store_true"
+    )
+    parser.add_argument("-v",
+        "--verbose",
+        help    = "Make the output verbose",
+        default = False,
+        action  = "store_true"
+    )
+    parser.add_argument("--lib",
+        help    = "Choose a papers library, default general",
+        default = "general",
+        action  = "store"
+    )
+    # parser.add_argument("-p", "--paper",
+        # help    = "Choose a paper in a given library",
+        # default = "",
+        # action  = "store"
+    # )
+
+
+    #  Subparsers {{{2  #
+    #####################
+
+    SUBPARSER_HELP="For further information for every command, type in 'papis <command> -h'"
+    subparsers = parser.add_subparsers(help=SUBPARSER_HELP,
+            metavar="command",
+            dest="command")
+
+    # add parser
+    add_parser = subparsers.add_parser("add",
+            help="Add a paper into a given library")
+    add_parser.add_argument("paper",
+            help="Input file.",
+            action="store")
+    add_parser.add_argument("--from-bibtex",
+        help    = "Parse information from a bibtex file",
+        default = "",
+        action  = "store"
+    )
+
+    # show parser
+    show_parser = subparsers.add_parser("show",
+            help="Show a paper from a given library")
+    show_parser.add_argument("paper",
+            help="Paper search",
+            action="store")
+
+    # update parser
+    update_parser = subparsers.add_parser("update",
+            help="Update a paper from a given library")
+    update_parser.add_argument("--from-bibtex",
+        help    = "Update info from bibtex file",
+        action  = "store"
+    )
+    update_parser.add_argument("-i",
+        "--interactive",
+        help    = "Interactively update",
+        default = False,
+        action  = "store_true"
+    )
+    update_parser.add_argument("-f",
+        "--force",
+        help    = "Force update, overwrite conflicting information",
+        default = False,
+        action  = "store_true"
+    )
+    update_parser.add_argument("paper",
+            help="Paper search",
+            action="store")
+
+    # export parser
+    export_parser = subparsers.add_parser("export",
+            help="Export a paper from a given library")
+    export_parser.add_argument("paper",
+            help="Paper search",
+            action="store")
+    export_parser.add_argument("--bibtex",
+        help    = "Export into bibtex",
+        default = False,
+        action  = "store_true"
+    )
+
+    # list parser
+    list_parser = subparsers.add_parser("list",
+            help="List papers from a given library")
+
+    # test parser
+    test_parser = subparsers.add_parser("test",
+            help="For testing (ignore)")
+
+    # Parse arguments
+    args = parser.parse_args()
+    VERBOSE=args.verbose
+    if args.manual:
+        print(MANUAL)
+
+
+    config = Configuration()
+    papersDir = os.path.expanduser(config[args.lib]["dir"])
+    printv("Using directory %s"%papersDir)
+
+
+    if args.command == "add":
+        pass
+    elif args.command == "update":
+        pass
+    elif args.command == "list":
+        for folder in getFolders(papersDir):
+            print(folder)
+    elif args.command == "export":
+        paperSearch = args.paper
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        for folder in folders:
+            printv(folder)
+            paper = Paper(folder)
+            if args.bibtex:
+                print(paper.toBibtex())
+    elif args.command == "test":
+        print(bibTexToDict("ss.bib"))
+    else:
+        folders = getFolders(papersDir)
+        for folder in folders:
+            printv(folder)
+            paper = Paper(folder)
+            paper.save()
+
+
+
+
+#vim-run: python3 % -v test
+#vim-run: python3 % -v export --bibtex  "mccarthy"
+#vim-run: python3 % export sadf --bibtex
+#vim-run: python3 % list
+#vim-run: python3 % -h
+#vim-run: python3 %
+#vim-run: python3 % -v
+#vim-run: python3 % --manual
+# vim:set et sw=4 ts=4 ft=python:
