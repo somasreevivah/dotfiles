@@ -25,7 +25,13 @@
 MANUAL =\
 """
 Yeah... well
+
+TODO:
+    - update from bibtex
+    - add paper
 """
+
+
 
 
 #  Import modules {{{1  #
