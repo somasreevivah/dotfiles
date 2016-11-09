@@ -27,7 +27,6 @@ MANUAL =\
 Yeah... well
 
 TODO:
-    - update from bibtex
     - add paper
 """
 
@@ -391,7 +390,25 @@ if __name__ == "__main__":
     if args.command == "add":
         pass
     elif args.command == "update":
-        pass
+        paperSearch = args.paper
+        bibtexInfo  = bibTexToDict(args.from_bibtex)
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        folder  = folders[0]
+        paper   = Paper(folder)
+        for key in bibtexInfo:
+            if paper[key] != bibtexInfo[key]:
+                if args.force:
+                    paper[key] = bibtexInfo[key]
+                elif args.interactive:
+                    confirmation = input("(%s conflict) Replace '%s' by '%s'? (y/N)"%(
+                        key, paper[key], bibtexInfo[key]
+                        ) ) or "N"
+                    if confirmation in "Yy":
+                        paper[key] = bibtexInfo[key]
+                else:
+                    pass
+        paper.save()
     elif args.command == "list":
         for folder in getFolders(papersDir):
             print(folder)
@@ -405,7 +422,11 @@ if __name__ == "__main__":
             if args.bibtex:
                 print(paper.toBibtex())
     elif args.command == "test":
-        print(bibTexToDict("ss.bib"))
+        info = bibTexToDict(
+                os.path.expanduser("~/.dotfiles/bin/ss.bib")
+                )
+        for i in info:
+            print(i,info[i])
     else:
         folders = getFolders(papersDir)
         for folder in folders:
@@ -416,6 +437,7 @@ if __name__ == "__main__":
 
 
 
+#vim-run: python3 % -v update -f --from-bibtex $DOTFILES/bin/ss.bib "mccarthy"
 #vim-run: python3 % -v test
 #vim-run: python3 % -v export --bibtex  "mccarthy"
 #vim-run: python3 % export sadf --bibtex
