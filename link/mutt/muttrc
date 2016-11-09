@@ -181,7 +181,7 @@ set attach_charset = 'utf-8' # default: '(empty)'
 
 #set query_format = '%n %a %e'
 set query_format = '%n %a %e'
-set query_command = "~/contacts/query %s"
+set query_command = "~/contacts/bin/query %s"
 set timeout = '10' # 10 seconds
 
 ##########

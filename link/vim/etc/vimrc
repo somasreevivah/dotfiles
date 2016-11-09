@@ -450,8 +450,7 @@ nnoremap <C-w>f :call ToggleWindowZoom()<cr>
 
 let s:CONTACT_AUTOCOMPLETION=""
 let s:CONTACT_FILE="~/contacts/contacts.header"
-"let s:CONTACT_COMMAND="~/contacts/query"
-let g:CONTACT_COMMAND="~/contacts/query"
+let g:CONTACT_COMMAND="~/contacts/bin/query"
 
 "function! QueryContact()
   "let CONTACT_AUTOCOMPLETION = expand("<cword>")
@@ -492,6 +491,19 @@ nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
 "endfun
 "set completefunc=CompleteContacts
 
+
+
+"  dict {{{1  "
+"""""""""""""""
+
+
+" TODO
+function! SearchInDict()
+  "bufwinnr('ppe')
+  nnoremap <buffer> q :q
+endfunction
+
+nnoremap <localleader><localleader>d :call SearchInDict()<cr>
 
 
 " Text Formatting {{{1 "
