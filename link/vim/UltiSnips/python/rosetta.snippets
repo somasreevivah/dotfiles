@@ -154,7 +154,7 @@ snippet sys "Talk to the shell" b
 os.system(${1:"${2:command}"})
 endsnippet
 snippet mkdir "Create directory" b
-os.mkdir(${1:"${2:path/to/dir}"}, mode=0777)$0
+os.mkdir(${1:"${2:path/to/dir}"}, mode=0o777)$0
 endsnippet
 snippet cp "Copy a file" b
 shutil.copy(${1:src}, ${2:dest})$0
