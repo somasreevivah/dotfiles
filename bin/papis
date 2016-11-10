@@ -225,7 +225,28 @@ class Paper(object):
                 bibtexString += "\t%s = { %s },\n"%(bibKey, self[bibKey])
         bibtexString += "}\n"
         return bibtexString
+    def update(self, data, force = False, interactive = False):
+        """TODO: Docstring for update.
 
+        :data: TODO
+        :force: TODO
+        :interactive: TODO
+        :returns: TODO
+
+        """
+        bibtexInfo = data
+        for key in bibtexInfo:
+            if self[key] != bibtexInfo[key]:
+                if force:
+                    self[key] = bibtexInfo[key]
+                elif interactive:
+                    confirmation = input("(%s conflict) Replace '%s' by '%s'? (y/N)"%(
+                        key, self[key], bibtexInfo[key]
+                        ) ) or "N"
+                    if confirmation in "Yy":
+                        self[key] = bibtexInfo[key]
+                else:
+                    pass
     def keys(self):
         """TODO: Docstring for keys().
 
@@ -234,6 +255,13 @@ class Paper(object):
 
         """
         return self._keys
+    def dump(self):
+        """TODO: Docstring for dump.
+        :returns: TODO
+
+        """
+        for i in self.keys():
+            print(i,":   ",self[i])
     def loadInformationFromFile(self):
         """
         load information from file
@@ -317,8 +345,13 @@ if __name__ == "__main__":
     add_parser = subparsers.add_parser("add",
             help="Add a paper into a given library")
     add_parser.add_argument("paper",
-            help="Input file.",
+            help="Paper file name",
             action="store")
+    add_parser.add_argument("--name",
+        help    = "Name for the main folder of the paper",
+        default = "",
+        action  = "store"
+    )
     add_parser.add_argument("--from-bibtex",
         help    = "Parse information from a bibtex file",
         default = "",
@@ -388,26 +421,31 @@ if __name__ == "__main__":
 
 
     if args.command == "add":
-        pass
+        paperPath = args.paper
+        m = re.match(r"^(.*)\.([a-zA-Z]*)$", os.path.basename(paperPath))
+        extension = m.group(2) if m else ""
+        folderName  = m.group(1) if m else os.path.basename(paperPath)
+        endPaperPath = os.path.join(papersDir, folderName, folderName+"."+extension )
+        data  = bibTexToDict(args.from_bibtex) \
+                if args.from_bibtex else dict()
+        printv("Folder = % s" % folderName)
+        printv("File   = % s" % paperPath)
+        printv("EndFile   = % s" % endPaperPath)
+        printv("Data   = % s" % data)
+        printv("Ext.   = % s" % extension)
+        fullDirPath = os.path.join(papersDir, folderName)
+        printv("Creating directory '%s'"%fullDirPath)
+        os.mkdir(fullDirPath)
+        # shutil.copy(paperPath, )
     elif args.command == "update":
         paperSearch = args.paper
-        bibtexInfo  = bibTexToDict(args.from_bibtex)
+        data  = bibTexToDict(args.from_bibtex) \
+                if args.from_bibtex else dict()
         folders = getFolders(papersDir)
         folders = filterPaper(folders, paperSearch)
         folder  = folders[0]
         paper   = Paper(folder)
-        for key in bibtexInfo:
-            if paper[key] != bibtexInfo[key]:
-                if args.force:
-                    paper[key] = bibtexInfo[key]
-                elif args.interactive:
-                    confirmation = input("(%s conflict) Replace '%s' by '%s'? (y/N)"%(
-                        key, paper[key], bibtexInfo[key]
-                        ) ) or "N"
-                    if confirmation in "Yy":
-                        paper[key] = bibtexInfo[key]
-                else:
-                    pass
+        paper.update(data, args.force, args.interactive)
         paper.save()
     elif args.command == "list":
         for folder in getFolders(papersDir):
@@ -421,6 +459,8 @@ if __name__ == "__main__":
             paper = Paper(folder)
             if args.bibtex:
                 print(paper.toBibtex())
+            else:
+                print(paper.dump())
     elif args.command == "test":
         info = bibTexToDict(
                 os.path.expanduser("~/.dotfiles/bin/ss.bib")
@@ -437,9 +477,11 @@ if __name__ == "__main__":
 
 
 
-#vim-run: python3 % -v update -f --from-bibtex $DOTFILES/bin/ss.bib "mccarthy"
-#vim-run: python3 % -v test
+#vim-run: python3 % -v add ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf
+#vim-run: python3 % export  "mccarthy"
 #vim-run: python3 % -v export --bibtex  "mccarthy"
+#vim-run: python3 % -v update -i --from-bibtex $DOTFILES/bin/ss.bib "mccarthy"
+#vim-run: python3 % -v test
 #vim-run: python3 % export sadf --bibtex
 #vim-run: python3 % list
 #vim-run: python3 % -h
