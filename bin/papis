@@ -521,8 +521,8 @@ if __name__ == "__main__":
 
 
 
+#vim-run: python3 % -v add --from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers_bak/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf --name 2013-doherty-nv-centers-review
 #vim-run: python3 % list --file
-#vim-run: python3 % -v add --from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf
 #vim-run: python3 % -v add --from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf --name pepe
 #vim-run: python3 % export  "mccarthy"
 #vim-run: python3 % -v export --bibtex  "mccarthy"
