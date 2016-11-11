@@ -327,6 +327,15 @@ class Configuration(configparser.ConfigParser):
                     self[section][field] = self.default_info[section][field]
             with open(self.DEFAULT_FILE_LOCATION, "w") as configfile:
                 self.write(configfile)
+    def save(self):
+        """
+        :f: TODO
+        :returns: TODO
+        """
+        fd = open(self.DEFAULT_FILE_LOCATION, "w")
+        self.write(fd)
+        fd.close()
+
 
 
 #  main {{{1  #
@@ -464,6 +473,17 @@ if __name__ == "__main__":
         action  = "store_true"
     )
 
+    # config parser
+    config_parser = subparsers.add_parser("config",
+            help="Manage the configuration options")
+
+    config_parser.add_argument("option",
+            help="Set or get option",
+            default="",
+            nargs="*",
+            action="store"
+            )
+
     # test parser
     test_parser = subparsers.add_parser("test",
             help="For testing (ignore)")
@@ -547,16 +567,41 @@ if __name__ == "__main__":
                 )
         for i in info:
             print(i,info[i])
+    elif args.command == "config":
+        # FIXME: Replacing values does not work
+        option = " ".join(args.option)
+        printv(option)
+        value = False
+        m = re.match(r"([^ ]*)\.(.*)", option)
+        if not m:
+            raise Exception("Syntax for option %s not recognised"%option)
+        lib    = m.group(1)
+        preKey = m.group(2)
+        m = re.match(r"(.*)\s*=\s*(.*)", preKey)
+        if m:
+            key = m.group(1)
+            value = m.group(2)
+        else:
+            key = preKey
+        printv("lib -> %s" % lib)
+        printv("key -> %s" % key)
+        if not value:
+            print(config[lib][key])
+        else:
+            try:
+                config.remove_option(lib,key)
+                config.set(lib, key, value)
+            except configparser.NoSectionError:
+                config.add_section(lib)
+                config.set(lib, key, value)
+            config.save()
     else:
-        folders = getFolders(papersDir)
-        for folder in folders:
-            printv(folder)
-            paper = Paper(folder)
-            paper.save()
+        pass
 
 
 
 
+#vim-run: python3 % config settings.user = 2
 #vim-run: python3 % export  "."
 #vim-run: python3 % -v add -from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers_bak/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf --name 2013-doherty-nv-centers-review
 #vim-run: python3 % list --file

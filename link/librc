@@ -31,7 +31,7 @@ runCommand() {
 
 # Papers stuff
 registerCommand pap
-pap_PATH=~/Documents/papers/
+pap_PATH=$(papis config general.dir)
 pap_SEARCHER=papSearcher
 pap_ACTION=papAction
 
