@@ -256,6 +256,12 @@ class Paper(object):
                         self[key] = data[key]
                 else:
                     pass
+    def getInfoFile(self):
+        """TODO: Docstring for getFiles.
+        :returns: TODO
+
+        """
+        return self._infoFilePath
     def getFiles(self):
         """TODO: Docstring for getFiles.
         :returns: TODO
@@ -445,6 +451,12 @@ if __name__ == "__main__":
             nargs="?",
             action="store"
             )
+    list_parser.add_argument("-i",
+        "--info",
+        help    = "Show the info file name associated with the paper",
+        default = False,
+        action  = "store_true"
+    )
     list_parser.add_argument("-f",
         "--file",
         help    = "Show the file name associated with the paper",
@@ -508,11 +520,14 @@ if __name__ == "__main__":
         folders = getFolders(papersDir)
         folders = filterPaper(folders, paperSearch)
         for folder in folders:
-            if not args.file:
-                print(folder)
-            else:
+            if args.file:
                 paper = Paper(folder)
                 print(os.path.join(paper.getMainFolder(), paper.getFiles()))
+            elif args.info:
+                paper = Paper(folder)
+                print(os.path.join(paper.getMainFolder(), paper.getInfoFile()))
+            else:
+                print(folder)
     elif args.command == "export":
         paperSearch = args.paper
         folders = getFolders(papersDir)
