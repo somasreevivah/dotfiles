@@ -38,7 +38,7 @@ bindsym $mod+$windows+h exec "systemctl poweroff"
 
 
 # lock session
-bindsym $mod+Shift+x exec i3lock
+#bindsym $mod+Shift+x exec i3lock
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -i
