@@ -27,7 +27,8 @@ MANUAL =\
 Yeah... well
 
 TODO:
-    - add paper
+    - edit paper
+    - open paper
 """
 
 
@@ -183,6 +184,7 @@ class Paper(object):
         :obj: TODO
         :returns: TODO
         """
+        self._keys.append(obj)
         setattr(self, obj, value)
     def __getitem__(self, obj):
         """
@@ -194,7 +196,7 @@ class Paper(object):
         """
         :returns: TODO
         """
-        fd = open(self._infoFilePath, "w")
+        fd = open(self._infoFilePath, "w+")
         structure = dict()
         for key in self.keys():
             structure[key] = self[key]
@@ -234,19 +236,25 @@ class Paper(object):
         :returns: TODO
 
         """
-        bibtexInfo = data
-        for key in bibtexInfo:
-            if self[key] != bibtexInfo[key]:
+        printv("Updating...")
+        for key in data:
+            if self[key] != data[key]:
                 if force:
-                    self[key] = bibtexInfo[key]
+                    self[key] = data[key]
                 elif interactive:
                     confirmation = input("(%s conflict) Replace '%s' by '%s'? (y/N)"%(
-                        key, self[key], bibtexInfo[key]
+                        key, self[key], data[key]
                         ) ) or "N"
                     if confirmation in "Yy":
-                        self[key] = bibtexInfo[key]
+                        self[key] = data[key]
                 else:
                     pass
+    def getFiles(self):
+        """TODO: Docstring for getFiles.
+        :returns: TODO
+
+        """
+        return self["file"]
     def keys(self):
         """TODO: Docstring for keys().
 
@@ -267,7 +275,11 @@ class Paper(object):
         load information from file
         :returns: TODO
         """
-        fd = open(self._infoFilePath, "r")
+        try:
+            fd = open(self._infoFilePath, "r")
+        except:
+            print("Warning: No info file found")
+            return False
         structure = yaml.load(fd)
         fd.close()
         for key in structure:
@@ -358,12 +370,26 @@ if __name__ == "__main__":
         action  = "store"
     )
 
-    # show parser
-    show_parser = subparsers.add_parser("show",
-            help="Show a paper from a given library")
-    show_parser.add_argument("paper",
+    # open parser
+    open_parser = subparsers.add_parser("open",
+            help="Open a paper from a given library")
+    open_parser.add_argument("paper",
             help="Paper search",
             action="store")
+
+    # edit parser
+    edit_parser = subparsers.add_parser("edit",
+            help="Edit paper information from a given library")
+    edit_parser.add_argument("paper",
+            help="Paper search",
+            action="store")
+
+    # show parser
+    # show_parser = subparsers.add_parser("show",
+            # help="Show a paper from a given library")
+    # show_parser.add_argument("paper",
+            # help="Paper search",
+            # action="store")
 
     # update parser
     update_parser = subparsers.add_parser("update",
@@ -403,6 +429,12 @@ if __name__ == "__main__":
     # list parser
     list_parser = subparsers.add_parser("list",
             help="List papers from a given library")
+    list_parser.add_argument("-f",
+        "--file",
+        help    = "Show the file name associated with the paper",
+        default = False,
+        action  = "store_true"
+    )
 
     # test parser
     test_parser = subparsers.add_parser("test",
@@ -423,20 +455,28 @@ if __name__ == "__main__":
     if args.command == "add":
         paperPath = args.paper
         m = re.match(r"^(.*)\.([a-zA-Z]*)$", os.path.basename(paperPath))
-        extension = m.group(2) if m else ""
-        folderName  = m.group(1) if m else os.path.basename(paperPath)
-        endPaperPath = os.path.join(papersDir, folderName, folderName+"."+extension )
+        extension    = m.group(2) if m else ""
+        folderName   = m.group(1) if m else os.path.basename(paperPath)
+        folderName   = folderName if not args.name else args.name
+        paperName    = "paper."+extension
+        endPaperPath = os.path.join(papersDir, folderName, paperName )
         data  = bibTexToDict(args.from_bibtex) \
                 if args.from_bibtex else dict()
-        printv("Folder = % s" % folderName)
-        printv("File   = % s" % paperPath)
+        ######
+        data["file"] = paperName
+        printv("Folder    = % s" % folderName)
+        printv("File      = % s" % paperPath)
         printv("EndFile   = % s" % endPaperPath)
-        printv("Data   = % s" % data)
-        printv("Ext.   = % s" % extension)
+        printv("Data      = % s" % data)
+        printv("Ext.      = % s" % extension)
         fullDirPath = os.path.join(papersDir, folderName)
-        printv("Creating directory '%s'"%fullDirPath)
-        os.mkdir(fullDirPath)
-        # shutil.copy(paperPath, )
+        if not os.path.isdir(fullDirPath):
+            printv("Creating directory '%s'"%fullDirPath)
+            os.mkdir(fullDirPath)
+        shutil.copy(paperPath, endPaperPath)
+        paper = Paper(fullDirPath)
+        paper.update(data, force = True)
+        paper.save()
     elif args.command == "update":
         paperSearch = args.paper
         data  = bibTexToDict(args.from_bibtex) \
@@ -449,7 +489,11 @@ if __name__ == "__main__":
         paper.save()
     elif args.command == "list":
         for folder in getFolders(papersDir):
-            print(folder)
+            if not args.file:
+                print(folder)
+            else:
+                # TODO: print the whole path
+                print(Paper(folder).getFiles())
     elif args.command == "export":
         paperSearch = args.paper
         folders = getFolders(papersDir)
@@ -477,7 +521,9 @@ if __name__ == "__main__":
 
 
 
-#vim-run: python3 % -v add ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf
+#vim-run: python3 % list --file
+#vim-run: python3 % -v add --from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf
+#vim-run: python3 % -v add --from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf --name pepe
 #vim-run: python3 % export  "mccarthy"
 #vim-run: python3 % -v export --bibtex  "mccarthy"
 #vim-run: python3 % -v update -i --from-bibtex $DOTFILES/bin/ss.bib "mccarthy"
