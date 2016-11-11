@@ -192,6 +192,13 @@ class Paper(object):
         :returns: TODO
         """
         return getattr(self, obj) if hasattr(self, obj) else None
+    def getMainFolder(self):
+        """
+        Get main folder where the paper and the information is stored
+        :returns: TODO
+
+        """
+        return self._folder
     def save(self):
         """
         :returns: TODO
@@ -429,6 +436,12 @@ if __name__ == "__main__":
     # list parser
     list_parser = subparsers.add_parser("list",
             help="List papers from a given library")
+    list_parser.add_argument("paper",
+            help="Paper search",
+            default="",
+            nargs="?",
+            action="store"
+            )
     list_parser.add_argument("-f",
         "--file",
         help    = "Show the file name associated with the paper",
@@ -488,12 +501,15 @@ if __name__ == "__main__":
         paper.update(data, args.force, args.interactive)
         paper.save()
     elif args.command == "list":
-        for folder in getFolders(papersDir):
+        paperSearch = args.paper
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        for folder in folders:
             if not args.file:
                 print(folder)
             else:
-                # TODO: print the whole path
-                print(Paper(folder).getFiles())
+                paper = Paper(folder)
+                print(os.path.join(paper.getMainFolder(), paper.getFiles()))
     elif args.command == "export":
         paperSearch = args.paper
         folders = getFolders(papersDir)

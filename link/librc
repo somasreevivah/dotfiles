@@ -32,6 +32,18 @@ runCommand() {
 # Papers stuff
 registerCommand pap
 pap_PATH=~/Documents/papers/
+pap_SEARCHER=papSearcher
+pap_ACTION=papAction
+
+papSearcher(){
+  papis list | xargs -n1 basename
+}
+
+papAction(){
+  local name
+  read -r name
+  rifle $(papis list --file ${name})
+}
 
 # Software
 registerCommand soft
