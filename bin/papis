@@ -27,7 +27,7 @@ MANUAL =\
 Yeah... well
 
 TODO:
-    - open paper
+    - implement picker functionality
 """
 
 
@@ -148,6 +148,22 @@ def getFolders(folder, recursive=False):
             if os.path.exists(os.path.join(f,infoFileName)):
                 folders.append(f)
     return folders
+
+def pickFile(files, configuration = {}):
+    """TODO: Docstring for editFile.
+    :fileName: TODO
+    :returns: TODO
+    """
+    from subprocess import Popen, PIPE
+    try:
+        picker = configuration["settings"]["picker"]
+    except KeyError:
+        picker = os.environ["PICKER"]
+    if not picker:
+        return files[0]
+    else:
+        # FIXME: Do it more fancy
+        return Popen("echo "+"\n".join(files)+" | "+picker, stdout=PIPE, shell=True).read()
 
 def openFile(fileName, configuration = {}):
     """TODO: Docstring for openFile.
@@ -613,11 +629,7 @@ if __name__ == "__main__":
         paper   = Paper(folders[0])
         editFile(paper.getInfoFile(), config)
     elif args.command == "test":
-        info = bibTexToDict(
-                os.path.expanduser("~/.dotfiles/bin/ss.bib")
-                )
-        for i in info:
-            print(i,info[i])
+        pickFile(["1","3"], config)
     elif args.command == "config":
         # FIXME: Replacing values does not work
         option = " ".join(args.option)
@@ -652,6 +664,7 @@ if __name__ == "__main__":
 
 
 
+#vim-run: python3 % -v test
 #vim-run: python3 % open
 #vim-run: python3 % edit
 #vim-run: python3 % config settings.user = 2
@@ -662,7 +675,6 @@ if __name__ == "__main__":
 #vim-run: python3 % export  "mccarthy"
 #vim-run: python3 % -v export --bibtex  "mccarthy"
 #vim-run: python3 % -v update -i --from-bibtex $DOTFILES/bin/ss.bib "mccarthy"
-#vim-run: python3 % -v test
 #vim-run: python3 % export sadf --bibtex
 #vim-run: python3 % list
 #vim-run: python3 % -h
