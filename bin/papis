@@ -27,7 +27,6 @@ MANUAL =\
 Yeah... well
 
 TODO:
-    - edit paper
     - open paper
 """
 
@@ -150,6 +149,30 @@ def getFolders(folder, recursive=False):
                 folders.append(f)
     return folders
 
+def openFile(fileName, configuration = {}):
+    """TODO: Docstring for openFile.
+    :fileName: TODO
+    :returns: TODO
+    """
+    from subprocess import call
+    try:
+        opener = configuration["settings"]["viewer"]
+    except KeyError:
+        opener = "xdg-open"
+    call([opener, fileName])
+
+def editFile(fileName, configuration = {}):
+    """TODO: Docstring for editFile.
+    :fileName: TODO
+    :returns: TODO
+    """
+    from subprocess import call
+    try:
+        editor = configuration["settings"]["editor"]
+    except KeyError:
+        editor = os.environ["EDITOR"]
+    call([editor, fileName])
+
 def filterPaper(folders, paperInput):
     """
 
@@ -164,6 +187,9 @@ def filterPaper(folders, paperInput):
     for folder in folders:
         if re.match(regex, folder, re.IGNORECASE):
             results.append(folder)
+    if len(results) == 0:
+        print("No results found with the given input")
+        sys.exit(1)
     return results
 
 
@@ -262,12 +288,12 @@ class Paper(object):
 
         """
         return self._infoFilePath
-    def getFiles(self):
+    def getFile(self):
         """TODO: Docstring for getFiles.
         :returns: TODO
 
         """
-        return self["file"]
+        return os.path.join(self._folder, self["file"])
     def keys(self):
         """TODO: Docstring for keys().
 
@@ -395,9 +421,20 @@ if __name__ == "__main__":
 
     # open parser
     open_parser = subparsers.add_parser("open",
-            help="Open a paper from a given library")
+            help="Open paper document from a given library")
     open_parser.add_argument("paper",
             help="Paper search",
+            nargs="?",
+            default=".",
+            action="store")
+
+    # check parser
+    check_parser = subparsers.add_parser("check",
+            help="Check paper document from a given library")
+    check_parser.add_argument("paper",
+            help="Paper search",
+            nargs="?",
+            default=".",
             action="store")
 
     # edit parser
@@ -405,6 +442,8 @@ if __name__ == "__main__":
             help="Edit paper information from a given library")
     edit_parser.add_argument("paper",
             help="Paper search",
+            nargs="?",
+            default=".",
             action="store")
 
     # show parser
@@ -542,7 +581,7 @@ if __name__ == "__main__":
         for folder in folders:
             if args.file:
                 paper = Paper(folder)
-                print(os.path.join(paper.getMainFolder(), paper.getFiles()))
+                print(paper.getFile())
             elif args.info:
                 paper = Paper(folder)
                 print(os.path.join(paper.getMainFolder(), paper.getInfoFile()))
@@ -561,6 +600,18 @@ if __name__ == "__main__":
                 a = paper.dump()
                 print(a)
                 # print(paper.dump())
+    elif args.command == "open":
+        paperSearch = args.paper
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        paper   = Paper(folders[0])
+        openFile(paper.getFile(), config)
+    elif args.command == "edit":
+        paperSearch = args.paper
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        paper   = Paper(folders[0])
+        editFile(paper.getInfoFile(), config)
     elif args.command == "test":
         info = bibTexToDict(
                 os.path.expanduser("~/.dotfiles/bin/ss.bib")
@@ -601,6 +652,8 @@ if __name__ == "__main__":
 
 
 
+#vim-run: python3 % open
+#vim-run: python3 % edit
 #vim-run: python3 % config settings.user = 2
 #vim-run: python3 % export  "."
 #vim-run: python3 % -v add -from-bibtex ~/.dotfiles/bin/ss.bib ~/Documents/papers_bak/NV-centers/Helmut/Doherty_et_al_2013_NV_centers.pdf --name 2013-doherty-nv-centers-review
