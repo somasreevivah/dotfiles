@@ -241,6 +241,16 @@ class Paper(object):
 
         """
         return self._folder
+    def check(self):
+        """
+        :returns: TODO
+        """
+        # Check for the exsitence of the document
+        if not os.path.exists(self.getFile()):
+            print("** Error: %s not found in %s"%(self.getFile(), self.getMainFolder()))
+            return False
+        else:
+            return True
     def save(self):
         """
         :returns: TODO
@@ -613,9 +623,20 @@ if __name__ == "__main__":
             if args.bibtex:
                 print(paper.toBibtex())
             else:
-                a = paper.dump()
-                print(a)
-                # print(paper.dump())
+                print(paper.dump())
+    elif args.command == "check":
+        paperSearch = args.paper
+        folders = getFolders(papersDir)
+        folders = filterPaper(folders, paperSearch)
+        allOk = True
+        for folder in folders:
+            printv(folder)
+            paper   = Paper(folder)
+            allOk &= paper.check()
+        if not allOk:
+            print("Errors were detected, please fix the info files")
+        else:
+            print("No errors detected")
     elif args.command == "open":
         paperSearch = args.paper
         folders = getFolders(papersDir)
