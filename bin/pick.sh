@@ -8,11 +8,9 @@ echo "" > ${inBuffer}
 echo -n "" > ${searchWord}
 
 clear_results() {
-  local i
-  for (( i = 1; i < (($(tput lines) -1)); i++ )); do
-    tput cup ${i} 0
-    tput dl1
-  done
+  tput cup 1 0
+  # Clear to the end of display
+  tput ed
 }
 
 #initialize terminal
@@ -21,6 +19,8 @@ term_init(){
     POSY=0
     tput init
     tput clear
+    # Remove automatic margins
+    tput rmam
 }
 
 create_buffer() {
@@ -34,6 +34,7 @@ create_buffer() {
 on_kill(){
     tput cup 0 0
     tput clear
+    tput reset
     # Erase in-buffer
     exit 0
 }
@@ -41,6 +42,8 @@ trap on_kill SIGINT SIGTERM
 
 C_N=$(echo -n -e "\\x0e")
 C_P=$(echo -n -e "\\x10")
+DOWN='\033[B'
+UP='\033[A'
 ESC=$(echo -n -e "\\x1b")
 BACKSPACE=$(echo -n -e "\\x7f")
 ENTER=""
@@ -49,7 +52,7 @@ create_buffer "${1:-/dev/stdin}"
 
 term_init
 
-echo "asdf" > $(tty)
+#echo "asdf" > $(tty)
 
 while : ; do
 
