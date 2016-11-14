@@ -41,6 +41,8 @@ import re
 import sys
 import yaml
 import shutil
+import requests
+import tempfile
 import argparse
 import configparser
 
@@ -106,6 +108,37 @@ def error(msg):     print(" \033[1;31mX\033[0m  "+str(msg))
 def arrow(msg):     print(" \033[1;34m==>\033[0m  "+str(msg))
 def warning(msg):   print(" \033[0;93m==>\033[0m  "+str(msg))
 
+def getUrlService(url):
+    """TODO: Docstring for getUrlService.
+
+    :url: TODO
+    :returns: TODO
+
+    """
+    m = re.match(r".*arxiv.org.*", url)
+    if m: # Arxiv
+        printv("Arxiv recognised")
+        return "arxiv"
+    return ""
+
+def which(program):
+    # source http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
+    import os
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.access(fpath, os.X_OK)
+    fpath, fname = os.path.split(program)
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.environ["PATH"].split(os.pathsep):
+            path = path.strip('"')
+            exe_file = os.path.join(path, program)
+            if is_exe(exe_file):
+                return exe_file
+    return None
+
+
 def printv(arg1):
     if VERBOSE:
         print(arg1)
@@ -130,6 +163,34 @@ def bibTexToDict(bibtexFile):
         if m:
             result[m.group(1)] = m.group(2)
     return result
+
+def add_from_arxiv(url):
+    """TODO: Docstring for add_from_arxiv.
+    :url: TODO
+    :returns: TODO
+    """
+    data = {}
+    filePath   = tempfile.mktemp()+".pdf"
+    bibtexPath = tempfile.mktemp()
+    m = re.match(r".*arxiv.org/abs/(.*)", url)
+    if m:
+        p_id = m.group(1)
+        printv("Arxiv id = '%s'"%p_id)
+    else:
+        print("Arxiv url fromat not recognised, no document id found")
+        sys.exit(1)
+    infoUrl = "http://export.arxiv.org/api/query?search_query=%s&start=0&max_results=1"%p_id
+    pdfUrl  = "https://arxiv.org/pdf/%s.pdf"%p_id
+    printv("Pdf url  = '%s'"%pdfUrl)
+    printv("Info url = '%s'"%infoUrl)
+    response = requests.get(pdfUrl, stream=True)
+    if response: # Download pdf
+        fd = open(filePath, "wb")
+        # fd.write(response.raw)
+        shutil.copyfileobj(response.raw, fd)
+        printv("Pdf saved in %s"%filePath)
+        fd.close()
+    return (filePath, data)
 
 def getFolders(folder, recursive=False):
     """
@@ -413,11 +474,6 @@ if __name__ == "__main__":
         default = "general",
         action  = "store"
     )
-    # parser.add_argument("-p", "--paper",
-        # help    = "Choose a paper in a given library",
-        # default = "",
-        # action  = "store"
-    # )
 
 
     #  Subparsers {{{2  #
@@ -433,6 +489,8 @@ if __name__ == "__main__":
             help="Add a paper into a given library")
     add_parser.add_argument("paper",
             help="Paper file name",
+            default="",
+            nargs="?",
             action="store")
     add_parser.add_argument("--name",
         help    = "Name for the main folder of the paper",
@@ -441,6 +499,11 @@ if __name__ == "__main__":
     )
     add_parser.add_argument("--from-bibtex",
         help    = "Parse information from a bibtex file",
+        default = "",
+        action  = "store"
+    )
+    add_parser.add_argument("--from-url",
+        help    = "Get paper and information from a given url, a parser must be implemented",
         default = "",
         action  = "store"
     )
@@ -566,15 +629,25 @@ if __name__ == "__main__":
 
 
     if args.command == "add":
-        paperPath = args.paper
+        if args.from_url:
+            url = args.from_url
+            service = getUrlService(url)
+            try:
+                serviceParser = eval("add_from_%s"%service)
+            except:
+                print("No add_from_%s function has been implemented, sorry"%service)
+                sys.exit(1)
+            paperPath, data = serviceParser(url)
+        else:
+            paperPath = args.paper
+            data  = bibTexToDict(args.from_bibtex) \
+                    if args.from_bibtex else dict()
         m = re.match(r"^(.*)\.([a-zA-Z]*)$", os.path.basename(paperPath))
         extension    = m.group(2) if m else ""
         folderName   = m.group(1) if m else os.path.basename(paperPath)
         folderName   = folderName if not args.name else args.name
         paperName    = "paper."+extension
         endPaperPath = os.path.join(papersDir, folderName, paperName )
-        data  = bibTexToDict(args.from_bibtex) \
-                if args.from_bibtex else dict()
         ######
         data["file"] = paperName
         printv("Folder    = % s" % folderName)
@@ -685,6 +758,7 @@ if __name__ == "__main__":
 
 
 
+#vim-run: python3 % -v add --from-url https://arxiv.org/abs/0705.0337v3 --name hf-something.pdf
 #vim-run: python3 % -v test
 #vim-run: python3 % open
 #vim-run: python3 % edit
