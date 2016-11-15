@@ -56,10 +56,26 @@ def print_debug(main_screen, text):
     main_screen.addstr(max_height+2,0,"Debug: "+text)
 
 
+# a = sys.stdin
+# print(a.readlines())
+# a.read(-1)
+# sys.stdin.readlines()
+# sys.stdin.close()
+# sys.stdin.flush()
+# sys.stdin.__init__()
+# a.close()
+
+print("text")
+
+# sys.stdin = sys.__stdin__
+a = input("ASdf")
+print(a)
+sys.exit(0)
 
 main_screen   = init() # main window
 
-max_height = int(main_screen.getmaxyx()[1])
+
+max_height = int(main_screen.getmaxyx()[0])
 buffer_height = max_height - 3
 
 lineBuffer    = getHistory()
@@ -121,4 +137,5 @@ while 1:
 
 terminate(main_screen)
 
-#vim-run: python3 %
+#vim-run: echo -e "asdf\n" | python3 %
+#vim-run: python %
