@@ -77,7 +77,7 @@ setCurrentVariables() {
   local variable
   for var in ${vars[@]} ; do
     variable=${CURRENT_COMMAND}${var}
-    if test ${!variable}; then
+    if test "${!variable}"; then
       eval "CURRENT${var}=${variable}"
     else
       eval "CURRENT${var}=default${var}"
