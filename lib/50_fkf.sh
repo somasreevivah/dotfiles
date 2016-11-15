@@ -27,6 +27,7 @@ export PATH=$PATH:/home/gallo/opt/p4vasp/bin
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/ase
 export PATH=$PATH:$HOME/lib/python/site-packages/ase/tools
 export PATH=$PATH:/usr/local/server/bin/
+export PATH=$PATH:$HOME/vtstscripts-916/
 
 #set my local python
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/

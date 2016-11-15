@@ -288,6 +288,18 @@ bindsym $windows+i exec "xcalib -invert -alter"
 
 
 
+#  disable mode {{{1  #
+#######################
+
+
+mode "disable" {
+
+
+    # back to normal: Escape
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Ctrl+d mode "disable"
 
 #  move mode {{{1  #
 ####################
