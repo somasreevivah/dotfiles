@@ -31,18 +31,26 @@ runCommand() {
 
 # Papers stuff
 registerCommand pap
+registerCommand pap_misc
+
 pap_PATH=$(papis config general.dir)
+pap_misc_PATH=$(papis config misc.dir)
+
 pap_SEARCHER=papSearcher
 pap_ACTION=papAction
+pap_misc_SEARCHER="papSearcher misc"
+pap_misc_ACTION="papAction misc"
 
 papSearcher(){
-  papis list | xargs -n1 basename
+  local lib=${1:-general}
+  papis --lib ${lib} list | xargs -n1 basename
 }
 
 papAction(){
+  local lib=${1:-general}
   local name
   read -r name
-  rifle $(papis list --file ${name})
+  rifle $(papis --lib ${lib} list --file ${name})
 }
 
 # Software

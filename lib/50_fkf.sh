@@ -47,5 +47,6 @@ abacd() {
 abac() {
   ssh abakus01 "cd ${PWD} ; $@"
 }
+alias molpro='/usr/local/fkf/Molpro/Molpro_OpenSuSE/molprop_2012_1_Linux_x86_64_i8/bin/molpro'
 
 export OMP_NUM_THREADS=1
