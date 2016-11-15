@@ -1,7 +1,7 @@
 
-if type zathura 2>&1 > /dev/null; then
+if type zathura &> /dev/null; then
   PDF_VIEWER="zathura --fork"
-elif type mupdf 2>&1 >/dev/null; then
+elif type mupdf &> /dev/null; then
   PDF_VIEWER="mupdf"
 else
   PDF_VIEWER="xdg-open"
