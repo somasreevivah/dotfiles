@@ -7,13 +7,20 @@ export DOTFILES=~/.dotfiles
 
 #local
 PATH=$HOME/local/bin:$PATH
+
 #.local
 PATH=$HOME/.local/bin:$PATH
 MANPATH=$HOME/.local/man:$MANPATH
 LD_LIBRARY_PATH=$HOME/.local/lib64:$HOME/.local/lib:$LD_LIBRARY_PATH
+PKG_CONFIG_PATH=$HOME/.local/lib64/pkgconfig/:${PKG_CONFIG_PATH}
+PKG_CONFIG_PATH=$HOME/.local/lib/pkgconfig/:${PKG_CONFIG_PATH}
+
 #home
 PATH=$HOME/bin:$PATH
+
+#DOTFILES
 PATH=$DOTFILES/bin:$PATH
+
 #Some other outsourced tools
 PATH=$HOME/.calcurse/bin:$PATH
 PATH=$HOME/contacts/bin:$PATH
@@ -21,6 +28,7 @@ PATH=$HOME/contacts/bin:$PATH
 export PATH
 export MANPATH
 export LD_LIBRARY_PATH
+export PKG_CONFIG_PATH
 
 
 # Source all files in "lib"
