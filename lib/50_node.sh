@@ -1,6 +1,13 @@
 ######################################
 #  I DO NOT KNOW YET WHAT THIS DOES  #
 ######################################
+
+
+# set up local npm path
+export PATH=$PATH:$HOME/node_modules/.bin/
+
+
+
 return 0
 
 
