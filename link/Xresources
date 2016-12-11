@@ -9,6 +9,8 @@
 
 XTerm*background:black
 XTerm*foreground:white
+XTerm.background:black
+XTerm.foreground:white
 XTerm*cursorColor:red
 XTerm*font:*-fixed-*-*-*-18-*
 !Save more lines
