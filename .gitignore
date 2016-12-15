@@ -1,3 +1,6 @@
+link/vim/spell/*spl
+link/vim/spell/*sug
+
 link/elinks/bookmarks.*
 link/emacs.d/emacs.d
 
