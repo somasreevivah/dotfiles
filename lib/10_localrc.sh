@@ -4,6 +4,7 @@
 
 LOCAL_CONFIGURATION_FILES=(
 $HOME/.bashrc_local
+$HOME/.bashrc.local
 )
 
 

@@ -15,8 +15,12 @@ menu_up     k Up
 menu_select space Return
 
 # Same for image navigation ...
-next_img C-n
-prev_img C-p
+next_img C-n n
+prev_img C-p p
+jump_first 0
+jump_last dollar
+toggle_pause period
+toggle_info i
 
 # and image movement
 scroll_up    j C-Up
@@ -32,10 +36,11 @@ delete   C-d
 toggle_filenames b
 
 # zooming
-zoom_in  f
-zoom_out F
+zoom_in  plus
+zoom_out minus
 zoom_default
 zoom_fit W
+toggle_fullscreen f
 # I only hit these accidentaly
 save_image
 save_filelist

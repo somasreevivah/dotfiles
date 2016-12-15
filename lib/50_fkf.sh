@@ -2,11 +2,13 @@
 fkf() {
   ssh gallo@mz4.fkf.mpg.de $@
 }
+
+dfs_is_on_mpi_fkf || return 1
+
 aba() {
   ssh abakus01 $@
 }
 
-dfs_is_on_mpi_fkf || return 1
 
 ####################
 #  MaxPlanck stuff  #
