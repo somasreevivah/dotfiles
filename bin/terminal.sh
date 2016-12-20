@@ -2,9 +2,9 @@
 
 
 if which lilyterm; then
-  lilyterm
+  lilyterm $*
 elif which konsole; then
-  konsole
+  konsole $*
 else
-  xterm
+  xterm $*
 fi
