@@ -37,8 +37,8 @@ bindsym $mod+$windows+l exec "i3lock"
 bindsym $mod+$windows+h exec "systemctl poweroff"
 
 # Marks
-bindsym $mod+m exec i3-input -F 'mark %s' -P 'Mark name: '
-bindsym $mod+Shift+m exec i3-input -F '[con_mark=%s] focus' -P 'Goto mark: '
+bindsym $mod+m exec i3-input -l 1 -F 'mark %s' -P 'Mark name: '
+bindsym $mod+Shift+m exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
 
 
 # lock session
