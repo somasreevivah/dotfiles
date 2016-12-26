@@ -1,0 +1,58 @@
+#! /usr/bin/env bash
+
+function header()   { echo -e "\n\033[1m$@\033[0m"; }
+function success()  { echo -e " \033[1;32m==>\033[0m  $@"; }
+function error()    { echo -e " \033[1;31mX\033[0m  $@"; }
+function arrow()    { echo -e " \033[1;34m==>\033[0m  $@"; }
+function warning()  { echo -e " \033[0;93m==>\033[0m  $@"; }
+
+files="$@"
+
+all_files=
+all_headers=
+
+HEADER_PATHS=(
+/usr/include
+/usr/local/include
+/usr/include/x86_64-linux-gnu/
+)
+
+HEADERS=()
+
+find_header() {
+  local file=$1
+  local headers=
+  local header=
+  local header_path=
+  headers=($(sed -n "s/#\s*include\s*<\(.*\)>/\1/p" ${file}))
+  for header_path in ${HEADER_PATHS[@]}; do
+    for header in ${headers[@]} ; do
+      if [[ -f ${header_path}/${header} ]]; then
+        echo ${header_path}/${header}
+      fi
+    done
+  done
+}
+
+if [[ -z ${files} ]]; then
+  echo "Give some files in please"
+  exit 1
+fi
+
+
+for f in ${files}; do
+  HEADERS=(${HEADERS[@]} $(find_header ${f}))
+done
+
+HEADERS=($(echo ${HEADERS[@]} | sort | uniq ))
+
+for header in ${HEADERS[@]} ; do
+  arrow "Found ${header}"
+done
+
+ctags ${files} ${HEADERS[@]}
+
+
+#vim-run: bash % *
+#vim-run: bash % config.mk Makefile
+# vim: ft=sh
