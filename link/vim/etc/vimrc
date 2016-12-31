@@ -358,13 +358,37 @@ function! VIMRun()
     let command_to_run=substitute(whole_text, "^.*".magic_word." *", "","")
     "echo whole_text
   catch
-    let command_to_run = './%'
+    try
+      call VIMRunFile()
+      return 0
+    catch
+      let command_to_run = './%'
+    endtry
   endtry
   echo command_to_run
   exec ":!".command_to_run
 endfunction
 nnoremap <localleader><localleader>r :call VIMRun()<cr>
 
+function! VIMRunFile()
+  let vim_run = globpath(".", ".vim-run")
+  "if ! filereadable(".vim-run")
+  if len(vim_run) != 0
+    exec ':!$SHELL .vim-run %'
+  else
+    echoerr 'No ".vim-run" file'
+  endif
+endfunction
+
+
+" Fswitch {{{1
+
+if has("autocmd")
+
+au! BufEnter *.cpp let b:fswitchdst = 'hpp,h' | let b:fswitchlocs = '../inc' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+au! BufEnter *.h,*.hpp let b:fswitchdst = 'cpp,C' | let b:fswitchlocs = '../inc' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+
+endif 
 
 "  Airline  {{{1"
 

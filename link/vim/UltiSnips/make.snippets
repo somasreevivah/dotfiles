@@ -93,7 +93,7 @@ endsnippet
 # help target for self-documented Makefile
 snippet help
 help: ## Prints help for targets with comments
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $\$1, $\$2}'
+	@$(or $(AWK),awk) 'BEGIN {FS = ":.*?## "}; /^[a-zA-Z_-]+:.*?## .*$$/{printf "\033[36m%-30s\033[0m %s\n", $\$1, $\$2}' $(MAKEFILE_LIST)
 ${0}
 endsnippet
 

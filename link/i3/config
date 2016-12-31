@@ -119,9 +119,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' cmd "
 
 # languages
-bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
+#bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
   # put default
-bindsym $windows+Shift+l exec ~/.dotfiles/bin/change_kb.sh de-none
+bindsym $windows+Shift exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
+bindsym $windows+Shift+space exec ~/.dotfiles/bin/change_kb.sh de-none
 
 
 #wallpaper script
