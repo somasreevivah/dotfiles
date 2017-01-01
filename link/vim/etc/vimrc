@@ -380,6 +380,13 @@ function! VIMRunFile()
   endif
 endfunction
 
+" local vimrc {{{1
+
+let local_vimrc = ".vimrc"
+if len(globpath(".", local_vimrc)) != 0
+  exec ":silent source ".".vimrc"
+endif
+
 
 " Fswitch {{{1
 
