@@ -748,9 +748,9 @@ hi SpellBad guibg=#ff2929 ctermbg=160
 
 " local vimrc {{{1
 
-let local_vimrc = ".vimrc"
+let local_vimrc = ".vimrc.local"
 if len(globpath(".", local_vimrc)) != 0
-  exec ":silent source ".".vimrc"
+  exec ":silent source ".".vimrc.local"
 endif
 
 
