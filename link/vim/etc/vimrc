@@ -380,14 +380,6 @@ function! VIMRunFile()
   endif
 endfunction
 
-" local vimrc {{{1
-
-let local_vimrc = ".vimrc"
-if len(globpath(".", local_vimrc)) != 0
-  exec ":silent source ".".vimrc"
-endif
-
-
 " Fswitch {{{1
 
 if has("autocmd")
@@ -752,6 +744,14 @@ endif
 " This should be after the color theme
 hi clear SpellBad
 hi SpellBad guibg=#ff2929 ctermbg=160
+
+
+" local vimrc {{{1
+
+let local_vimrc = ".vimrc"
+if len(globpath(".", local_vimrc)) != 0
+  exec ":silent source ".".vimrc"
+endif
 
 
 " Configuration file edit options {{{1
