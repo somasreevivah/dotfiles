@@ -248,7 +248,7 @@ command! -nargs=* Greplace call GrepAndReplace(<f-args>)
 
 
 
-" Leader and localleader {{{1 "
+" Leaders and mappings {{{1 "
 
 "Set maplocalleader to something else if you like
 let maplocalleader = "\<Space>"
@@ -376,9 +376,13 @@ function! VIMRunFile()
   if len(vim_run) != 0
     exec ':!$SHELL .vim-run %'
   else
-    echoerr 'No ".vim-run" file'
+    throw 'No ".vim-run" file'
   endif
 endfunction
+
+if has("autocmd")
+  autocmd BufRead .vim-run set ft=sh
+endif
 
 " Fswitch {{{1
 
@@ -751,7 +755,7 @@ hi SpellBad guibg=#ff2929 ctermbg=160
 
 let local_vimrc = ".vimrc.local"
 if len(globpath(".", local_vimrc)) != 0
-  exec ":silent source ".".vimrc.local"
+  exec ":silent source ".local_vimrc
 endif
 
 
