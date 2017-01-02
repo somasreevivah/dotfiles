@@ -5,14 +5,11 @@ shopt -s nocaseglob
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# gcc colors
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
 # Prevent less from clearing the screen while still showing colors.
 export LESS=-XR
-
-# Set the terminal's title bar.
-titlebar() {
-  echo -n $'\e]0;'"$*"$'\a'
-}
 
 # SSH auto-completion based on entries in known_hosts.
 if [[ -e ~/.ssh/known_hosts ]]; then
@@ -21,5 +18,6 @@ fi
 
 # Disable ansible cows }:]
 export ANSIBLE_NOCOWS=1
+
 
 
