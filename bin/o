@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+file="$*"
+
+# If rifle is installed use rifle
+if type -a rifle 2>&1 > /dev/null; then
+  rifle ${file}
+fi
+
+
+# vim: ft=sh :
