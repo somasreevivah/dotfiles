@@ -1,0 +1,29 @@
+
+# Open with macro
+macro attach O \
+"\
+<enter-command>unset wait_key<enter>\
+<shell-escape>rm -f /tmp/mutt-attach<enter>\
+<save-entry><kill-line>/tmp/mutt-attach<enter>\
+<shell-escape> /tmp/mutt-attach &^A\
+"
+
+macro index gi '=INBOX' 'Go to inbox'
+macro index gh \
+'\
+<enter-command>set content_type="text/html"<enter>\
+<enter-command>exec mail<enter>\
+' 'Compose an html email'
+
+# get the "index" like in zathura
+macro index \t \
+"\
+<change-folder>?\
+"
+
+# unbind space
+bind index <space> noop
+macro index <space>l '<limit>all<enter>'
+
+
+# vim: ft=muttrc cc=80 :
