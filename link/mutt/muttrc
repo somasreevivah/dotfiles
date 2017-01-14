@@ -483,18 +483,12 @@ my_hdr User-Agent: Every email client sucks, this one just sucks less.
 
 #folder-hook . `touch ~/asdf.asdf`
 
+
 ##########
 # macros {{{1
 ##########
-
-macro index gi '=INBOX' 'Go to inbox'
-macro index gh '<enter-command>set content_type="text/html"<enter>\
-<enter-command>exec mail<enter>' 'Compose an html email'
-
-# get the "index" like in zathura
-macro index \t "c?"
-
-
+#
+source $HOME/.mutt/macros
 
 ##########
 # colors {{{1
@@ -510,8 +504,6 @@ source $HOME/.mutt/colors.angdraug
 
 # Index {{{2
 
-# unbind
-bind index <space> noop
 
 # move around
 bind index J next-thread
@@ -534,7 +526,6 @@ bind index L list-reply
 
 
 bind index l limit
-macro index <space>l '<limit>all<enter>'
 
 # '?' is used for search-opposite
 bind index \Ch help
