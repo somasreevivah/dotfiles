@@ -469,7 +469,7 @@ set history = '0'
 # set print_split = no
 # set quit = yes
 # set suspend = yes
-set tmpdir = $HOME/.mutt/tmp
+set tmpdir = /tmp
 set shell = 'bash'
 
 ##########
