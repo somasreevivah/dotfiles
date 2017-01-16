@@ -8,6 +8,11 @@ macro attach O \
 <shell-escape> /tmp/mutt-attach &^A\
 "
 
+macro index S "\
+<pipe-entry>$HOME/contacts/bin/add-contact-from-mail.sh\
+" 'Add contact from email header'
+
+
 macro index gi '=INBOX' 'Go to inbox'
 macro index gh \
 '\

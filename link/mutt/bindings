@@ -1,0 +1,84 @@
+
+# Index {{{2
+
+
+# move around
+bind index J next-thread
+bind index K previous-thread
+
+#bind index l display-message
+
+bind index / search
+bind index ? search-reverse
+bind index n search-next
+bind index N search-opposite
+
+
+bind index z collapse-thread
+bind index Z collapse-all
+
+bind index r reply
+bind index a group-reply
+bind index L list-reply
+
+
+bind index l limit
+
+# '?' is used for search-opposite
+bind index \Ch help
+
+# Always start with threads collapsed and with the most recent thread selected
+push <collapse-all><last-entry>
+
+# Pager {{{2
+bind pager j next-line
+bind pager k previous-line
+#bind pager h quit
+
+#bind pager <down> next-line
+#bind pager <up>   previous-line
+
+bind pager / search
+bind pager ? search-reverse
+bind pager n search-next
+bind pager N search-opposite
+
+bind pager gg top
+bind pager G bottom
+
+# from http://rhonda.deb.at/config/mutt/keys
+#bind editor \cT complete-query     # complete address with query
+bind editor \Cx complete-query     # complete address with query
+
+bind pager r reply
+bind pager a group-reply
+bind pager l list-reply
+#bind pager L list-reply
+
+# '?' is used for search-opposite
+bind pager \Ch help
+
+# query {{{2
+# where for example we are selecting a contact
+# in the autocompletion menu
+
+bind query,alias,browser <Tab> next-entry
+bind query,alias,browser <BackTab> previous-entry
+
+
+# moving around with vi keys
+bind index,query,alias,browser j next-entry
+bind index,query,alias,browser k previous-entry
+bind index,query,alias,browser G last-entry
+bind index,query,alias,browser gg first-entry
+bind pager,index,query,alias,browser \cu half-up
+bind pager,index,query,alias,browser \cd half-down
+bind index,query,alias,browser \ce next-line
+bind index,query,alias,browser \cy previous-line
+# like in my vimrc
+bind pager,index,query,alias,browser <space>f search
+bind pager,index,query,alias,browser <space>F search-reverse
+
+#bind index G imap-fetch-mail
+
+# vim: ft=muttrc
