@@ -131,8 +131,7 @@ bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
 bindsym $windows+Shift+w exec "~/.dotfiles/bin/wallpaper.sh $(~/.dotfiles/bin/wallpaper.sh -l | dmenu -p 'Parser')"
 
 # composite manager
-
-exec 'type xcompmgr && xcompmgr'
+exec '~/.i3/scripts/composite.sh'
 
 
 # focus the child container
