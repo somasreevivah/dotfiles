@@ -8,13 +8,21 @@ liberator.plugins.exOpen = (function() {
       description: 'open vimperator trac page',
       newtab: true
     }, {
-      label: ['gh', "github"],
+      label: 'gh',
       value: 'http://github.com/search?q=',
       custom: function (value, a) {
         return String(value)+String(a);
         //return "https://github.com/search?q="+a[1];
       },
       description: 'Search in github',
+      newtab: true
+    }, {
+      label: 'vasp',
+      value: 'http://cms.mpi.univie.ac.at/wiki/index.php/',
+      custom: function (value, a) {
+        return String(value)+String(a);
+      },
+      description: 'Search in vasp wiki',
       newtab: true
     },];
   }
