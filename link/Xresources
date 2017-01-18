@@ -9,14 +9,12 @@
 
 XTerm*background:black
 XTerm*foreground:white
-XTerm.background:black
-XTerm.foreground:white
 XTerm*cursorColor:red
-XTerm*font:*-fixed-*-*-*-18-*
+!XTerm*font:*-fixed-*-*-*-20-*
 !Save more lines
-XTerm.saveLines:4096
+XTerm*saveLines:4096
 
-*scrollBar:   false
+XTerm*scrollBar:   false
 
 
 
