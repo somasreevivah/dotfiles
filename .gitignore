@@ -77,3 +77,12 @@ link/newsbeuter/history.cmdline
 link/newsbeuter/history.search
 link/newsbeuter/queue
 wallpapers/
+
+link/vim/.netrwhist
+link/vim/bundle/
+link/vim/vim
+link/vimperator/info/default/history-command
+link/vimperator/info/default/history-search
+link/vimperator/info/default/local-marks
+link_config/dwb/dwb
+link_config/uzbl/uzbl
