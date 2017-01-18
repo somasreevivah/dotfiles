@@ -3,3 +3,9 @@ color tree.date red default
 color main.date red default
 
 
+
+bind generic & :view-grep
+bind generic <C-w> :view-next
+
+bind main g :move-first-line
+bind main G :move-last-line
