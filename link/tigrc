@@ -8,4 +8,4 @@ bind generic & :view-grep
 bind generic <C-w> :view-next
 
 bind generic g :move-first-line
-bind generic main G :move-last-line
+bind generic G :move-last-line
