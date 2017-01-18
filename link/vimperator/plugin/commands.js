@@ -33,4 +33,20 @@ function opener_concat(template, args) {
     true
   );
 
+  liberator.modules.commands.addUserCommand(
+      ["vvs"],
+      "Vvs",
+      function(args){
+        //liberator.open("http://vvs.de", liberator.NEW_TAB);
+        //var win = window.open("https://vvs.de", "_blank");
+        var win = window;
+        document.getElementById("efaOrigin").value = "pepe";
+        document.getElementById("efaDestination").value = "popo";
+      },
+      {},
+      true
+      );
+
 })();
+
+// vim-run: firefox
