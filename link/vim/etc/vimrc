@@ -321,10 +321,10 @@ nnoremap <localleader>p :cprevious<cr>
 " Buffer control {{{1 "
 
 "Change to next buffer
-nnoremap <Tab> :bn<CR>
+nnoremap <C-n> :bn<CR>
 
 "Change to previous buffer
-nnoremap <S-Tab> :bp<CR>
+nnoremap <C-p> :bp<CR>
 
 "Delete
 nnoremap <localleader>d :bd<CR>
