@@ -6,6 +6,21 @@ import sys
 import shutil
 endsnippet
 
+snippet "log([ewdi])" "Logging" r
+`!p
+level = match.group(1)
+if level == "e":
+	t[2] = "error"
+elif level == "i":
+	t[2] = "info"
+elif level == "d":
+	t[2] = "debug"
+elif level == "w":
+	t[2] = "warning"
+`
+${1:logging}.${2:level}(${3:"${4:something}"})
+endsnippet
+
 snippet check-version "Check python version code block" b
 import sys
 if sys.version_info < (${1:major_number}, ${2:minor_number}):
