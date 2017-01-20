@@ -6,7 +6,7 @@ set folder="imaps://aamsgallo@imap.gmail.com/"
 
 #  Contacts {{{1 #
 ##################
-source ~/contacts/aliases
+source ~/contacts/aliases.muttrc
 set query_command = "~/contacts/bin/query %s"
 set query_format = '%n %a %e'
 
@@ -98,7 +98,7 @@ my_hdr User-Agent: Every email client sucks, this one just sucks less.
 
 # macros {{{1
 #############
-source $HOME/.mutt/macros
+source $HOME/.mutt/macros.muttrc
 
 # colors {{{1
 #############
@@ -106,6 +106,6 @@ source $HOME/.mutt/colors.angdraug
 
 # bindings {{{1
 ###############
-source $HOME/.mutt/bindings
+source $HOME/.mutt/bindings.muttrc
 
 # vim: cc=80
