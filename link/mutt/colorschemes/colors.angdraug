@@ -89,3 +89,5 @@ color index magenta default "\(Resent-\)?Message-Id: '<.* .*>'"
 color index magenta default "\(Resent-\)?Message-Id: localhost"
 color index magenta default "! \(Resent-\)?Message-Id: @"
 color index magenta default '~C Undisclosed.*Recipients'
+
+# vim: ft=muttrc cc=80 :

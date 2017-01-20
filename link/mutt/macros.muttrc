@@ -31,4 +31,4 @@ bind index <space> noop
 macro index <space>l '<limit>all<enter>'
 
 
-# vim: ft=muttrc cc=80 :
+# vim: cc=80 ft=muttrc

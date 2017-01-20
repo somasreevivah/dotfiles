@@ -1,0 +1,110 @@
+
+# This file should be a compatibility layer between mutt and neomutt
+# configuration files
+
+
+#  Contacts {{{1 #
+##################
+source ~/contacts/aliases.muttrc
+set query_command = "~/contacts/bin/query %s"
+set query_format = '%n %a %e'
+
+
+# *************************************************************************
+# * see the wiki, there are 4 to choose from. mbox is here a way 'how' to *
+# * store mails. Below is mbox meant as a 'mailbox' where read mails are  *
+# * saved ouf of the inbox ($spoolfile).                                  *
+set mbox_type = 'mbox'
+# *************************************************************************
+set message_cachedir=+mutt_cache
+set header_cache=+mutt_cache
+set spoolfile=+inbox    # incoming mails (~/.mail/inbox)
+set mbox=+read_inbox           # ~/.mail/read_inbox
+set postponed=+postponed       # an 'internal' box for mutt basically
+set record=+sent               # folder for sent emails
+set copy=yes                 # always keep a copy of my mails
+set fast_reply           # do not ask for to, subject,... when replying.
+
+# Ask me who I want to email
+set autoedit = no
+set edit_headers = yes # See headers while editing, default no
+
+
+
+# default {{{1
+##############
+
+set attach_charset = 'utf-8' # default: '(empty)'
+set timeout = '10' # 10 seconds
+
+# display {{{1
+##############
+# Display emails above pager
+set pager_index_lines = 5
+set tilde # show tildes like in vim
+set allow_ansi = yes # default: no
+set ascii_chars = no
+set charset = 'utf-8'
+
+# editor {{{1
+#############
+set editor = 'vim'
+
+# folders {{{1
+##############
+set mail_check = '2'
+
+# reading {{{1
+##############
+set assumed_charset = 'utf-8'
+
+# sending {{{1
+##############
+set allow_8bit = yes
+set send_charset = 'utf-8:us-ascii:iso-8859-1'
+set sendmail = '/usr/sbin/sendmail -oem -oi'
+
+# This adds the -f option when calling $sendmail to deliver the mail, forcing
+# it to use the same address for the envelope as for the From: header field.
+# https://dev.mutt.org/trac/wiki/MuttFaq/Header
+set use_envelope_from = yes
+
+set use_from = yes
+set user_agent = yes
+set write_bcc = yes
+
+# sorting {{{1
+##############
+set sort = 'date'
+set sort_browser = 'date' # default: 'alpha'
+set sort_re = yes
+
+# ssl {{{1
+##########
+set certificate_file = '~/.mutt/certificates'
+set ssl_force_tls = yes
+set ssl_starttls = yes
+
+# system {{{1
+#############
+set history = '0'
+set tmpdir = /tmp
+set shell = 'bash'
+
+# my_hdrs {{{1
+##############
+my_hdr User-Agent: Every email client sucks, this one just sucks less.
+
+# macros {{{1
+#############
+source $HOME/.mutt/macros.muttrc
+
+# colors {{{1
+#############
+source $HOME/.mutt/colorschemes/colors.angdraug
+
+# bindings {{{1
+###############
+source $HOME/.mutt/bindings.muttrc
+
+# vim: cc=80 ft=muttrc

@@ -81,4 +81,4 @@ bind pager,index,query,alias,browser <space>F search-reverse
 
 #bind index G imap-fetch-mail
 
-# vim: ft=muttrc
+# vim: cc=80 ft=muttrc
