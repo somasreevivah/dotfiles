@@ -1,2 +1,5 @@
+source ~/.mutt/muttrc
+
+set sidebar_visible
 
 # vim: ft=muttrc cc=80 :
