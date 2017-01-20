@@ -1,0 +1,32 @@
+
+# Assertions & Tests #
+######################
+
+snippet ae "Assert equal" b
+self.assertEqual(${1:${VISUAL:first}},${2:second})
+endsnippet
+
+snippet at "Assert True" b
+self.assertTrue(${1:${VISUAL:expression}})
+endsnippet
+
+snippet af "Assert False" b
+self.assertFalse(${1:${VISUAL:expression}})
+endsnippet
+
+snippet aae "Assert almost equal" b
+self.assertAlmostEqual(${1:${VISUAL:first}},${2:second})
+endsnippet
+
+snippet ar "Assert raises" b
+self.assertRaises(${1:exception}, ${2:${VISUAL:func}}${3/.+/, /}${3:arguments})
+endsnippet
+
+snippet an "Assert is None" b
+self.assertIsNone(${1:${VISUAL:expression}})
+endsnippet
+
+snippet ann "Assert is not None" b
+self.assertIsNotNone(${1:${VISUAL:expression}})
+endsnippet
+
