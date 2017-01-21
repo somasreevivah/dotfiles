@@ -346,44 +346,6 @@ nnoremap <localleader>mt :make test<cr>
 
 
 
-" VimRun {{{1
-
-"Run actual script being edited
-function! VIMRun()
-  let magic_word = "vim-run:"
-  try
-    "/.*/j is there so that it does not jump to the word
-    exec "vimgrep /".magic_word."/j %"
-    let qflist = getqflist()
-    let whole_text = qflist[0]['text']
-    let command_to_run=substitute(whole_text, "^.*".magic_word." *", "","")
-    "echo whole_text
-  catch
-    try
-      call VIMRunFile()
-      return 0
-    catch
-      let command_to_run = './%'
-    endtry
-  endtry
-  echo command_to_run
-  exec ":!".command_to_run
-endfunction
-nnoremap <localleader><localleader>r :call VIMRun()<cr>
-
-function! VIMRunFile()
-  let vim_run = globpath(".", ".vim-run")
-  "if ! filereadable(".vim-run")
-  if len(vim_run) != 0
-    exec ':!$SHELL .vim-run %'
-  else
-    throw 'No ".vim-run" file'
-  endif
-endfunction
-
-if has("autocmd")
-  autocmd BufRead .vim-run set ft=sh
-endif
 
 " Fswitch {{{1
 
@@ -443,14 +405,6 @@ set shiftwidth=2
 "Set softtabstop to control how many columns vim uses when you hit Tab in insert mode
 set softtabstop=2
 
-"Set tab to 4
-nmap \t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-"Set tab to 8 with insertmode tab to 4
-nmap \T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-"Some other common configuration
-nmap \M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
-"Set tab to 2
-nmap \m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 " Windowing configuration {{{1 "
 
@@ -483,50 +437,14 @@ let s:CONTACT_AUTOCOMPLETION=""
 let s:CONTACT_FILE="~/contacts/contacts.header"
 let g:CONTACT_COMMAND="~/contacts/bin/query"
 
-"function! QueryContact()
-  "let CONTACT_AUTOCOMPLETION = expand("<cword>")
-  "echo CONTACT_AUTOCOMPLETION
-  "exec ".!".s:CONTACT_COMMAND." ".CONTACT_AUTOCOMPLETION." ".l:pipe
-"endfunction
 
-"Nice and simple
-"get all results
+"Nice and simple get all results
 nnoremap <localleader>mmq :exec ".!".g:CONTACT_COMMAND." <cword> "<cr>
 "get only first result
 nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
 
-
-"function! GetContact(name)
-  "exec "vimgrep /".a:name."/j ".s:CONTACT_FILE
-  "let result = {}
-  "let croppedResults=[]
-  "for result in getqflist()
-    "call add(croppedResults, result.text)
-  "endfor
-  "return croppedResults
-"endfunction
-"fun! CompleteContacts(findstart, base)
-  "if a:findstart
-    "" locate the start of the word
-    "let s:CONTACT_AUTOCOMPLETION = expand("<cword>")
-    "let line = getline('.')
-    "let start = col('.') - 1
-    "while start > 0 && line[start - 1] =~ '\a'
-      "let start -= 1
-    "endwhile
-    "return start
-  "else
-    "let contacts = GetContact(s:CONTACT_AUTOCOMPLETION)
-    "return contacts
-  "endif
-"endfun
-"set completefunc=CompleteContacts
-
-
-
 "  dict {{{1  "
 """""""""""""""
-
 
 " TODO
 function! SearchInDict()
@@ -640,12 +558,6 @@ function! Plot(...)
 endfunction
 
 " Ctags {{{1 "
-"TODO :
-function! FindInCtagsVisualSelection()
-  let visual_string = s:get_visual_selection()
-  normal! tag visual_string
-endfunction
-"vnoremap <localleader>t :normal! :call FindInCtagsVisualSelection()<cr>
 
 " Set default tags filename as 'tags' 
 set tags+=tags
@@ -664,10 +576,6 @@ nnoremap gt <C-]>
 "  Latex {{{1  "
 """"""""""""""""
 
-"if &ft == "tex"
-  "inoremap C-u ^{}
-  "inoremap C-d _{}
-"endif
 
 function! AsciiTex()
   exec ".!asciiTeX '".getline(".")."'"
