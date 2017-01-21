@@ -132,10 +132,6 @@ function! TrailingSpacesClean()
   echom "Removing trailing spaces"
   %s/\v\s+$//g
 endfunction
-" convert print as a keyword in python 2 to a function for python 3
-fun! PrintPython2ToPython3()
-  %s/\vprint\s+(.*)/print(\1)/c
-endf
 
 "set undo stuff, it needs VIM 7.3 at least
 if has("persistent_undo")
@@ -313,7 +309,6 @@ if has("autocmd")
     autocmd!
     autocmd FileType tex,mail     set spell
     autocmd FileType asy,gnuplot  set nospell
-    autocmd FileType python       set tabstop=4
     autocmd BufNewFile *.tex      set ft=tex
   augroup END " }}}2
 end
