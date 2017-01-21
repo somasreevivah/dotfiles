@@ -274,6 +274,12 @@ vnoremap <localleader>r :s/
 " replace at the current line
 nnoremap <localleader>rr :.s/
 
+function! ReplaceYankedTextWithInput()
+  let word_to_replace = input("Replace it by:")
+  exec "%s/".@"."/".word_to_replace."/gc"
+endfunction
+nnoremap <localleader>ry :call ReplaceYankedTextWithInput()<cr>
+
 "Toggle NERDTree file structure easily
 "noremap <localleader>ne :NERDTreeToggle<cr>
 
