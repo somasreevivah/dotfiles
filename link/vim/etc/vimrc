@@ -94,21 +94,6 @@ function! AutoCompleteParentheses()
     endfor
     let c-=1
   endwhile
-  "for s in symbs_begin
-    "if current_line[cursor_column-1] =~ s
-      "exec "normal! a".symbs_end[c]
-      "echo "yee"
-    "endif
-    "let c+=1
-  "endfor
-  "while c < len(current_line)
-    "for s in symbs_begin
-      "if current_line[c] =~ s
-        "echo current_line[c]
-      "endif
-    "endfor
-    "let c+=1
-  "endwhile
 endfunction
 
 
@@ -161,7 +146,8 @@ filetype plugin on
 set number
 
 " Relative numbering
-if v:version >= 704
+"if v:version >= 704
+if exists("&relativenumber")
   "is only supported for vim 7.04 and above...
   set relativenumber
 endif
@@ -442,29 +428,6 @@ let g:CONTACT_COMMAND="~/contacts/bin/query"
 nnoremap <localleader>mmq :exec ".!".g:CONTACT_COMMAND." <cword> "<cr>
 "get only first result
 nnoremap <localleader>mq :exec ".!".g:CONTACT_COMMAND." <cword> \| head -1"<cr>
-
-"  dict {{{1  "
-"""""""""""""""
-
-" TODO
-function! SearchInDict()
-  "bufwinnr('ppe')
-  nnoremap <buffer> q :q
-endfunction
-
-nnoremap <localleader><localleader>d :call SearchInDict()<cr>
-
-
-" Text Formatting {{{1 "
-function! CreateRsTTitle(character)
-  "This function creates a header of the rst type
-  "We use execute because then we can write Esc inside the command
-  execute "normal! yypv^$r".a:character."\<ESC>"
-endfunction
-nnoremap <localleader>t= :call CreateRsTTitle("=")<cr>
-nnoremap <localleader>t- :call CreateRsTTitle("-")<cr>
-nnoremap <localleader>t~ :call CreateRsTTitle("~")<cr>
-
 
 
 "  emmet.vim  {{{1"
