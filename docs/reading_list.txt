@@ -15,3 +15,5 @@ https://github.com/antirez/linenoise
 https://www.recurse.com/blog/7-understanding-c-by-learning-assembly
 dynamic polarizability
 halite.io
+http://physicstoday.scitation.org/do/10.1063/PT.5.7331/full/
+www.sciencemag.org/news/2016/12/deep-probe-antimatter-puts-einstein-s-special-relativity-test

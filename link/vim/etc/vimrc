@@ -26,7 +26,7 @@ if ! exists("NO_SPARTAN")
 endif
 Plugin 'easymotion/vim-easymotion'
 if has("lua") " it needs lua!
-  Plugin 'Shougo/neocomplete.vim'
+  "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'alejandrogallo/vim-syntax-extra'
@@ -68,6 +68,7 @@ let g:netrw_liststyle = 3
 " 30% of column
 let g:netrw_winsize   = 30
 let g:netrw_browsex_viewer = "rifle" 
+
 
 
 function! GoogleLookUp()
@@ -610,6 +611,10 @@ if &term =~ "xterm\\|rxvt"
   " use \003]12;gray\007 for gnome-terminal and rxvt up to version 9.21
 endif
 
+if has("gui_running")
+  color solarized
+  set background=dark
+endif
 
 " Spelling {{{1 "
 
