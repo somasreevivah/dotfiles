@@ -1,6 +1,3 @@
-[submodule "compile/ledgi"]
-	path = compile/ledgi
-	url = https://github.com/alejandrogallo/ledgi.git
 [submodule "link/calcurse"]
 	path = link/calcurse
 	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
