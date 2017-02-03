@@ -25,3 +25,11 @@ re-downloaded in order to locate PACKAGE."
 
 (require 'evil)
 (evil-mode t)
+
+(defun my-evil-doc-view-hook ()
+  (turn-off-evil-mode)
+  (define-key doc-view-mode-map (kbd "j") 'doc-view-scroll-up-or-next-page)
+  (define-key doc-view-mode-map (kbd "k") 'doc-view-scroll-down-or-previous-page)
+  (define-key doc-view-mode-map (kbd "h") 'image-backward-hscroll)
+  (define-key doc-view-mode-map (kbd "l") 'image-forward-hscroll))
+(add-hook 'doc-view-mode-hook 'my-evil-doc-view-hook)
