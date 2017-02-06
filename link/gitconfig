@@ -4,3 +4,6 @@
 
 [alias]
   l = log --decorate --oneline --graph --date-order --all --date=short
+
+[merge]
+	tool = vimdiff

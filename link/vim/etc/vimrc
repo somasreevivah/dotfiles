@@ -132,7 +132,7 @@ set nocompatible
 "set textwidth=72
 
 "Go to normal mode typing  kj in insert mode
-inoremap kj <ESC>
+"inoremap kj <ESC>
 
 filetype plugin on
 "Autocompletion from vim
@@ -234,9 +234,9 @@ let maplocalleader = "\<Space>"
 let mapleader = ','
 
 "Save current buffer
-nnoremap <localleader>w :w<cr>
+"nnoremap <localleader>w :w<cr>
 "Close vim
-nnoremap <localleader>q :q<cr>
+"nnoremap <localleader>q :q<cr>
 
 "/ is way too far away, and I want case insensitive!
 nnoremap <localleader>f /\c
