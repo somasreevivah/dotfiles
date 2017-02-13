@@ -81,7 +81,7 @@ liberator.plugins.exOpen = (function() {
     },
     registerCommand: function() {
       var self = this;
-      commands.addUserCommand(['exopen'], 'Open byextension URL',
+      liberator.modules.commands.addUserCommand(['exopen'], 'Open byextension URL',
         function(args) self.open(args), {
           bang: true,
           completer: function(context, args) {
