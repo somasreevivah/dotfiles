@@ -30,9 +30,9 @@ function getIDList(filter, isChrome){
 }
 
 var options = [
-  [["-frame","-f"], commands.OPTION_NOARG]
+  [["-frame","-f"], liberator.modules.commands.OPTION_NOARG]
 ];
-commands.add(["inspect","dominspect"],"run DOM Inspector",
+liberator.modules.commands.add(["inspect","dominspect"],"run DOM Inspector",
   function(args){
     var arg = args[0];
     var doc = args.bang ? document : content.document;

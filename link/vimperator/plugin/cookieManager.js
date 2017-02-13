@@ -112,7 +112,7 @@ buffer.addPageInfoSection("c", "Cookies", function(verbose){
 // --------------------------------------------------------
 // Command
 // -----------------------------------------------------{{{
-commands.addUserCommand(["cookiem[anager]"], "Cookie Management",
+liberator.modules.commands.addUserCommand(["cookiem[anager]"], "Cookie Management",
     function(args){
         if (args["-perm"]){
             switch (args[0]){
@@ -148,7 +148,7 @@ commands.addUserCommand(["cookiem[anager]"], "Cookie Management",
                 break;
             case "remove":
                 cManager.stored.remove(host);
-                break;
+                lobreak;
             default:
                 liberator.echoerr("Invalid sub-command.");
         }

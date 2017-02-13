@@ -1,5 +1,5 @@
 
-commands.add(["invert","inv"],
+liberator.modules.commands.add(["invert","inv"],
     "Invert colors of website",
     function (args) {
       var DOCUMENT=window.content.window.document;

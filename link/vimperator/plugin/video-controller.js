@@ -135,7 +135,7 @@ var INFO = xml`
     function () '//video'
   );
 
-  commands.addUserCommand(
+  liberator.modules.commands.addUserCommand(
     ['videocontrol'],
     'Control HTML5 Videos',
     function (args) {

@@ -34,7 +34,7 @@ open statusbar menu like Tiny Menu [ https://addons.mozilla.org/firefox/addon/14
 
     popup.addEventListener( 'popuphidden' , function(event) { popup.hidePopup(); } , false);
 
-    commands.addUserCommand(
+    liberator.modules.commands.addUserCommand(
         ['opentinymenu'],
         'Open the tiny menu ',
         function () {

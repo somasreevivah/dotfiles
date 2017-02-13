@@ -238,7 +238,7 @@ if (window.izImage) {
         function () query
     );
 }
-commands.addUserCommand(
+liberator.modules.commands.addUserCommand(
     ['downimageall'],
     'download all images of current page',
     function () {
