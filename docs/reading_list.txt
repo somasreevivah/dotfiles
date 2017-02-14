@@ -17,3 +17,4 @@ dynamic polarizability
 halite.io
 http://physicstoday.scitation.org/do/10.1063/PT.5.7331/full/
 www.sciencemag.org/news/2016/12/deep-probe-antimatter-puts-einstein-s-special-relativity-test
+http://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming
