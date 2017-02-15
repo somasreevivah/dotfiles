@@ -20,7 +20,7 @@ if ! exists("NO_SPARTAN")
 endif
 Plugin 'easymotion/vim-easymotion'
 if has("lua") " it needs lua!
-  Plugin 'Shougo/neocomplete.vim'
+  "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'alejandrogallo/vim-syntax-extra'
