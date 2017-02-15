@@ -1,6 +1,11 @@
 
+let g:vim_run_auto_save = 1
+
 "Run actual script being edited
 function! VIMRun()
+  if g:vim_run_auto_save == 1
+    write
+  endif
   let magic_word = "vim-run:"
   try
     "/.*/j is there so that it does not jump to the word
