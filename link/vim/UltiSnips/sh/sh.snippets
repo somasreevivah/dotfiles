@@ -4,6 +4,24 @@ DEBUG=${1:1}
 function echo_debug() { if [[ -n ${DEBUG} ]]; then echo -ne "\033[0;105mDEBUG::\033[0m "; echo $@ ; fi }
 endsnippet
 
+snippet assert "assert" b
+assert ()
+{
+	E_PARAM_ERR=98
+	E_ASSERT_FAILED=99
+	if [ -z "$2" ]; then
+		lineno=?
+	else
+		lineno=$2
+	fi
+	if [ ! $1 ]; then
+		echo "Assertion failed:	\"$1\""
+		echo "File \"$0\", line $lineno"
+		exit $E_ASSERT_FAILED
+	fi
+}
+endsnippet
+
 snippet scriptDir "Variable w script directory" b
 ${1:SCRIPT_DIR}=$(dirname \$0) $0
 endsnippet
