@@ -22,7 +22,19 @@ set_wallpaper() {
   [[ -n $1 ]] && IMAGE_PATH=$1
   arrow "Setting wallpaper"
   #Using feh
-  if type feh 2>&1 > /dev/null; then
+  if type osascript 2>&1 > /dev/null; then
+    arrow "Through osascript..."
+    # before mavericks
+    #osascript -e '
+    #tell application "Finder"
+    #set desktop picture to POSIX file "'${IMAGE_PATH}'"
+    #end tell
+    #'
+    # From mavericks on
+    sqlite3 \
+      ~/Library/Application\ Support/Dock/desktoppicture.db \
+      "update data set value = '${IMAGE_PATH}'" && killall Dock
+  elif type feh 2>&1 > /dev/null; then
     arrow "Trhough feh..."
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
@@ -32,13 +44,6 @@ set_wallpaper() {
     arrow "Through xsetbgimg..."
     xsetbgimg "${IMAGE_PATH}"
   #Using osascript (osx)
-  elif type osascript 2>&1 > /dev/null; then
-    arrow "Through osascript..."
-    osascript -e '
-    tell application "Finder"
-    set desktop picture to POSIX file "'${IMAGE_PATH}'"
-    end tell
-    '
   fi
 }
 
