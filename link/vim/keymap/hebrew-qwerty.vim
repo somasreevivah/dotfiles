@@ -14,7 +14,7 @@ b       <char-0x5d1> " á - bet
 g       <char-0x5d2> " â - gimel
 q       <char-0x5e7> " ÷ - qof
 k       <char-0x5db> " ë - kaf
-g       <char-0x5e2> " ò - ayin
+e       <char-0x5e2> " ò - ayin
 y       <char-0x5d9> " é - yod
 N       <char-0x5df> " ï - final nun
 j       <char-0x5d7> " ç - het
@@ -24,17 +24,19 @@ x       <char-0x5e6> " ö - tsadi
 m       <char-0x5de> " î - mem
 M       <char-0x5dd> " í - final mem
 p       <char-0x5e4> " ô - pe
+f       <char-0x5e4><char-0x5bc> " ô - fe + dagesh
 r       <char-0x5e8> " ø - resh
 d       <char-0x5d3> " ã - dalet
 a       <char-0x5d0> " à - alef
 v       <char-0x5d5> " å - vav
 h       <char-0x5d4> " ä - he
 s       <char-0x5e1> " ñ - samekh
-T       <char-0x5d8> " è - tet
 z       <char-0x5d6> " æ - zayin
+T       <char-0x5d8> " è - tet
 t       <char-0x5ea> " ú - tav
 X       <char-0x5e5> " õ - final tsadi
 P       <char-0x5e3> " ó - final pe
+F       <char-0x5e3><char-0x5bc> " ô - final fe + dagesh
 A:      <char-0x5b0> " sheva
 HE      <char-0x5b1> " hataf segol
 HA      <char-0x5b2> " hataf patah
@@ -51,9 +53,9 @@ D       <char-0x5bc> " dagesh
 ]Q      <char-0x5be> " maqaf
 ]R      <char-0x5bf> " rafe
 ]p      <char-0x5c0> " paseq
-SR      <char-0x5c1> " shin-dot
-SL      <char-0x5c2> " sin-dot
-]P      <char-0x5c3> " sof-pasuq
+"SR      <char-0x5c1> " shin-dot
+"SL      <char-0x5c2> " sin-dot
+"]P      <char-0x5c3> " sof-pasuq
 VV      <char-0x5f0> " double-vav
 VY      <char-0x5f1> " vav-yod
 YY      <char-0x5f2> " yod-yod
