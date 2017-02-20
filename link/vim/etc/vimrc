@@ -23,6 +23,7 @@ if has("lua") " it needs lua!
   "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/vim-auto-save'
 Plugin 'alejandrogallo/vim-syntax-extra'
 Plugin 'othree/html5.vim'
 Plugin 'lervag/vimtex'
