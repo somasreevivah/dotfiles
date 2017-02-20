@@ -37,9 +37,6 @@ getVolume() {
 }
 
 volumeUp() {
-  if type -a osascript; then
-    #statements
-  fi
   local down
   up=3
   arrow "Increasing volume by ${up}%"
@@ -54,7 +51,7 @@ volumeDown() {
 }
 
 setVolume() {
-  local level
+  local level=$1
   if [[ ${OSX} == 1 ]]; then
     osascript -e "set volume output volume ${level}"
   else
@@ -63,7 +60,9 @@ setVolume() {
 }
 
 refreshInformations() {
-  pkill -RTMIN+10 i3blocks
+  if type -a i3blocks 2>&1 > /dev/null ; then
+    pkill -RTMIN+10 i3blocks
+  fi
 }
 
 while getopts $__OPTIONS opt
@@ -85,10 +84,6 @@ do
 done
 shift $(($OPTIND-1))
 
-if ! which amixer &> /dev/null; then
-  error "This script uses mixer in debian, please install it\n\t sudo apt-get install amixer"
-  exit 1
-fi
 
 VOLUME_LEVEL=$1
 
@@ -97,7 +92,7 @@ CURRENT_VOLUME=$(getVolume)
 arrow "Current volume is ${CURRENT_VOLUME}%"
 
 if [[ -n ${VOLUME_LEVEL} ]]; then
-  if [[ ! $VOLUME_LEVEL = *% ]]; then
+  if [[ ! $VOLUME_LEVEL = *% && ! ${OSX} == 1 ]]; then
     VOLUME_LEVEL=$VOLUME_LEVEL'%'
     arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
   fi
