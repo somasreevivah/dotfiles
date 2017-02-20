@@ -4,6 +4,21 @@ link/vim/spell/*sug
 link/elinks/bookmarks.*
 link/emacs.d/emacs.d
 
+pdf-plugin.conf
+ps-plugin.conf
+
+
+
+
+bin/wspace.sh
+compile/
+link/mutt/cache/
+link/vim/.netrwbook
+link/vim/spell/ca.utf-8.add
+dwb/default/cookies
+qpdfview.conf
+
+no changes added to commit (use "git add" and/or "git commit -a")
 
 
 
