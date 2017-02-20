@@ -24,11 +24,22 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
+if type -a osascript; then
+  OSX=1
+fi
+
 getVolume() {
-  amixer get Master | sed -n "s/.*\([0-9]\+\)%.*/\1/p"
+  if [[ ${OSX} == 1 ]]; then
+    sudo osascript -e "output volume of (get volume settings)"
+  else
+    amixer get Master | sed -n "s/.*\([0-9]\+\)%.*/\1/p"
+  fi
 }
 
 volumeUp() {
+  if type -a osascript; then
+    #statements
+  fi
   local down
   up=3
   arrow "Increasing volume by ${up}%"
@@ -40,6 +51,15 @@ volumeDown() {
   down=3
   arrow "Lowering volume by ${down}%"
   amixer -q sset Master ${down}%-
+}
+
+setVolume() {
+  local level
+  if [[ ${OSX} == 1 ]]; then
+    osascript -e "set volume output volume ${level}"
+  else
+    amixer set Master ${level}
+  fi
 }
 
 refreshInformations() {
@@ -81,7 +101,7 @@ if [[ -n ${VOLUME_LEVEL} ]]; then
     VOLUME_LEVEL=$VOLUME_LEVEL'%'
     arrow "Interpreting the volume as a percentage $VOLUME_LEVEL"
   fi
-  amixer set Master $VOLUME_LEVEL
+  setVolume ${VOLUME_LEVEL}
 fi
 
 refreshInformations
