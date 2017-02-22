@@ -31,15 +31,15 @@ runCommand() {
 
 # Papers stuff
 registerCommand pap
-registerCommand pap_misc
+registerCommand misc
 
 pap_PATH=$(papis config general.dir)
-pap_misc_PATH=$(papis config misc.dir)
+misc_PATH=$(papis config misc.dir)
 
 pap_SEARCHER=papSearcher
 pap_ACTION=papAction
-pap_misc_SEARCHER="papSearcher misc"
-pap_misc_ACTION="papAction misc"
+misc_SEARCHER="papSearcher misc"
+misc_ACTION="papAction misc"
 
 papSearcher(){
   local lib=${1:-general}
