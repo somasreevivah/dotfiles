@@ -1,5 +1,5 @@
 
-if [[ $TERM = "linux" || $TERM = "screen"  || $TERM =~ "xterm" ]]; then
+if [[ $TERM = "linux" || $TERM = "screen" ]]; then
   if which elinks &> /dev/null; then
     export BROWSER="elinks" #I prefer elinks, it is nice 
   elif which lynx &> /dev/null; then
