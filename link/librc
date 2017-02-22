@@ -33,11 +33,11 @@ runCommand() {
 registerCommand pap
 registerCommand misc
 
-pap_PATH=$(papis config general.dir)
+pap_PATH=$(papis config papers.dir)
 misc_PATH=$(papis config misc.dir)
 
-pap_SEARCHER=papSearcher
-pap_ACTION=papAction
+pap_SEARCHER="papSearcher papers"
+pap_ACTION="papAction papers"
 misc_SEARCHER="papSearcher misc"
 misc_ACTION="papAction misc"
 
