@@ -8,14 +8,14 @@
 #
 #create_buffer patch by Laurent Bachelier
 #
-#restriction to local variables and 
+#restriction to local variables and
 #rename variables to ones which will not collide
 #by Markus Mikkolainen
 #
 #support for bgcolors by Markus Mikkolainen
 #
-#support for delay loop function (instead of sleep, 
-#enabling keyboard input) by Markus Mikkolainen 
+#support for delay loop function (instead of sleep,
+#enabling keyboard input) by Markus Mikkolainen
 
 bsc_create_buffer(){
     local BUFFER_DIR
@@ -26,7 +26,7 @@ bsc_create_buffer(){
         BUFFER_DIR=$TMPDIR
     else
         BUFFER_DIR="/tmp"
-    fi 
+    fi
     local buffername
     [[ "$1" != "" ]] &&  buffername=$1 || buffername="bashsimplecurses"
 
@@ -71,7 +71,7 @@ bsc_term_init(){
 bsc__nl(){
     BSC_POSY=$((BSC_POSY+1))
     tput cup $BSC_POSY $BSC_POSX >> $BSC_BUFFER
-    #echo 
+    #echo
 }
 
 
@@ -141,9 +141,9 @@ window(){
     local color
     local bgcolor
     title=$1
-    color=$2        
+    color=$2
     bgcolor=$4
-    tput cup $BSC_POSY $BSC_POSX 
+    tput cup $BSC_POSY $BSC_POSX
     bsc_cols=$(tput cols)
     bsc_cols=$((bsc_cols))
     if [[ "$3" != "" ]]; then
@@ -176,7 +176,7 @@ window(){
     #set title color
     setcolor $color
     setbgcolor $bgcolor
-    
+
     echo $title
     setcolor
     setbgcolor
@@ -187,7 +187,7 @@ window(){
     bsc__nl
     #then draw bottom line for title
     addsep
-    
+
     BSC_LASTCOLS=$bsc_cols
 
 }
@@ -272,7 +272,7 @@ addsep (){
     setbgcolor $2
     local i
     for i in `seq 3 $bsc_cols`; do echo -ne $_HLINE; done
-    setcolor    
+    setcolor
     setbgcolor
     echo -ne $_SEPR
     bsc__nl
@@ -284,7 +284,7 @@ clean_line(){
     tput sc
     #tput el
     tput rc
-    
+
 }
 
 
@@ -316,7 +316,7 @@ blinkenlights(){
     text=$1
     color=$2
     color2=$3
-    incolor=$4  
+    incolor=$4
     bgcolor=$5
 
     declare -a params
@@ -338,12 +338,12 @@ blinkenlights(){
         params=( "${params[@]}" )
     done
 
-    bsc__multiappend "left" "[" $incolor $bgcolor $lights "]${text}" $incolor $bgcolor 
+    bsc__multiappend "left" "[" $incolor $bgcolor $lights "]${text}" $incolor $bgcolor
 }
 
 #
 #   vumeter <text> <width> <value> <max> [color] [color2] [inactivecolor] [bgcolor]
-#   
+#
 vumeter(){
     local done
     local todo
@@ -380,7 +380,7 @@ vumeter(){
     green=""
     red=""
     rest=""
-    
+
     for i in `seq 1 $(($done))`;do
         green="${green}|"
     done
@@ -411,7 +411,7 @@ progressbar(){
     progress=$2
     max=$3
     len=$(( len - 2 ))
-    
+
     done=$(( progress * len / max))
     todo=$(( len - done - 1))
     modulo=$(( progress % 4 ))
@@ -454,7 +454,7 @@ bsc__multiappend(){
         text="${text}${params[0]}"
         unset params[0]
         unset params[1]
-        unset params[2]    
+        unset params[2]
         params=( "${params[@]}" )
     done
     clean_line
@@ -463,7 +463,7 @@ bsc__multiappend(){
     len=$(echo "$text" | wc -c )
     len=$((len-1))
     bsc_left=$((BSC_LASTCOLS/2 - len/2 -1))
-    
+
     params=( "$@")
     [[ "${params[0]}" == "left" ]] && bsc_left=0
     unset params[0]
@@ -473,7 +473,7 @@ bsc__multiappend(){
         setcolor "${params[1]}"
         setbgcolor "${params[2]}"
         echo -ne "${params[0]}"
-        setcolor    
+        setcolor
         setbgcolor
         unset params[0]
         unset params[1]
@@ -496,14 +496,14 @@ bsc__append(){
     len=$(echo "$1" | wc -c )
     len=$((len-1))
     bsc_left=$((BSC_LASTCOLS/2 - len/2 -1))
-    
+
     [[ "$2" == "left" ]] && bsc_left=0
 
     tput cuf $bsc_left
     setcolor $3
     setbgcolor $4
     echo -e "$1"
-    setcolor    
+    setcolor
     setbgcolor
     tput rc
     tput cuf $((BSC_LASTCOLS-1))
@@ -521,15 +521,15 @@ append_tabbed(){
     local len
     len=$(echo "$1" | wc -c )
     len=$((len-1))
-    bsc_left=$((BSC_LASTCOLS/$2)) 
+    bsc_left=$((BSC_LASTCOLS/$2))
 
     setcolor $4
     setbgcolor $5
-    local i 
+    local i
     for i in `seq 0 $(($2))`; do
         tput rc
         tput cuf $((bsc_left*i+1))
-        echo "`echo $1 | cut -f$((i+1)) -d"$delim"`" | cut -c 1-$((bsc_left-2)) 
+        echo "`echo $1 | cut -f$((i+1)) -d"$delim"`" | cut -c 1-$((bsc_left-2))
     done
 
     setcolor
@@ -575,19 +575,21 @@ main_loop (){
     bsc_term_init
     bsc_init_chars
     local time
+    local refresh_rate
     local number_re
     #everything starting with a number is a number
     number_re='^[0-9]+.*$'
     time=1
+    refresh_rate=.5
     [[ "$1" == "" ]] || time=$1
     while [[ 1 ]];do
         tput cup 0 0 >> $BSC_BUFFER
         tput il $(tput lines) >>$BSC_BUFFER
-        main >> $BSC_BUFFER 
-        tput cup $(tput lines) $(tput cols) >> $BSC_BUFFER 
+        main >> $BSC_BUFFER
+        tput cup $(tput lines) $(tput cols) >> $BSC_BUFFER
         refresh
         if ! [[ $time =~ $number_re ]] ; then
-            #call function with name $time 
+            #call function with name $time
             eval $time
             retval=$?
             [ "$retval" == "0" ] || {
@@ -595,8 +597,8 @@ main_loop (){
                 exit $retval
             }
         else
-            sleep $time
-        fi   
+            sleep ${refresh_rate}
+        fi
         BSC_POSX=0
         BSC_POSY=0
     done
@@ -624,27 +626,46 @@ list_idle_nodes(){
 }
 
 llq_min(){
-  queue | awk -F " " '{ \
+  ${ABA} llq -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
+  awk -F " " '{ \
   if ($8 == "R"){ \
-    A="running on"; \
+    A="runs"; \
     USER=$5; \
+    JOB=$7; \
     MACHINE=$9; \
     name=$6; \
-    printf "+%s is %s %s (%s)\n", USER, A, MACHINE, name; \
+    printf "+%s %s %s (%s) %s\n", USER, A, MACHINE, name, JOB; \
   } \
-else if ($6=="I"){ \
-  A="waiting..."; \
-  USER=$3; \
-  MACHINE=$7; \
-  name=$4; \
-  printf "-%s is %s (%s)\n", USER, A,  name; \
-} \
-}';
+  else if ($6=="I"){ \
+    A="waits"; \
+    USER=$3; \
+    JOB=$5; \
+    MACHINE=$7; \
+    name=$4; \
+    printf "-%s %s %s (%s) %s\n", USER, A, MACHINE,  name, JOB; \
+  } \
+}' | {
+  while read line; do
+    jobid=$(echo $line | awk '{print $NF}' |
+      sed "s/abakus01\.//; s/\.0.*//" | tr -d "\r")
+    tasks=$(llq -x -d |
+      sed -n "/"${jobid}"/,/total_tasks/s/.*total_tasks\s*=//p"
+      )
+    [[ -z "${tasks}" ]] && tasks="??"
+    echo ${line} |
+    awk '{ \
+      for (i=1; i< NF; ++i) { \
+        printf "%s ", $i; \
+      } \
+    }';
+    echo "${jobid} ${tasks}@$((tasks/16))"
+  done
+  }
 }
 
 
 main(){
-  window "Idle nodes ($(list_idle_nodes | wc -l))" "red" "33%"
+  window "$Idle nodes ($(list_idle_nodes | wc -l))" "red" "33%"
     #append "Idle nodes"
     #addsep
     append_command "list_idle_nodes"
@@ -677,7 +698,7 @@ main(){
   #endwin
 
   window "Queue ($(llq_min | wc -l) jobs)" "green" "60%"
-    append_command "llq_min"
+    append_command "llq_min | column -t"
   endwin
 
   #col_right
