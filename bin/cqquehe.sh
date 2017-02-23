@@ -697,7 +697,7 @@ main(){
     #append "I only ask for date"
   #endwin
 
-  window "Queue ($(llq_min | wc -l) jobs)" "green" "60%"
+  window "Queue ($(llq_min | wc -l) jobs)" "green" "67%"
     append_command "llq_min | column -t"
   endwin
 
