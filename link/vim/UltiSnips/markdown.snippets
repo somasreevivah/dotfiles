@@ -10,20 +10,44 @@ snippet travis "Description" b
 endsnippet
 
 
-snippet ita "Italics text" b
-*$1*$0
-endsnippet
 
 snippet tag "Generic tag" w
 <${1:tag}>${2:content}</$1>$0
 endsnippet
 
+snippet it "Italics text" w
+*$1*$0
+endsnippet
 
-snippet bold "bold text" b
+snippet bf "bold text" w
 **$1**$0
 endsnippet
 
 
 snippet hl "Highlight" b
 ==$1==$0
+endsnippet
+
+snippet h1 "Header" b
+# ${1:Title}
+endsnippet
+
+snippet h2 "Header" b
+## ${1:Title}
+endsnippet
+
+snippet h3 "Header" b
+### ${1:Title}
+endsnippet
+
+snippet h4 "Header" b
+#### ${1:Title}
+endsnippet
+
+snippet a "Link" w
+[${1:Link name}](${2:http://${3:url}})
+endsnippet
+
+snippet hrule "Horizonatl rule" b
+---
 endsnippet

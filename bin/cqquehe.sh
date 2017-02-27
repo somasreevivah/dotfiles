@@ -626,7 +626,7 @@ list_idle_nodes(){
 }
 
 llq_min(){
-  ${ABA} llq $@ -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
+  ${ABA} llq -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
   awk -F " " '{ \
   if ($8 == "R"){ \
     A="runs"; \
