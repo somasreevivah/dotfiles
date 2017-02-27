@@ -626,7 +626,7 @@ list_idle_nodes(){
 }
 
 llq_min(){
-  ${ABA} llq -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
+  ${ABA} llq $@ -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
   awk -F " " '{ \
   if ($8 == "R"){ \
     A="runs"; \
@@ -669,7 +669,7 @@ main(){
     #append "Idle nodes"
     #addsep
     append_command "list_idle_nodes"
-    endwin
+  endwin
 
     #window "Tree files" "gree" "33%"
     #if [[ -x `which tree 2> /dev/null` ]]; then
