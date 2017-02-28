@@ -1,5 +1,6 @@
 
 [[ $(hostname) = pccq* ]] || return 0
+which brew 2> /dev/null > /dev/null || return
 
 # Until LinuxBrew is fixed, the following is required.
 # See: https://github.com/Homebrew/linuxbrew/issues/47
