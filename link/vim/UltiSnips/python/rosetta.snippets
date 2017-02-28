@@ -141,25 +141,25 @@ endsnippet
 #endsnippet
 #snippet sof "Printf to stdout (formated)" b
 #endsnippet
-snippet read "Stdin read" b
+snippet read "Stdin read" w
 ${1:var} = input(${2:"${3:Type in something: }"})
 endsnippet
-snippet cd "Change dir" b
+snippet cd "Change dir" w
 os.chdir(${1:"${2:path/to/dir}"})$0
 endsnippet
 snippet ls "List directory" w
 os.listdir(${1:"."})$0
 endsnippet
-snippet sys "Talk to the shell" b
+snippet sys "Talk to the shell" w
 os.system(${1:"${2:command}"})
 endsnippet
-snippet mkdir "Create directory" b
+snippet mkdir "Create directory" w
 os.mkdir(${1:"${2:path/to/dir}"}, mode=0o777)$0
 endsnippet
-snippet cp "Copy a file" b
+snippet cp "Copy a file" w
 shutil.copy(${1:src}, ${2:dest})$0
 endsnippet
-snippet cpr "Copy dir" b
+snippet cpr "Copy dir" w
 shutil.copytree(${1:src}, ${2:dest})$0
 endsnippet
 #snippet fopen "File open" b
@@ -168,14 +168,14 @@ endsnippet
 #endsnippet
 #snippet fwrite "File write" b
 #endsnippet
-snippet fread "File read" b
+snippet fread "File read" w
 for ${1:line} in ${2:file_descriptor}:
 	${3:pass}
 endsnippet
-snippet exit "Exit a program with status" b
+snippet exit "Exit a program with status" w
 sys.exit(${1:1})$0
 endsnippet
-snippet ret "Return a value in function" b
+snippet ret "Return a value in function" w
 return
 endsnippet
 snippet argc "Get arguments number" w
@@ -192,16 +192,16 @@ endsnippet
 snippet basename "Bash basename" w
 os.path.basename(${1:"${2:path}"})$0
 endsnippet
-snippet genv "Get Environment variables" b
+snippet genv "Get Environment variables" w
 os.environ[${1:"${2:VAR_NAME}"}]$0
 endsnippet
-snippet senv "Set Environment variables" b
+snippet senv "Set Environment variables" w
 os.environ[${1:"${2:VAR_NAME}"}]=${3:"${4:something}"}$0
 endsnippet
-snippet clear "stdout clear" b
+snippet clear "stdout clear" w
 os.system("clear")#NO_WINDOWS
 endsnippet
-snippet sleep "Sleep for some time" b
+snippet sleep "Sleep for some time" w
 time.sleep(${1:1})
 endsnippet
 snippet shbang "Shbang for some scripting languages" b
