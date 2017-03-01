@@ -669,7 +669,7 @@ main(){
     #append "Idle nodes"
     #addsep
     append_command "list_idle_nodes"
-    endwin
+  endwin
 
     #window "Tree files" "gree" "33%"
     #if [[ -x `which tree 2> /dev/null` ]]; then

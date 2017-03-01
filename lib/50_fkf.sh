@@ -23,7 +23,8 @@ module purge
 module load  mpi.intel/5.1.2 ifort/16.0.1
 
 # set p4vasp environment variables
-export PATH=$PATH:/home/gallo/opt/p4vasp/bin
+export PATH=$PATH:$HOME/opt/p4vasp/bin
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/gallo/opt/boost/boost_1_55_0/stage/lib/
 
 #set ase environment 
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/ase

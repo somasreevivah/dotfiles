@@ -12,7 +12,7 @@ if ! exists("NO_SPARTAN")
   "Plugin 'bling/vim-airline'
   Plugin 'yuratomo/w3m.vim'
   Plugin 'vim-scripts/VCard-syntax'
-  Plugin 'scrooloose/syntastic'
+  "Plugin 'scrooloose/syntastic'
   Plugin 'dhruvasagar/vim-table-mode'
   Plugin 'kchmck/vim-coffee-script'
   Plugin 'burnettk/vim-angular'
@@ -23,7 +23,9 @@ if has("lua") " it needs lua!
   "Plugin 'Shougo/neocomplete.vim'
 endif
 Plugin 'vim-scripts/OmniCppComplete'
-Plugin 'vim-scripts/vim-auto-save'
+if hostname() != "abakus01"
+  Plugin 'vim-scripts/vim-auto-save'
+endif
 Plugin 'alejandrogallo/vim-syntax-extra'
 Plugin 'othree/html5.vim'
 Plugin 'lervag/vimtex'
@@ -250,6 +252,8 @@ nnoremap <localleader>f /\c
 nnoremap <localleader>F ?\c
 vnoremap <localleader>f /\c
 vnoremap <localleader>F ?\c
+
+nnoremap <localleader>cd :cd %:p:h<cr>:pwd<cr>
 
 " too complicated to replace
 nnoremap <localleader>r :%s/

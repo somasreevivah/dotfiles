@@ -167,6 +167,22 @@ def get$1(self$2):
 endsnippet
 
 
+snippet la "Latex print" w
+print(
+r"""
+${1:${VISUAL}}
+"""
+)
+endsnippet
+
+snippet tla "Latex with template" w
+print(string.Template(
+r"""
+
+""").substitute(
+	)
+)
+endsnippet
 
 ###################
 #  General stuff  #
