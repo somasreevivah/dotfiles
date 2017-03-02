@@ -44,12 +44,10 @@ bindsym $mod+g exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
 # lock session
 #bindsym $mod+Shift+x exec i3lock
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -i
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
+# program launcher
+bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
+# program switcher
+bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/switcher.sh
 
 # change focus
 # It should be like in vim

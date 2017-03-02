@@ -11,7 +11,7 @@ for line in sys.stdin:
     lines += [line]
 
 for line in lines:
-    for m in re.finditer(r"[$]([a-zA-Z]+)", line):
+    for m in re.finditer(r"[$]([a-zA-Z_]+)", line):
         variables += [ m.group(1) ]
 
 variables = list(set(variables))
