@@ -20,6 +20,7 @@ snippet texdiff "Texdiff preamble" b
 %Define editing colors "ins" and "del" with existing "xcolor" color names:
 \colorlet{ins}{blue} \colorlet{del}{red}
 endsnippet
+
 snippet def "General latex defintio" w
 \def\\${1:nameOfVariable}{${2:value}}
 endsnippet
@@ -51,25 +52,27 @@ endsnippet
 snippet c "General command" w
 \\${1:command}${2:{${3:arg}}}
 endsnippet
-snippet large "large text" w
+
+snippet lg "large text" w
 { \large ${1:${VISUAL}} }$0
 endsnippet
 
-snippet Large "large text" w
+snippet Lg "large text" w
 { \Large ${1:${VISUAL}} }$0
 endsnippet
 
-snippet huge "large text" w
+snippet hg "large text" w
 { \huge ${1:${VISUAL}} }$0
 endsnippet
 
-snippet Huge "large text" w
+snippet Hg "large text" w
 { \Huge ${1:${VISUAL}} }$0
 endsnippet
 
 snippet multicolumn "Description" w
 \multicolumn{${1:cols(2)}}{${2:|c|}}{${3:content}}$0
 endsnippet
+
 snippet vimrun "Vim-run code snippet" b
 %vim-run: pdflatex % ; mupdf $(basename % .tex).pdf $0
 endsnippet
@@ -80,6 +83,10 @@ endsnippet
 
 snippet ... "ldots" w
 \ldots$0
+endsnippet
+
+snippet * "cdot" w
+\cdot$0
 endsnippet
 
 snippet note "Beamer note" b
@@ -215,11 +222,9 @@ endsnippet
 
 snippet mm
 %
-%
 \[
 ${1:${VISUAL}}
 \]$0
-%
 %
 endsnippet
 
@@ -230,8 +235,17 @@ endsnippet
 snippet qqu
 \qquad$0
 endsnippet
+
 snippet hat
 \hat{${1:${VISUAL}}}$0
+endsnippet
+
+snippet vec
+\vec{${1:${VISUAL}}}$0
+endsnippet
+
+snippet tilde
+\tilde{${1:${VISUAL}}}$0
 endsnippet
 
 snippet sqr
@@ -281,11 +295,9 @@ snippet theight "text height" b
 endsnippet
 snippet eq "equation" b
 %
-%
 \begin{equation${1:*}}
 ${3:${VISUAL}}
 \end{equation$1}
-%
 %
 endsnippet
 snippet hbar
@@ -303,39 +315,40 @@ endsnippet
 snippet in
 \in$0
 endsnippet
+
 snippet align "align" b
-%
 %
 \begin{align${1:*}}
 ${3:${VISUAL}}
 \end{align$1}
 %
-%
 endsnippet
+
 snippet toc "Table of contents" b
 \tableofcontents$0
 endsnippet
+
 snippet minipage "Minipage" b
 \begin{minipage}[${1:t}]{${2:0.5}\textwidth}
 ${3:${VISUAL}}
 \end{minipage}
 endsnippet
+
 snippet centeri "Centering" b
 \centering
 endsnippet
+
 snippet vspace "vertical space" w
 \vspace{${1:1cm}}
 endsnippet
+
 snippet hspace "horizontal space" w
 \hspace{${1:1cm}}
 endsnippet
 
-
 snippet it "Text italics with visual support" w
 \textit{${1:${VISUAL}}}$0
 endsnippet
-
-
 
 snippet center "Center with visual" b
 \begin{center}
@@ -395,6 +408,7 @@ endsnippet
 snippet ket "ket predefined" w
 \ket{${1:\psi}}$0
 endsnippet
+
 snippet bra "bra predefined" w
 \bra{${1:\psi}}$0
 endsnippet
@@ -419,6 +433,7 @@ snippet rproj "projector raw format" w
 \left | $1 \right \rangle
 \left \langle $2 \right | $0
 endsnippet
+
 
 #  Greek letters  {{{1 #
 ########################
@@ -548,11 +563,11 @@ endsnippet
 
 snippet bibtex "Initialise bibtex" b
 \usepackage[backend=bibtex]{biblatex} %backend tells biblatex what you will be using to process the bibliography file
-\bibliography{${1:file_name(without extension)}}
 endsnippet
+
 snippet bibtex-add "Insert bibtex document in latex document" b
 \bibliographystyle{abbrv}
-\bibliography{${1:file_name(without extension)}}
+\bibliography{${1:file_name(without or extension)}}
 endsnippet
 
 snippet lab "Label" w
@@ -607,9 +622,6 @@ snippet tikz-draw-text "Draw" b
 ${5:Text}
 };
 endsnippet
-
-
-
 
 #  Beamer {{{1  #
 #################
@@ -672,25 +684,27 @@ endsnippet
 #  Sections override {{{1  #
 ############################
 
-
 snippet sec "Section" b
 \section{${1:${VISUAL:section_name}}} %{{{1
 \label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
+
 snippet ssec "Subsection" b
 \subsection{${1:${VISUAL:subsection_name}}} %{{{1
 \label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
+
 snippet sssec "Subsubsection" b
 \subsubsection{${1:${VISUAL:subsubsection_name}}} %{{{1
 \label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
 endsnippet
+
 snippet cha "Chapter" b
 \chapter{${1:${VISUAL:chapter_name}}} %{{{1
 \label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
