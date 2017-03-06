@@ -1,6 +1,6 @@
 
+#/etc/
 COMPLETION_PATHS=(
-/etc/
 $HOME/.local/etc/
 $HOME/.config/
 $HOME/local/etc/
