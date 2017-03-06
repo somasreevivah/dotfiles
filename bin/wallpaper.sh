@@ -39,11 +39,9 @@ set_wallpaper() {
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
      || wall_error "Failure setting wallpaper"
-  #Using xsetbgimg
-  elif type xsetbgimg 2>&1 > /dev/null; then
-    arrow "Through xsetbgimg..."
-    xsetbgimg "${IMAGE_PATH}"
-  #Using osascript (osx)
+  elif type xv 2>&1 > /dev/null; then
+    arrow "Through xv.."
+    xv -root -quit "${IMAGE_PATH}"
   fi
 }
 
