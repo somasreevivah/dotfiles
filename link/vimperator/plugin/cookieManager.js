@@ -148,7 +148,7 @@ liberator.modules.commands.addUserCommand(["cookiem[anager]"], "Cookie Managemen
                 break;
             case "remove":
                 cManager.stored.remove(host);
-                lobreak;
+                break;
             default:
                 liberator.echoerr("Invalid sub-command.");
         }
