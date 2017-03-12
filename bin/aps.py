@@ -1,13 +1,17 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 import re
 import urllib.request
 import string
 import time
+import logging
+import argparse
 import sys
 
 def get_url_contents(url):
     return urllib.request.urlopen(url).read().decode('utf-8')
 
-def to_dict(content):
+def aps_to_dict(content):
     data = dict()
     M = re.findall(r"Room:.*", content)
     for m in M:
@@ -33,15 +37,12 @@ def to_dict(content):
     return data
 
 def dict_to_ical(dictionary,offset=["0","0",0]):
-    template = string.Template(r"""BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
+    template = string.Template(r"""BEGIN:VEVENT
 ORGANIZER;CN=$organizer
 DTSTART:$dtstart
 DTEND:$dtend
 SUMMARY:$summary
 END:VEVENT
-END:VCALENDAR
     """)
     day = dictionary["day"]
     if day == "Monday":
@@ -77,20 +78,80 @@ END:VCALENDAR
     return text
 
 
-url = sys.argv[1]
-outfile = sys.argv[2]
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter,
+    description="Calendar extractor from urls")
 
+    parser.add_argument("-v",
+        "--verbose",
+        help    = "Make the output verbose",
+        default = False,
+        action  = "store_true"
+    )
+    parser.add_argument("-f",
+        help   = "Url file.",
+        action = "store",
+        default = ""
+    )
+    parser.add_argument("-o", "--out",
+        help   = "out File",
+        action = "store",
+        default = "exported_calendar.ics"
+    )
+    parser.add_argument("-p", "--parser",
+        help   = "Parser",
+        action = "store",
+        default = "aps"
+    )
+    parser.add_argument("--url",
+        help   = "Url",
+        action = "store",
+        default = ""
+    )
+    parser.add_argument(
+            "--log",
+            help="Logging level",
+            choices=[
+                "INFO",
+                "DEBUG",
+                "WARNING",
+                "ERROR",
+                "CRITICAL"
+                ],
+            action="store",
+            default="WARNING"
+            )
+    # Parse arguments
+    args = parser.parse_args()
+    if args.verbose:
+        args.log = "DEBUG"
+    logging.basicConfig(level = getattr(logging, args.log))
 
-# url = "http://meetings.aps.org/Meeting/MAR17/Session/A19.1"
-# url = "http://meetings.aps.org/Meeting/MAR17/Session/A19.3"
-data = get_url_contents(url)
-dictionary = to_dict(data)
+    if args.url:
+        urls = [args.url]
+    else:
+        urls = open(args.f).readlines()
 
-date_offset = ["2017","03",12]
-ical = dict_to_ical(dictionary, offset=date_offset)
+    outfile = args.out
 
-print(ical)
+    if args.parser == "aps":
+        parser = aps_to_dict
+    else:
+        logging.error("Parser not found")
+        sys.exit(1)
 
-open(outfile, "w+").write(ical)
+    outfd = open(outfile, "w+")
 
-#vim-run: clear; python3 % http://meetings.aps.org/Meeting/MAR17/Session/A19.3 qm.ical
+    outfd.write("BEGIN:VCALENDAR\nVERSION:2.0")
+
+    for url in urls:
+        data = get_url_contents(url)
+        date_offset = ["2017","03",12]
+        dictionary = parser(data)
+        ical = dict_to_ical(dictionary, offset=date_offset)
+        print(ical)
+        outfd.write(ical)
+
+    outfd.write("END:VCALENDAR")
+
+#vim-run: clear; python3 % --url http://meetings.aps.org/Meeting/MAR17/Session/A19.3 -o qm.ical
