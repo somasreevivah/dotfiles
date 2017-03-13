@@ -26,14 +26,18 @@ def aps_to_dict(content):
     for m in M:
         data["session"] = m.replace("Session","")
     M = re.findall(r"Chair:.*", content)
+    if len(M):
+        for m in M:
+            data["chair"] = m.replace("Chair:","")
+    else:
+        data["chair"] = ""
+    M = re.findall(r".*[AP]M.*", content)
     for m in M:
-        data["chair"] = m.replace("Chair:","")
-    M = re.findall(r".*AM.*", content)
-    for m in M:
+        print(m)
         data["time"] = m.replace("&nbsp;", " ").replace("&#8211;"," to ")
     for key in data.keys():
         data[key] = re.sub(r"</?\w+>", "", data[key])
-        print(data[key])
+        print(key,data[key])
     return data
 
 def dict_to_ical(dictionary,offset=["0","0",0]):
@@ -43,7 +47,7 @@ DTSTART:$dtstart
 DTEND:$dtend
 SUMMARY:$summary
 END:VEVENT
-    """)
+""")
     day = dictionary["day"]
     if day == "Monday":
         day_offset = 1
@@ -57,15 +61,15 @@ END:VEVENT
         day_offset = 5
     day = [str(p) for p in
                 [offset[0], offset[1], int(offset[2]) + day_offset]]
-    hours = dictionary["time"].replace(" ","").split("to")
+    hours = re.sub(r" ", "", dictionary["time"]).split("to")
     start_time = time.strptime(
             "%s %s %s %s"%(day[0], day[1], day[2], hours[0]),
             "%Y %m %d %I:%M%p")
     end_time = time.strptime(
             "%s %s %s %s"%(day[0], day[1], day[2], hours[1]),
             "%Y %m %d %I:%M%p")
-    dtstart = time.strftime("%Y%m%dT%H%M%SZ", start_time)
-    dtend = time.strftime("%Y%m%dT%H%M%SZ", end_time)
+    dtstart = time.strftime("%Y%m%dT%H%M%S", start_time)
+    dtend = time.strftime("%Y%m%dT%H%M%S", end_time)
     print(dtstart)
     print(dtend)
     summary = dictionary["room"]+dictionary["abstract"]
@@ -142,7 +146,7 @@ if __name__ == "__main__":
 
     outfd = open(outfile, "w+")
 
-    outfd.write("BEGIN:VCALENDAR\nVERSION:2.0")
+    outfd.write("BEGIN:VCALENDAR\nVERSION:2.0\n")
 
     for url in urls:
         data = get_url_contents(url)
@@ -151,6 +155,7 @@ if __name__ == "__main__":
         ical = dict_to_ical(dictionary, offset=date_offset)
         print(ical)
         outfd.write(ical)
+        # outfd.write("\n")
 
     outfd.write("END:VCALENDAR")
 
