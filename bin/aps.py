@@ -25,6 +25,9 @@ def aps_to_dict(content):
     M = re.findall(r"Session\s*\w+:.*", content)
     for m in M:
         data["session"] = m.replace("Session","")
+    M = re.findall(r'.*citation_authors.*content="(.*)"', content)
+    for m in M:
+        data["authors"] = m
     M = re.findall(r"Chair:.*", content)
     if len(M):
         for m in M:
@@ -72,7 +75,7 @@ END:VEVENT
     dtend = time.strftime("%Y%m%dT%H%M%S", end_time)
     print(dtstart)
     print(dtend)
-    summary = dictionary["room"]+dictionary["abstract"]
+    summary = dictionary["room"]+" |"+dictionary["abstract"]+" | Chair: "+dictionary["chair"]+" | Authors: "+dictionary["authors"]
     text = template.substitute(
         dtstart=dtstart,
         dtend=dtend,
@@ -159,4 +162,5 @@ if __name__ == "__main__":
 
     outfd.write("END:VCALENDAR")
 
+#vim-run: clear; python3 % --url http://meetings.aps.org/Meeting/MAR17/Session/E8.14 -o qm.ical
 #vim-run: clear; python3 % --url http://meetings.aps.org/Meeting/MAR17/Session/A19.3 -o qm.ical
