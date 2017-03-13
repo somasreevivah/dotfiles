@@ -32,17 +32,13 @@ bindsym $mod+Shift+minus move scratchpad
 #show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-bindsym $mod+$windows+s exec "systemctl hybrid-sleep; i3lock"
-bindsym $mod+$windows+l exec "i3lock"
+bindsym $mod+$windows+s exec "systemctl hybrid-sleep; i3lock -c 333333"
+bindsym $mod+$windows+l exec "i3lock -c 333333"
 bindsym $mod+$windows+h exec "systemctl poweroff"
 
 # Marks
 bindsym $mod+m exec i3-input -l 1 -F 'mark %s' -P 'Mark name: '
 bindsym $mod+g exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
-
-
-# lock session
-#bindsym $mod+Shift+x exec i3lock
 
 # program launcher
 bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
