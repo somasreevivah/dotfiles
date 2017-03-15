@@ -75,7 +75,7 @@ END:VEVENT
     dtend = time.strftime("%Y%m%dT%H%M%S", end_time)
     print(dtstart)
     print(dtend)
-    summary = dictionary["room"]+" |"+dictionary["abstract"]+" | Chair: "+dictionary["chair"]+" | Authors: "+dictionary["authors"]
+    summary = dictionary["room"]+" |"+dictionary["abstract"]+" | Authors: "+dictionary["authors"]+" | Chair: "+dictionary["chair"]
     text = template.substitute(
         dtstart=dtstart,
         dtend=dtend,
