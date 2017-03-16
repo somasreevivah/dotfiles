@@ -6,6 +6,8 @@ source! $HOME/.vimperatorrc.local
 " go tp the last tab opened for toggling
 noremap g; <C-^>
 inoremap <C-c> <Esc>
+nnoremap J :tabnext<cr>
+nnoremap K :tabprev<cr>
 
 
 
