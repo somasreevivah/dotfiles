@@ -44,7 +44,7 @@ URxvt.externalBorder:      0
 URxvt.scrollBar:   false
 URxvt.urgentOnBell:false
 
-URxvt*fading:              30
+URxvt*fading: 20
 
 !URxvt.perl-ext-common:     resize-font
 
@@ -63,7 +63,7 @@ rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
 rofi.color-active: #273238, #80cbc4, #273238, #394249, #80cbc4
 rofi.color-urgent: #273238, #ff1844, #273238, #394249, #ff1844
 
-!vim-run: xrdb ~/.Xresources; xterm
 !vim-run: xrdb ~/.Xresources; urxvt
+!vim-run: xrdb ~/.Xresources; xterm
 !vim-run: xrdb -merge ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources
