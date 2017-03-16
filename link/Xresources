@@ -1,34 +1,34 @@
 
 /****************************************************
-*  Reload the whole thing with xrdb -merge ~/.Xresources  *
+* Reload the whole thing with xrdb -merge ~/.Xresources *
 ****************************************************/
 
 /***********
-*  XTERM  *
+* XTERM *
 ***********/
 
-XTerm*background:black
-XTerm*foreground:white
-XTerm*cursorColor:red
+XTerm*background: black
+XTerm*foreground: white
+XTerm*cursorColor: red
 !XTerm*font:*-fixed-*-*-*-20-*
 !Save more lines
-XTerm*saveLines:4096
+XTerm*saveLines: 4096
 
-XTerm*scrollBar:   false
+XTerm*scrollBar: false
 
 
 
 
 /***********
-*  URxvt  *
+* URxvt *
 ***********/
 
 
 !URxvt.font: xft:*:size=15
 urxvt.font: xft:Monospace:size=12
 
-urxvt*foreground:white
-urxvt*background:black
+urxvt*foreground: white
+urxvt*background: black
 
 !Real transparency
 !urxvt*background:rgba:0000/0000/0200/ffff
@@ -38,21 +38,21 @@ urxvt*transparent: true
 ! Level of transparency
 urxvt*shading: 15
 
-URxvt.internalBorder:      10
-URxvt.externalBorder:      0
+URxvt.internalBorder: 10
+URxvt.externalBorder: 0
 
-URxvt.scrollBar:   false
-URxvt.urgentOnBell:false
+URxvt.scrollBar: false
+URxvt.urgentOnBell: false
 
 URxvt*fading: 20
 
-!URxvt.perl-ext-common:     resize-font
+!URxvt.perl-ext-common: resize-font
 
 !URxvt.resize-font.smaller: C-Up
-!URxvt.resize-font.bigger:  C-Down
+!URxvt.resize-font.bigger: C-Down
 
-URxvt.url-launcher:        firefox
-URxvt.colorUL:             #7780a1
+URxvt.url-launcher: firefox
+URxvt.colorUL: #7780a1
 
 !------------------------------------------------------------------------------
 ! ROFI Color theme
