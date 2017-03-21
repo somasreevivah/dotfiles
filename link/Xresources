@@ -3,26 +3,25 @@
 * Reload the whole thing with xrdb -merge ~/.Xresources *
 ****************************************************/
 
-/***********
-* XTERM *
-***********/
+!---------------------
+! Xterm settings
+!---------------------
 
 XTerm*background: black
 XTerm*foreground: white
 XTerm*cursorColor: red
-!XTerm*font:*-fixed-*-*-*-20-*
+XTerm*font:*-fixed-*-*-*-20-*
+!XTerm*font: xft:Monospace:size=12
 !Save more lines
 XTerm*saveLines: 4096
-
 XTerm*scrollBar: false
 
 
 
 
-/***********
-* URxvt *
-***********/
-
+!---------------------
+! URxvt settings
+!---------------------
 
 !URxvt.font: xft:*:size=15
 urxvt.font: xft:Monospace:size=12
@@ -38,7 +37,7 @@ urxvt*transparent: true
 ! Level of transparency
 urxvt*shading: 15
 
-URxvt.internalBorder: 10
+URxvt.internalBorder: 0
 URxvt.externalBorder: 0
 
 URxvt.scrollBar: false
@@ -54,9 +53,9 @@ URxvt*fading: 20
 URxvt.url-launcher: firefox
 URxvt.colorUL: #7780a1
 
-!------------------------------------------------------------------------------
+!---------------------
 ! ROFI Color theme
-!------------------------------------------------------------------------------
+!---------------------
 rofi.color-enabled: true
 rofi.color-window: #273238, #273238, #1e2529
 rofi.color-normal: #273238, #c1c1c1, #273238, #394249, #ffffff
