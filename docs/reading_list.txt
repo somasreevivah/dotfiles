@@ -21,3 +21,7 @@ http://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming
 http://physicstoday.scitation.org/do/10.1063/PT.5.9076/full/
 https://people.duke.edu/~ccc14/sta-663/index.html #Tutorial
 http://joshuagoings.com/2013/04/27/linear-response-td-dft-the-density-density-response-function/
+http://www.vanderbilt.edu/AnS/physics/volker/p8164/DFT_review_2015.pdf
+http://joshuagoings.com/2013/04/27/linear-response-td-dft-the-density-density-response-function/
+http://joshuagoings.com/notes/
+http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
