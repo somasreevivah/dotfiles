@@ -90,7 +90,7 @@ snippet * "cdot" w
 endsnippet
 
 snippet note "Beamer note" b
-\note{
+\note{%
 	$0${VISUAL}
 }
 endsnippet
@@ -211,15 +211,12 @@ snippet subfig "Subfigure of subcaption package" b
 \end{subfigure}
 endsnippet
 
-
 #  math stuff {{{1  #
 #####################
-
 
 snippet dim
 \mathsf{dim}$0
 endsnippet
-
 
 snippet d "Subindex (down)" i
 _{${1:${VISUAL}}}$0
@@ -242,7 +239,7 @@ endsnippet
 snippet mm
 %
 \[
-${1:${VISUAL}}
+	${1:${VISUAL}}
 \]$0
 %
 endsnippet
@@ -306,12 +303,15 @@ endsnippet
 snippet graph "Include graphic" b
 \includegraphics[${2:width=${3:\\textwidth}, height=${4:$3}}]{${1:filePath}}
 endsnippet
+
 snippet twidth "text width" b
 \textwidth
 endsnippet
+
 snippet theight "text height" b
 \textheight
 endsnippet
+
 snippet eq "equation" b
 %
 \begin{equation${1:*}}
@@ -369,6 +369,13 @@ snippet it "Text italics with visual support" w
 \textit{${1:${VISUAL}}}$0
 endsnippet
 
+snippet item "Item" w
+\begin{itemize}
+	\item
+		$0
+\end{itemize}
+endsnippet
+
 snippet center "Center with visual" b
 \begin{center}
 ${VISUAL}$0
@@ -382,6 +389,16 @@ endsnippet
 
 snippet diff "Integral differential" w
 \mathrm{d} ${1:\\mathbf{r}}$0
+endsnippet
+
+snippet ebook "Ebook" b
+% FOR EBOOK
+\usepackage{extsizes}
+\usepackage{geometry}
+\usepackage{autobreak}
+% 6 inch
+\geometry{papersize={90mm, 150mm},margin=0.4mm}
+
 endsnippet
 
 snippet pdiff "Integral differential" w
@@ -573,9 +590,6 @@ endsnippet
 snippet "([^\\])Omega" "Omega" r
 `!p snip.rv=match.group(1)`\Omega$0
 endsnippet
-
-
-
 
 #  bibtex {{{1  #
 #################
