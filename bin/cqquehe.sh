@@ -569,6 +569,7 @@ refresh (){
 }
 
 
+# }}} BashSimpleCurses #
 
 #main loop called
 main_loop (){
@@ -580,7 +581,7 @@ main_loop (){
     #everything starting with a number is a number
     number_re='^[0-9]+.*$'
     time=1
-    refresh_rate=.5
+    refresh_rate=1
     [[ "$1" == "" ]] || time=$1
     while [[ 1 ]];do
         tput cup 0 0 >> $BSC_BUFFER
@@ -603,11 +604,13 @@ main_loop (){
         BSC_POSY=0
     done
 }
-# }}} BashSimpleCurses #
 
+echo -n "Checking if in abakus... "
 if [[ ! $HOSTNAME =~ abakus ]]; then
+  echo "No"
   ABA="ssh abakus01"
 else
+  echo "Yes"
   ABA=
 fi
 
@@ -617,8 +620,9 @@ queue(){
 }
 
 list_idle_nodes(){
+  [[ -n $1 ]] && { cat /tmp/$1 && return 0 }
   local counter=0
-  ${ABA} queue.sh | grep Idle | grep -v Name | grep -v abakus01 |\
+  ${ABA} queue | grep Idle | grep -v Name | grep -v abakus01 |\
   while read line; do
     let counter+=1
     echo -e "$counter)\t"$line | cut -d " " -f 1
@@ -626,6 +630,7 @@ list_idle_nodes(){
 }
 
 llq_min(){
+  [[ -n $1 ]] && { cat /tmp/$1 && return 0 }
   ${ABA} llq -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
   awk -F " " '{ \
   if ($8 == "R"){ \
@@ -665,10 +670,22 @@ llq_min(){
 
 
 main(){
-  window "$Idle nodes ($(list_idle_nodes | wc -l))" "red" "33%"
+  window "$Idle nodes ($(list_idle_nodes | wc -l)) $(date)" "red" "33%"
     #append "Idle nodes"
     #addsep
     append_command "list_idle_nodes"
+    addsep
+    append "Nodes memory"
+    addsep
+  endwin
+
+
+  col_right
+  move_up
+
+
+  window "Queue ($(llq_min | wc -l) jobs)" "green" "67%"
+    append_command "llq_min | column -t"
   endwin
 
     #window "Tree files" "gree" "33%"
@@ -678,9 +695,6 @@ main(){
       #append "Please install tree command"
     #fi
   #endwin
-
-  col_right
-  move_up
 
   #window "Test 2" "red" "33%"
     #append "Multiline is allowed !!!\nLike this :)"
@@ -696,10 +710,6 @@ main(){
     #append "`date`"
     #append "I only ask for date"
   #endwin
-
-  window "Queue ($(llq_min | wc -l) jobs)" "green" "67%"
-    append_command "llq_min | column -t"
-  endwin
 
   #col_right
   #move_up
@@ -726,6 +736,8 @@ main(){
 
 
 }
+
+echo "Entering in main loop"
 main_loop
 
 
