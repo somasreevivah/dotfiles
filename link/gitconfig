@@ -1,9 +1,9 @@
 [user]
   name = Alejandro Gallo
   email = aamsgallo@gmail.com
-
 [alias]
   l = log --decorate --oneline --graph --date-order --all --date=short
-
 [merge]
 	tool = vimdiff
+[core]
+	editor = vim
