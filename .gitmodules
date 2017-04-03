@@ -1,6 +1,3 @@
 [submodule "link/calcurse"]
 	path = link/calcurse
 	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
-[submodule "link/expenses"]
-	path = link/expenses
-	url = https://alejandroamsg@gitlab.com/alejandroamsg/expenses.git
