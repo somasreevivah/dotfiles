@@ -1,11 +1,9 @@
 #!/bin/bash
 
-echo -n "Checking if in abakus... "
+# "Checking if in abakus... "
 if [[ ! $HOSTNAME =~ abakus ]]; then
-  echo "No"
   ABA="ssh abakus01"
 else
-  echo "Yes"
   ABA=
 fi
 
