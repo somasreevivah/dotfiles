@@ -4,6 +4,7 @@
 
 set $mod Mod1
 set $windows Mod4
+set $mod_r Mod5
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -20,11 +21,8 @@ bindsym $mod+Return exec ~/.dotfiles/bin/terminal.sh
 bindsym $windows+Return exec "xterm"
 
 
-
-
 # kill focused window
 bindsym $mod+Shift+q kill
-
 
 
 #scratchpad config 
