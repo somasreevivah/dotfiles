@@ -74,7 +74,9 @@ main(){
   paste <(list_idle_nodes)
 
   window "Queue ($(llq | grep abakus | wc -l) jobs)" "green" "67%"
-  llq_min | column -t
+  llq_min |
+  sort    |
+  column -t
 
 }
 
