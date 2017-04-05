@@ -13,6 +13,7 @@ all_headers=
 
 HEADER_PATHS=(
 /usr/include
+/usr/include/**
 /usr/local/include
 /usr/include/x86_64-linux-gnu/
 )

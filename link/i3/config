@@ -32,8 +32,8 @@ bindsym $mod+Shift+minus move scratchpad
 #show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-bindsym $mod+$windows+s exec "systemctl hybrid-sleep; i3lock -c 333333"
-bindsym $mod+$windows+l exec "i3lock -c 333333"
+bindsym $mod+$windows+s exec "systemctl hybrid-sleep; ~/.dotfiles/bin/lock-screen.sh"
+bindsym $mod+$windows+l exec "~/.dotfiles/bin/lock-screen.sh"
 bindsym $mod+$windows+h exec "systemctl poweroff"
 
 # Marks
