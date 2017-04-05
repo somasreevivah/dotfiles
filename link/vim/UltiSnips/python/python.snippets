@@ -6,6 +6,10 @@ import sys
 import shutil
 endsnippet
 
+snippet get "Get" w
+urllib.request.urlopen(${1:url}).read().decode('utf-8')
+endsnippet
+
 snippet logConfig "Logging configuration" b
 logging.basicConfig(${1:filename = "", }level = ${2:logging.${3:DEBUG}})
 
