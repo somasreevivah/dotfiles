@@ -620,7 +620,6 @@ queue(){
 }
 
 list_idle_nodes(){
-  [[ -n $1 ]] && { cat /tmp/$1 && return 0 }
   local counter=0
   ${ABA} queue | grep Idle | grep -v Name | grep -v abakus01 |\
   while read line; do
@@ -630,11 +629,12 @@ list_idle_nodes(){
 }
 
 llq_min(){
-  [[ -n $1 ]] && { cat /tmp/$1 && return 0 }
+  local headers=$(mktemp)
+  llq -x -d > $headers
   ${ABA} llq -W -f %dq %dd %o %jn %id %st %h %p %c %nh |
-  awk -F " " '{ \
+  awk '{ \
   if ($8 == "R"){ \
-    A="runs"; \
+    A="R"; \
     USER=$5; \
     JOB=$7; \
     MACHINE=$9; \
@@ -642,7 +642,7 @@ llq_min(){
     printf "+%s %s %s (%s) %s\n", USER, A, MACHINE, name, JOB; \
   } \
   else if ($6=="I"){ \
-    A="waits"; \
+    A="W"; \
     USER=$3; \
     JOB=$5; \
     MACHINE=$7; \
@@ -653,10 +653,10 @@ llq_min(){
   while read line; do
     jobid=$(echo $line | awk '{print $NF}' |
       sed "s/abakus01\.//; s/\.0.*//" | tr -d "\r")
-    tasks=$(llq -x -d |
-      sed -n "/"${jobid}"/,/total_tasks/s/.*total_tasks\s*=//p"
+    tasks=$(
+      sed -n "/"${jobid}"/,/total_tasks/s/.*total_tasks\s*=//p" $headers
       )
-    [[ -z "${tasks}" ]] && tasks="??"
+    #[[ -z "${tasks}" ]] && tasks="??"
     echo ${line} |
     awk '{ \
       for (i=1; i< NF; ++i) { \
@@ -665,7 +665,9 @@ llq_min(){
     }';
     echo "${jobid} ${tasks}@$((tasks/16))"
   done
-  }
+  } |
+  sort
+  rm $headers
 }
 
 
@@ -684,8 +686,8 @@ main(){
   move_up
 
 
-  window "Queue ($(llq_min | wc -l) jobs)" "green" "67%"
-    append_command "llq_min | column -t"
+  window "Queue ($(llq | grep abakus | wc -l) jobs)" "green" "67%"
+    append_command "llq_min"
   endwin
 
     #window "Tree files" "gree" "33%"
