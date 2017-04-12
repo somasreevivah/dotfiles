@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author: Alejandro Gallo <aamsgallo@gmail.com> 2017-04-12 16:05
 
 # "Checking if in abakus... "
 if [[ ! $HOSTNAME =~ abakus ]]; then
