@@ -285,6 +285,11 @@ vnoremap <localleader>t :Tabularize /
 
 nnoremap <localleader><localleader>s :source $MYVIMRC<cr>
 
+vnoremap <silent> <localleader>y y:new<CR>:call setline(1,getregtype())<CR>o<Esc>P:wq! ~/reg.txt<CR>
+nnoremap <silent> <localleader>y :new<CR>:call setline(1,getregtype())<CR>o<Esc>P:wq! ~/reg.txt<CR>
+noremap <silent> <localleader>p :sview ~/reg.txt<CR>"zdddG:q!<CR>:call setreg('"', @", @z)<CR>p
+noremap <silent> <localleader>p :sview ~/reg.txt<CR>"zdddG:q!<CR>:call setreg('"', @", @z)<CR>P
+
 "nnoremap gpip execute :normal! vip:'<,'>!par j
 
 
@@ -308,8 +313,10 @@ end
 " Quickfix stuff {{{1 "
 
 " remap ccnext and cprevious, nice for grep, make etc...
-nnoremap <localleader>n :cnext<cr>
-nnoremap <localleader>p :cprevious<cr>
+nnoremap <localleader>cn :cnext<cr>
+nnoremap <localleader>cp :cprevious<cr>
+nnoremap <localleader>ln :lnext<cr>
+nnoremap <localleader>lp :lprevious<cr>
 
 " Buffer control {{{1 "
 

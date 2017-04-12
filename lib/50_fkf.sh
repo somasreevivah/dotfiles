@@ -35,6 +35,10 @@ export PATH=$PATH:$HOME/vtstscripts-916/
 #set my local python
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/
 
+# For Wien2k
+export PATH=$PATH:/usr/local/fkf/WIEN2000_13/SLES11/
+export WIENROOT=/usr/local/fkf/WIEN2000_13/SLES11/
+export EDITOR=vi
 
 # Perl stuff 
 #PATH="/home/gallo/perl5/bin${PATH+:}${PATH}"; export PATH;

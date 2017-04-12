@@ -74,7 +74,7 @@ snippet multicolumn "Description" w
 endsnippet
 
 snippet vimrun "Vim-run code snippet" b
-%vim-run: pdflatex % ; mupdf $(basename % .tex).pdf $0
+%vim-run: pdflatex % && (mupdf $(basename % .tex).pdf &)&
 endsnippet
 
 snippet modeline "Modeline for latex" b
@@ -244,31 +244,31 @@ snippet mm
 %
 endsnippet
 
-snippet qu
+snippet qu "" w
 \quad$0
 endsnippet
 
-snippet qqu
+snippet qqu "" w
 \qquad$0
 endsnippet
 
-snippet hat
+snippet hat "" w
 \hat{${1:${VISUAL}}}$0
 endsnippet
 
-snippet vec
+snippet vec "" w
 \vec{${1:${VISUAL}}}$0
 endsnippet
 
-snippet tilde
+snippet tilde "" w
 \tilde{${1:${VISUAL}}}$0
 endsnippet
 
-snippet sqr
+snippet sqr "" w
 \sqrt{${1:${VISUAL}}}$0
 endsnippet
 
-snippet set
+snippet set "" w
 \left \\{ ${1:${VISUAL}} \right \\} $0
 endsnippet
 
@@ -480,6 +480,10 @@ endsnippet
 snippet rproj "projector raw format" w
 \left | $1 \right \rangle
 \left \langle $2 \right | $0
+endsnippet
+
+snippet oo "Infinity" w
+\infty
 endsnippet
 
 
