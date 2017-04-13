@@ -112,7 +112,88 @@ snippet double-space "Double space command" b
 \linespread{1.5}$0
 endsnippet
 
-snippet tmp-letter "letter" b
+snippet temp-formal-letter "Description" b
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Full Size Formal Letter
+% LaTeX Template
+% Version 1.2 (8/2/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Micha Elmueller (http://micha.elmueller.net/)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	pagenumber=false, % Removes page numbers from page 2 onwards
+	parskip=half, % Separates paragraphs with some whitespace, use parskip=full for more space or comment out to return to default
+	fromalign=right, % Aligns the from address to the right
+	foldmarks=true, % Prints small fold marks on the left of the page
+	addrfield=true % Set to false to hide the addressee section - you will then want to adjust the height of the body of the letter on the page by adding the following in this section: \makeatletter \@setplength{refvpos}{\useplength{toaddrvpos}} \makeatletter
+	]{scrlttr2}
+
+\usepackage[english]{babel} % Explicitly load the babel package to stop an error occurring on some LaTeX installations
+
+\renewcommand*{\raggedsignature}{\raggedright} % Stop the signature from indenting
+
+%----------------------------------------------------------------------------------------
+%	YOUR INFORMATION AND LETTER DATE
+%----------------------------------------------------------------------------------------
+
+\setkomavar{fromname}{Andreas Grueneis} % Your name used in the from address
+\setkomavar{fromaddress}{Max Planck institute for solid state research} % Your address
+\setkomavar{signature}{Andreas Grueneis} % Your name used in the signature
+
+\date{\today} % Date of the letter
+
+%----------------------------------------------------------------------------------------
+ 
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	ADDRESSEE
+%----------------------------------------------------------------------------------------
+ 
+\begin{letter}{Ministeri d'Educaci\'o i Ensenyament Superior\\ Principat d'Andorra
+	} % Addressee name and address
+
+
+%----------------------------------------------------------------------------------------
+%	LETTER CONTENT
+%----------------------------------------------------------------------------------------
+
+\opening{Dear Sir or Madam,}
+
+
+
+
+I hereby confirm that the student Alejandro Agust\'i Mart\'inez-Soria Gallo is working on a master thesis 
+at my research group at the Max Planck Institute for solid state research in Stuttgart. \\
+
+This document I have prepared upon request of my student Mr. Mart\'inez-Soria Gallo in order to help him 
+with his documentation in his home country. \\
+
+\closing{Sincerely,}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{letter}
+ 
+\end{document}
+%vim-run: pdflatex % && (mupdf $(basename % .tex).pdf &)&
+endsnippet
+
+snippet temp-letter "letter" b
 \documentclass{letter}
 \usepackage{hyperref}
 %\signature{Alejandro Gallo}
@@ -149,7 +230,7 @@ I look forward to your reply.
 
 endsnippet
 
-snippet tmp "Super basic template" b
+snippet temp "Super basic template" b
 \documentclass[A4paper, 12pt]{article}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -167,7 +248,7 @@ $0
 
 \end{document}
 endsnippet
-snippet tmp-basic "Basic latex template" b
+snippet temp-basic "Basic latex template" b
 %  Preamble {{{1 %
 %%%%%%%%%%%%%%%%%%
 \documentclass[A4paper, 12pt]{article}
