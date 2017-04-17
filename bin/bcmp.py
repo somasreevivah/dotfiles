@@ -51,13 +51,20 @@ def download(url):
         os.makedirs(folder, mode=0o777)
 
     for track in tracks:
-        title = track.get("title")
-        track_num = track.get("track_num")
-        song_path = folder+"/%s_%s.mp3"%(track_num, title.replace(" ", "-"))
+        data = dict()
+        data["artist"] = artist
+        data["album"] = album
+        data["title"] = track.get("title")
+        data["track_num"] = track.get("track_num")
+        song_path = folder+"/%s_%s.mp3" % \
+            (
+                data["track_num"],
+                data["title"].replace(" ", "-")
+            )
         url = "https:"+track.get("file").get("mp3-128")
         print("%s. %s (%s)" % (
-            track_num,
-            title,
+            data["track_num"],
+            data["title"],
             url
             ))
         if not os.path.exists(song_path):
@@ -65,17 +72,19 @@ def download(url):
             fd = open(song_path, "wb+")
             fd.write(urllib.request.urlopen(url).read())
             fd.close()
+        else:
+            print("\tUsing already downloaded file....")
         print("\t* Setting mp3 metadata...")
         audio_file = eyed3.load(song_path)
         audio_file.initTag()
-        print("\t\t - artist")
-        audio_file.tag.artist = unicode(artist)
-        print("\t\t - album")
-        audio_file.tag.album = unicode(album)
-        print("\t\t - title")
-        audio_file.tag.title = unicode(title)
-        print("\t\t - track_num")
-        audio_file.tag.track_num = track_num
+        for key in data.keys():
+            if key == "track_num":
+                value = int(data[key])
+            else:
+                value = unicode(data[key])
+            if value:
+                print("\t\t - %s" % key)
+                setattr(audio_file.tag, key, value)
         audio_file.tag.save()
 
 if __name__ == "__main__":
@@ -83,4 +92,6 @@ if __name__ == "__main__":
     for url in urls:
         download(url)
 
+#vim-run: python % https://nango.bandcamp.com/
+#vim-run: python % https://kennelpanic.bandcamp.com/album/501-bars
 #vim-run: python % https://kennelpanic.bandcamp.com/album/the-johnny-silver-ep
