@@ -485,7 +485,6 @@ class Pim:
 
         self.scrolled_win = Gtk.ScrolledWindow()
         self.vbox.pack_start(self.scrolled_win, True, True, 0)
-        import webkit
 
         viewport = Gtk.Viewport()
         viewport.modify_bg(Gtk.StateType.NORMAL, Gdk.color_parse('#999999'))
