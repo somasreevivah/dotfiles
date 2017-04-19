@@ -11,6 +11,7 @@ FONTW=8  # Size of one terminal column
 COLUMNS=`tput cols`
 LINES=`tput lines`
 
+clear
 read width height <<< `echo -e "5;$FILENAME" | $W3MIMGDISPLAY`
 
 max_width=$(($FONTW * $COLUMNS))
