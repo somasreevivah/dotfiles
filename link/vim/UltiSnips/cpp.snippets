@@ -3,3 +3,16 @@ priority 1
 snippet vimrun "Vim-run code snippet" b
 //vim-run: g++ % && ./a.out $0
 endsnippet
+
+snippet io "iostream" b
+#include <iostream>
+endsnippet
+
+snippet inc "include" b
+#include <${1:iostream}>
+endsnippet
+
+snippet log "Log" b
+${1:logger} << ${2:"${3:message}"} << std::endl;$0
+endsnippet
+

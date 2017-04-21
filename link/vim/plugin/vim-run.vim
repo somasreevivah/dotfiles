@@ -1,5 +1,5 @@
 
-let g:vim_run_auto_save = 1
+let g:vim_run_auto_save = 0
 
 "Run actual script being edited
 function! VIMRun()
