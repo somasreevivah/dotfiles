@@ -42,5 +42,5 @@ shift $(($OPTIND-1))
 if [[ $(uname) = Darwin ]]; then
   find /private &>/dev/null | grep "/Flash"
 elif [[ $(uname) = Linux ]]; then
-  echo "Not yet implemented, sorry"
+  sudo file -h /proc/*/fd/* #2> /dev/null | grep -i Flash 
 fi
