@@ -43,7 +43,7 @@ URxvt.externalBorder: 0
 URxvt.scrollBar: false
 URxvt.urgentOnBell: false
 
-URxvt*fading: 20
+URxvt*fading: 5
 
 !URxvt.perl-ext-common: resize-font
 
