@@ -68,10 +68,10 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 # Left hand mode
-bindsym $windows+Shift+a focus left
-bindsym $windows+Shift+s focus down
-bindsym $windows+Shift+w focus up
-bindsym $windows+Shift+d focus right
+bindsym $windows+Shift+a move left
+bindsym $windows+Shift+s move down
+bindsym $windows+Shift+w move up
+bindsym $windows+Shift+d move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left

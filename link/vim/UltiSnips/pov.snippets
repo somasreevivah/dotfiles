@@ -1,0 +1,23 @@
+snippet vimrun "vimrun" b
+// vim-run: povray +P %
+endsnippet
+
+snippet fread "File read" b
+#fopen fd "${1:filename}" write
+endsnippet
+
+snippet fwrite "File read" b
+#write (MyFile,"\"Testing 123\",",5,",",<1,2,3>,"\n")
+endsnippet
+
+snippet for "For loop" b
+#for (${1:i}, ${2:0}, ${3:10}, ${4:1})
+	$0
+#end
+endsnippet
+
+snippet while "While loop" b
+#while (${1:i} <= ${2:limit})
+	$0
+#end
+endsnippet
