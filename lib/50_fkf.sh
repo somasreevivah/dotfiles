@@ -30,7 +30,7 @@ export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/gallo/opt/boost/boost_1_55_0/sta
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/ase
 export PATH=$PATH:$HOME/lib/python/site-packages/ase/tools
 export PATH=$PATH:/usr/local/server/bin/
-export PATH=$PATH:$HOME/vtstscripts-916/
+export PATH=$PATH:$HOME/software/vpqrs/src/vtstscripts/
 
 #set my local python
 export PYTHONPATH=$PYTHONPATH:$HOME/lib/python/site-packages/
