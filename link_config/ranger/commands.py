@@ -87,13 +87,6 @@ from ranger.api.commands import *
 #  Custom commands {{{1  #
 ##########################
 
-class less(Command):
-    def execute(self):
-        filepath = self.fm.thisfile.path
-        self.fm.notify(filepath)
-        self.fm.execute_command("less "+filepath)
-
-
 class vesta(Command):
 
     """ Open files with vesta """
