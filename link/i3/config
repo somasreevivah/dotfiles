@@ -107,8 +107,9 @@ bindsym $windows+Shift+a move left
 bindsym $windows+Shift+s move down
 bindsym $windows+Shift+w move up
 bindsym $windows+Shift+d move right
-bindsym $windows+n workspace next
-bindsym $windows+p workspace prev
+# Workspaces
+bindsym $windows+e workspace next
+bindsym $windows+q workspace prev
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -305,7 +306,7 @@ bindsym $mod+$windows+r exec i3-input -F 'rename workspace to "%s"' -P 'New name
 #####################################
 
 bindsym $windows+t exec "date +'%H %M' | sed -e 's/^0\+//g' -e 's/\s0/ /g' | espeak"
-bindsym $mod+$windows+p exec "import -window root $HOME/screenshot_$(date | tr ' ' '_').jpg "
+bindsym $windows+p exec "import -window root $HOME/screenshot_$(date | tr ' ' '_').jpg "
 #invert colors
 bindsym $windows+i exec "xcalib -invert -alter"
 
