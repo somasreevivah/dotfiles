@@ -190,7 +190,7 @@ endsnippet
 #snippet sizeof "Get size of variables or types" b
 #endsnippet
 snippet basename "Bash basename" w
-os.path.basename(${1:"${2:path}"})$0
+os.path.basename(${1:${VISUAL}})$0
 endsnippet
 snippet genv "Get Environment variables" w
 os.environ[${1:"${2:VAR_NAME}"}]$0

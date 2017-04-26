@@ -27,12 +27,12 @@ urllib.request.urlopen(${1:url}).read().decode('utf-8')
 endsnippet
 
 snippet logConfig "Logging configuration" b
-logging.basicConfig(${1:filename = "", }level = ${2:logging.${3:DEBUG}})
+logging.basicConfig(${1:filename="", }level=${2:logging.${3:DEBUG}})
 
 endsnippet
 
 snippet dirname "Bash dirname" w
-os.path.dirname(${1:"${2:path}"})$0
+os.path.dirname(${1:${VISUAL}})$0
 endsnippet
 
 snippet "log([ewdi])" "Logging" r
