@@ -49,6 +49,3 @@ dotfiles() {
 }
 
 source_lib_files
-
-
-complete -o default -C /usr/local/lib/python3.4/dist-packages/ase-3.14.0b1-py3.4.egg/ase/cli/complete.py ase
