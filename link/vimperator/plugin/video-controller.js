@@ -102,6 +102,17 @@ var INFO = xml`
     fullscreen: function (elem) {
       elem.mozRequestFullScreen();
     },
+    // TODO: it does not retrieve currentTime well
+    shift: function (elem, value) {
+      if (value.match(/\d+%/)) {
+        new_time = elem.currentTime + elem.duration * parseInt(value, 10) / 100;
+        if (new_time <= elem.currentTime){
+          elem.currentTime = new_time;
+        }
+      } else {
+        elem.currentTime = parseInt(elem.currentTime, 10) + value;
+      }
+    },
     seek: function (elem, value) {
       if (value.match(/\d+%/)) {
         elem.currentTime = elem.duration * parseInt(value, 10) / 100;

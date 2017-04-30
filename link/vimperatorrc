@@ -9,6 +9,12 @@ inoremap <C-c> <Esc>
 nnoremap J :tabnext<cr>
 nnoremap K :tabprev<cr>
 
+nnoremap ,s :source ~/.vimperatorrc<cr>
+
+nnoremap ,p :videocontrol playOrPause<cr>
+nnoremap ,f :videocontrol fullscreen<cr>
+nnoremap ,h :videocontrol shift -10<cr>
+nnoremap ,l :videocontrol shift 10<cr>
 
 
 " vim: set ft=vim:
