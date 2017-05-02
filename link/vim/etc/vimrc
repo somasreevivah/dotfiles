@@ -275,7 +275,7 @@ nnoremap <localleader>ry :call ReplaceYankedTextWithInput()<cr>
 noremap <localleader>tg :TagbarToggle<cr>
 
 "edit vimrc
-nnoremap <localleader>V :e $HOME/.vim/etc/vimrc<cr>
+nnoremap <localleader>V :edit $DOTFILES/link/vimrc<cr>
 
 " edit bashrc
 nnoremap <localleader>B :edit $DOTFILES/link/bashrc<cr>
