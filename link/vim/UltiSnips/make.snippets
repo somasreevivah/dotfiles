@@ -26,9 +26,7 @@ $(${1:VAR_NAME})$0
 endsnippet
 
 snippet for "Embedded shell for" b
-	@for ${1:variable} in ${2:container}; do \
-		${3:Body}; \
-	done
+\$(foreach ${1:var},${2:list},${3:do_something})
 endsnippet
 
 snippet if

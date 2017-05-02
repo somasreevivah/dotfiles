@@ -22,7 +22,7 @@ set_wallpaper() {
   [[ -n $1 ]] && IMAGE_PATH=$1
   arrow "Setting wallpaper"
   #Using feh
-  if type osascript 2>&1 > /dev/null; then
+  if which osascript 2>&1 > /dev/null; then
     arrow "Through osascript..."
     # before mavericks
     #osascript -e '
@@ -34,12 +34,12 @@ set_wallpaper() {
     sqlite3 \
       ~/Library/Application\ Support/Dock/desktoppicture.db \
       "update data set value = '${IMAGE_PATH}'" && killall Dock
-  elif type feh 2>&1 > /dev/null; then
+  elif which feh 2>&1 > /dev/null; then
     arrow "Trhough feh..."
     feh --bg-max ${IMAGE_PATH} \
      && wall_success "Wallpaper set" \
      || wall_error "Failure setting wallpaper"
-  elif type xv 2>&1 > /dev/null; then
+  elif which xv 2>&1 > /dev/null; then
     arrow "Through xv.."
     xv -root -quit "${IMAGE_PATH}"
   fi
@@ -48,7 +48,7 @@ set_wallpaper() {
 wall_error (){
   local message=$1
   error ${message}
-  if type dzen2 2>&1 > /dev/null ; then
+  if which dzen2 2>&1 > /dev/null ; then
     echo ${message}|\
       timeout 1 dzen2 -p\
       -fg red\
@@ -58,9 +58,9 @@ wall_error (){
       -w 200\
       -h 100\
       -ta c
-  elif type kdialog 2>&1 > /dev/null ; then
+  elif which kdialog 2>&1 > /dev/null ; then
     kdialog --error "${message}" 1
-  elif type notify-send 2>&1 > /dev/null ; then
+  elif which notify-send 2>&1 > /dev/null ; then
     notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
@@ -68,7 +68,7 @@ wall_error (){
 
 wall_notify() {
   local message=$1
-  if type dzen2  2>&1 > /dev/null ; then
+  if which dzen2  2>&1 > /dev/null ; then
     success ${message}
     echo ${message}|\
       timeout 1 dzen2 -p\
@@ -79,9 +79,9 @@ wall_notify() {
       -w 200\
       -h 100\
       -ta c
-  elif type kdialog 2>&1 > /dev/null ; then
+  elif which kdialog 2>&1 > /dev/null ; then
     kdialog --passivepopup "${message}" 1
-  elif type notify-send 2>&1 > /dev/null ; then
+  elif which notify-send 2>&1 > /dev/null ; then
     notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
@@ -89,7 +89,7 @@ wall_notify() {
 
 wall_success() {
   local message=$1
-  if type dzen2  2>&1 > /dev/null ; then
+  if which dzen2  2>&1 > /dev/null ; then
     success ${message}
     echo ${message}|\
       timeout 1 dzen2 -p\
@@ -100,9 +100,9 @@ wall_success() {
       -w 200\
       -h 100\
       -ta c
-  elif type kdialog 2>&1 > /dev/null ; then
+  elif which kdialog 2>&1 > /dev/null ; then
     kdialog --passivepopup "${message}" 1
-  elif type notify-send 2>&1 > /dev/null ; then
+  elif which notify-send 2>&1 > /dev/null ; then
     notify-send -t 1000 "Wallpaper" "${message}"
   fi
   return 0
