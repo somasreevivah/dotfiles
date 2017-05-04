@@ -160,12 +160,21 @@ endsnippet
 
 
 
+snippet nbands "Nbands for vasp" b
+echo "Checking band numbers (NBANDS=${nbands})"
+let r=nbands%n_cores
+if [[ ! $r == 0 ]]; then
+  echo "${nbands} is not divisible by ${n_cores}"
+  echo "  ${nbands} = $((nbands/n_cores))*${n_cores} + $((nbands%n_cores))"
+  let nbands+=n_cores-r
+  assert "$((nbands%n_cores)) == 0"
+  echo "Now it is divisible"
+  echo "  ${nbands} = $((nbands/n_cores))*${n_cores} + $((nbands%n_cores))"
+fi
 
-
-
-
-
-snippet not "not operator" i
-!
 endsnippet
+
+
+
+
 

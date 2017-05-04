@@ -95,8 +95,13 @@ set shell = 'bash'
 ##############
 my_hdr User-Agent: Every email client sucks, this one just sucks less.
 
-# gpg {{{1
+# pgp {{{1
 ##########
+set pgp_use_gpg_agent = yes
+#set pgp_sign_as = A2519C02
+set pgp_timeout = 3600
+set crypt_autosign = yes
+set crypt_replyencrypt = yes
 source $HOME/.mutt/gpg.muttrc
 
 # macros {{{1
