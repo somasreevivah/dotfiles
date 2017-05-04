@@ -95,6 +95,10 @@ set shell = 'bash'
 ##############
 my_hdr User-Agent: Every email client sucks, this one just sucks less.
 
+# gpg {{{1
+##########
+source $HOME/.mutt/gpg.muttrc
+
 # macros {{{1
 #############
 source $HOME/.mutt/macros.muttrc
