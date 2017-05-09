@@ -11,7 +11,7 @@ fi
 pdf_url=$(wget $link -qO - | grep -Eom1 'http://[^ ]+\.pdf')
 
 echo
-echo "pdf url = ${pdf_url}"
+echo "sciget: pdf_url = ${pdf_url}"
 echo
 
 if [[ -z ${pdf_url} ]]; then
@@ -29,8 +29,23 @@ EOF
 wget ${pdf_url} -O ${output_pdf}
 
 if ! file ${output_pdf} | grep PDF ; then
-  echo "${output_pdf} is not a pdf, going to the website"
+  echo "sciget: ${output_pdf} is not a pdf, going to the website"
   ${BROWSER} ${pdf_url}
+  read -p "Robots ready? (y/N)" -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "sciget: Downloading again ..."
+    wget ${pdf_url} -O ${output_pdf}
+    if ! file ${output_pdf} | grep PDF ; then
+      echo "sciget: There was a problem downloading the file"
+      exit 1
+    fi
+  else
+    echo "sciget: Exiting.."
+    rm ${output_pdf}
+    exit 0
+  fi
+  REPLY= # unset REPLY after using it
 fi
 
 #vim-run: bash % 10.1103/PhysRevLett.52.997
