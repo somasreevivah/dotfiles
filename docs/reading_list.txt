@@ -25,3 +25,8 @@ http://www.vanderbilt.edu/AnS/physics/volker/p8164/DFT_review_2015.pdf
 http://joshuagoings.com/2013/04/27/linear-response-td-dft-the-density-density-response-function/
 http://joshuagoings.com/notes/
 http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
+
+eom
+---
+coupled cluster green's funtion method
+Monika Musia
