@@ -30,7 +30,7 @@ wget ${pdf_url} -O ${output_pdf}
 
 if ! file ${output_pdf} | grep PDF ; then
   echo "${output_pdf} is not a pdf, going to the website"
-  (${BROWSER} ${pdf_url} &) &
+  ${BROWSER} ${pdf_url}
 fi
 
 #vim-run: bash % 10.1103/PhysRevLett.52.997

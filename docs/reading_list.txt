@@ -28,5 +28,6 @@ http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
 
 eom
 ---
-coupled cluster green's funtion method
-Monika Musia
+- coupled cluster green's funtion method
+- Monika Musia
+- Spectral functions of the uniform electron gas via coupled-cluster theory
