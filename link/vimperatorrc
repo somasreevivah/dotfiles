@@ -18,7 +18,7 @@ nnoremap ,l :videocontrol shift 10<cr>
 
 command! sourcerc :source ~/.vimperatorrc
 command! cc4s :tabopen https://vault.hulldamage.org/cc4s.org
-command! -nargs=1 vaspp :tabopen http://cms.mpi.univie.ac.at/wiki/index.php?title=Special:Search&go=Go&search=<args>
+command! -nargs=1 vasp :tabopen http://cms.mpi.univie.ac.at/wiki/index.php?title=Special:Search&go=Go&search=<args>
 
 
 " vim: set ft=vim:
