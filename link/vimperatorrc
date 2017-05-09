@@ -16,5 +16,8 @@ nnoremap ,f :videocontrol fullscreen<cr>
 nnoremap ,h :videocontrol shift -10<cr>
 nnoremap ,l :videocontrol shift 10<cr>
 
+command! sourcerc :source ~/.vimperatorrc
+command! cc4s :tabopen https://vault.hulldamage.org/cc4s.org
+
 
 " vim: set ft=vim:
