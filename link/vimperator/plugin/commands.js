@@ -13,15 +13,15 @@ function opener_concat(template, args) {
 
 (function () {
 
-  liberator.modules.commands.addUserCommand(
-    ["vasp"],
-    "Vasp wiki searcher",
-    function(args){
-      return opener_concat("http://cms.mpi.univie.ac.at/wiki/index.php?title=Special:Search&go=Go&search=", args);
-    },
-    {},
-    true
-  );
+  //liberator.modules.commands.addUserCommand(
+    //["vasp"],
+    //"Vasp wiki searcher",
+    //function(args){
+      //return opener_concat("http://cms.mpi.univie.ac.at/wiki/index.php?title=Special:Search&go=Go&search=", args);
+    //},
+    //{},
+    //true
+  //);
 
   liberator.modules.commands.addUserCommand(
     ["youtube"],
