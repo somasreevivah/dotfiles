@@ -31,6 +31,7 @@ http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
 - coupled cluster green's funtion method
 - Monika Musia
 - Spectral functions of the uniform electron gas via coupled-cluster theory
+- https://vault.hulldamage.org/cc4s.org/doku.php?id=reference:conding_conventions&s[]=conventions
 
                 GW Louie
                 --------

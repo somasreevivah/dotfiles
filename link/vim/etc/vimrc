@@ -474,6 +474,7 @@ nnoremap <localleader>gu :Gpull
 
 let g:ctrlp_map = 'Q' " This is the default
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 nnoremap <localleader>b :CtrlPBuffer<cr>
 nnoremap <localleader>Q :CtrlPTag<cr>
 nnoremap <localleader><localleader>l :CtrlPLine<cr>
