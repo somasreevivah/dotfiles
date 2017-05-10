@@ -1,0 +1,34 @@
+#! /usr/bin/env bash
+
+file=$1
+
+
+awk '
+BEGIN {
+  start = 0;
+}
+{
+  if (match($0, /^[^#].*/) != 0) {
+    if (start == 0) {
+      start = 1;
+      print "```python";
+    }
+  }
+
+  if (match($0, /^##.*/)) {
+    sub(/##\s*/, "", $0);
+    print $0;
+  } else if (match($0, /^[^#].*/) != 0){
+    print $0;
+  } else if (match($0, /^$/) != 0){
+    print ;
+  }
+
+  if (match($0, /^$/) != 0) {
+    if (start == 1) {
+      print "```";
+      start = 0;
+    }
+  }
+}
+' ${file}
