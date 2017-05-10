@@ -26,8 +26,12 @@ http://joshuagoings.com/2013/04/27/linear-response-td-dft-the-density-density-re
 http://joshuagoings.com/notes/
 http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
 
-eom
----
+                EOM
+                ---
 - coupled cluster green's funtion method
 - Monika Musia
 - Spectral functions of the uniform electron gas via coupled-cluster theory
+
+                GW Louie
+                --------
+- First principles theory of quasiparticles
