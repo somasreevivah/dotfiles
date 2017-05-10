@@ -1,34 +1,13 @@
 #! /usr/bin/env bash
 
 file=$1
+output=${2:-output.pdf}
+
+tmp_md=$(tempfile)
 
 
-awk '
-BEGIN {
-  start = 0;
-}
-{
-  if (match($0, /^[^#].*/) != 0) {
-    if (start == 0) {
-      start = 1;
-      print "```python";
-    }
-  }
+echo "Creating md file in ${tmp_md}"
 
-  if (match($0, /^##.*/)) {
-    sub(/##\s*/, "", $0);
-    print $0;
-  } else if (match($0, /^[^#].*/) != 0){
-    print $0;
-  } else if (match($0, /^$/) != 0){
-    print ;
-  }
+py2md ${file} > ${tmp_md}
 
-  if (match($0, /^$/) != 0) {
-    if (start == 1) {
-      print "```";
-      start = 0;
-    }
-  }
-}
-' ${file}
+pandoc -f markdown -t latex ${tmp_md} -s -o ${output}

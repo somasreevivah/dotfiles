@@ -38,7 +38,7 @@ if ! file ${output_pdf} | grep PDF ; then
     wget ${pdf_url} -O ${output_pdf}
     if ! file ${output_pdf} | grep PDF ; then
       echo "sciget: There was a problem downloading the file"
-    rm ${output_pdf}
+      rm ${output_pdf}
       exit 1
     fi
   else
