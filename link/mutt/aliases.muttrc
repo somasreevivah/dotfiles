@@ -1,0 +1,3 @@
+source ~/contacts/aliases.muttrc
+
+# vim: cc=80 ft=muttrc

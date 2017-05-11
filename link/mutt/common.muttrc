@@ -5,7 +5,7 @@
 
 #  Contacts {{{1 #
 ##################
-source ~/contacts/aliases.muttrc
+source $HOME/.mutt/aliases.muttrc
 set query_command = "~/contacts/bin/query.py --query %s --mutt"
 set query_format = '%n %a %e'
 
