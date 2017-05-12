@@ -5,6 +5,7 @@ dir = ~/Documents/papers
 opentool = rifle
 editor = vim
 default = papers
+file-browser = ranger
 
 [books]
 dir = ~/Documents/books

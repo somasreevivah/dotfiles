@@ -36,3 +36,4 @@ http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
                 GW Louie
                 --------
 - First principles theory of quasiparticles
+- Hedin
