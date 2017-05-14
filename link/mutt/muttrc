@@ -1,6 +1,6 @@
 # accounts {{{1
 ###############
-set folder="imaps://aamsgallo@imap.gmail.com/"
 set from="`mutt -F $HOME/.mutt/aliases.muttrc -A me`"
 
+source ~/.mutt/aamsgallo@gmail.muttrc
 source ~/.mutt/common.muttrc

@@ -1,0 +1,5 @@
+set folder="imaps://aamsgallo@imap.gmail.com/"
+set smtp_url="smtps://aamsgallo@smtp.gmail.com:465/"
+set imap_user="aamsgallo@gmail.com"
+
+# vim: ft=muttrc
