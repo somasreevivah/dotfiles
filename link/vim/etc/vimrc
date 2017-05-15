@@ -151,7 +151,7 @@ set number
 "if v:version >= 704
 if exists("&relativenumber")
   "is only supported for vim 7.04 and above...
-  set relativenumber
+  "set relativenumber
 endif
 
 

@@ -8,9 +8,10 @@ if [[ ! ${link} =~ http* ]]; then
   link="http://sci-hub.io/$link"
 fi
 
-pdf_url=$(wget $link -qO - | grep -Eom1 'http://[^ ]+\.pdf')
+pdf_url=http:$(curl -s ${link} | grep -Eom1 '//[^ ]+\.pdf')
 
 echo
+echo "sciget: link = ${link}"
 echo "sciget: pdf_url = ${pdf_url}"
 echo
 
