@@ -300,23 +300,23 @@ def bibtexEntry(ref):
   s = "@article{" + ref["key"] + ",\n"
 
   if len(ref["authors"]) > 0:
-    s = s + "  author = { " + latex(" and ".join(ref["authors"])) + " },\n"
+    s = s + "  author = {" + latex(" and ".join(ref["authors"])) + "},\n"
 
   if ref["title"] is not None:
-    s = s + "  title = { " + latex(ref["title"]) + " },\n"
+    s = s + "  title = {" + latex(ref["title"]) + "},\n"
   if ref["shortJournal"] is not None:
-    s = s + "  journal = { " + latex(ref["shortJournal"]) + " },\n"
+    s = s + "  journal = {" + latex(ref["shortJournal"]) + "},\n"
   if ref["year"] is not None:
-    s = s + "  year = { " + latex(ref["year"]) + " },\n"
+    s = s + "  year = {" + latex(ref["year"]) + "},\n"
   if ref["volume"] is not None:
-    s = s + "  volume = { " + latex(ref["volume"]) + " },\n"
+    s = s + "  volume = {" + latex(ref["volume"]) + "},\n"
   if ref["issue"] is not None:
-    s = s + "  issue = { " + latex(ref["issue"]) + " },\n"
+    s = s + "  issue = {" + latex(ref["issue"]) + "},\n"
   if ref["firstPage"] is not None:
     if ref["lastPage"] is not None:
-      s = s + "  pages = { " + latex(ref["firstPage"]) + "--" + latex(ref["lastPage"]) + " },\n"
+      s = s + "  pages = {" + latex(ref["firstPage"]) + "--" + latex(ref["lastPage"]) + "},\n"
     else:
-      s = s + "  pages = { " + latex(ref["firstPage"]) + " },\n"
+      s = s + "  pages = {" + latex(ref["firstPage"]) + "},\n"
 
   s = s + "}"
   return s
