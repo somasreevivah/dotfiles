@@ -350,8 +350,13 @@ nnoremap <localleader>mt :make test<cr>
 
 if has("autocmd")
 
+" For c++
 au! BufEnter *.cpp,*.cxx,*.C let b:fswitchdst = 'hpp,h,hxx' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
 au! BufEnter *.h,*.hpp let b:fswitchdst = 'cxx,cpp,C' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+"
+" For c and fortran
+au! BufEnter *.c,*.F,*.f90,*.f95,*.f77 let b:fswitchdst = 'h' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+au! BufEnter *.h let b:fswitchdst = 'c,F,f90,f95,f77' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
 
 endif 
 
