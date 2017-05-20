@@ -11,3 +11,7 @@ file-browser = ranger
 dir = ~/Documents/books
 gagp = git add . && git commit && git push origin master
 
+[contacts]
+dir = ~/Documents/contacts/general
+header_format = {doc.full_name}
+match_format = {doc.full_name}
