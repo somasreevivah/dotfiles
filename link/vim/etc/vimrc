@@ -350,8 +350,8 @@ nnoremap <localleader>mt :make test<cr>
 
 if has("autocmd")
 
-au! BufEnter *.cpp let b:fswitchdst = 'hpp,h' | let b:fswitchlocs = '../inc' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
-au! BufEnter *.h,*.hpp let b:fswitchdst = 'cpp,C' | let b:fswitchlocs = '../inc' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+au! BufEnter *.cpp,*.cxx,*.C let b:fswitchdst = 'hpp,h,hxx' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
+au! BufEnter *.h,*.hpp let b:fswitchdst = 'cxx,cpp,C' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
 
 endif 
 
