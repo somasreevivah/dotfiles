@@ -1,0 +1,30 @@
+#! /usr/bin/env bash
+
+ignore_files="$*"
+
+[[ -n ${ignore_files} ]] && echo "Ignoring: ${ignore_files}"
+
+for f in \
+CHG \
+CHGCAR \
+CONTCAR \
+DOSCAR \
+DYNMAT \
+EIGENVAL \
+IBZKPT \
+OSZICAR \
+OUTCAR \
+PCDAT \
+vasprun.xml \
+WAVECAR \
+XDATCAR \
+; do
+  { echo ${ignore_files} | grep ${f} > /dev/null ; } && continue
+  if [[ -f ${f} ]]; then
+    echo "Removing ${f}"
+    rm ${f}
+  fi
+done
+
+
+# vim: ft=sh
