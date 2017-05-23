@@ -7,10 +7,10 @@ editor = vim
 default = papers
 file-browser = ranger
 mode = document
+gagp = git add . && git commit && git push origin master
 
 [books]
 dir = ~/Documents/books
-gagp = git add . && git commit && git push origin master
 
 [contacts]
 dir = ~/contacts/general
