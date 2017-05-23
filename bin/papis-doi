@@ -11,7 +11,8 @@ doi2bib=doi2bib
 pdf_output=output.pdf
 doi="$1"
 
-bibtex_file=$(tempfile)
+bibtex_file=$(mktemp)
+echo "$(basename $0): Bibtex file  ${bibtex_file}"
 
 ${doi2bib} ${doi} > ${bibtex_file}
 
