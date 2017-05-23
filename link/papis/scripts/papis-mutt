@@ -18,7 +18,7 @@ for contact in docs:
         email = contact["email"][t]
         if not email:
             continue
-        string = "{c[first_name]} {c[last_name]}  {email}".format(c=contact, email=email)
+        string = "{c[first_name]} {c[last_name]}  <{email}>".format(c=contact, email=email)
         print(string)
 
 
