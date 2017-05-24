@@ -122,7 +122,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 #bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher'"
 #bindsym $mod+Shift+o exec "~/.dotfiles/bin/lib -l | dmenu -fn '-bitstream-*-*-*-*-*-18-*-*-*-*-*-*-*' | xargs -n1 ~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' "
 #bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' cmd "
-bindsym $mod+o exec "papis --rofi --pick-lib open"
+bindsym $mod+o exec "papis --rofi --pick-lib gui --rofi"
 
 # languages
 #bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"

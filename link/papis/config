@@ -4,7 +4,6 @@ dir = ~/Documents/papers
 [settings]
 opentool = rifle
 editor = vim
-xeditor = gvim
 default = papers
 file-browser = ranger
 mode = document
