@@ -4,6 +4,10 @@ dir = ~/Documents/papers
 [settings]
 opentool = rifle
 editor = vim
+rofi-fullscreen =
+rofi-width = 90
+rofi-lines = 20
+rofi-fixed-lines = 20
 default = papers
 file-browser = ranger
 mode = document
