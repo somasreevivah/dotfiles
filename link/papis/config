@@ -9,10 +9,16 @@ file-browser = ranger
 mode = document
 gagp = git add . && git commit && git push origin master
 
-rofi-fullscreen =
-rofi-width = 90
-rofi-lines = 20
+[rofi-gui]
+rofi-fullscreen = False
+rofi-width = 80
+rofi-lines = 10
+rofi-eh = 3
+rofi-sep = |
 rofi-fixed-lines = 20
+rofi-header_format = {doc[title]}
+                     {doc[empty]}   {doc[author]}
+                     {doc[empty]: >%(rofi-width)s}({doc[year]:->4})
 
 [books]
 dir = ~/Documents/books
