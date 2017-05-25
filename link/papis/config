@@ -11,13 +11,16 @@ gagp = git add . && git commit && git push origin master
 
 [rofi-gui]
 rofi-fullscreen = False
+rofi-case_sensitive = False
+rofi-markup_rows = True
+rofi-multi_select = True
 rofi-width = 80
 rofi-lines = 10
 rofi-eh = 3
 rofi-sep = |
 rofi-fixed-lines = 20
-rofi-header_format = {doc[title]}
-                     {doc[empty]}   {doc[author]}
+rofi-header_format = <b>{doc[title]}</b>
+                     {doc[empty]}   <i>{doc[author]}</i>
                      {doc[empty]: >%(rofi-width)s}({doc[year]:->4})
 
 [books]
