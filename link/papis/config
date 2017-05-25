@@ -21,7 +21,7 @@ rofi-sep = |
 rofi-fixed-lines = 20
 rofi-header_format = <b>{doc[title]}</b>
                      {doc[empty]}   <i>{doc[author]}</i>
-                     {doc[empty]: >%(rofi-width)s}({doc[year]:->4})
+                     {doc[empty]: >%(rofi-width)s}<span foreground="red">({doc[year]:->4})</span>
 
 [books]
 dir = ~/Documents/books
