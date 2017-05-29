@@ -1,13 +1,10 @@
 
 [include]
 tk-gui = ~/.papis/tk-gui.ini
+rofi-gui = ~/.papis/rofi-gui.ini
 
 [papers]
-tk-prompt-fg=lightgreen
 dir = ~/Documents/papers
-tk-header_format = {doc[title]} 
-                     {doc[empty]}   {doc[author]}
-                     ({doc[year]:->4})
 
 
 [settings]
@@ -20,19 +17,6 @@ match_format = {doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
 header_format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
 gagp = git add . && git commit && git push origin master
 
-[rofi-gui]
-fullscreen = False
-case_sensitive = False
-markup_rows = True
-multi_select = True
-width = 80
-lines = 10
-eh = 3
-sep = |
-fixed-lines = 20
-header_format = <b>{doc[title]}</b>
-                     {doc[empty]}   <i>{doc[author]}</i>
-                     {doc[empty]: >%(width)s}<span foreground="red">({doc[year]:->4})</span>
 
 [books]
 dir = ~/Documents/books
@@ -46,3 +30,5 @@ rofi-eh = 2
 rofi-header_format = %(header_format)s
                      {doc[tel][cell]}
 tk-header_format = %(rofi-header_format)s
+
+# vim: ft=dosini
