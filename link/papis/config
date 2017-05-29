@@ -1,9 +1,13 @@
+
+[include]
+tk-gui = ~/.papis/tk-gui.ini
+
 [papers]
+tk-prompt-fg=lightgreen
 dir = ~/Documents/papers
 tk-header_format = {doc[title]} 
                      {doc[empty]}   {doc[author]}
                      ({doc[year]:->4})
-rofi-markup_rows = True
 
 
 [settings]
