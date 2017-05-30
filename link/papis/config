@@ -19,6 +19,8 @@ header_format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
 gagp = git add . && git commit && git push origin master
 gs = git status
 gm = git commit
+gp = git push
+gu = git pull
 gma = git commit -a
 
 
