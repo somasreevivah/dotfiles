@@ -15,7 +15,11 @@ file-browser = ranger
 mode = document
 match_format = {doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
 header_format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
+
 gagp = git add . && git commit && git push origin master
+gs = git status
+gm = git commit
+gma = git commit -a
 
 
 [books]
