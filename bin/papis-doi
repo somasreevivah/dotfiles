@@ -10,6 +10,7 @@ doi2bib=doi2bib
 
 pdf_output=output.pdf
 doi="$1"
+shift
 
 bibtex_file=$(mktemp)
 echo "$(basename $0): Bibtex file  ${bibtex_file}"
@@ -28,4 +29,6 @@ if [[ ! $? = 0 ]]; then
   exit 1
 fi
 
-papis -l ${PAPIS_LIB} add ${pdf_output} --from-bibtex ${bibtex_file} --edit --confirm
+set -x
+papis ${PAPIS_VERBOSE} -l ${PAPIS_LIB} add ${pdf_output} --from-bibtex ${bibtex_file} $@
+set +x
