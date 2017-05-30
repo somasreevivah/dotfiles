@@ -28,4 +28,4 @@ if [[ ! $? = 0 ]]; then
   exit 1
 fi
 
-papis -l ${PAPIS_LIB} add ${pdf_output} --from-bibtex ${bibtex_file} --edit
+papis -l ${PAPIS_LIB} add ${pdf_output} --from-bibtex ${bibtex_file} --edit --confirm
