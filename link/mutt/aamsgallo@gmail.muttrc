@@ -2,4 +2,7 @@ set folder="imaps://aamsgallo@imap.gmail.com/"
 set smtp_url="smtps://aamsgallo@smtp.gmail.com:465/"
 set imap_user="aamsgallo@gmail.com"
 
+set imap_pass = `read -s -p 'aamsgallo pass: ' mailpass; echo $mailpass`
+set smtp_pass = $imap_pass
+
 # vim: ft=muttrc
