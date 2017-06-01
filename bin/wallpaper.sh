@@ -41,6 +41,7 @@ set_wallpaper() {
      || wall_error "Failure setting wallpaper"
   elif which xv > /dev/null 2>&1; then
     arrow "Through xv.."
+    set -x
     xv -root -quit "${IMAGE_PATH}"
   fi
 }
