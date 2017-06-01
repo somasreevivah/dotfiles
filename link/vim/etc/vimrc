@@ -46,7 +46,7 @@ if v:version >= 704
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
 endif
-Plugin 'mattn/emmet-vim'
+"Plugin 'mattn/emmet-vim'
 " Track the engine.
 Plugin 'VundleVim/Vundle.vim'
 " All of your Plugins must be added before the following line
@@ -561,7 +561,7 @@ onoremap in( :<c-u>normal! f(vi(<cr>
 "  Syntastic  {{{1"
 
 "from repository of syntastic 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
@@ -574,13 +574,13 @@ let g:syntastic_check_on_wq = 0
 set laststatus=2
 
 " The current file
-set statusline+=%f
+"set statusline+=%f
 
-if ! exists("NO_SPARTAN")
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-endif
+"if ! exists("NO_SPARTAN")
+  "set statusline+=%#warningmsg#
+  "set statusline+=%{SyntasticStatuslineFlag()}
+  "set statusline+=%*
+"endif
 
 nnoremap <localleader>ts :SyntasticToggleMode<cr>
 
