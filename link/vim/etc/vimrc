@@ -8,8 +8,6 @@ call vundle#begin()
 if ! exists("NO_SPARTAN")
   "Plugins that are not loaded 
   "when I want to be spartan
-  "Plugin 'vim-airline/vim-airline-themes'
-  "Plugin 'bling/vim-airline'
   Plugin 'yuratomo/w3m.vim'
   Plugin 'vim-scripts/VCard-syntax'
   Plugin 'scrooloose/syntastic'
@@ -359,18 +357,6 @@ au! BufEnter *.h let b:fswitchdst = 'c,F,f90,f95,f77' | let b:fswitchlocs = '.' 
 
 endif 
 
-"  Airline  {{{1"
-
-
-"let g:airline_powerline_fonts = 0
-"let g:Powerline_symbols = 'fancy'
-
-let g:airline_theme = 'badwolf'
-
-let g:airline#extensions#tabline#enabled = 1
-
-" To get the downbar
-set laststatus=2
 
 
 "  ULTISNIPS STUFF  {{{1"
@@ -584,6 +570,10 @@ let g:syntastic_check_on_wq = 0
 
 "  Statusline  {{{1"
 
+" To get the statusline shown
+set laststatus=2
+
+" The current file
 set statusline+=%f
 
 if ! exists("NO_SPARTAN")
