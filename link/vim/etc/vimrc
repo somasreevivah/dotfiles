@@ -574,18 +574,23 @@ onoremap in( :<c-u>normal! f(vi(<cr>
 
 "  Syntastic  {{{1"
 
+"from repository of syntastic 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+" ignore some anoying warnings
+
+
+"  Statusline  {{{1"
+
+set statusline+=%f
+
 if ! exists("NO_SPARTAN")
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
 endif
-
-"from repository of syntastic 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" ignore some anoying warnings
 
 nnoremap <localleader>ts :SyntasticToggleMode<cr>
 
