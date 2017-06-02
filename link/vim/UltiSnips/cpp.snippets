@@ -19,3 +19,14 @@ endsnippet
 snippet endl "Endline" w
 std::endl
 endsnippet
+
+snippet mpirank "Get the rank of the processor" b
+int rank;
+MPI_comm_rank(MPI_COMM_WORLD, &rank);
+endsnippet
+
+snippet mpisize "Get the size of the session" b
+int num_pes;
+MPI_Comm_size(MPI_COMM_WORLD, &num_pes);
+endsnippet
+
