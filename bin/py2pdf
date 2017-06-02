@@ -3,7 +3,7 @@
 file=$1
 output=${2:-output.pdf}
 
-tmp_md=$(tempfile)
+tmp_md=$(mktemp)
 
 
 echo "Creating md file in ${tmp_md}"
