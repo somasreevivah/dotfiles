@@ -24,7 +24,7 @@ $(usage_head)
 EOF
 }    # ----------  end of function usage  ----------
 
-if type -a osascript; then
+if which osascript > /dev/null 2>&1; then
   OSX=1
 fi
 
