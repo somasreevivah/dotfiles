@@ -3,6 +3,12 @@
   email = aamsgallo@gmail.com
 [alias]
   l = log --decorate --oneline --graph --date-order --all --date=short
+  s = status
+  m = commit
+  a = add
+  ma = commit -a
+  u = pull
+  p = push
 [merge]
 	tool = vimdiff
 [core]
