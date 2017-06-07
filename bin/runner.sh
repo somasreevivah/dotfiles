@@ -3,11 +3,11 @@
 
 
 # In general do this
-if type -a rofi; then
+if which rofi >&1 2> /dev/null; then
   rofi -show run
   exit $?
-elif type -a dmenu; then
-  dmenu_run -i
+elif which dmenu_run >&1 2> /dev/null; then
+  dmenu_run -i -l 10
   exit $?
 fi
 

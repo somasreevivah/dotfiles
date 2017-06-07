@@ -39,7 +39,8 @@ bindsym $mod+m exec i3-input -l 1 -F 'mark %s' -P 'Mark name: '
 bindsym $mod+g exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
 
 # program launcher
-bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
+#bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
+bindsym $mod+d exec runner.sh
 # program switcher
 bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/switcher.sh
 
