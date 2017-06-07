@@ -240,6 +240,10 @@ function compile_do() {
     ./configure --prefix=${DOTFILES}
     make
     make install
+  if [[ -f ${2}/CMakeList.txt ]]; then
+    dfs_arrow "Cmake project detected"
+    mkdir -p ${2}/build
+    (cd ${2}/build; cmake ../ -DCMAKE_INSTALL_PREFIX=${DOTFILES})
   else
     dfs_arrow "Makefile detected (and no configuration script)"
     dfs_arrow "Compiling..."
