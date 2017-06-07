@@ -7,6 +7,8 @@
 ! Xterm settings
 !---------------------
 
+XTerm.background: black
+XTerm.foreground: white
 XTerm*background: black
 XTerm*foreground: white
 XTerm*cursorColor: red
@@ -15,8 +17,6 @@ XTerm*font:*-fixed-*-*-*-20-*
 !Save more lines
 XTerm*saveLines: 4096
 XTerm*scrollBar: false
-
-
 
 
 !---------------------
@@ -108,7 +108,7 @@ rofi.kb-page-next: Page_Down,Control+f
 !*.color7:       #707880
 *.color15:      #c5c8c6
 
-!vim-run: xrdb ~/.Xresources; urxvt
 !vim-run: xrdb ~/.Xresources; xterm
+!vim-run: xrdb ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources; urxvt
 !vim-run: xrdb -merge ~/.Xresources
