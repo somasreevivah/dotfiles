@@ -3,7 +3,7 @@
 
 
 # In general do this
-if type -a rofi; then
+if which rofi >&1 2> /dev/null; then
   rofi -show Window
   exit $?
 fi

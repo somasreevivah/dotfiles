@@ -3,13 +3,13 @@
 
 color=$(
   for i in {1..6}; do
-    { for j in {0..9} {a..f}; do echo $j; done } |
+    { for j in {1..9} {a..e}; do echo $j; done } |
     shuf |
     sed -n 1p |
     tr -d "\n"
   done
 )
 
-i3lock -c ${color}
+i3lock -c ${color} -b -p win
 
 #vim-run: bash %
