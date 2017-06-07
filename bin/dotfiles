@@ -22,6 +22,7 @@ $(usage_head)
     Options:
       -h|help       Display this message
       -v|version    Display script version"
+      -d            Debug mode
 
     Commands:
       compile       Compile the projects in ${DOTFILES}/compile
@@ -32,13 +33,15 @@ Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
 EOF
 }    # ----------  end of function usage  ----------
 
-while getopts ":hv" opt
+while getopts ":hvd" opt
 do
   case $opt in
 
   h|help     )  usage; exit 0   ;;
 
   v|version  )  echo "$__SCRIPT_NAME -- Version $__SCRIPT_VERSION"; exit 0   ;;
+
+  d  )  set -x ;;
 
   #* )  echo -e "\n  Option does not exist : $OPTARG\n"
       #usage_head; exit 1   ;;
