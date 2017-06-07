@@ -6,6 +6,7 @@
   #exit
 #fi
 
+{
 if which urxvt; then
   # Because it works well with ranger for images
   urxvt $*
@@ -16,3 +17,4 @@ elif which konsole; then
 else
   xterm $*
 fi
+} || xdg-terminal
