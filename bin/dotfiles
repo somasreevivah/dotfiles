@@ -200,7 +200,7 @@ function compile_do() {
     ./configure --prefix=${DOTFILES}
     make
     make install
-  if [[ -f ${2}/CMakeList.txt ]]; then
+  elif [[ -f ${2}/CMakeList.txt ]]; then
     dfs_arrow "Cmake project detected"
     mkdir -p ${2}/build
     (cd ${2}/build; cmake ../ -DCMAKE_INSTALL_PREFIX=${DOTFILES})
@@ -220,7 +220,6 @@ function compile_do() {
       fi
     done
   fi
-  #come back from there
   cd -
 }
 
