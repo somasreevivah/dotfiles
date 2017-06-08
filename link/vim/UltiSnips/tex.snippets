@@ -96,11 +96,11 @@ snippet note "Beamer note" b
 endsnippet
 
 snippet red "red" w
-\color{red}$0
+{\color{red}${VISUAL}$0 }
 endsnippet
 
-snippet blue "Blue" w
-\color{blue}$0
+snippet blue "blue" w
+{\color{blue}${VISUAL}$0 }
 endsnippet
 
 snippet color "color" w
@@ -299,13 +299,21 @@ snippet dim
 \mathsf{dim}$0
 endsnippet
 
-snippet d "Subindex (down)" i
+#snippet d "Subindex (down)" i
+#_{${1:${VISUAL}}}$0
+#endsnippet
+
+snippet dd "Subindex (down)" A
 _{${1:${VISUAL}}}$0
 endsnippet
 
-snippet u "Superindex (upper)" i
+snippet uu "Subindex (up)" A
 ^{${1:${VISUAL}}}$0
 endsnippet
+
+#snippet u "Superindex (upper)" i
+#^{${1:${VISUAL}}}$0
+#endsnippet
 
 snippet m
 $ ${1:${VISUAL}} $$0
