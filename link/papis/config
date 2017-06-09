@@ -27,6 +27,9 @@ gma = git commit -a
 [books]
 dir = ~/Documents/books
 
+[videos]
+dir = ~/Videos/courses
+
 [contacts]
 dir = ~/contacts/general
 mode = contact
