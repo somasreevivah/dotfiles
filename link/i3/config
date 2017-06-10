@@ -128,7 +128,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+o exec "python3 -m papis.main --rofi --pick-lib gui --rofi"
 bindsym $mod+Shift+o exec "python3 -m papis.main --rofi --pick-lib gui --tk"
 
-bindsym $mod+Shift+p exec "rofi-pass"
+bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass"
 
 # languages
 #bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
