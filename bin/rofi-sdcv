@@ -1,0 +1,73 @@
+#! /usr/bin/env bash
+
+ROFI=$(which rofi)
+SDCV=$(which sdcv)
+dictionary_flag=""
+word=""
+dictionary=""
+
+select_dictionary() {
+  ${SDCV} -l |
+  sed "1s/.*/ALL/"  |
+  ${ROFI} \
+    -p "Select dictionary: " \
+    -sidebar-mode \
+    -dmenu \
+    -select ALL \
+    -i \
+    -markup-rows |
+  rev |
+  cut -f 2- -d " " |
+  rev |
+  sed "s/ *$//"
+}
+
+get_word() {
+  echo "" |
+  ${ROFI} \
+    -p "Search word: " \
+    -dmenu \
+    -i \
+    -markup-rows
+}
+
+show_result() {
+  file=$1
+  lines=$(wc -l ${file} | cut -d " " -f1)
+  max_lines=100
+  if [[ ${lines} -lt ${max_lines} ]]; then
+    rofi -dmenu \
+      -p "Search in doc" \
+      -input ${file}
+  else
+    sed -i "/-->/s/$/ {{{1/g" ${result}
+    gvim \
+      -c "set nonumber"\
+      -c "set nolist"\
+      -c "set foldmethod=marker"\
+      -c "syntax match Title /-->.*/"\
+      -c "syntax match keyword /\[.*\]/"\
+      -c "nnoremap \<SPACE> za"\
+      ${file}
+  fi
+}
+
+dictionary="$(select_dictionary)"
+if [[ ! ${dictionary} = ALL ]]; then
+  dictionary_flag="-u \"${dictionary}\""
+fi
+if [[ -z "${dictionary}" ]]; then
+  exit 0
+fi
+word=$(get_word)
+if [[ -z "${word}" ]]; then
+  exit 0
+fi
+result=$(mktemp)
+echo "${dictionary}"
+echo "${dictionary_flag}"
+${SDCV} -n ${dictionary_flag} ${word} > ${result}
+show_result ${result}
+
+
+#vim-run: bash %
