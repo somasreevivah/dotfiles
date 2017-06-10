@@ -1,0 +1,18 @@
+snippet so "Standard output" w
+echo(${1:"${2:hello}"});
+endsnippet
+
+snippet for "For" b
+for (${1:i} = [${2:start:end}]) {
+	$0
+}
+endsnippet
+
+snippet if "If" b
+if (${1:contition}) {
+	$0
+}
+endsnippet
+
+snippet fun "function"
+function ${1:fname}(${2:args}) = ${3:definition};$0
