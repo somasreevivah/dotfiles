@@ -144,6 +144,9 @@ bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
 # composite manager
 exec '~/.i3/scripts/composite.sh'
 
+# composite manager
+exec '~/.dotfiles/bin/x11-dashboard.sh'
+
 
 # focus the child container
 #bindsym $mod+d focus child
