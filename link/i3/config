@@ -144,8 +144,9 @@ bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
 # composite manager
 exec '~/.i3/scripts/composite.sh'
 
-# composite manager
-exec '~/.dotfiles/bin/x11-dashboard.sh'
+# dashboard
+exec_once --no-startup-id "~/.dotfiles/bin/x11-dashboard.sh"
+exec_always --no-startup-id "rofi -show window"
 
 
 # focus the child container
