@@ -1,0 +1,17 @@
+#! /usr/bin/env bash
+
+usage() {
+  echo "kj job_number"
+}
+
+if [[ -n $1 ]]; then
+  usage
+  exit 0
+fi
+
+job_number=$1
+
+command="kill -9 %${job_number}"
+
+echo ${command}
+${command}
