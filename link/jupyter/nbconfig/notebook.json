@@ -1,0 +1,8 @@
+{
+  "load_extensions": {
+    "vim_binding/vim_binding": true,
+    "vim_binding/vim_binding.js": true,
+    "vim_binding/vim_binding.yaml": true,
+    "vim_binding": true
+  }
+}

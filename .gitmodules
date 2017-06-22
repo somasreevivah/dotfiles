@@ -1,3 +1,6 @@
 [submodule "link/calcurse"]
 	path = link/calcurse
 	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
+[submodule "link/jupyter/nbextensions/vim_binding"]
+	path = link/jupyter/nbextensions/vim_binding
+	url = https://github.com/lambdalisue/jupyter-vim-binding
