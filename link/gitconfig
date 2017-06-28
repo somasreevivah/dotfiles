@@ -10,6 +10,7 @@
   u = pull
   p = push
 [merge]
-	tool = vimdiff
+  tool = vimdiff
 [core]
-	editor = vim
+  editor = vim
+  pager = less

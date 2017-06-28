@@ -12,13 +12,6 @@ Executes A, then B,  then C, etc. The B1, B2, B3  means it executes only
 the first of those files found.
 
 
-Table 1 : For bash.
-[Source](https://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/)
-
-
-
-
-
 
 
 ## Inspiration ##
