@@ -8,20 +8,19 @@ dfs_is_osx || return 1
 recipes=(
   #android-platform-tools
   #ansible
-  #bash
+  bash
   cmatrix
   cowsay
   git
-  #git-extras
-  #htop-osx
-  #hub
+  git-extras
+  htop-osx
+  hub
   #id3tool
   #lesspipe
   #man2html
-  #mercurial
   #nmap
   #sl
-  #ssh-copy-id
+  ssh-copy-id
   #terminal-notifier
   #the_silver_searcher
   tree
