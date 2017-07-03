@@ -10,6 +10,7 @@ snippet amsmath "amsmath packages" b
 % amsmath packages
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amsthm}
 \usepackage{amssymb}
 endsnippet
 
@@ -717,6 +718,18 @@ elif title == "fig":
     snip.rv="Figure"
 elif title == "tab":
     snip.rv="Table"
+elif title == "theo":
+    snip.rv="Theorem"
+elif title == "def":
+    snip.rv="Definition"
+elif title == "prop":
+    snip.rv="Proposition"
+elif title == "lemma":
+    snip.rv="Lemma"
+elif title == "proof":
+    snip.rv="Proof"
+elif title == "corol":
+    snip.rv="Corollary"
 else:
     snip.rv="Environment"
 ` for ${2:label name}
@@ -848,6 +861,16 @@ snippet cha "Chapter" b
 \label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 
 ${0}
+endsnippet
+
+
+#  Math environments {{{1  #
+############################
+
+snippet theo "Theorem" b
+\begin{theorem}
+$0
+\end{theorem}
 endsnippet
 
 
