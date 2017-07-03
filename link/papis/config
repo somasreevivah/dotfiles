@@ -30,6 +30,9 @@ dir = ~/Documents/books
 [videos]
 dir = ~/Videos/courses
 
+[gay]
+dir = ~/penis/
+
 [contacts]
 dir = ~/contacts/general
 mode = contact
