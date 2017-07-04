@@ -6,7 +6,6 @@ rofi-gui = ~/.papis/rofi-gui.ini
 [papers]
 dir = ~/Documents/papers
 
-
 [settings]
 opentool = rifle
 editor = vim
@@ -29,9 +28,6 @@ dir = ~/Documents/books
 
 [videos]
 dir = ~/Videos/courses
-
-[gay]
-dir = ~/penis/
 
 [contacts]
 dir = ~/contacts/general
