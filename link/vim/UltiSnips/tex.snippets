@@ -350,6 +350,10 @@ snippet vec "" w
 \vec{${1:${VISUAL}}}$0
 endsnippet
 
+snippet bar "" w
+\bar{${1:${VISUAL}}}$0
+endsnippet
+
 snippet tilde "" w
 \tilde{${1:${VISUAL}}}$0
 endsnippet
@@ -541,6 +545,8 @@ snippet braket-def "Braket commands" b
 \newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
 \newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|\!\!
 	\left. #2 \vphantom{#1} \right>} % for Dirac brackets
+\newcommand{\proj}[2]{\left| #1 \vphantom{#2} \right>\!\!
+	\left< #2 \vphantom{#1} \right|} % for projectors
 endsnippet
 
 snippet comm "Commutator" w
@@ -558,8 +564,13 @@ endsnippet
 snippet bra "bra predefined" w
 \bra{${1:\psi}}$0
 endsnippet
+
 snippet braket "bra predefined" w
 \braket{${1:\psi}}{${2:\psi}}$0
+endsnippet
+
+snippet proj "Projector" w
+\proj{${1:\psi}}{${2:$1}}
 endsnippet
 
 snippet rket "ket raw format" w
