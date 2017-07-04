@@ -4,6 +4,10 @@
 link=$1
 output_pdf=output.pdf
 
+log() {
+  echo "$(basename $0)> $@"
+}
+
 if [[ ! ${link} =~ http* ]]; then
   link="http://sci-hub.io/$link"
 fi
@@ -11,8 +15,8 @@ fi
 pdf_url=http:$(curl -s ${link} | grep -Eom1 '//[^ ]+\.pdf')
 
 echo
-echo "sciget: link = ${link}"
-echo "sciget: pdf_url = ${pdf_url}"
+log "link = ${link}"
+log "pdf_url = ${pdf_url}"
 echo
 
 if [[ -z ${pdf_url} ]]; then
@@ -21,6 +25,12 @@ fi
 
 cat <<EOF
 
+ ____   ____ ___      _   _ _   _ ____  
+/ ___| / ___|_ _|    | | | | | | | __ ) 
+\___ \| |    | |_____| |_| | | | |  _ \ 
+ ___) | |___ | |_____|  _  | |_| | |_) |
+|____/ \____|___|    |_| |_|\___/|____/ 
+                                        
 
         Downloading...
 
@@ -30,20 +40,20 @@ EOF
 wget ${pdf_url} -O ${output_pdf}
 
 if ! file ${output_pdf} | grep PDF ; then
-  echo "sciget: ${output_pdf} is not a pdf, going to the website"
+  log "${output_pdf} is not a pdf, going to the website"
   ${BROWSER} ${pdf_url}
   read -p "Robots ready? (y/N)" -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "sciget: Downloading again ..."
+    log "Downloading again ..."
     wget ${pdf_url} -O ${output_pdf}
     if ! file ${output_pdf} | grep PDF ; then
-      echo "sciget: There was a problem downloading the file"
+      log "There was a problem downloading the file"
       rm ${output_pdf}
       exit 1
     fi
   else
-    echo "sciget: Exiting.."
+    log "Exiting.."
     rm ${output_pdf}
     exit 0
   fi

@@ -1,5 +1,9 @@
 #! /usr/bin/env bash
 
+log() {
+  echo "$(basename $0)> $@"
+}
+
 if [[ $1 = "-h" ]]; then
   echo "Get pdf and bibtex from doi identificator"
   exit 0
@@ -11,9 +15,11 @@ doi2bib=doi2bib
 pdf_output=output.pdf
 doi="$1"
 shift
+log "Doi: ${doi}"
+[[ -n $@ ]] && log "Other args: $@"
 
 bibtex_file=$(mktemp)
-echo "$(basename $0): Bibtex file  ${bibtex_file}"
+log "Bibtex file  ${bibtex_file}"
 
 ${doi2bib} ${doi} > ${bibtex_file}
 
