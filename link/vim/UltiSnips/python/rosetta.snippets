@@ -248,6 +248,7 @@ import argparse
 
 
 if __name__ == "__main__":
+
 	parser = argparse.ArgumentParser(
 		formatter_class=argparse.RawTextHelpFormatter,
 		description="$1"
@@ -255,27 +256,30 @@ if __name__ == "__main__":
 $0
 	parser.add_argument("-v",
 		"--verbose",
-		help    = "Make the output verbose",
-		default = False,
-		action  = "store_true"
+		help="Make the output verbose",
+		default=False,
+		action="store_true"
 	)
+
 	parser.add_argument("-f",
-		help   = "Input file.",
-		action = "store"
+		help= "Input file.",
+		action="store"
 	)
+
 	parser.add_argument(
-			"--log",
-			help="Logging level",
-			choices=[
-				"INFO",
-				"DEBUG",
-				"WARNING",
-				"ERROR",
-				"CRITICAL"
-				],
-			action="store",
-			default="WARNING"
-			)
+		"--log",
+		help="Logging level",
+		choices=[
+			"INFO",
+			"DEBUG",
+			"WARNING",
+			"ERROR",
+			"CRITICAL"
+			],
+		action="store",
+		default="WARNING"
+	)
+
 	# Parse arguments
 	args = parser.parse_args()
 	if args.verbose:

@@ -24,14 +24,14 @@ log "Bibtex file  ${bibtex_file}"
 ${doi2bib} ${doi} > ${bibtex_file}
 
 if [[ -z $(cat ${bibtex_file}) ]]; then
-  echo "No bibtex retrieved!"
+  log "No bibtex retrieved!"
   exit 1
 fi
 
 ${sciget} ${doi}
 
 if [[ ! $? = 0 ]]; then
-  echo "Something happened"
+  log "Something happened"
   exit 1
 fi
 
