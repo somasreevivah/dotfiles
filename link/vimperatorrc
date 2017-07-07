@@ -9,6 +9,9 @@ inoremap <C-c> <Esc>
 nnoremap J :tabnext<cr>
 nnoremap K :tabprev<cr>
 
+inoremap <C-j> <cr>
+nnoremap <C-j> <cr>
+
 nnoremap ,s :source ~/.vimperatorrc<cr>
 
 nnoremap ,p :videocontrol playOrPause<cr>
