@@ -1143,6 +1143,7 @@ class scout(Command):
         return self._regex
 
     def _count(self, move=False, offset=0):
+        from  collections import deque
         count   = 0
         cwd     = self.fm.thisdir
         pattern = self.pattern
