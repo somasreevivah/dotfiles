@@ -1,10 +1,10 @@
 #! /usr/bin/env bash
 
 
-#if [[ $(hostname) =~ pccq ]]; then
-  #konsole $*
-  #exit
-#fi
+if [[ $(hostname) =~ pccq ]]; then
+  xterm $*
+  exit
+fi
 
 {
 if which urxvt; then
