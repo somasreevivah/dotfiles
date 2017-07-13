@@ -1,8 +1,8 @@
 set recolor true
 " The color of the text really
 set recolor-darkcolor "#DDDDDD"
-" Do not recolor images
-set recolor-reverse-video true
+" recolor images ?
+set recolor-reverse-video false
 
 set statusbar-fg "#FFBBBB"
 
