@@ -1,0 +1,21 @@
+set recolor true
+" The color of the text really
+set recolor-darkcolor "#DDDDDD"
+" Do not recolor images
+set recolor-reverse-video true
+
+set statusbar-fg "#FFBBBB"
+
+set page-padding 0
+
+set index-fg "#BB7777"
+set index-bg "#000000"
+
+set window-title-home-tilde true
+set statusbar-home-tilde true
+
+map i recolor
+"map [index] aa navigate_index bottom
+
+" vim-run: papis -l books open tour
+" vim: ft=vim
