@@ -76,7 +76,7 @@ rofi.kb-page-next: Page_Down,Control+f
 *.cursorColor:  red
 
 ! black (dark/light)
-!*.color0:       #282a2e
+*.color0:       #282a2e
 *.color8:       #373b41
 
 ! red (dark/light)
