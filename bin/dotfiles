@@ -161,10 +161,12 @@ function link_config_do() {
   local TO_LINK LINK
   TO_LINK=../${2#$HOME/}
   LINK=~/.config/$1
-  dfs_arrow "Linking ${TO_LINK} to ${LINK}."
   if [[ -L ${LINK} ]]; then
-    dfs_warning "Already linked..."
+    dfs_warning "Already linked..." > /dev/null
+  elif [[ -e ${LINK} ]]; then
+    dfs_error "There is already a file in ${LINK}, not linking..."
   else
+    dfs_arrow "Linking ${TO_LINK} to ${LINK}."
     ln -s ${TO_LINK} ${LINK} && dfs_success "Linked!"
   fi
 }
@@ -178,10 +180,12 @@ function link_do() {
   local TO_LINK LINK
   TO_LINK=${2#$HOME/}
   LINK=~/.$1
-  dfs_arrow "Linking ${TO_LINK} to ${LINK}."
   if [[ -L ${LINK} ]]; then
-    dfs_warning "Already linked..."
+    dfs_warning "Already linked..." > /dev/null
+  elif [[ -e ${LINK} ]]; then
+    dfs_error "There is already a file in ${LINK}, not linking..."
   else
+    dfs_arrow "Linking ${TO_LINK} to ${LINK}."
     ln -s ${TO_LINK} ${LINK} && dfs_success "Linked!"
   fi
 }
