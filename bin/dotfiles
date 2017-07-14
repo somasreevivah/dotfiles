@@ -199,7 +199,9 @@ function compile_do() {
   #change directory for security because you never know
   #what the configuration scripts presuppose
   cd $2
-  if [[ -x ${2}/configure ]]; then
+  if [[ -x ${DOTFILES}/compile/${1}.sh ]]; then
+    (cd ${DOTFILES}/compile && ./${DOTFILES}/compile/${1}.sh)
+  elif [[ -x ${2}/configure ]]; then
     dfs_arrow "Configuration script detected, compiling the gnu way.."
     ./configure --prefix=${DOTFILES}
     make
@@ -209,7 +211,7 @@ function compile_do() {
     mkdir -p ${2}/build
     (cd ${2}/build; cmake ../ -DCMAKE_INSTALL_PREFIX=${DOTFILES})
   else
-    dfs_arrow "Makefile detected (and no configuration script)"
+    dfs_arrow "Makefile detected (and no configuration scripts)"
     dfs_arrow "Compiling..."
     make
     for binary in bin/* ; do

@@ -3,6 +3,7 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
+let g:vundle_default_git_proto = 'git'
 call vundle#begin()
 
 if ! exists("NO_SPARTAN")
@@ -47,6 +48,7 @@ if v:version >= 704
   Plugin 'SirVer/ultisnips'
   Plugin 'honza/vim-snippets'
 endif
+Plugin 'JuliaEditorSupport/julia-vim'
 "Plugin 'mattn/emmet-vim'
 " Track the engine.
 Plugin 'VundleVim/Vundle.vim'
