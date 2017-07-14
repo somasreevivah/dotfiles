@@ -1,0 +1,8 @@
+# Write your default config options here!
+
+ffactor="10" #black outline
+#sub-bg-alpha="9"
+#sub-bg-color="0"
+#subfont-blur="8"
+
+
