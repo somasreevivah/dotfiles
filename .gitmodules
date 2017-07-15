@@ -4,3 +4,6 @@
 [submodule "link/jupyter/nbextensions/vim_binding"]
 	path = link/jupyter/nbextensions/vim_binding
 	url = git://github.com/lambdalisue/jupyter-vim-binding
+[submodule "compile/c"]
+	path = compile/c
+	url = git://github.com/alejandrogallo/c.git

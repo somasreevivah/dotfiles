@@ -195,38 +195,29 @@ function compile_header() { dfs_header "Compiling projects"; }
 function compile_do() {
   # remember: $2 is the full path and $1 the basename
   # for example $2=/home/gallo/.dotfiles/compile/hello_world
-  dfs_success "Compiling ~/.$1."
-  #change directory for security because you never know
-  #what the configuration scripts presuppose
-  cd $2
+  # If $2 is not a directory, go out
+  [[ -d ${2} ]] || return
+  dfs_success "Processing $1"
   if [[ -x ${DOTFILES}/compile/${1}.sh ]]; then
-    (cd ${DOTFILES}/compile && ./${DOTFILES}/compile/${1}.sh)
+    dfs_arrow "Script detected"
+    PREFIX=${HOME}/.local ${DOTFILES}/compile/${1}.sh compile
+    PREFIX=${HOME}/.local ${DOTFILES}/compile/${1}.sh install
   elif [[ -x ${2}/configure ]]; then
     dfs_arrow "Configuration script detected, compiling the gnu way.."
-    ./configure --prefix=${DOTFILES}
+    ./configure --prefix=${HOME}/.local
     make
     make install
   elif [[ -f ${2}/CMakeList.txt ]]; then
     dfs_arrow "Cmake project detected"
     mkdir -p ${2}/build
-    (cd ${2}/build; cmake ../ -DCMAKE_INSTALL_PREFIX=${DOTFILES})
+    (cd ${2}/build; cmake ../ -DCMAKE_INSTALL_PREFIX=${HOME}/.local)
   else
     dfs_arrow "Makefile detected (and no configuration scripts)"
     dfs_arrow "Compiling..."
     make
-    for binary in bin/* ; do
-      if [[ -x ${DOTFILES}/${binary} ]]; then
-        dfs_success "${binary} already linked"
-      else
-        if [[ -x ${binary} ]]; then
-          dfs_success "Linking binary ${binary}"
-          echo ${PWD}
-          ln -s ${PWD}/${binary} ${DOTFILES}/${binary}
-        fi
-      fi
-    done
+    make install prefix=${HOME}/.local \
+      PREFIX=${HOME}/.local
   fi
-  cd -
 }
 
 
