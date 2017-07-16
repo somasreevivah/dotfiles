@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+# To use with newsbeuter
+
+opener=zathura
+cmd=$1
+shift
+
+[[ -z ${cmd} ]] && cmd=open
+
+while read line; do
+  url=$(
+    sed -n "s/^Link:\s*\(.*\)/\1/p" <<<"${line}"
+  )
+  if [[ -n ${url} ]]; then
+    if [[ ${cmd} = save ]]; then
+      papis -v add --from-url ${url} $@
+    elif [[ ${cmd} = open ]]; then
+      (${opener} $(sed s/abs/pdf/ <<<"${url}") &)&
+    fi
+    exit
+  fi
+done
