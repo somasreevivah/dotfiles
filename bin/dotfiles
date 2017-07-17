@@ -25,8 +25,10 @@ $(usage_head)
       -d            Debug mode
 
     Commands:
-      compile       Compile the projects in ${DOTFILES}/compile
       source        Source the main functions in ${__SCRIPT_NAME}
+      compile       Compile the projects in ${DOTFILES}/compile
+      init          Initialize
+      git           Run git commands in ${DOTFILES} directory
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
@@ -283,14 +285,22 @@ backup_dir="$DOTFILES/backups/$(date "+%Y_%m_%d-%H_%M_%S")/"
 backup=
 
 # Execute code for each file in these subdirectories.
-do_stuff "copy"
-do_stuff "link"
-do_stuff "link_config"
 if [[ $1 == init ]]; then
   do_stuff "init"
-fi
-if [[ $1 == compile ]]; then
+  exit 0
+elif [[ $1 == compile ]]; then
   do_stuff "compile"
+  exit 0
+elif [[ $1 == git ]]; then
+  shift
+  set -x
+  git -C ${DOTFILES} $@
+  set +x
+  exit 0
+else
+  do_stuff "copy"
+  do_stuff "link"
+  do_stuff "link_config"
 fi
 
 # Alert if backups were made.
