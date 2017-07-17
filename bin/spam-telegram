@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+write() {
+  for i in $@; do
+    xdotool search --name telegram key $(sed "s/./& /g" <<<"$i")
+    xdotool search --name telegram key space
+  done
+}
+
+id=$(xdotool search --name telegram)
+[[ -z ${id} ]] && { echo telegram not found; exit 1;}
+
+number=${1:-1}
+shift
+
+if [[ -z $@ ]]; then
+  text="
+  Hello World
+  "
+else
+  text="$@"
+fi
+
+for i in {1..${number}}; do
+  write ${text}
+  xdotool key --window ${id} Return
+done
+
+#vim-run: bash %
