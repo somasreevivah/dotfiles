@@ -27,3 +27,9 @@ snippet vim "Vim interpolation" w
 ${1:"code here}
 \`
 endsnippet
+
+snippet snip "Snippet" i
+`echo snippet` ${1:name} "${2:desctiption}" ${3:b}
+$0
+`echo endsnippet`
+endsnippet
