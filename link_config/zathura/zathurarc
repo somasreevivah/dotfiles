@@ -15,6 +15,8 @@ set window-title-home-tilde true
 set statusbar-home-tilde true
 
 map i recolor
+map <C-e> scroll down
+map <C-y> scroll up
 "map [index] aa navigate_index bottom
 
 " vim-run: papis -l books open tour
