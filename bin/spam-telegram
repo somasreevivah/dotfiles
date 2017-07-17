@@ -2,26 +2,28 @@
 
 write() {
   for i in $@; do
-    xdotool search --name telegram key $(sed "s/./& /g" <<<"$i")
-    xdotool search --name telegram key space
+    xdotool search --name Telegram key $(sed "s/./& /g" <<<"$i")
+    xdotool search --name Telegram key space
   done
 }
 
-id=$(xdotool search --name telegram)
-[[ -z ${id} ]] && { echo telegram not found; exit 1;}
+id=$(xdotool search --name Telegram)
+[[ -z ${id} ]] && { echo Telegram not found; exit 1;}
 
 number=${1:-1}
 shift
 
 if [[ -z $@ ]]; then
-  text="
-  Hello World
-  "
+  text="Hello World"
 else
   text="$@"
 fi
 
-for i in {1..${number}}; do
+echo "Id            : ${id}"
+echo "Number of spam: ${number}"
+echo "Text of spam  : ${text}"
+
+for i in $(seq 1 ${number}); do
   write ${text}
   xdotool key --window ${id} Return
 done
