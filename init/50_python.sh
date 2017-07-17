@@ -7,18 +7,21 @@ if ! type pip 2>&1 > /dev/null ; then
   return 1
 fi
 
-PYTHON_PACKAGES_LOCAL=(
+PYTHON3_PACKAGES_LOCAL=(
 shellpic
 tldr
 pyfiglet
+cppman
+ranger-fm
 )
+PIP3=pip3
 
 
-for package in ${PYTHON_PACKAGES_LOCAL[@]} ; do
-  if pip list | grep -i ${package} 2>&1 ;then
+for package in ${PYTHON3_PACKAGES_LOCAL[@]} ; do
+  if ${PIP3} list | grep -i ${package} 2>&1 ;then
     continue
   fi
-  pip install --user ${package}
+  ${PIP3} install --user ${package}
 done
 
 #vim-run: bash %
