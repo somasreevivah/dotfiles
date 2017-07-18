@@ -1,0 +1,19 @@
+snippet foreign "foreign, non gnu" b
+AUTOMAKE_OPTIONS = foreign
+endsnippet
+
+snippet basic "basic file configuration" b
+# For non-gnu projects
+# AUTOMAKE_OPTIONS = foreign
+
+SUBDIRS = src doc
+endsnippet
+
+snippet bin "add binary" b
+bin_PROGRAMS = ${1:binary_names}
+`!p
+snip.rv = "\n".join(
+	[binary+"_SOURCES =" for binary in t[1].split()]
+)
+`
+endsnippet
