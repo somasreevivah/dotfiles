@@ -29,6 +29,8 @@ $(usage_head)
       compile       Compile the projects in ${DOTFILES}/compile
       init          Initialize
       git           Run git commands in ${DOTFILES} directory
+      pull          Run git pull in ${DOTFILES} directory
+      push          Run git push in ${DOTFILES} directory
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
@@ -291,6 +293,10 @@ if [[ $1 == init ]]; then
 elif [[ $1 == compile ]]; then
   do_stuff "compile"
   exit 0
+elif [[ $1 == pull ]]; then
+  git -C ${DOTFILES} pull
+elif [[ $1 == push ]]; then
+  git -C ${DOTFILES} push
 elif [[ $1 == git ]]; then
   shift
   set -x
