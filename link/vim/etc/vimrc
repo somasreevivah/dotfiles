@@ -255,6 +255,8 @@ vnoremap <localleader>f /\c
 vnoremap <localleader>F ?\c
 
 nnoremap <localleader>cd :cd %:p:h<cr>:pwd<cr>
+command! -nargs=0 Xterm
+      \ | execute ':silent !(xterm -e "cd %:p:h && bash" &)&'
 
 " too complicated to replace
 nnoremap <localleader>r :%s/
