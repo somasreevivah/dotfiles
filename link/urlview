@@ -6,7 +6,8 @@
 REGEXP (((http|https|git|doi|DOI|ftp|gopher)|mailto):(//)?[^ <>"\t]*|(www|ftp)[0-9]?\.[-a-z0-9.]+)[^ .,;\t\n\r<">\):]?[^, <>"\t]*[^ .,;\t\n\r<">\):]
 
 # command to invoke for selected URL
-COMMAND /bin/bash -c
+#COMMAND /bin/bash -c
+COMMAND urlview.sh
 
 # set to yes to enable menu wrapping
 #WRAP Yes
