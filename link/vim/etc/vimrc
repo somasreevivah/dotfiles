@@ -494,7 +494,9 @@ if has("autocmd")
 endif
 
 
-
+"  vim-run {{{1  "
+""""""""""""""""""
+nnoremap <localleader><localleader>r :call VIMRun()<cr>
 
 "  W3M {{{1  "
 """"""""""""""

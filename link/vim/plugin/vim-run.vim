@@ -25,7 +25,6 @@ function! VIMRun()
   echo command_to_run
   exec ":!".command_to_run
 endfunction
-nnoremap <localleader><localleader>r :call VIMRun()<cr>
 
 function! VIMRunFile()
   let vim_run = globpath(".", ".vim-run")
