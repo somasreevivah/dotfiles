@@ -184,14 +184,19 @@ endsnippet
 ############
 #  SPHINX  #
 ############
-snippet sph-param "Sphinx parameter" b
+snippet docar "Sphinx parameter" b
 :param ${1:parameter_name}: ${2:Description}
 :type  $1: ${3:parameter_type}
 endsnippet
 
-snippet sph-returns "Sphinx returns" b
+snippet docre "Sphinx returns" b
 :returns: ${1:Description}
 ${2::rtype:  ${3:return_type}}
+endsnippet
+
+snippet docex "Sphinx returns" b
+>>> ${1:command}
+${2:stdout}
 endsnippet
 
 
