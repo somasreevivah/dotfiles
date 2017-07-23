@@ -1,15 +1,9 @@
-[submodule "link/calcurse"]
-	path = link/calcurse
-	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
 [submodule "link/jupyter/nbextensions/vim_binding"]
 	path = link/jupyter/nbextensions/vim_binding
 	url = git://github.com/lambdalisue/jupyter-vim-binding
 [submodule "compile/c"]
 	path = compile/c
 	url = git://github.com/alejandrogallo/c.git
-[submodule "link/newsbeuter"]
-	path = link/newsbeuter
-	url = https://alejandroamsg@gitlab.com/alejandroamsg/newsbeuter.git
 [submodule "link/vim/bundle/Vundle.vim"]
 	path = link/vim/bundle/Vundle.vim
 	url = git://github.com/VundleVim/Vundle.vim
