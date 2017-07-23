@@ -7,3 +7,6 @@
 [submodule "link/vim/bundle/Vundle.vim"]
 	path = link/vim/bundle/Vundle.vim
 	url = git://github.com/VundleVim/Vundle.vim
+[submodule "link/calcurse"]
+	path = link/calcurse
+	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
