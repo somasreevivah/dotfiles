@@ -9,7 +9,7 @@
 	url = git://github.com/VundleVim/Vundle.vim
 [submodule "link/calcurse"]
 	path = link/calcurse
-	url = git@gitlab.com:alejandroamsg/calendar.git
+	url = https://gitlab.com/alejandroamsg/calendar.git
 [submodule "link/newsbeuter"]
 	path = link/newsbeuter
-	url = git@gitlab.com:alejandroamsg/newsbeuter.git
+	url = https://gitlab.com/alejandroamsg/newsbeuter.git
