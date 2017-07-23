@@ -7,3 +7,6 @@
 [submodule "compile/c"]
 	path = compile/c
 	url = git://github.com/alejandrogallo/c.git
+[submodule "link/newsbeuter"]
+	path = link/newsbeuter
+	url = https://alejandroamsg@gitlab.com/alejandroamsg/newsbeuter.git
