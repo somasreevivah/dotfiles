@@ -10,3 +10,6 @@
 [submodule "link/calcurse"]
 	path = link/calcurse
 	url = https://alejandroamsg@gitlab.com/alejandroamsg/calendar.git
+[submodule "link/newsbeuter"]
+	path = link/newsbeuter
+	url = https://alejandroamsg@gitlab.com/alejandroamsg/newsbeuter.git
