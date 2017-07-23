@@ -10,3 +10,6 @@
 [submodule "link/newsbeuter"]
 	path = link/newsbeuter
 	url = https://alejandroamsg@gitlab.com/alejandroamsg/newsbeuter.git
+[submodule "link/vim/bundle/Vundle.vim"]
+	path = link/vim/bundle/Vundle.vim
+	url = git://github.com/VundleVim/Vundle.vim
