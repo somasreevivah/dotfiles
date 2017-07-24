@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+news=${HOME}/.newsbeuter
+
+cd ${news}
+
+git pull origin master &&
+  {
+    newsbeuter ;
+    make database.sql
+    make update-db
+  } || echo "Something happens"
