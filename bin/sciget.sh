@@ -8,9 +8,7 @@ log() {
   echo "$(basename $0)> $@"
 }
 
-if [[ ! ${link} =~ http* ]]; then
-  link="http://sci-hub.io/$link"
-fi
+link="http://sci-hub.io/$link"
 
 pdf_url=http:$(curl -s ${link} | grep -Eom1 '//[^ ]+\.pdf')
 
