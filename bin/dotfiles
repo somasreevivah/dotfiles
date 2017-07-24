@@ -31,6 +31,7 @@ $(usage_head)
       git           Run git commands in ${DOTFILES} directory
       pull          Run git pull in ${DOTFILES} directory
       push          Run git push in ${DOTFILES} directory
+      sub           Update submodules
 
 
 Copyright © 2016 Alejandro Gallo. All Rights Reserved, yoh!
@@ -294,15 +295,19 @@ elif [[ $1 == compile ]]; then
   do_stuff "compile"
   exit 0
 elif [[ $1 == pull ]]; then
-  git -C ${DOTFILES} pull
+  git -C ${DOTFILES} pull origin master
 elif [[ $1 == push ]]; then
-  git -C ${DOTFILES} push
+  git -C ${DOTFILES} push origin master
 elif [[ $1 == git ]]; then
   shift
   set -x
   git -C ${DOTFILES} $@
   set +x
   exit 0
+elif [[ $1 == sub ]]; then
+  git -C ${DOTFILES} submodule foreach git pull origin master &&
+  git -C ${DOTFILES} commit -am "Submodule upload"            &&
+  git -C ${DOTFILES} push origin master
 else
   do_stuff "copy"
   do_stuff "link"
