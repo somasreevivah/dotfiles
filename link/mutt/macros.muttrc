@@ -12,6 +12,10 @@ macro index S "\
 <pipe-entry>$HOME/contacts/bin/add-contact-from-mail.sh\
 " 'Add contact from email header'
 
+macro index = "\
+<enter-command>source $HOME/.mutt/muttrc<enter>\
+" 'Source config file'
+
 
 macro index gi '=INBOX' 'Go to inbox'
 macro index gh \

@@ -16,15 +16,15 @@ color tilde     brightblue default #
 color tree      red default
 
 # paint different quote levels
-color	quoted  	green	default
-color	quoted1 	cyan	default
-color	quoted2 	yellow	default
-color	quoted3		red	default
+color  quoted    green  default
+color  quoted1   cyan  default
+color  quoted2   yellow  default
+color  quoted3    red  default
 
 color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # email
 color body brightblue default "(http|ftp)://[\-\.\,/+=&%~_:?\#a-zA-Z0-9]+" # URL
 color body brightgreen default "(^| |[-.[:alnum:]]+:+)~?\(/[-_.'[:alnum:]]+\)+/?" # Unix file path
-color body brightgreen	default "(^| +)[[:alpha:]]:[-_.[:alnum:]\]+" # DOS file path
+color body brightgreen  default "(^| +)[[:alpha:]]:[-_.[:alnum:]\]+" # DOS file path
 color body brightmagenta default "(^|[ '\"]+)\\$[[:alpha:]][-_[:alpha:]]+" # variable
 color body brightred default "(^| )[*_]+[-&[:alnum:]]+[*_]( |$)" # bold/underline
 color body yellow default "(^| )[;:8o][-^o]?[)>(|/\\]+" # smiley
@@ -43,7 +43,7 @@ color header   brightcyan default ^Reply-To:
 color header   brightcyan default ^Cc:
 color header   brightblue default ^Subject:
 
-color	header	brightcyan	default "^newsgroups: "
+color  header  brightcyan  default "^newsgroups: "
 color   header  yellow  default "^Delivered-To: "
 color   header  green   default "^sender: "
 color   header  green   default "^organi[sz]ation: "
@@ -52,18 +52,18 @@ color   header  green   default "(x-mailer|user-agent): "
 color   header  green   default "X-Operating-System: "
 color   header  green   default "X-MimeOLE: "
 color   header  green   default "X-Accept-Language: "
-color	header	red	default	"^message-id:"
-color	header	red	default	"^in-reply-to: "
-color	header	red	default	"^references: "
-color	header	cyan	default	"^followup-to: "
-color	header	cyan	default	"^mail-followup-to: "
-color	header	cyan	default	"^reply-to: "
-color	header	magenta	default	"MIME-Version: "
-color	header	magenta	default	"Content-Type: "
-color	header	magenta	default	"Content-Transfer-Encoding: "
-color	header	magenta	default	"Content-Disposition: "
-color	header	magenta	default	"Content-Encoding: "
-color	header	magenta	default	"Content-Language: "
+color  header  red  default  "^message-id:"
+color  header  red  default  "^in-reply-to: "
+color  header  red  default  "^references: "
+color  header  cyan  default  "^followup-to: "
+color  header  cyan  default  "^mail-followup-to: "
+color  header  cyan  default  "^reply-to: "
+color  header  magenta  default  "MIME-Version: "
+color  header  magenta  default  "Content-Type: "
+color  header  magenta  default  "Content-Transfer-Encoding: "
+color  header  magenta  default  "Content-Disposition: "
+color  header  magenta  default  "Content-Encoding: "
+color  header  magenta  default  "Content-Language: "
 
 color status brightwhite blue
 
