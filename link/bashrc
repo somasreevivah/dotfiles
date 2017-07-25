@@ -45,7 +45,7 @@ source_lib_files() {
 
 # Run dotfiles script, then source.
 dotfiles() {
-  $DOTFILES/bin/dotfiles "$@" && source_lib_files
+  $DOTFILES/bin/dfs "$@" && source_lib_files
 }
 
 source_lib_files
