@@ -1,4 +1,6 @@
-
 .PHONY: init
-init: 
-	./bin/dotfiles
+
+init:
+	./bin/dfs
+	./bin/dfs sub
+	vim +PluginInstall
