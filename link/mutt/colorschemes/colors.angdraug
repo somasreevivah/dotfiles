@@ -5,9 +5,10 @@
 
 # override defaults, make transparency work
 color normal    white default
-color attachment green default #
+color attachment green default # The attachments color
 color hdrdefault cyan default
-color indicator black cyan
+#color indicator black cyan
+color indicator brightgreen black # This is the mail selector
 color markers   brightred default
 color quoted    green default
 color signature brightblue default #
@@ -65,7 +66,7 @@ color  header  magenta  default  "Content-Disposition: "
 color  header  magenta  default  "Content-Encoding: "
 color  header  magenta  default  "Content-Language: "
 
-color status brightwhite blue
+color status green black
 
 color index brightblue default '~P' # from me
 color index cyan default '~p' # personal
