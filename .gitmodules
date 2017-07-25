@@ -13,6 +13,3 @@
 [submodule "link/newsbeuter"]
 	path = link/newsbeuter
 	url = https://gitlab.com/alejandroamsg/newsbeuter.git
-[submodule "docs/wallpapers"]
-	path = docs/wallpapers
-	url = https://gitlab.com/alejandroamsg/wallpapers.git
