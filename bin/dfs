@@ -305,6 +305,7 @@ elif [[ $1 == git ]]; then
   set +x
   exit 0
 elif [[ $1 == sub ]]; then
+  git -C ${DOTFILES} pull origin master                               &&
   git -C ${DOTFILES} submodule init                                   &&
   git -C ${DOTFILES} submodule update                                 &&
   git -C ${DOTFILES} submodule foreach git fetch origin master        &&
