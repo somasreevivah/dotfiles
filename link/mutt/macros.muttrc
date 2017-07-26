@@ -17,6 +17,9 @@ macro index = "\
 " 'Source config file'
 
 
+macro index zt '<enter-command>exec current-top<enter>'    'Current top'
+macro index zb '<enter-command>exec current-bottom<enter>' 'Current bottom'
+macro index zz '<enter-command>exec current-middle<enter>' 'Current middle'
 macro index gi '=INBOX' 'Go to inbox'
 macro index gh \
 '\
