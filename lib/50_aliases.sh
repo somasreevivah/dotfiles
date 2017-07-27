@@ -6,6 +6,7 @@ alias chromium="chromium --app='https://google.com'"
 alias grep="grep --color=auto"
 alias bookis="papis -l books"
 alias conis="papis -l contacts"
+alias vapis="papis --pick-lib --picktool vim gui --vim"
 
 zat() {
   for i in $@; do
