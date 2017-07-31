@@ -11,7 +11,7 @@ import papis.utils
 
 search_string = sys.argv[1] if len(sys.argv) > 1 else ""
 
-docs = papis.utils.get_documents_in_lib(os.environ["PAPIS_LIB"], search_string)
+docs = papis.utils.get_documents_in_lib(papis.utils.get_lib(), search_string)
 
 print("Name  <email>")
 for contact in docs:
@@ -19,7 +19,9 @@ for contact in docs:
         email = contact["email"][t]
         if not email:
             continue
-        string = "{c[first_name]} {c[last_name]}  <{email}>".format(c=contact, email=email)
+        string = "{doc[first_name]} {doc[last_name]}  <{email}>".format(
+            doc=contact, email=email
+        )
         print(string)
 
 
