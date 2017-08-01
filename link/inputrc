@@ -1,11 +1,20 @@
 # vi mode in all applications that use readline
 set editing-mode vi
 
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+
 # COMMAND MODE
 set keymap vi-command
 
 # INSERT MODE
 set keymap vi-insert
+
+# Control + l should clear the screen
+Control-l: clear-screen
+
+Control-p: history-search-backward
+Control-n: history-search-forward
 
 # Up/down arrows search history
 "\e[A": history-search-backward
