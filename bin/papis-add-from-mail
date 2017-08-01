@@ -1,0 +1,48 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+
+import sys
+
+if '-h' in sys.argv:
+    print('Add contact from mail file')
+    sys.exit(0)
+
+import re
+import papis.utils
+
+contacts = papis.utils.get_documents_in_lib(papis.utils.get_lib())
+
+mail_file = sys.argv[1]
+
+mail_fd = open(mail_file)
+papis.commands.init()
+
+for line in mail_fd:
+    matches = re.findall(
+        r'^(From|cc|to|bcc): *([a-z ]+) *<([a-z@.]+)>',
+        line,
+        re.IGNORECASE
+    )
+    for contact in matches:
+        mode = contact[0]
+        full_name = contact[1]
+        email = contact[2]
+        name_result = papis.utils.filter_documents(contacts, full_name)
+        if name_result:
+            print(
+                "We have '%s' already in the contact book" % full_name
+            )
+            email_result = papis.utils.filter_documents(contacts, email)
+            if email_result:
+                continue
+            database_contact = papis.commands.Command().pick(
+                name_result
+            )
+            database_contact['new_email'] = email
+            papis.utils.edit_file(database_contact.get_info_file())
+            print(database_contact.dump())
+
+
+#vim-run: papis -l contacts add-from-mail ~/lozovoi
+#vim-run: papis -h
