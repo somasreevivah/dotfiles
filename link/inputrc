@@ -4,10 +4,10 @@ set editing-mode vi
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
 
-# COMMAND MODE
+# command mode
 set keymap vi-command
 
-# INSERT MODE
+# insert mode
 set keymap vi-insert
 
 # Control + l should clear the screen
