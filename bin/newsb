@@ -4,6 +4,20 @@ news=${HOME}/.newsbeuter
 
 cd ${news}
 
+db="database.sql"
+cache="cache.db"
+
+if [[ ${cache} -ot ${db} ]]; then
+  echo "${cache} is older than ${db}"
+  read -p "Update it? (Y/n)" -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+    echo "Updating"
+    make recache
+  fi
+  REPLY= # unset REPLY after using it
+fi
+
 git pull origin master &&
   {
     newsbeuter ;
