@@ -1,4 +1,4 @@
-#
+# This is the configuration for readline
 # see
 # https://cnswww.cns.cwru.edu/php/chet/readline/readline.html
 #
@@ -19,15 +19,15 @@ set keymap vi-insert
 # Control + l should clear the screen
 Control-l: clear-screen
 
-#Free
-#Control-a:
-#Control-m: '\\ \n'
+$if Bash
+# Only in bash
 Control-e: 'vim\n'
 Control-o: 'ranger\n'
 Control-v: '$(xclip -o) '
 Control-b: 'cd ..\n'
 Control-k: 'ls -la\n'
 #Control-space: menu-complete
+$endif
 
 # Complete using control x
 Control-x: menu-complete
