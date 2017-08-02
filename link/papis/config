@@ -1,15 +1,14 @@
-
 [include]
 tk-gui = ~/.papis/tk-gui.ini
 rofi-gui = ~/.papis/rofi-gui.ini
 
-[papers]
-dir = ~/Documents/papers
-
 [settings]
 opentool = rifle
 editor = vim
+xeditor = gvim
 file-browser = ranger
+add-confirm = True
+add-edit = True
 mode = document
 match-format = {doc[tags]}{doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
 header-format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
@@ -21,6 +20,8 @@ gp = git push
 gu = git pull
 gma = git commit -a
 
+[papers]
+dir = ~/Documents/papers
 
 [books]
 dir = ~/Documents/books
