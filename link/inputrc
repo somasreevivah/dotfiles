@@ -1,3 +1,9 @@
+#
+# see
+# https://cnswww.cns.cwru.edu/php/chet/readline/readline.html
+#
+# for more information
+#
 # vi mode in all applications that use readline
 set editing-mode vi
 
@@ -12,6 +18,9 @@ set keymap vi-insert
 
 # Control + l should clear the screen
 Control-l: clear-screen
+
+# Complete using control x
+Control-x: menu-complete
 
 Control-p: history-search-backward
 Control-n: history-search-forward
