@@ -1,8 +1,6 @@
 
 install_node_npm_locally() {
   local install_folder="$HOME/.local"
-  echo 'export PATH=$HOME/local/bin:$PATH' >> ~/.bashrc
-  . ~/.bashrc
   mkdir -p $install_folder
   mkdir ~/node-latest-install
   cd ~/node-latest-install
