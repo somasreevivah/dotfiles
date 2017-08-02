@@ -26,6 +26,7 @@ Control-e: 'vim\n'
 Control-o: 'ranger\n'
 Control-v: '$(xclip -o) '
 Control-b: 'cd ..\n'
+#Control-space: menu-complete
 
 # Complete using control x
 Control-x: menu-complete
