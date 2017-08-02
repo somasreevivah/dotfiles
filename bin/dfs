@@ -225,6 +225,21 @@ function compile_do() {
   fi
 }
 
+function tests_header() { dfs_header "Testing dotfiles"; }
+function tests_do() {
+  # remember: $2 is the full path and $1 the basename
+  # for example $2=/home/gallo/.dotfiles/compile/hello_world
+  # If $2 is not a directory, go out
+  grep -E '^test_' <<<${1} > /dev/null || return
+  dfs_arrow "Testing ${2}"
+  {
+    cd $(dirname ${2}) ;
+    ${BASH} ${1}
+  } && 
+  dfs_success "Succesfully passed" ||
+  dfs_error   "Something wrong happened"
+}
+
 
 # Copy, link, init, etc.
 function do_stuff() {
@@ -313,6 +328,8 @@ elif [[ $1 == sub ]]; then
   git -C ${DOTFILES} submodule foreach git merge master origin/master &&
   git -C ${DOTFILES} commit -am "Submodule upload"                    &&
   git -C ${DOTFILES} push origin master
+elif [[ $1 == tests ]]; then
+  do_stuff "tests"
 else
   do_stuff "copy"
   do_stuff "link"
@@ -329,4 +346,3 @@ dfs_header "All done!"
 
 
 # vim:fdm=marker
-# vim-run: bash %
