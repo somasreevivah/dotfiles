@@ -19,6 +19,14 @@ set keymap vi-insert
 # Control + l should clear the screen
 Control-l: clear-screen
 
+#Free
+#Control-a:
+#Control-m: '\\ \n'
+Control-e: 'vim\n'
+Control-o: 'ranger\n'
+Control-v: '$(xclip -o) '
+Control-b: 'cd ..\n'
+
 # Complete using control x
 Control-x: menu-complete
 
