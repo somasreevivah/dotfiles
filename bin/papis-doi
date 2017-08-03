@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+# papis-short-help: Get pdf and bibtex from doi identificator
 
 log() {
   echo "$(basename $0)> $@"

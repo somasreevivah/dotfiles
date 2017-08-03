@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+# papis-short-help:  Email a paper to my friend
 
 if [[ $1 = "-h" ]]; then
   echo "Email a paper to my friend"

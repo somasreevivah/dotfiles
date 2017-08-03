@@ -38,5 +38,9 @@ rofi-gui-gui-eh = 2
 rofi-gui-header-format = %(header-format)s
                      {doc[tel][cell]}
 tk-gui-header-format = %(rofi-gui-header-format)s
+vim-gui-header-format = Title: %(header-format)s
+                        Tel  : {doc[tel]}
+                        Mail : {doc[email]}
+                     {doc[empty]}
 
 # vim: ft=dosini

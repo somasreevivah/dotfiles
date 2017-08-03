@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# papis-short-help: Print contact information in mutt format
 
 import sys
 
