@@ -258,8 +258,8 @@ bindsym $mod+i exec i3-input
 
 bindsym XF86Tools exec espeak tools
 
-#bindsym XF86TaskPane exec '~/.dotfiles/bin/rotate-screen.sh'
-bindsym XF86TaskPane exec espeak 'hello world'
+bindsym XF86RotateWindows exec '/home/gallo/.dotfiles/bin/rotate-screen.sh'
+bindsym XF86TaskPane exec espeak 'Task Pane'
 bindsym XF86PowerOff exec espeak 'brightness down'
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec  xbacklight -inc 10

@@ -6,6 +6,7 @@ packages=(
   vim
   sudo
   rfkill
+  espeak
   htop
   tree
   w3m
