@@ -17,6 +17,7 @@ packages=(
   mupdf
   mutt
   nasm
+  mplayer
 )
 
 debian_packages=(
