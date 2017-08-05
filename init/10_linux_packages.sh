@@ -1,26 +1,33 @@
 dfs_is_osx && return 1
 
 
-# Install APT packages.
 packages=(
   git
+  vim
+  sudo
+  rfkill
   htop
   tree
-  dzen2
+  w3m
+  w3m-img
+  elinks
+  zathura
+  zathura-djvu
   mupdf
   mutt
-  vim-nox
   nasm
-  antiword
+)
+
+debian_packages=(
+  aptitude
+  rofi
+  python3-pip
 )
 
 
 install_debian_packages() {
-  # Update APT.
   dfs_header "Updating APT"
-  #sudo apt-get -qq update
   sudo apt-get update
-  #sudo apt-get -qq dist-upgrade
 
   packages=($(setdiff "${packages[*]}" "$(dpkg --get-selections | grep -v deinstall | awk '{print $1}')"))
 
@@ -30,9 +37,18 @@ install_debian_packages() {
       sudo apt-get -qq install "$package"
     done
   fi
-
 }
 
+install_linux_packages(){
+  packs=$@
+  for p in ${packs[@]}; do
+    sudo apt-get install ${p}
+  done
+}
+
+
+install_linux_packages ${packages[@]}
+
 if dfs_is_debian || dfs_is_ubuntu; then
-  install_debian_packages
+  install_linux_packages ${debian_packages[@]}
 fi
