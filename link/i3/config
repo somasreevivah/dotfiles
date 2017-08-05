@@ -338,6 +338,20 @@ mode "disable" {
 
 bindsym $mod+Ctrl+d mode "disable"
 
+#  normal mode {{{1  #
+#####################
+
+mode "normal" {
+    bindsym Return split h ; exec ~/.dotfiles/bin/terminal.sh
+    bindsym o split v ; exec ~/.dotfiles/bin/terminal.sh
+    bindsym q kill
+    bindsym Escape mode "default"
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+}
+
 #  move mode {{{1  #
 ####################
 
@@ -360,7 +374,8 @@ mode "move" {
     bindsym Escape mode "default"
 }
 
-bindsym $windows+m mode "move"
+#bindsym $windows+m mode "move"
+bindsym $mod+Escape mode "normal"
 
 #  Resize {{{1  #
 #################

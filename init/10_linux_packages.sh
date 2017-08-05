@@ -8,10 +8,14 @@ packages=(
   rfkill
   espeak
   htop
+  xclip
+  info
   tree
   w3m
   w3m-img
   elinks
+  fortune
+  cowsay
   zathura
   zathura-djvu
   mupdf
