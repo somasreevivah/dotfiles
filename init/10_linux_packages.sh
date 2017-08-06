@@ -9,6 +9,7 @@ packages=(
   espeak
   htop
   xclip
+  feh
   info
   tree
   w3m

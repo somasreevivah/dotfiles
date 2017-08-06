@@ -145,7 +145,6 @@ exec '~/.i3/scripts/composite.sh'
 
 # dashboard
 exec_once --no-startup-id "~/.dotfiles/bin/x11-dashboard.sh"
-exec_always --no-startup-id "rofi -show window"
 
 
 # focus the child container
