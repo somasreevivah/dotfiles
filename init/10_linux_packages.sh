@@ -6,6 +6,7 @@ packages=(
   vim
   sudo
   rfkill
+  urlview
   espeak
   htop
   xclip
