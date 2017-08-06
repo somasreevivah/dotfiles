@@ -258,6 +258,8 @@ bindsym $mod+i exec i3-input
 
 bindsym XF86Tools exec espeak tools
 
+bindsym XF86RotateWindows exec '/home/gallo/.dotfiles/bin/rotate-screen.sh'
+bindsym XF86TaskPane exec espeak 'Task Pane'
 bindsym XF86PowerOff exec espeak 'brightness down'
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec  xbacklight -inc 10
@@ -336,6 +338,20 @@ mode "disable" {
 
 bindsym $mod+Ctrl+d mode "disable"
 
+#  normal mode {{{1  #
+#####################
+
+mode "normal" {
+    bindsym Return split h ; exec ~/.dotfiles/bin/terminal.sh
+    bindsym o split v ; exec ~/.dotfiles/bin/terminal.sh
+    bindsym q kill
+    bindsym Escape mode "default"
+    bindsym h focus left
+    bindsym j focus down
+    bindsym k focus up
+    bindsym l focus right
+}
+
 #  move mode {{{1  #
 ####################
 
@@ -358,7 +374,8 @@ mode "move" {
     bindsym Escape mode "default"
 }
 
-bindsym $windows+m mode "move"
+#bindsym $windows+m mode "move"
+bindsym $mod+Escape mode "normal"
 
 #  Resize {{{1  #
 #################

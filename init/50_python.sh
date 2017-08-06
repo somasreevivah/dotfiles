@@ -2,17 +2,18 @@
 
 
 
-if ! type pip 2>&1 > /dev/null ; then
+if ! type pip3 2>&1 > /dev/null ; then
   dfs_error "No pip found..."
   return 1
 fi
 
 PYTHON3_PACKAGES_LOCAL=(
-shellpic
-tldr
-pyfiglet
-cppman
-ranger-fm
+  shellpic
+  tldr
+  pyfiglet
+  cppman
+  ranger-fm
+  mps-youtube
 )
 PIP3=pip3
 
