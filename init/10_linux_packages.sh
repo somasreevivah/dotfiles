@@ -20,6 +20,9 @@ packages=(
   zathura
   zathura-djvu
   mupdf
+  automake
+  tig
+  gcc
   mutt
   nasm
   mplayer
@@ -29,6 +32,7 @@ debian_packages=(
   aptitude
   rofi
   python3-pip
+  autotools-dev
 )
 
 
