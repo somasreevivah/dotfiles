@@ -344,7 +344,8 @@ mode "normal" {
     bindsym Return split h ; exec ~/.dotfiles/bin/terminal.sh
     bindsym o split v ; exec ~/.dotfiles/bin/terminal.sh
     bindsym q kill
-    bindsym Escape mode "default"
+    bindsym i mode "default"
+    bindsym d mode "disable"
     bindsym h focus left
     bindsym j focus down
     bindsym k focus up

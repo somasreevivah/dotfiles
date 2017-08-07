@@ -14,7 +14,7 @@ mode = document
 match-format = {doc[tags]}{doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
 header-format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
 
-gagp = git add . && git commit && git push origin master
+gagp = git commit -a && git push origin master
 gs = git status
 gm = git commit
 gp = git push
