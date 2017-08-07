@@ -43,6 +43,7 @@ set_wallpaper() {
     arrow "Through xv.."
     set -x
     xv -root -quit "${IMAGE_PATH}"
+    set +x
   fi
 }
 
@@ -256,7 +257,7 @@ wallpapercave() {
 __SCRIPT_VERSION="0.0.1"
 __SCRIPT_NAME=$( basename $0 )
 __DESCRIPTION="Set wallpaper"
-__OPTIONS=":hvls:"
+__OPTIONS=":hvl"
 
 PARSERS=(
 local_wallpaper
@@ -280,7 +281,6 @@ $(usage_head)
     -h|help       Display this message
     -v|version    Display script version
     -l            List source names
-    -s            Set wallpaper by filename
 
 
     This program is maintained by Alejandro Gallo.
@@ -300,10 +300,6 @@ while getopts $__OPTIONS opt; do
     done
     exit 0
     ;;
-  s )
-    set_wallpaper ${OPTARG}
-    exit 0
-    ;;
 
   * )  echo -e "\n  Option does not exist : $OPTARG\n"
       usage_head; exit 1   ;;
@@ -320,6 +316,9 @@ shift $(($OPTIND-1))
 
 
 if [[ -n $1 ]]; then
+  if [[ -f $1 ]]; then
+    set_wallpaper "$1"
+  fi
   parse=$1
 else
   parse=$(echo ${PARSERS[@]} | tr " " "\n" | ${SORT} -R | tail -1)
