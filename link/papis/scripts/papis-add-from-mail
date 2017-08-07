@@ -9,9 +9,10 @@ if '-h' in sys.argv:
     sys.exit(0)
 
 import re
+import papis.api
 import papis.utils
 
-contacts = papis.utils.get_documents_in_lib(papis.utils.get_lib())
+contacts = papis.api.get_documents_in_lib()
 
 mail_file = sys.argv[1]
 
@@ -40,7 +41,7 @@ for line in mail_fd:
                 name_result
             )
             database_contact['new_email'] = email
-            papis.utils.edit_file(database_contact.get_info_file())
+            papis.api.edit_file(database_contact.get_info_file())
             print(database_contact.dump())
 
 

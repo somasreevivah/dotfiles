@@ -8,11 +8,11 @@ if len(sys.argv) > 1 and sys.argv[1] == "-h":
     sys.exit(0)
 
 import os
-import papis.utils
+import papis.api
 
 search_string = sys.argv[1] if len(sys.argv) > 1 else ""
 
-docs = papis.utils.get_documents_in_lib(papis.utils.get_lib(), search_string)
+docs = papis.api.get_documents_in_lib(search=search_string)
 
 print("Name  <email>")
 for contact in docs:

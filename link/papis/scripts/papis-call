@@ -11,20 +11,20 @@ if len(sys.argv) > 1 and sys.argv[1] == "-h":
     sys.exit(0)
 
 import os
-import papis.utils
+import papis.api
 import papis.config
 
 search_string = sys.argv[1] if len(sys.argv) > 1 else ""
 
-docs = papis.utils.get_documents_in_lib(papis.config.get_lib(), search=search_string)
+docs = papis.api.get_documents_in_lib(search=search_string)
 
 papis.config.set('picktool', 'rofi')
 
-contact = papis.utils.pick(
+contact = papis.api.pick(
     docs
 )
 
-phone = papis.utils.pick(
+phone = papis.api.pick(
     list(contact['tel']),
     dict(
         header_filter=lambda x: 
