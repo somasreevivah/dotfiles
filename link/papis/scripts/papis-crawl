@@ -13,7 +13,9 @@ def warning(msg):   print(" \033[0;93m==>\033[0m  "+str(msg))
 logging.basicConfig(level=logging.DEBUG)
 
 if len(sys.argv) > 1 and sys.argv[1] == "-h":
-    print("Print contact information in mutt format")
+    print("""
+    papis crawl [seed doi]
+    """)
     sys.exit(0)
 
 import os
@@ -24,9 +26,6 @@ import papis.api
 import papis.config
 import papis.utils
 
-search_string = sys.argv[1] if len(sys.argv) > 1 else ""
-
-seed_doi = '10.1063/1.3611401'
 
 def crawl(doi):
     folder = hashlib.md5(doi.encode()).hexdigest()
@@ -48,11 +47,12 @@ def crawl(doi):
         return []
 
 
+seed_doi = sys.argv[1] if len(sys.argv) > 1 else '10.1063/1.3611401'
 dois = [seed_doi]
 
 for i in range(3):
     header('%s Iteration' % i)
     dois = list(itertools.chain.from_iterable([crawl(d) for d in dois]))
+    arrow(' %s dois retrieved ' % len(dois))
 
 
-#vim-run: python3 %
