@@ -20,7 +20,7 @@ fi
 
 git pull origin master &&
   {
-    newsbeuter ;
-    make database.sql
+    newsbeuter &&
+    make database.sql &&
     make update-db
   } || echo "Something happens"
