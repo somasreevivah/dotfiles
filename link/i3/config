@@ -1,11 +1,10 @@
-#  General {{{1  #
-##################
-
+#  Variable definitions {{{1  #
+###############################
 
 set $mod Mod1
 set $windows Mod4
 set $mod_r Mod5
-
+#
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -16,22 +15,30 @@ font pango:DejaVu Sans Mono 11
 floating_modifier Shift
 focus_follows_mouse no
 
+#borders of windows will be default a pixel wide
+new_window pixel
+hide_edge_borders none
+
+#  General {{{1  #
+##################
+
 # start a terminal
 bindsym $mod+Return exec ~/.dotfiles/bin/terminal.sh
 bindsym $windows+Return exec "xterm"
 
-
 # kill focused window
 bindsym $mod+Shift+q kill
-
 
 #scratchpad config 
 bindsym $mod+Shift+minus move scratchpad
 #show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# sleep
 bindsym $mod+$windows+s exec "systemctl hybrid-sleep; ~/.dotfiles/bin/lock-screen.sh"
+# lock screen
 bindsym $mod+$windows+l exec "~/.dotfiles/bin/lock-screen.sh"
+# power off (halt) system
 bindsym $mod+$windows+h exec "systemctl poweroff"
 
 # Marks
@@ -40,9 +47,8 @@ bindsym $mod+g exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
 
 # program launcher
 bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
-#bindsym $mod+d exec runner.sh
 # program switcher
-bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/switcher.sh
+#bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/switcher.sh
 
 # change focus
 # It should be like in vim
@@ -96,9 +102,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 bindsym $mod+b border toggle
-#borders of windows will be default a pixel wide
-new_window pixel
-hide_edge_borders none
+
 
 # Left hand mode
 bindsym $windows+a focus left
@@ -308,6 +312,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # More workspace related stuff
+bindsym $mod+Shift+Tab exec ~/.i3/scripts/desktop.sh
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
 bindsym $mod+Tab workspace back_and_forth

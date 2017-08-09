@@ -25,7 +25,7 @@ Control-e: 'vim\n'
 Control-o: 'ranger\n'
 Control-v: '$(xclip -o) '
 Control-b: 'cd ..\n'
-Control-k: 'ls -la\n'
+Control-k: 'ls -1a\n'
 #Control-space: menu-complete
 $endif
 

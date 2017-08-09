@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-conky
+conky -b
