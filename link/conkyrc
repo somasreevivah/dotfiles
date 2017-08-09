@@ -8,6 +8,7 @@ default_shade_color white
 color1 44bbff
 color2 2299ff
 color3 ff0000
+color4 af00af
 draw_borders no
 draw_graph_borders yes
 draw_outline no
@@ -54,5 +55,6 @@ ${color3} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
 ${color3} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
 ${color3} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
 ${color3} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
-$hr
+${color}$hr
+${color4}${cpugraph}
 #${color2}XKCD ${exec echo hello world}
