@@ -10,6 +10,7 @@ fi
 PYTHON3_PACKAGES_LOCAL=(
   shellpic
   tldr
+  rtv
   pyfiglet
   cppman
   ranger-fm
