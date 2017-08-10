@@ -14,6 +14,7 @@ packages=(
   info
   tree
   w3m
+  wget
   w3m-img
   elinks
   fortune
@@ -21,6 +22,7 @@ packages=(
   zathura
   zathura-djvu
   mupdf
+  newsbeuter
   automake
   tig
   gcc
