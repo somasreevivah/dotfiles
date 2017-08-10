@@ -249,10 +249,18 @@ nnoremap <localleader>w :w<cr>
 nnoremap <localleader>q :q<cr>
 
 "/ is way too far away, and I want case insensitive!
-nnoremap <localleader>f /\c
-nnoremap <localleader>F ?\c
-vnoremap <localleader>f /\c
-vnoremap <localleader>F ?\c
+"nnoremap <localleader>f /\c
+"nnoremap <localleader>F ?\c
+"vnoremap <localleader>f /\c
+"vnoremap <localleader>F ?\c
+"
+set ignorecase
+set smartcase
+
+nnoremap j :echo 'Do not touch it'<cr>
+nnoremap h :echo 'Do not touch it'<cr>
+nnoremap k :echo 'Do not touch it'<cr>
+nnoremap l :echo 'Do not touch it'<cr>
 
 nnoremap <localleader>cd :cd %:p:h<cr>:pwd<cr>
 command! -nargs=0 Xterm
