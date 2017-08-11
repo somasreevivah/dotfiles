@@ -367,7 +367,7 @@ au! BufEnter *.h,*.hpp let b:fswitchdst = 'cxx,cpp,C' | let b:fswitchlocs = '.' 
 au! BufEnter *.c,*.F,*.f90,*.f95,*.f77 let b:fswitchdst = 'h' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
 au! BufEnter *.h let b:fswitchdst = 'c,F,f90,f95,f77' | let b:fswitchlocs = '.' | nnoremap <localleader><localleader><Tab> :FSHere<cr>
 
-endif 
+endif
 
 
 
