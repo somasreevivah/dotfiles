@@ -4,5 +4,5 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-setlocal keywordprg=pydoc
+setlocal keywordprg=pydoc3
 
