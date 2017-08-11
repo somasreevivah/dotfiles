@@ -52,10 +52,10 @@ bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
 
 # change focus
 # It should be like in vim
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h mark \# ; focus left
+bindsym $mod+j mark \# ; focus down
+bindsym $mod+k mark \# ; focus up
+bindsym $mod+l mark \# ; focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -320,6 +320,7 @@ bindsym $mod+Shift+Tab exec ~/.i3/scripts/desktop.sh
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
 bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Ctrl+o [con_mark=\#] focus
 bindsym $mod+$windows+r exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
 
