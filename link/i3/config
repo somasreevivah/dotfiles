@@ -163,118 +163,106 @@ bindsym $mod+i exec i3-input
 #  X86 key bindings {{{1  #
 ###########################
 
- #{{{ All keys
-#XF86ClearGrab
-#XF86Switch_VT_1
-#XF86Switch_VT_2
-#XF86Switch_VT_3
-#XF86Switch_VT_4
-#XF86Switch_VT_5
-#XF86Switch_VT_6
-#XF86Switch_VT_7
-#XF86Switch_VT_8
-#XF86Switch_VT_9
-#XF86Switch_VT_10
-#XF86Prev_VMode
-#XF86Next_VMode
-#XF86Switch_VT_11
-#XF86Switch_VT_12
-#XF86Ungrab
-#XF86AudioMute
-#XF86PowerOff
-#XF86LaunchA
-#XF86Copy
-#XF86Open
-#XF86Paste
-#XF86Cut
-#XF86MenuKB
-#XF86Calculator
-#XF86Sleep
-#XF86WakeUp
-#XF86Explorer
-#XF86Send
-#XF86Xfer
-#XF86Launch1
-#XF86Launch2
-#XF86WWW
-#XF86DOS
-#XF86ScreenSaver
-#XF86RotateWindows
-#XF86TaskPane
-#XF86Mail
-#XF86Favorites
-#XF86MyComputer
-#XF86Back
-#XF86Forward
-#XF86Eject
-#XF86Eject
-#XF86AudioNext
-#XF86AudioPlay
-#XF86AudioPrev
-#XF86AudioStop
-#XF86AudioRecord
-#XF86AudioRewind
-#XF86Phone
-#XF86Tools
-#XF86HomePage
-#XF86Reload
-#XF86Close
-#XF86ScrollUp
-#XF86ScrollDown
-#XF86New
-#XF86Launch5
-#XF86Launch6
-#XF86Launch7
-#XF86Launch8
-#XF86Launch9
-#XF86AudioMicMute
-#XF86TouchpadToggle
-#XF86TouchpadOn
-#XF86TouchpadOff
-#XF86AudioPlay
-#XF86AudioPause
-#XF86Launch3
-#XF86Launch4
-#XF86LaunchB
-#XF86Suspend
-#XF86Close
-#XF86AudioPlay
-#XF86AudioForward
-#XF86WebCam
-#XF86Mail
-#XF86Messenger
-#XF86Search
-#XF86Go
-#XF86Finance
-#XF86Game
-#XF86Shop
-#XF86AudioMedia
-#XF86Display
-#XF86KbdLightOnOff
-#XF86KbdBrightnessDown
-#XF86KbdBrightnessUp
-#XF86Send
-#XF86Reply
-#XF86MailForward
-#XF86Save
-#XF86Documents
-#XF86Battery
-#XF86Bluetooth
-#XF86WLAN }}}
+# {{{ XF86 keys
+bindsym XF86ClearGrab         exec espeak ClearGrab key
+bindsym XF86Switch_VT_1       exec espeak Switch_VT_1 key
+bindsym XF86Switch_VT_2       exec espeak Switch_VT_2 key
+bindsym XF86Switch_VT_3       exec espeak Switch_VT_3 key
+bindsym XF86Switch_VT_4       exec espeak Switch_VT_4 key
+bindsym XF86Switch_VT_5       exec espeak Switch_VT_5 key
+bindsym XF86Switch_VT_6       exec espeak Switch_VT_6 key
+bindsym XF86Switch_VT_7       exec espeak Switch_VT_7 key
+bindsym XF86Switch_VT_8       exec espeak Switch_VT_8 key
+bindsym XF86Switch_VT_9       exec espeak Switch_VT_9 key
+bindsym XF86Switch_VT_10      exec espeak Switch_VT_10 key
+bindsym XF86Prev_VMode        exec espeak Prev_VMode key
+bindsym XF86Next_VMode        exec espeak Next_VMode key
+bindsym XF86Switch_VT_11      exec espeak Switch_VT_11 key
+bindsym XF86Switch_VT_12      exec espeak Switch_VT_12 key
+bindsym XF86Ungrab            exec espeak Ungrab key
+bindsym XF86AudioMute         exec espeak AudioMute key
+bindsym XF86PowerOff          exec espeak PowerOff key
+bindsym XF86LaunchA           exec espeak LaunchA key
+bindsym XF86Copy              exec espeak Copy key
+bindsym XF86Open              exec espeak Open key
+bindsym XF86Paste             exec espeak Paste key
+bindsym XF86Cut               exec espeak Cut key
+bindsym XF86MenuKB            exec espeak MenuKB key
+bindsym XF86Calculator        exec espeak Calculator key
+bindsym XF86Sleep             exec espeak Sleep key
+bindsym XF86WakeUp            exec espeak WakeUp key
+bindsym XF86Explorer          exec espeak Explorer key
+bindsym XF86Send              exec espeak Send key
+bindsym XF86Xfer              exec espeak XF86 key
+bindsym XF86Launch1           exec espeak Launch1 key
+bindsym XF86Launch2           exec espeak Launch2 key
+bindsym XF86WWW               exec espeak WWW key
+bindsym XF86DOS               exec espeak DOS key
+bindsym XF86ScreenSaver       exec espeak ScreenSaver key
+bindsym XF86Favorites         exec espeak Favorites key
+bindsym XF86MyComputer        exec espeak MyComputer key
+bindsym XF86Back              exec espeak Back key
+bindsym XF86Forward           exec espeak Forward key
+bindsym XF86Eject             exec espeak Eject key
+bindsym XF86AudioNext         exec espeak AudioNext key
+bindsym XF86AudioPlay         exec espeak AudioPlay key
+bindsym XF86AudioPrev         exec espeak AudioPrev key
+bindsym XF86AudioStop         exec espeak AudioStop key
+bindsym XF86AudioRecord       exec espeak AudioRecord key
+bindsym XF86AudioRewind       exec espeak AudioRewind key
+bindsym XF86Phone             exec espeak Phone key
+bindsym XF86HomePage          exec espeak HomePage key
+bindsym XF86Reload            exec espeak Reload key
+bindsym XF86Close             exec espeak Close key
+bindsym XF86ScrollUp          exec espeak ScrollUp key
+bindsym XF86ScrollDown        exec espeak ScrollDown key
+bindsym XF86New               exec espeak New key
+bindsym XF86Launch5           exec espeak Launch5 key
+bindsym XF86Launch6           exec espeak Launch6 key
+bindsym XF86Launch7           exec espeak Launch7 key
+bindsym XF86Launch8           exec espeak Launch8 key
+bindsym XF86Launch9           exec espeak Launch9 key
+bindsym XF86AudioMicMute      exec espeak AudioMicMute key
+bindsym XF86TouchpadToggle    exec espeak TouchpadToggle key
+bindsym XF86TouchpadOn        exec espeak TouchpadOn key
+bindsym XF86TouchpadOff       exec espeak TouchpadOff key
+bindsym XF86AudioPause        exec espeak AudioPause key
+bindsym XF86Launch3           exec espeak Launch3 key
+bindsym XF86Launch4           exec espeak Launch4 key
+bindsym XF86LaunchB           exec espeak LaunchB key
+bindsym XF86Suspend           exec espeak Suspend key
+bindsym XF86AudioForward      exec espeak AudioForward key
+bindsym XF86WebCam            exec espeak WebCam key
+bindsym XF86Mail              exec espeak Mail key
+bindsym XF86Messenger         exec espeak Messenger key
+bindsym XF86Go                exec espeak Go key
+bindsym XF86Finance           exec espeak Finance key
+bindsym XF86Game              exec espeak Game key
+bindsym XF86Shop              exec espeak Shop key
+bindsym XF86AudioMedia        exec espeak AudioMedia key
+bindsym XF86Display           exec espeak dISPLAY KEY
+bindsym XF86KbdLightOnOff     exec espeak KbdLightOnOff key
+bindsym XF86KbdBrightnessDown exec espeak KbdBrightnessDown key
+bindsym XF86KbdBrightnessUp   exec espeak KbdBrightnessUp key
+bindsym XF86Reply             exec espeak Reply key
+bindsym XF86MailForward       exec espeak MailForward key
+bindsym XF86Save              exec espeak Save key
+bindsym XF86Documents         exec espeak Documents key
+bindsym XF86Battery           exec espeak Battery key
+bindsym XF86Bluetooth         exec espeak Bluetooth key
+bindsym XF86WLAN              exec espeak WLAN key
+bindsym XF86Search            exec espeak search key
+bindsym XF86Tools             exec espeak tools key
+# }}}
 
-bindsym XF86Tools exec espeak tools
-
-bindsym XF86RotateWindows exec ~/.dotfiles/bin/rotate-screen.sh left
-bindsym XF86TaskPane exec ~/.dotfiles/bin/tablet-mode.sh
-bindsym XF86PowerOff exec espeak 'brightness down'
-#bindsym XF86PowerOff exec "systemctl hybrid-sleep; ~/.dotfiles/bin/lock-screen.sh"
+bindsym XF86RotateWindows     exec ~/.dotfiles/bin/rotate-screen.sh left
+bindsym XF86TaskPane          exec ~/.dotfiles/bin/tablet-mode.sh
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec  xbacklight -inc 10
-#bindsym XF86AudioLowerVolume exec ~/.dotfiles/bin/volume.sh -d
-#bindsym XF86AudioRaiseVolume exec ~/.dotfiles/bin/volume.sh -u
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 3%+ && pkill -RTMIN+10 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 3%- && pkill -RTMIN+10 i3blocks
-bindsym XF86Search exec espeak search
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 10
+bindsym XF86AudioRaiseVolume  exec amixer -q sset Master 3%+ && \
+  pkill -RTMIN+10 i3blocks
+bindsym XF86AudioLowerVolume  exec amixer -q sset Master 3%- && \
+  pkill -RTMIN+10 i3blocks
 
 #  Workspaces {{{1  #
 #####################
@@ -458,4 +446,4 @@ client.focused    #2c3e50 #ff0000 #000000 #2e9ef4
 #client.unfocused #2c3e50 #2c3e50 #1abc9c #2e9ef4
 #client.urgent    #e74c3c #e74c3c #ffffff #900000
 
-# vim:foldmethod=marker
+# vim:foldmethod=marker cc=80
