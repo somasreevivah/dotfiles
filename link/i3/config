@@ -145,7 +145,7 @@ bindsym $windows+Shift+space exec ~/.dotfiles/bin/change_kb.sh de-none
 
 #wallpaper script
 #exec_always ~/.dotfiles/bin/wallpaper.sh
-bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh
+bindsym $mod+Shift+w exec ~/.dotfiles/bin/wallpaper.sh local_wallpaper
 
 # composite manager
 exec '~/.i3/scripts/composite.sh'
@@ -265,7 +265,7 @@ bindsym $mod+i exec i3-input
 bindsym XF86Tools exec espeak tools
 
 bindsym XF86RotateWindows exec ~/.dotfiles/bin/rotate-screen.sh left
-bindsym XF86TaskPane exec ~/.dotfiles/bin/rotate-screen.sh inverted
+bindsym XF86TaskPane exec ~/.dotfiles/bin/tablet-mode.sh
 bindsym XF86PowerOff exec espeak 'brightness down'
 #bindsym XF86PowerOff exec "systemctl hybrid-sleep; ~/.dotfiles/bin/lock-screen.sh"
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
