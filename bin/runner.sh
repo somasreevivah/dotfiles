@@ -4,8 +4,8 @@
 
 # In general do this
 if which rofi >&1 2> /dev/null; then
-  rofi -show run
-  #rofi -show combi
+  #rofi -show run
+  rofi -show combi
   exit $?
 elif which dmenu_run >&1 2> /dev/null; then
   dmenu_run -i -l 10
