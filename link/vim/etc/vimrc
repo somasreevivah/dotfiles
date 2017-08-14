@@ -267,11 +267,11 @@ command! -nargs=0 Xterm
       \ | execute ':silent !(xterm -e "cd %:p:h && bash" &)&'
 
 " too complicated to replace
-nnoremap <localleader>r :%s/
+"nnoremap <localleader>r :%s/
 "replace in the current visual selection
-vnoremap <localleader>r :s/
+"vnoremap <localleader>r :s/
 " replace at the current line
-nnoremap <localleader>rr :.s/
+"nnoremap <localleader>rr :.s/
 
 function! ReplaceYankedTextWithInput()
   let word_to_replace = input("Replace it by:")
