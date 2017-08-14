@@ -249,6 +249,7 @@ nnoremap <localleader>w :w<cr>
 nnoremap <localleader>q :q<cr>
 
 "/ is way too far away, and I want case insensitive!
+" I do not need these anymore
 "nnoremap <localleader>f /\c
 "nnoremap <localleader>F ?\c
 "vnoremap <localleader>f /\c
@@ -267,6 +268,7 @@ command! -nargs=0 Xterm
       \ | execute ':silent !(xterm -e "cd %:p:h && bash" &)&'
 
 " too complicated to replace
+" I do not need these anymore
 "nnoremap <localleader>r :%s/
 "replace in the current visual selection
 "vnoremap <localleader>r :s/
