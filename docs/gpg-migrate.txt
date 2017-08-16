@@ -1,0 +1,16 @@
+EXPORTING
+
+gpg -a --export >mypubkeys.asc
+gpg -a --export-secret-keys >myprivatekeys.asc
+
+# Optionally export gpg's trustdb to a text file:
+gpg --export-ownertrust >otrust.txt
+
+
+IMPORTING
+
+gpg --import myprivatekeys.asc
+gpg --import mypubkeys.asc
+
+# Optionally import the trustdb file as well:
+gpg --import-ownertrust otrust.txt
