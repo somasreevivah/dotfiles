@@ -139,12 +139,15 @@ david_lloyd(){
 }
 
 local_wallpaper() {
-  local imageFile=$(ls $WALLPAPERS_DIR \
+  local imageFile=$(\
+    find $WALLPAPERS_DIR -name '*.jpg' -or -name '*.png' \
     | ${SORT} -R \
     | grep -v ${IMAGE_PATH} \
     | tail -1)
-  IMAGE_PATH=$WALLPAPERS_DIR/$imageFile
+  echo "imageFile = $imageFile"
+  IMAGE_PATH=$imageFile
 }
+alias localw=local_wallpaper
 
 nasa_mars() {
   local cat=${1:-images}
@@ -261,6 +264,7 @@ __OPTIONS=":hvl"
 
 PARSERS=(
 local_wallpaper
+localw
 hubble
 wallpaperscraft
 nasa_mars
