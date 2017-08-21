@@ -27,3 +27,15 @@ AC_OUTPUT(
 	src/Makefile
 )
 endsnippet
+
+snippet check_prog "check program" b
+AC_CHECK_PROGS([${1:VARIABLE}], [${2:program}])
+endsnippet
+
+snippet check_fun "check funram" b
+AC_CHECK_FUNCS([${1:function}])
+endsnippet
+
+snippet check "check " b
+AC_CHECK_${1:FUNCS}([${1:whtv}])
+endsnippet

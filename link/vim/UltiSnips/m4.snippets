@@ -1,5 +1,15 @@
+
+extends sh
 snippet pragma "Pragma" b
 ifdef(\`${1:whatever}',,\`define(\`$1',1)dnl
 ${VISUAL}$0
 ')dnl
+endsnippet
+
+snippet def "Define function" b
+AC_DEFUN([${1:NAME}],
+[
+${2:${VISUAL}}
+]
+)
 endsnippet
