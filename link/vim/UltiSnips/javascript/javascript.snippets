@@ -5,3 +5,17 @@ endsnippet
 snippet al "alert" b
 alert("${1:alert}");$0
 endsnippet
+
+snippet doc "jsdoc documentation" b
+/**
+ * ${1:Text}
+*/
+endsnippet
+
+snippet docar "jsdoc argument" w
+@param ${2:{${3:type}}} ${3:name} - ${4:Description}
+endsnippet
+
+snippet docre "jsdoc returns" w
+@returns {${1:type}} ${2:description}
+endsnippet
