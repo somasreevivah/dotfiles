@@ -134,7 +134,7 @@ bindsym $mod+o exec \
   python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1 | \
   tee ~/.rofi-gui
 
-bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass"
+bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass || rofi-pass"
 
 # languages
 #bindsym $windows+l exec "~/.dotfiles/bin/change_kb.sh $(~/.dotfiles/bin/change_kb.sh -l | dmenu -l 5 -p 'Select language')"
