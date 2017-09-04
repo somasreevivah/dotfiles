@@ -6,9 +6,15 @@ link/emacs.d/emacs.d
 
 pdf-plugin.conf
 ps-plugin.conf
-
-
-
+bin/.nfs0000000482b64a51000007ab
+bin/.nfs000000048f1d56bd0000059f
+link/jupyter/migrated
+link/papis/cache/
+link/papis/scripts/doi/
+link/w3m/bufinfo
+link/w3m/cookie
+link/w3m/history
+tests/.vim-run
 
 bin/wspace.sh
 link/mutt/cache/
