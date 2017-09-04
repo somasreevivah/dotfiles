@@ -30,3 +30,13 @@ int num_pes;
 MPI_Comm_size(MPI_COMM_WORLD, &num_pes);
 endsnippet
 
+snippet doc "Start doxygen documentation" b
+/**
+ * @brief ${1:Documentation text brief}
+ * ${2:Documentation text long}
+ */
+endsnippet
+
+snippet docar "Document argument" w
+@param ${1:param_name} ${2:Description}
+endsnippet
