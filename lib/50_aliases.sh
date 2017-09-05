@@ -8,6 +8,10 @@ alias bookis="papis -l books"
 alias conis="papis -l contacts"
 alias vapis="papis --pick-lib --picktool vim gui --vim"
 
+rgrep() {
+  grep -r "$@"
+}
+
 zat() {
   for i in $@; do
     [[ -f $i ]] && file=$i
