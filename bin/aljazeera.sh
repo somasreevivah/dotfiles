@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
-url=https://www.youtube.com/watch?v=fN2sEo7hq-E
+url=https://www.youtube.com/watch?v=fN2sEo7hq-E # old url
+url=https://www.youtube.com/watch?v=0zc9dACzJYY
 doc_url=https://www.youtube.com/watch?v=ZJIDMi_8O5o
 
 if [[ $1 == doc ]]; then
