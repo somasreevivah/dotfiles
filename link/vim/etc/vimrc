@@ -545,8 +545,8 @@ endfunction
 
 " Set default tags filename as 'tags' 
 set tags+=tags
-nnoremap gt <C-]>
-vnoremap gt <C-]>
+"nnoremap gt <C-]>
+"vnoremap gt <C-]>
 "I should use the default stuff
 " Go to definition of something
 "nnoremap <F1> <C-]>
