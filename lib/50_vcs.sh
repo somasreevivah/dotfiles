@@ -16,6 +16,7 @@ alias gm='git commit'
 alias gma='git commit -a'
 alias gb='git branch'
 alias gba='git branch -a'
+alias gcp='git checkout -p'
 gc() { git checkout "${@:-master}"; } # Checkout master by default
 alias gr='git remote'
 alias grv='gr -v'
