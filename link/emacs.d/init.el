@@ -18,6 +18,7 @@ re-downloaded in order to locate PACKAGE."
 (package-initialize)
 
 (require-package 'evil)
+(require-package 'ledger-mode)
 
 (setq evil-search-module 'evil-search
       evil-want-C-u-scroll t

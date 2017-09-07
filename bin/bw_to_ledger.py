@@ -23,6 +23,8 @@ header = clean_line(lines[0])
 dictionaries = list()
 # print(header)
 
+
+
 header = [
  'account',
  'date',
@@ -43,6 +45,17 @@ header = [
  'Info'
 ]
 
+header = [
+    "date",
+    "Auftragsart",
+    "payee",
+    "BLZ/BIC",
+    "Kontonummer/IBAN",
+    "text",
+    "amount",
+    "Soll/Haben"
+]
+
 lines.pop(0)
 
 for line in lines:
@@ -54,7 +67,7 @@ for line in lines:
     dictionaries.append(d)
 
 for d in dictionaries:
-    d['amount'] = float(d['amount'].replace(',','.'))
+    d['amount'] = float(str(d['amount']).replace(',','.'))
     if d['amount'] < 0:
         first = 'assets:bank:checking'
         second = 'expenses:general'
@@ -66,18 +79,21 @@ for d in dictionaries:
     d['date'] = '%s/%s/%s' %(
         date[2] if len(date[2]) > 2 else '20'+date[2], date[1], date[0]
     )
-
     if re.match(r"ENTGELT", d['text']):
         d['text'] = 'Salary'
         second = 'income:salary'
     elif re.match(r".*VUELING.*", d['text']):
         second = 'expenses:flight'
 
-    print("""\
-{d[date]} * {d[payee]} {d[text]}
+    d['title'] = d['payee'] + " " + d['text']
+    d['title'] = re.sub(r"Europe S.a.r.l. .* Ihr Einkauf ", '', d['title'])
+    d['title'] = re.sub(r"ALDI GMBH .*", 'ALDI', d['title'])
+
+    print("""
+{d[date]} {d[title]}
     {first}        {d[amount]}
     {second}""".format(d=d, first=first, second=second)
     )
 
+#vim-run: python % ~/.ledger/Umsaetze-7421078731-20170123.csv | less
 #vim-run: python % ~/Downloads/20170907-7421078731-umsatz.CSV >> ~/ledger.dat
-#vim-run: python % ~/Downloads/20170907-7421078731-umsatz.CSV | less
