@@ -36,6 +36,9 @@ set edit_headers = yes # See headers while editing, default no
 
 set attach_charset = 'utf-8' # default: '(empty)'
 set timeout = '10' # 10 seconds
+set new_mail_command = \
+  "notify-send -u normal \
+  'New Email' '%n new messages, %u unread.' &"
 
 # display {{{1
 ##############
