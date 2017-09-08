@@ -1,0 +1,29 @@
+snippet so "standard out" b
+(write-line ${1:"${2:something}"})
+endsnippet
+
+snippet shbang "shbang" b
+#!/usr/bin/env sbcl --script
+endsnippet
+
+snippet vimrun "vim run" b
+; vim-run: sbcl --script %
+endsnippet
+
+snippet fun "Function" w
+(defun ${1:name} (${2:args})
+	$0
+)
+endsnippet
+
+snippet list "List" w
+(list ${1:els})
+endsnippet
+
+snippet first "first" w
+(first ${1:list})
+endsnippet
+
+snippet append "append" w
+(append ${1:list} ${2:list2})
+endsnippet
