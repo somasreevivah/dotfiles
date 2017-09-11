@@ -32,19 +32,30 @@ EOF
 }
 
 get_busy_box() {
+  # sudo apt-get install crossbuild-essential-arm64
   [[ $1 = -h ]] && cat <<EOF
   $0: Get busybox and compile it for android
 EOF
   url="http://busybox.net/downloads/busybox-1.27.2.tar.bz2"
   bb_file=busybox.tar.bz2
   echo "Getting busybox from ${url}"
-  wget ${url} -O ${bb_file}
-  tar xvf ${bb_file}
+  [[ -e ${bb_file} ]] || wget ${url} -O ${bb_file}
+  [[ -e busybox ]] || {
+    mkdir -p busybox;
+    tar xvf ${bb_file} --strip-components=1 -C busybox;
+  }
+  cd busybox &&
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- defconfig &&
+  echo "Do a static compilation: Busybox Settins -> Build configuration" &&
+  read &&
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig &&
+  make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- install
 
 }
 
 COMMANDS=(
 get_pictures
+get_all_pictures
 get_busy_box
 )
 
