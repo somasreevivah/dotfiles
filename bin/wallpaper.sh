@@ -36,9 +36,9 @@ set_wallpaper() {
       "update data set value = '${IMAGE_PATH}'" && killall Dock
   elif which feh > /dev/null 2>&1; then
     arrow "Trhough feh..."
-    feh --bg-max ${IMAGE_PATH} \
-     && wall_success "Wallpaper set" \
-     || wall_error "Failure setting wallpaper"
+    feh --no-fehbg --bg-fill --no-xinerama ${IMAGE_PATH} &&
+        wall_success "Wallpaper set" ||
+        wall_error "Failure setting wallpaper"
   elif which xv > /dev/null 2>&1; then
     arrow "Through xv.."
     set -x
