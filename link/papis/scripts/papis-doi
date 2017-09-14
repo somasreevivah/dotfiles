@@ -26,5 +26,5 @@ if [[ ! $? = 0 ]]; then
 fi
 
 set -x
-papis ${PAPIS_VERBOSE} -l ${PAPIS_LIB} add ${pdf_output} --from-doi ${doi} $@ --edit --confirm
+papis ${PAPIS_VERBOSE} -l ${PAPIS_LIB} add ${pdf_output} --from-doi ${doi} $@
 set +x
