@@ -28,7 +28,7 @@ urxvt.font: xft:Monospace:size=12
 
 urxvt*foreground: white
 urxvt*background: black
-urxvt*cursorUnderline: true
+urxvt*cursorUnderline: false
 
 !Real transparency
 !urxvt*background:rgba:0000/0000/0200/ffff
