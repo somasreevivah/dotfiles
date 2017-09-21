@@ -8,7 +8,5 @@ own risk!
 
 ## Inspiration ##
 
-I   got   a    lot   of    stuff   from
-[here](https://github.com/cowboy/dotfiles), it  remains to see if  it is reallz
-useful.
+I   got   some stuff from [here](https://github.com/cowboy/dotfiles).
 
