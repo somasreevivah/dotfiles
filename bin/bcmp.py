@@ -11,12 +11,6 @@ import eyed3
 from six.moves import urllib
 
 def download(url):
-    """TODO: Docstring for download.
-
-    :url: TODO
-    :returns: TODO
-
-    """
     print("Input url %s" % url)
     print("Parsing url...")
 
@@ -70,18 +64,25 @@ def download(url):
         if not os.path.exists(song_path):
             print("\tDownloading....")
             fd = open(song_path, "wb+")
+            print("\tSaving it in (%s)"%song_path)
             fd.write(urllib.request.urlopen(url).read())
             fd.close()
         else:
             print("\tUsing already downloaded file....")
         print("\t* Setting mp3 metadata...")
-        audio_file = eyed3.load(song_path)
+        try:
+            audio_file = eyed3.load(unicode(song_path))
+        except:
+            print("Could not load song_path for eyed3")
         audio_file.initTag()
         for key in data.keys():
             if key == "track_num":
                 value = int(data[key])
             else:
-                value = unicode(data[key])
+                try:
+                    value = unicode(data[key])
+                except:
+                    value = "Unknown"
             if value:
                 print("\t\t - %s" % key)
                 setattr(audio_file.tag, key, value)
