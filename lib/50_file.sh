@@ -12,16 +12,9 @@ else
   export LS_COLORS
 fi
 
-# Directory listing
-if [[ "$(type -P tree)" ]]; then
-  alias ll='tree --dirsfirst -aLpughDFiC 1'
-  alias lsd='ll -d'
-else
-  alias ll='ls -al'
-  alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
-fi
 
-
+alias ll='ls -al'
+alias lsd='CLICOLOR_FORCE=1 ll | grep --color=never "^d"'
 # Easier navigation: .., ..., -
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -34,15 +27,3 @@ alias cls="clear; ls"
 # File size
 alias fs="stat -f '%z bytes'"
 alias df="df -h"
-
-# Recursively delete `.DS_Store` files
-alias dsstore="find . -name '*.DS_Store' -type f -ls -delete"
-
-# Aliasing eachdir like this allows you to use aliases/functions as commands.
-alias eachdir=". eachdir"
-
-# Fast directory switching
-mkdir -p $DOTFILES/caches/z
-#_Z_NO_PROMPT_COMMAND=1
-#_Z_DATA=$DOTFILES/caches/z/z
-#. $DOTFILES/vendor/z/z.sh
