@@ -22,9 +22,6 @@ gp = git push
 gu = git pull
 gma = git commit -a
 
-[test]
-dir = ~/Documents/papiers-trest
-
 [papers]
 dir = ~/Documents/papers
 
