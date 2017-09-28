@@ -1,0 +1,17 @@
+#! /usr/bin/env bash
+
+when="$(date +"%y/%m/%d")"
+title="General expense"
+expenses_account="food"
+database=${HOME}/.ledger/bw.ledger
+
+read -e -p "Title : " -i "$title" title
+read -e -p "Amount: " -i "$amount" amount
+read -e -p "When  : " -i "$when" when
+
+cat | tee -a ${database} <<EOF
+
+${when} ${title}
+    assets:cash                          ${amount}
+    expenses:${expenses_account}
+EOF
