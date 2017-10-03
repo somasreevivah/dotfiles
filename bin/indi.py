@@ -90,26 +90,22 @@ class HorizontalReflexionLeft(GroupOperation):
             + string[0:middle][0] + string[middle:][1:]
 
 
-def orbit(string):
-    result = [string]
-    result.append(HorizontalReflexion() * string)
-    result.append(VerticalReflexion() * string)
-    result.append(HorizontalReflexion() * (VerticalReflexion() * string))
-    result.append(VerticalReflexion() * (HorizontalReflexion() * string))
-    return sets.Set(result)
+def get_orbit(string, group):
+    return sets.Set([g * string for g in group])
 
 
 e = Identity()
 h = HorizontalReflexion()
 v = VerticalReflexion()
+hl = HorizontalReflexionLeft()
+vt = VerticalReflexionTop()
+vb = h % vt % h
+hr = v % hl % v
 
 G_complex = [e, h, v, h % v]
-
-print(G_complex)
+G_real = G_complex + [hl, hr, vt, vb]
 
 SPACE = ["".join(d) for d in itertools.product('vo', repeat=4)]
-
-print(SPACE)
 
 BASE = sets.Set([
     "vvvv",
@@ -131,9 +127,9 @@ CANDIDATES = sets.Set([
 
 for c in CANDIDATES:
     print(c)
-    c_orbit = orbit(c)
-    print('\t%s' % c_orbit)
-    intersection = c_orbit.intersection(BASE)
+    orbit = get_orbit(c, G_complex)
+    print('\t%s' % orbit)
+    intersection = orbit.intersection(BASE)
     print('\t%s' % intersection)
     if len(intersection) == 0:
         print('\t\t %s No representable' % c)
