@@ -19,6 +19,7 @@ if ! exists("NO_SPARTAN")
 endif
 Plugin 'easymotion/vim-easymotion'
 Plugin 'sirtaj/vim-openscad'
+Plugin 'wilsaj/chuck.vim'
 if has("lua") " it needs lua!
   "Plugin 'Shougo/neocomplete.vim'
 endif
