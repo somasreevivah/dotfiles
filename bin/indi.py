@@ -7,7 +7,6 @@
 >>> a * 'vovo'
 'ovov'
 """
-import sets
 import itertools
 
 
@@ -41,8 +40,8 @@ class VerticalReflexion(GroupOperation):
         >>> VerticalReflexion()*'abcd'
         'badc'
         """
-        middle = len(string)/2
-        middle_middle = middle/2
+        middle = int(len(string)/2)
+        middle_middle = int(middle/2)
         return string[0:middle][middle_middle:] \
             + string[0:middle][0:middle_middle] \
             + string[middle:][middle_middle:] \
@@ -57,7 +56,7 @@ class VerticalReflexionTop(GroupOperation):
         >>> HorizontalReflexion() % VerticalReflexionTop() % HorizontalReflexion() * 'abcd'
         'abdc'
         """
-        middle = len(string)/2
+        middle = int(len(string)/2)
         return string[0:middle][1] \
             + string[0:middle][0] \
             + string[middle:]
@@ -71,7 +70,7 @@ class HorizontalReflexion(GroupOperation):
         >>> HorizontalReflexion()*'abcde'
         'cdeab'
         """
-        middle = len(string)/2
+        middle = int(len(string)/2)
         return string[middle:] + string[0:middle]
 
 
@@ -85,13 +84,13 @@ class HorizontalReflexionLeft(GroupOperation):
         >>> HorizontalReflexionLeft()*'ab'
         'ba'
         """
-        middle = len(string)/2
+        middle = int(len(string)/2)
         return string[middle:][0] + string[0:middle][1:] \
             + string[0:middle][0] + string[middle:][1:]
 
 
 def get_orbit(string, group):
-    return sets.Set([g * string for g in group])
+    return { g * string for g in group }
 
 
 e = Identity()
@@ -107,7 +106,7 @@ G_real = G_complex + [hl, hr, vt, vb]
 
 SPACE = ["".join(d) for d in itertools.product('vo', repeat=4)]
 
-BASE = sets.Set([
+BASE = set([
     "vvvv",
     "vovo",
     "vvoo",
@@ -116,7 +115,7 @@ BASE = sets.Set([
     "vvvo",
 ])
 
-CANDIDATES = sets.Set([
+CANDIDATES = set([
     "oovv",
     "ovoo",
     "ovov",
@@ -135,6 +134,6 @@ for c in CANDIDATES:
         print('\t\t %s No representable' % c)
 
 
-# vim-run: python -m doctest %
+# vim-run: python3 -m doctest %
 # vim-run: flake8 %
 # vim-run: python %
