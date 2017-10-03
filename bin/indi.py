@@ -93,6 +93,10 @@ def get_orbit(string, group):
     return { g * string for g in group }
 
 
+def spans_all(base, target_space, group):
+    return target_space <= { g * b for g in group for b in base}
+
+
 e = Identity()
 h = HorizontalReflexion()
 v = VerticalReflexion()
@@ -103,8 +107,11 @@ hr = v % hl % v
 
 G_complex = [e, h, v, h % v]
 G_real = G_complex + [hl, hr, vt, vb]
+G = G_real
+G = G_complex
 
-SPACE = ["".join(d) for d in itertools.product('vo', repeat=4)]
+SPACE = { "".join(d) for d in itertools.product('vo', repeat=4) }
+
 
 BASE = set([
     "vvvv",
@@ -124,14 +131,33 @@ CANDIDATES = set([
     "vvov",
 ])
 
-for c in CANDIDATES:
-    print(c)
-    orbit = get_orbit(c, G_complex)
-    print('\t%s' % orbit)
-    intersection = orbit.intersection(BASE)
-    print('\t%s' % intersection)
-    if len(intersection) == 0:
-        print('\t\t %s No representable' % c)
+min_dim = 2
+target_space = CANDIDATES
+target_space = SPACE
+
+try:
+    for dimension in range(min_dim, 2**len(SPACE) + 1):
+        print('Dimension: %s' % dimension)
+        bases = itertools.combinations(SPACE, dimension)
+        for base in bases:
+            # print(list(bases))
+            if spans_all(base, target_space, G):
+                print('Base' , base, 'expands')
+                print('  to' , {g * b for g in G for b in base})
+                print('Targ' , target_space)
+                # print(base)
+                raise Exception('Done here')
+except:
+    pass
+
+# for c in CANDIDATES:
+    # print(c)
+    # orbit = get_orbit(c, G_complex)
+    # print('\t%s' % orbit)
+    # intersection = orbit.intersection(BASE)
+    # print('\t%s' % intersection)
+    # if len(intersection) == 0:
+        # print('\t\t %s No representable' % c)
 
 
 # vim-run: python3 -m doctest %
