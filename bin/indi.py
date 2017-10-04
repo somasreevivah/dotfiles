@@ -8,11 +8,11 @@
 'ovov'
 """
 import itertools
-import os
 import sys
 
 
-class BreakIt(Exception): pass
+class BasisNotFound(Exception):
+    pass
 
 
 class GroupOperation(object):
@@ -66,7 +66,8 @@ class VerticalReflexionTop(GroupOperation):
         """
         >>> VerticalReflexionTop() * 'abcd'
         'bacd'
-        >>> HorizontalReflexion() % VerticalReflexionTop() % HorizontalReflexion() * 'abcd'
+        >>> HorizontalReflexion() % \
+                VerticalReflexionTop() % HorizontalReflexion() * 'abcd'
         'abdc'
         """
         middle = int(len(string)/2)
@@ -103,11 +104,11 @@ class HorizontalReflexionLeft(GroupOperation):
 
 
 def get_orbit(string, group):
-    return { g * string for g in group }
+    return {g * string for g in group}
 
 
 def spans_all(base, target_space, group):
-    return target_space <= { g * b for g in group for b in base}
+    return target_space <= {g * b for g in group for b in base}
 
 
 def get_representation(element, base, group):
@@ -139,6 +140,72 @@ def string_to_particle_indices(string):
     return result
 
 
+def find_generating_basis(
+        target_space, model_space, G, min_dim=1, antisymmetric=False,
+        antisymmetrizer=HorizontalReflexion('h') % VerticalReflexionTop('vt') %
+        HorizontalReflexion('h')
+        ):
+    """Find a basis of string generating the target space through the G
+    group
+    :returns: Set with basis elements
+
+    """
+    print('G                 ', G)
+    print('total_space  len: ', len(SPACE))
+    print('target_space len: ', len(target_space))
+    if antisymmetric:
+        print('Expanding target space for antisimmetry')
+        target_space = target_space \
+            | {antisymmetrizer * c for c in target_space}
+        print('target_space len: ', len(target_space))
+
+    print('model_space  len: ', len(model_space))
+
+    if len(model_space) == 0:
+        print('Model space is too small')
+        sys.exit(1)
+
+    for dimension in range(min_dim, 2**len(model_space) + 1):
+        print('Dimension: %s' % dimension)
+        bases = [
+            set(basis)
+            for basis in itertools.combinations(model_space, dimension)
+        ]
+        if len(bases) == 0:
+            print('I ran out of bases, your model space does not work')
+            sys.exit(1)
+        for basis in bases:
+            if spans_all(set(basis), target_space, G):
+                print('Base   ', basis)
+                print('G*Base ', {g * b for g in G for b in basis})
+                print('Target ', target_space)
+                return basis
+    raise BasisNotFound()
+
+
+def print_transformation_table(basis, target_space, G):
+    print()
+    print('Transformation table:')
+    for element in target_space:
+        g, b = get_representation(element, basis, G)
+        res = '%s = %s * %s' % (element, g, b)
+        if b == element:
+            continue
+        print(res)
+        base_tensor = 'V%s' % string_to_particle_indices(b)
+        base_indices = string_to_particle_indices(b)
+        element_tensor = 'V%s' % string_to_particle_indices(element)
+        new_indices = g * string_to_particle_indices(b)
+        print(
+            '  {0}["{1}"] = {2}["{3}"]'.format(
+                element_tensor,
+                new_indices,
+                base_tensor,
+                base_indices
+            )
+        )
+
+
 e = Identity('e')
 h = HorizontalReflexion('h')
 v = VerticalReflexion('v')
@@ -149,94 +216,38 @@ vb.name = 'vb'
 hr = v % hl % v
 hr.name = 'hr'
 
-# G_real = G_complex + [hl, hr, vt, vb]
 G_complex = [e, h, v, h % v]
 G_real = G_complex + [hl, hr]
 
-SPACE = { "".join(d) for d in itertools.product('vo', repeat=4) }
+SPACE = {"".join(d) for d in itertools.product('vo', repeat=4)}
 
 
-CANDIDATES = {
-    "oovv",
-    "ovoo",
-    "ovov",
-    "voov",
-    "ovvv",
-}
+if __name__ == "__main__":
+    CANDIDATES = {
+        "oovv",
+        "ovoo",
+        "ovov",
+        "voov",
+        "ovvv",
+    }
+    antisymmetric = True
+    G = G_complex
+    G = G_real
+    min_dim = 1
+    target_space = CANDIDATES
+    target_space = SPACE
+    model_space = SPACE - target_space
+    model_space = SPACE
 
-# INPUT PARAMETERS
-antisymmetric = True
-G = G_complex
-G = G_real
-min_dim = 1
-target_space = CANDIDATES
-target_space = SPACE
-
-print('G                 ', G)
-print('total_space  len: ', len(SPACE))
-print('target_space len: ', len(target_space))
-if antisymmetric:
-    print('Expanding target space for antisimmetry')
-    target_space = target_space | {vb * c for c in target_space}
-    print('target_space len: ', len(target_space))
-
-model_space = SPACE - target_space
-model_space = SPACE
-print('model_space  len: ', len(model_space))
-
-
-if len(model_space) == 0:
-    print('Model space is too small')
-    sys.exit(1)
-
-
-
-try:
-    for dimension in range(min_dim, 2**len(model_space) + 1):
-        print('Dimension: %s' % dimension)
-        bases = [ set(base)
-            for base in itertools.combinations(model_space, dimension)
-        ]
-        if len(bases) == 0:
-            print('I ran out of bases, your model space does not work')
-            sys.exit(1)
-        for base in bases:
-            # print(list(bases))
-            if spans_all(set(base), target_space, G):
-                print('Base   ' , base)
-                print('G*Base ' , {g * b for g in G for b in base})
-                print('Target ' , target_space)
-                raise BreakIt()
-except BreakIt:
-    pass
-
-print()
-print('Transformation table:')
-for element in target_space:
-    g, b = get_representation(element, base, G)
-    res = '%s = %s * %s' % (element, g, b)
-    if b == element:
-        continue
-    print(res)
-    base_tensor = 'V%s' % string_to_particle_indices(b)
-    base_indices = string_to_particle_indices(b)
-    element_tensor = 'V%s' % string_to_particle_indices(element)
-    new_indices = g * string_to_particle_indices(b)
-    print(
-        '  {0}["{1}"] = {2}["{3}"]'.format(
-            element_tensor,
-            new_indices,
-            base_tensor,
-            base_indices
-        )
+    basis = find_generating_basis(
+        target_space, model_space, G, min_dim=min_dim,
+        antisymmetric=antisymmetric, antisymmetrizer=vb
     )
-    # '\t\t(%s = %s * %s)' % (
-        # g * string_to_particle_indices(b),
-        # g,
-        # string_to_particle_indices(b)
-    # )
+
+    print_transformation_table(basis, target_space, G)
 
 
+# vim-run: python3 -m doctest % && flake8 % && python3 %
+# vim-run: flake8 % ; python3 %
 # vim-run: python3 -m doctest %
 # vim-run: flake8 %
-# vim-run: python %
