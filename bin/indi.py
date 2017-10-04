@@ -117,6 +117,28 @@ def get_representation(element, base, group):
                 return (g, b)
 
 
+def string_to_particle_indices(string):
+    """
+    >>> string_to_particle_indices('vvvv')
+    'abcd'
+    >>> string_to_particle_indices('vovo')
+    'aibj'
+    """
+    particles = 'abcdefgh'
+    holes = 'ijklmno'
+    result = ''
+    p = 0
+    h = 0
+    for c in string:
+        if c == 'v':
+            result += particles[p]
+            p += 1
+        if c == 'o':
+            result += holes[h]
+            h += 1
+    return result
+
+
 e = Identity('e')
 h = HorizontalReflexion('h')
 v = VerticalReflexion('v')
@@ -144,8 +166,8 @@ CANDIDATES = {
 
 # INPUT PARAMETERS
 antisymmetric = True
-G = G_real
 G = G_complex
+G = G_real
 min_dim = 1
 target_space = CANDIDATES
 target_space = SPACE
@@ -181,7 +203,7 @@ try:
         for base in bases:
             # print(list(bases))
             if spans_all(set(base), target_space, G):
-                print('Base   ' , base, 'expands')
+                print('Base   ' , base)
                 print('G*Base ' , {g * b for g in G for b in base})
                 print('Target ' , target_space)
                 raise BreakIt()
@@ -189,8 +211,30 @@ except BreakIt:
     pass
 
 print()
+print('Transformation table:')
 for element in target_space:
-    print('%s = %s * %s' % (element, *get_representation(element, base, G)))
+    g, b = get_representation(element, base, G)
+    res = '%s = %s * %s' % (element, g, b)
+    if b == element:
+        continue
+    print(res)
+    base_tensor = 'V%s' % string_to_particle_indices(b)
+    base_indices = string_to_particle_indices(b)
+    element_tensor = 'V%s' % string_to_particle_indices(element)
+    new_indices = g * string_to_particle_indices(b)
+    print(
+        '  {0}["{1}"] = {2}["{3}"]'.format(
+            element_tensor,
+            new_indices,
+            base_tensor,
+            base_indices
+        )
+    )
+    # '\t\t(%s = %s * %s)' % (
+        # g * string_to_particle_indices(b),
+        # g,
+        # string_to_particle_indices(b)
+    # )
 
 
 # vim-run: python3 -m doctest %
