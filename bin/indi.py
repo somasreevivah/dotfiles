@@ -12,6 +12,9 @@ import os
 import sys
 
 
+class BreakIt(Exception): pass
+
+
 class GroupOperation(object):
     """
     >>> GroupOperation() * 'asdf'
@@ -124,8 +127,9 @@ vb.name = 'vb'
 hr = v % hl % v
 hr.name = 'hr'
 
+# G_real = G_complex + [hl, hr, vt, vb]
 G_complex = [e, h, v, h % v]
-G_real = G_complex + [hl, hr, vt, vb]
+G_real = G_complex + [hl, hr]
 
 SPACE = { "".join(d) for d in itertools.product('vo', repeat=4) }
 
@@ -138,28 +142,31 @@ CANDIDATES = {
     "ovvv",
 }
 
-antisymmetric = False
+# INPUT PARAMETERS
+antisymmetric = True
 G = G_real
 G = G_complex
-min_dim = 2
+min_dim = 1
 target_space = CANDIDATES
 target_space = SPACE
 
-model_space = SPACE - target_space
-
 print('G                 ', G)
 print('total_space  len: ', len(SPACE))
-print('model_space  len: ', len(model_space))
 print('target_space len: ', len(target_space))
+if antisymmetric:
+    print('Expanding target space for antisimmetry')
+    target_space = target_space | {vb * c for c in target_space}
+    print('target_space len: ', len(target_space))
+
+model_space = SPACE - target_space
+model_space = SPACE
+print('model_space  len: ', len(model_space))
+
 
 if len(model_space) == 0:
     print('Model space is too small')
     sys.exit(1)
 
-if antisymmetric:
-    print('Expanding target space for antisimmetry')
-    target_space = target_space | {vb * c for c in target_space}
-    print('target_space len: ', len(target_space))
 
 
 try:
@@ -168,17 +175,20 @@ try:
         bases = [ set(base)
             for base in itertools.combinations(model_space, dimension)
         ]
-        print(max([len(b) for b in bases]))
+        if len(bases) == 0:
+            print('I ran out of bases, your model space does not work')
+            sys.exit(1)
         for base in bases:
             # print(list(bases))
             if spans_all(set(base), target_space, G):
                 print('Base   ' , base, 'expands')
                 print('G*Base ' , {g * b for g in G for b in base})
                 print('Target ' , target_space)
-                raise Exception('Done here')
-except:
+                raise BreakIt()
+except BreakIt:
     pass
 
+print()
 for element in target_space:
     print('%s = %s * %s' % (element, *get_representation(element, base, G)))
 
