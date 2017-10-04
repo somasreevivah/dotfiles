@@ -8,6 +8,7 @@
 'ovov'
 """
 import itertools
+import os
 
 
 class GroupOperation(object):
@@ -15,13 +16,21 @@ class GroupOperation(object):
     >>> GroupOperation() * 'asdf'
     """
     mul_method = lambda self, string: None
+
+    def __init__(self, name=""):
+        self.name = name
+
     def __mod__(self, other):
         result = GroupOperation()
+        result.name = self.name + '%' + other.name
         result.mul_method = lambda string: self * ( other * string )
         return result
 
     def __mul__(self, string):
         return self.mul_method(string)
+
+    def __repr__(self):
+        return self.name or 'GroupOperation'
 
 
 class Identity(GroupOperation):
@@ -97,67 +106,72 @@ def spans_all(base, target_space, group):
     return target_space <= { g * b for g in group for b in base}
 
 
-e = Identity()
-h = HorizontalReflexion()
-v = VerticalReflexion()
-hl = HorizontalReflexionLeft()
-vt = VerticalReflexionTop()
+def get_representation(element, base, group):
+    for g in group:
+        for b in base:
+            if element == g * b:
+                return (g, b)
+
+
+e = Identity('e')
+h = HorizontalReflexion('h')
+v = VerticalReflexion('v')
+hl = HorizontalReflexionLeft('hl')
+vt = VerticalReflexionTop('vt')
 vb = h % vt % h
+vb.name = 'vb'
 hr = v % hl % v
+hr.name = 'hr'
 
 G_complex = [e, h, v, h % v]
 G_real = G_complex + [hl, hr, vt, vb]
-G = G_real
-G = G_complex
 
 SPACE = { "".join(d) for d in itertools.product('vo', repeat=4) }
 
 
-BASE = set([
-    "vvvv",
-    "vovo",
-    "vvoo",
-    "oooo",
-    "ooov",
-    "vvvo",
-])
-
-CANDIDATES = set([
+CANDIDATES = {
     "oovv",
     "ovoo",
     "ovov",
     "voov",
     "ovvv",
-    "vvov",
-])
+}
 
+antisymmetric = True
+G = G_real
+G = G_complex
 min_dim = 2
-target_space = CANDIDATES
 target_space = SPACE
+target_space = CANDIDATES
+
+print('total_space  len: ', len(SPACE))
+print('target_space len: ', len(target_space))
+
+if antisymmetric:
+    print('Expanding target space for antisimmetry')
+    target_space = target_space | {vb * c for c in target_space}
+    print('target_space len: ', len(target_space))
+
 
 try:
     for dimension in range(min_dim, 2**len(SPACE) + 1):
         print('Dimension: %s' % dimension)
-        bases = itertools.combinations(SPACE, dimension)
+        bases = [ set(base) - target_space
+            for base in itertools.combinations(SPACE, dimension)
+        ]
+        print(max([len(b) for b in bases]))
         for base in bases:
             # print(list(bases))
-            if spans_all(base, target_space, G):
-                print('Base' , base, 'expands')
-                print('  to' , {g * b for g in G for b in base})
-                print('Targ' , target_space)
-                # print(base)
+            if spans_all(set(base), target_space, G):
+                print('Base   ' , base, 'expands')
+                print('G*Base ' , {g * b for g in G for b in base})
+                print('Target ' , target_space)
                 raise Exception('Done here')
 except:
     pass
 
-# for c in CANDIDATES:
-    # print(c)
-    # orbit = get_orbit(c, G_complex)
-    # print('\t%s' % orbit)
-    # intersection = orbit.intersection(BASE)
-    # print('\t%s' % intersection)
-    # if len(intersection) == 0:
-        # print('\t\t %s No representable' % c)
+for element in target_space:
+    print('%s = %s * %s' % (element, *get_representation(element, base, G)))
 
 
 # vim-run: python3 -m doctest %
