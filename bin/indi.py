@@ -9,6 +9,7 @@
 """
 import itertools
 import os
+import sys
 
 
 class GroupOperation(object):
@@ -137,15 +138,23 @@ CANDIDATES = {
     "ovvv",
 }
 
-antisymmetric = True
+antisymmetric = False
 G = G_real
 G = G_complex
 min_dim = 2
-target_space = SPACE
 target_space = CANDIDATES
+target_space = SPACE
 
+model_space = SPACE - target_space
+
+print('G                 ', G)
 print('total_space  len: ', len(SPACE))
+print('model_space  len: ', len(model_space))
 print('target_space len: ', len(target_space))
+
+if len(model_space) == 0:
+    print('Model space is too small')
+    sys.exit(1)
 
 if antisymmetric:
     print('Expanding target space for antisimmetry')
@@ -154,10 +163,10 @@ if antisymmetric:
 
 
 try:
-    for dimension in range(min_dim, 2**len(SPACE) + 1):
+    for dimension in range(min_dim, 2**len(model_space) + 1):
         print('Dimension: %s' % dimension)
-        bases = [ set(base) - target_space
-            for base in itertools.combinations(SPACE, dimension)
+        bases = [ set(base)
+            for base in itertools.combinations(model_space, dimension)
         ]
         print(max([len(b) for b in bases]))
         for base in bases:
