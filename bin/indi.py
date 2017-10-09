@@ -24,6 +24,9 @@ class GroupOperation(object):
     def __init__(self, name=""):
         self.name = name
 
+    def is_identity(self):
+        return False
+
     def __mod__(self, other):
         result = GroupOperation()
         result.name = self.name + '%' + other.name
@@ -43,6 +46,9 @@ class Identity(GroupOperation):
     'asdf'
     """
     mul_method = lambda self, string: string
+
+    def is_identity(self):
+        return True
 
 
 class VerticalReflexion(GroupOperation):
@@ -138,6 +144,26 @@ def string_to_particle_indices(string):
             result += holes[h]
             h += 1
     return result
+
+
+def get_independent_basis(basis, G):
+    """Discover dependencies in within the basis with the action G
+    """
+    new_basis = set()
+    dependent_elements = set()
+    for j in range(len(basis)):
+        if len(basis) == 0:
+            break
+        b = basis.pop()
+        for g in G:
+            h = g * b
+            if b == h:
+                continue
+            elif h in basis:
+                basis.remove(h)
+                dependent_elements.add(h)
+        new_basis.add(b)
+    return (new_basis, dependent_elements)
 
 
 def find_generating_basis(
@@ -239,6 +265,7 @@ if __name__ == "__main__":
     model_space = SPACE - target_space
     model_space = SPACE
 
+    print('\n{:^80}\n'.format('REAL CASE'))
     basis = find_generating_basis(
         target_space, model_space, G, min_dim=min_dim,
         antisymmetric=antisymmetric, antisymmetrizer=vb
@@ -246,7 +273,22 @@ if __name__ == "__main__":
 
     print_transformation_table(basis, target_space, G)
 
+    basis = {
+        'vovo',
+        'vvoo',
+        'oovv',
+        'voov',
+        'oooo',
+        'ooov',
+        'vooo',
+        'vvvv',
+        'vvvo'
+    }
+    print(basis)
+    print(get_independent_basis(basis, G))
 
+
+# vim-run: python3 %
 # vim-run: python3 -m doctest % && flake8 % && python3 %
 # vim-run: flake8 % ; python3 %
 # vim-run: python3 -m doctest %
