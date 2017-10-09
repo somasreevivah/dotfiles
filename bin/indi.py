@@ -27,7 +27,7 @@ class GroupOperation(object):
     def __mod__(self, other):
         result = GroupOperation()
         result.name = self.name + '%' + other.name
-        result.mul_method = lambda string: self * ( other * string )
+        result.mul_method = lambda string: self * (other * string)
         return result
 
     def __mul__(self, string):
