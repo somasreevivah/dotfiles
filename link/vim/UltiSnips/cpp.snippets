@@ -48,3 +48,11 @@ endsnippet
 snippet docmm "doc math" w
 \f[ ${1} \f]$0
 endsnippet
+
+snippet test "TestCase" b
+#include <${1:catch.hpp}>
+
+TEST_CASE( "${2:Title of the case}", "[${3:section}]" ) {
+	$0
+}
+endsnippet
