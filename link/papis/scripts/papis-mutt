@@ -12,7 +12,9 @@ import papis.api
 
 search_string = sys.argv[1] if len(sys.argv) > 1 else ""
 
-docs = papis.api.get_documents_in_lib(search=search_string)
+docs = papis.api.get_documents_in_lib(
+    search=search_string, library=papis.api.get_lib()
+)
 
 print("Name  <email>")
 for contact in docs:
