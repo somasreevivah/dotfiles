@@ -22,6 +22,7 @@ gp = git push
 gu = git pull
 gma = git commit -a
 
+
 [papers]
 dir = ~/Documents/papers
 
