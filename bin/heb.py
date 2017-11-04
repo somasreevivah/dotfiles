@@ -62,6 +62,8 @@ if __name__=="__main__" :
 
     if args.l=="heb":
         heb2en(url)
+    else:
+        heb2en(url)
 
 
 # vim:ft=python:
