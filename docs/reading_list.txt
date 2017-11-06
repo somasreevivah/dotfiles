@@ -27,6 +27,7 @@ http://joshuagoings.com/notes/
 http://www.matfys.lth.se/staff/Andreas.Wacker/Scripts/bandstructure_intro.pdf
 https://hackaday.com/2016/06/14/linux-assembly-required/
 http://www.worldscientific.com/worldscibooks/10.1142/3201
+https://autotools.io/autoconf/index.html
 
                 EOM
                 ---
