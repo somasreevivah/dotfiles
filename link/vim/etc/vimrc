@@ -124,13 +124,15 @@ function! TrailingSpacesClean()
   %s/\v\s+$//g
 endfunction
 
-"set undo stuff, it needs VIM 7.3 at least
+" set undo stuff, it needs VIM 7.3 at least but it will check for features
 if has("persistent_undo")
-  " src: http://stackoverflow.com/questions/17936130/vim-undo-undo-changes-after-file-write
   if exists('+undofile')
     set undofile
   endif
-  set undodir=$MYVIMRC/etc/undo
+  if !isdirectory($HOME."/.vim/etc/undo")
+    call mkdir($HOME."/.vim/etc/undo", "", 0700)
+  endif
+  set undodir=$HOME/.vim/etc/undo/
 endif
 
 " allowing modeline
