@@ -1,0 +1,28 @@
+.TH X86 Assembly cheatsheet 1
+.SH Main registers
+
+EAX - Stores function return values
+.nf
+EBX - Base pointer to data section
+.nf
+ECX - Counter for string and loop operations
+.nf
+EDX - IO Pointer
+.nf
+ESI - Source pointer for string operations
+.nf
+EDI - Destination pointer for string operations
+.nf
+ESP - Stack pointer
+.nf
+EBP - Stack frame base pointer
+.nf
+EIP - Instruction pointer
+
+.SH Caller-Callee save regs
+
+Caller-save - EAX ECX EDX
+.nf
+Callee-save - EBP EBX ESI EDI
+
+." vim-run: man ./%
