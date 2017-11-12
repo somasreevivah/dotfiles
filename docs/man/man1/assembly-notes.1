@@ -1,6 +1,7 @@
 .TH X86 Assembly cheatsheet 1
-.SH Main registers
 
+."+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.SH Main registers
 EAX - Stores function return values
 .nf
 EBX - Base pointer to data section
@@ -18,11 +19,42 @@ ESP - Stack pointer
 EBP - Stack frame base pointer
 .nf
 EIP - Instruction pointer
+.nf
+ZF  - Zero flag, set if the result of every instruction is zero.
+.nf
+SF  - Sign flag, set to the MSb of the result
 
+
+
+."+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 .SH Caller-Callee save regs
-
 Caller-save - EAX ECX EDX
 .nf
 Callee-save - EBP EBX ESI EDI
+
+."+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.SH Instructions
+
+.nf
+.B NOOP
+  Do no operation
+.nf
+.B PUSH
+  Push a {,d,q}word onto the stack
+  Example:
+    push 0x23 // Push the immediate 0x23 onto stack
+    push eax // Push contents of eax
+.B POP
+  Take a {,d,q}word from the stack and put it in a reg.
+  Example:
+    pop eax
+.B CALL
+  Transfer control to a different function in a way
+  that control can later be resumed.
+    1. push function address onto the stack.
+    2. Change EIP to the address.
+    3. RET will use it when the function finishes.
+.B RET
+.B MOVE
 
 ." vim-run: man ./%
