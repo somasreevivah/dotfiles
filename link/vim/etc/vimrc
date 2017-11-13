@@ -51,6 +51,7 @@ if v:version >= 704
   Plugin 'honza/vim-snippets'
 endif
 Plugin 'JuliaEditorSupport/julia-vim'
+Plugin 'rust-lang/rust.vim'
 "Plugin 'mattn/emmet-vim'
 " Track the engine.
 Plugin 'VundleVim/Vundle.vim'
