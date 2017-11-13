@@ -66,7 +66,7 @@ if ( ${1:Condition} ) {
 }
 endsnippet
 
-snippet fori "For int i" b
+snippet for "For int i" b
 for ( int ${1:i} = ${2:0}; $1 ${3:<} ${4:len}; ${5:$1+=1} ) {
 	${6://statement}
 }
@@ -129,6 +129,17 @@ snippet bool "Boolean define" b
 bool ${1:name} ${2:= ${3:value}};$0
 endsnippet
 
+snippet doc "Start doxygen documentation" b
+/**
+ * \brief ${1:Documentation text brief}
+ * ${2:Documentation text long}
+ */
+endsnippet
+
+snippet docar "Document argument" w
+\param[${3:in}] ${1:param_name} ${2:Description}$0
+endsnippet
+
 
 snippet path "Path define" b
 path ${1:p} ${2:= ${3:z[0]..z[1]---z[2]}};$0
@@ -140,8 +151,8 @@ endsnippet
 
 
 snippet fun "Traditional function" b
-${1:void} ${2:function_name} ( ${3:int i ...} ){
-${4://statements}
+${1:void} ${2:function_name} (${3:int i ...}){
+	${4://statements}
 };
 endsnippet
 

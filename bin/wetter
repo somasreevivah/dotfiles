@@ -1,2 +1,13 @@
+#! /usr/bin/env bash
+
+test -a ansiweather ||
+{
+  cd $HOME/software;
+  [ ! -d ansiweather ] &&
+  git clone https://github.com/alejandrogallo/ansiweather;
+  cd ansiweather;
+  ln -s  $(pwd)/ansiweather $HOME/.local/bin/ansiweather 
+}
+ansiweather -l Wien,AT
 ansiweather -l Stuttgart,DE
 ansiweather -l Andorra,AD

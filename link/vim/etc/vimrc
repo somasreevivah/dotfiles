@@ -124,13 +124,15 @@ function! TrailingSpacesClean()
   %s/\v\s+$//g
 endfunction
 
-"set undo stuff, it needs VIM 7.3 at least
+" set undo stuff, it needs VIM 7.3 at least but it will check for features
 if has("persistent_undo")
-  " src: http://stackoverflow.com/questions/17936130/vim-undo-undo-changes-after-file-write
   if exists('+undofile')
     set undofile
   endif
-  set undodir=$MYVIMRC/etc/undo
+  if !isdirectory($HOME."/.vim/etc/undo")
+    call mkdir($HOME."/.vim/etc/undo", "", 0700)
+  endif
+  set undodir=$HOME/.vim/etc/undo/
 endif
 
 " allowing modeline
@@ -244,7 +246,8 @@ command! -nargs=* Greplace call GrepAndReplace(<f-args>)
 let maplocalleader = "\<Space>"
 
 "Set maplocalleader to something else if you like
-let mapleader = ','
+", is a bad choice, since it repeats the latest f, t, F, or T see help cpo-;
+let mapleader = '_'
 
 "Save current buffer
 nnoremap <localleader>w :w<cr>
