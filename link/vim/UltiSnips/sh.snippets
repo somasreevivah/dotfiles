@@ -1,3 +1,7 @@
 snippet password "Password prompt" b
 read -s -p "Password: " ${1:varname}
 endsnippet
+
+snippet flags "Bash flags" b
+set -e # Exit script if some command returns non 0 values
+endsnippet
