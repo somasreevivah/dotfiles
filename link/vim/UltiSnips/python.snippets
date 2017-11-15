@@ -33,3 +33,9 @@ endsnippet
 snippet call "Call" b
 subprocess.call([$0])
 endsnippet
+
+snippet gtkimport "Import gtk" b
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+endsnippet
