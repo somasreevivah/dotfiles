@@ -10,6 +10,7 @@ alias conis="papis -l contacts"
 alias vapis="papis --pick-lib --picktool vim gui --vim"
 alias theis="papis -l /home/tsatsoulis/Documents/papers"
 alias fixis="papis -l /home/bumblebee/Documents/Papers"
+alias rawpapis="papis -C ~/.papis/simple-config"
 
 rgrep() {
   grep -r "$@"
