@@ -1,0 +1,11 @@
+[settings]
+default-library = papers
+
+[papers]
+dir = ~/Documents/papers
+
+[books]
+dir = ~/Documents/books
+
+
+# vim: ft=dosini
