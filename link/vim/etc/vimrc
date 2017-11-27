@@ -265,6 +265,9 @@ nnoremap <localleader>q :q<cr>
 set ignorecase
 set smartcase
 
+nnoremap <localleader>o :exec('!rifle '.expand('<cfile>'))<cr>
+nnoremap <localleader>O :exec('!'.input("Open with: ").' '.expand('<cfile>'))<cr>
+
 nnoremap j :echo 'Do not touch it'<cr>
 nnoremap h :echo 'Do not touch it'<cr>
 nnoremap k :echo 'Do not touch it'<cr>
@@ -518,7 +521,7 @@ nnoremap <localleader><localleader>r :call VIMRun()<cr>
 "  W3M {{{1  "
 """"""""""""""
 
-nnoremap <localleader>o :W3m 
+"nnoremap localleader>o :W3m 
 
 
 
