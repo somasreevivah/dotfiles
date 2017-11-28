@@ -471,11 +471,6 @@ endif
 """"""""""""""""""
 nnoremap <localleader><localleader>r :call VIMRun()<cr>
 
-"  W3M {{{1  "
-""""""""""""""
-
-"nnoremap localleader>o :W3m 
-
 
 
 "  Keymaps {{{1  "
@@ -507,17 +502,6 @@ endfunction
 
 " Set default tags filename as 'tags' 
 set tags+=tags
-"nnoremap gt <C-]>
-"vnoremap gt <C-]>
-"I should use the default stuff
-" Go to definition of something
-"nnoremap <F1> <C-]>
-" Get back from definition
-"nnoremap <F2> <C-t>
-" Get back plus delete buffer
-"nnoremap <F3> :bd<cr>
-
-
 
 
 "  Latex {{{1  "
