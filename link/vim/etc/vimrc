@@ -184,21 +184,7 @@ set list
 
 set tags+=~/.vim/commontags
 set omnifunc=syntaxcomplete#Complete
-let OmniCpp_MayCompleteDot      = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow    = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope    = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem     = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch     = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
-let OmniCpp_LocalSearchDecl     = 1 " don't require special style of function opening braces
-
 set complete+=t
-
-" Microsoft Windows stuff {{{1
-
-if !has("unix")
-  set shell=C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\ -executionpolicy\ bypass
-endif
 
 " GrepAndReplace {{{1 "
 
@@ -255,13 +241,6 @@ nnoremap <localleader>w :w<cr>
 "Close vim
 nnoremap <localleader>q :q<cr>
 
-"/ is way too far away, and I want case insensitive!
-" I do not need these anymore
-"nnoremap <localleader>f /\c
-"nnoremap <localleader>F ?\c
-"vnoremap <localleader>f /\c
-"vnoremap <localleader>F ?\c
-"
 set ignorecase
 set smartcase
 
@@ -276,23 +255,6 @@ nnoremap l :echo 'Do not touch it'<cr>
 nnoremap <localleader>cd :cd %:p:h<cr>:pwd<cr>
 command! -nargs=0 Xterm
       \ | execute ':silent !(xterm -e "cd %:p:h && bash" &)&'
-
-" too complicated to replace
-" I do not need these anymore
-"nnoremap <localleader>r :%s/
-"replace in the current visual selection
-"vnoremap <localleader>r :s/
-" replace at the current line
-"nnoremap <localleader>rr :.s/
-
-function! ReplaceYankedTextWithInput()
-  let word_to_replace = input("Replace it by:")
-  exec "%s/".@"."/".word_to_replace."/gc"
-endfunction
-nnoremap <localleader>ry :call ReplaceYankedTextWithInput()<cr>
-
-"Toggle NERDTree file structure easily
-"noremap <localleader>ne :NERDTreeToggle<cr>
 
 " Toggle Tagbar
 noremap <localleader>tg :TagbarToggle<cr>
@@ -312,8 +274,6 @@ vnoremap <silent> <localleader>y y:new<CR>P:wq! ~/reg.txt<CR>
 nnoremap <silent> <localleader>y yy:new<CR>P:wq! ~/reg.txt<CR>
 noremap <silent> <localleader>p :r ~/reg.txt<CR>
 
-"nnoremap gpip execute :normal! vip:'<,'>!par j
-
 
 " Folding stuff {{{1 "
 nnoremap <localleader>zmm :set foldmethod=marker<cr>
@@ -331,13 +291,6 @@ if has("autocmd")
   augroup END " }}}2
 end
 
-" Quickfix stuff {{{1 "
-
-" remap ccnext and cprevious, nice for grep, make etc...
-nnoremap <localleader>cn :cnext<cr>
-nnoremap <localleader>cp :cprevious<cr>
-nnoremap <localleader>ln :lnext<cr>
-nnoremap <localleader>lp :lprevious<cr>
 
 " Buffer control {{{1 "
 
@@ -666,10 +619,6 @@ endif
 if exists("+spelllang")
   set spelllang=en_gb
 endif
-" This should be after the color theme
-hi clear SpellBad
-hi SpellBad guibg=#ff2929 ctermbg=160
-
 
 " local vimrc {{{1
 
