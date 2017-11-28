@@ -1,5 +1,7 @@
 [settings]
 default-library = papers
+opentool = xdg-open
+editor = gedit
 
 [papers]
 dir = ~/Documents/papers
