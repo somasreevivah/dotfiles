@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+# papis-short-help:  Parse doi from url and download via papis-scihub
+# Copyright © 2017 Alejandro Gallo. GPLv3
+
+if [[ $1 = "-h" ]]; then
+  echo "Parse doi from url and download via papis-scihub"
+  cat <<EOF
+Usage: papis doi <url>
+EOF
+  exit 0
+fi
+
+parse_doi() {
+  local url="$1"
+  curl -s "${url}" |
+  grep -i doi      |
+  sed -E "s/(10[a-z0-9.]+\/\w+).*/PAPIS-DOI:\1/i" |
+  sed -n 's/.*PAPIS-DOI://p' |
+  sort | uniq | head -1
+}
+
+url="$1"
+shift
+
+doi=$(parse_doi "${url}")
+
+add_flags="$@"
+
+echo "Doi = ${doi}"
+
+set -x
+papis -l ${PAPIS_LIB} scihub ${doi} ${add_flags}
+set +x
