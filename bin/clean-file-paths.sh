@@ -10,10 +10,11 @@ folder="$1"
 for file_type in d f; do
 
   find "${folder}" -type ${file_type} | while read path; do
-    echo "Processing ${path}"
     new_path=$(echo "${path}" | sed "s/ \+/_/g")
     if [[ ! "${path}" = ${new_path} ]]; then
+      echo "Processing ${path}"
       echo "  to ${new_path}"
+      mv "${path}" "${new_path}"
     fi
   done
 
