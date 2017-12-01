@@ -11,8 +11,7 @@ progname="$(expr "${0}" : '.*/\([^/]*\)')"
 #therefore functions are required: http://mywiki.wooledge.org/BashFAQ/050
 DMENU() {
   dmenu -b \
-    -p 'Jump to' \
-    -l 20 \
+    -l 10 \
     -i \
     -fn fixed-14 \
     -nb \#000000 \
