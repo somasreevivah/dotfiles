@@ -102,6 +102,13 @@ prompt_command() {
   # exit code: 127
   PS1="$PS1$(prompt_exitcode "$exit_code")"
   PS1="$PS1 \$ "
+
+  # Change terminal window title
+  case $TERM in
+    xterm*|*rxvt* )
+      echo -ne "\033]0;${HOSTNAME}:$PWD\007"
+      ;;
+  esac
 }
 
 PROMPT_COMMAND="prompt_command"
