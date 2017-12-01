@@ -78,9 +78,13 @@ if [ -z "${selected_entry}" ]; then
 else
     #escape some characters to prevent i3 to interpret them as a pattern
     # "(" and ")" replace them with "\(" and "\)"
-    #title="$(printf "%s\\n" "${windows}" | sed 's/\([()]\)/\\\1/g')"
-    title="$(printf "%s\\n" "${selected_entry}" | \
-        egrep -o "::.*" | sed 's/:: //g;s/\([()]\)/\\\1/g')"
+    title="$(
+      printf "%s\\n" "${selected_entry}"  |
+      egrep -o "::.*"                     |
+      sed 's/:: //g;s/\([()]\)/\\\1/g'
+    )"
+
+    echo "${title}"
 
     #focus window
     output_msg="$(i3-msg "[title=\"${title}\"] focus" 2>&1)"
