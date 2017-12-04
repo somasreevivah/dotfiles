@@ -24,3 +24,11 @@ zat() {
   zathura --data-dir=$(dirname $file)/zathura_cache/ $@ ||
   zathura $@
 }
+
+urxvt-font-change() {
+  # example $@ = xft:Mono:size=30
+  local size="$@"
+  set -x
+  printf '\e]710;%s\007' "$size"
+  set +x
+}
