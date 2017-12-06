@@ -56,3 +56,9 @@ TEST_CASE( "${2:Title of the case}", "[${3:section}]" ) {
 $0
 }
 endsnippet
+
+snippet deb "Debug" b
+#ifdef DEBUG
+${1:${VISUAL}}
+#endif
+endsnippet
