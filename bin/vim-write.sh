@@ -2,7 +2,10 @@
 
 tmp_file=$(mktemp --suffix=vim-write)
 
-notify-send vim
+#xdotool type --file ${tmp_file} &&
+#current_id=$(xdotool getActiveWindow)
 
 gvim -f ${tmp_file} &&
-xdotool type --file ${tmp_file}
+xclip -i ${tmp_file} &&
+xdotool key Shift+Insert
+
