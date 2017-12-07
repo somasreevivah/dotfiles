@@ -116,6 +116,10 @@ function! s:get_visual_selection()
   return join(lines, "\n")
 endfunction
 
+function! CopyFileLine()
+  let @" = expand('%').":".getpos(".")[1]
+endfunction
+
 function! TabReplace()
   %s/\t/  /g
 endfunction
