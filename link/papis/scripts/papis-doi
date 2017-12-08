@@ -14,7 +14,7 @@ parse_doi() {
   local url="$1"
   curl -s "${url}" |
   grep -i doi      |
-  sed -E "s/(10[a-z0-9.]+\/[a-z0-9.()]+).*/PAPIS-DOI:\1/i" |
+  sed -E "s/(10[a-z0-9.]+\/[a-z0-9.()-]+).*/PAPIS-DOI:\1/i" |
   sed -n 's/.*PAPIS-DOI://p' |
   sort | uniq | head -1
 }
