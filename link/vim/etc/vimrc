@@ -484,6 +484,8 @@ command! -nargs=0 Hebrew    set keymap=hebrew-qwerty | set rightleft
 command! -nargs=0 Arabic    set keymap=arabic-qwerty | set rightleft
 command! -nargs=0 NoSemitic set keymap= | set norightleft
 
+command! -nargs=0 Russian   set keymap=russian-qwerty
+
 if &arabic
   set keymap=arabic-qwerty
 endif
