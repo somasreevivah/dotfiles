@@ -12,9 +12,10 @@ get_href() {
 }
 
 
-SERIE=serie/futurama
 SERIE=${1}
+SERIE=serie/futurama
 BASE_URL=https://watchseriesfree.to
+BASE_URL=https://seriesfree.to
 PROVIDER=nowvideo
 ISOLATE_2="open/cale"
 DATA_FILE=${PROVIDER}_$(tr -d "/" <<<"${SERIE}").txt
