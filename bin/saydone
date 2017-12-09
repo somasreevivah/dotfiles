@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+message="Done"
+
+type -a espeak && espeak ${message} &
+type -a notify-send && notify-send ${message} &
