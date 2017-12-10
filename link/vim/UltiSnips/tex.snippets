@@ -519,6 +519,10 @@ snippet par "partial" w
 \partial
 endsnippet
 
+snippet "(par)\.(\S*)" "partial" r
+\frac{\partial $1}{\partial `!p snip.rv=match.group(2)`}$0
+endsnippet
+
 snippet int "Integral" w
 \int${1:_{${2:\mathbb{R}}}} $0 ${3:\mathrm{d} ${4:x}}
 endsnippet
