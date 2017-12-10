@@ -501,6 +501,10 @@ snippet diff "Integral differential" w
 \mathrm{d} ${1:\\mathbf{r}}$0
 endsnippet
 
+snippet "(diff)\.(\S*)" "diff" r
+\frac{\mathrm{d} $1}{\mathrm{d} `!p snip.rv=match.group(2)`}$0
+endsnippet
+
 snippet ebook "Ebook" b
 % FOR EBOOK
 \usepackage{extsizes}
