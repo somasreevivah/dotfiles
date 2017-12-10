@@ -316,6 +316,18 @@ snippet uu "Subindex (up)" A
 ^{${1:${VISUAL}}}$0
 endsnippet
 
+#snippet "\.u(.*)\.d(.*)" "up-down" r
+#^{`!p snip.rv = match.group(1)`$1}_{`!p snip.rv = match.group(2)`$1}$0
+#endsnippet
+
+snippet "\.u(.*)" "up" r
+^{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+snippet "\.d(.*)" "down" r
+_{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
 #snippet u "Superindex (upper)" i
 #^{${1:${VISUAL}}}$0
 #endsnippet
