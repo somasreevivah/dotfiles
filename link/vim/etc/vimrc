@@ -77,6 +77,13 @@ let g:netrw_browsex_viewer = "rifle"
 
 set cc=80
 
+function! AddToLookUpList()
+  let word = expand("<cword>")
+  exe("silent !echo '".word."' >> to_lookup")
+  redraw!
+  echo "Added ".word
+endfunction
+
 function! GoogleLookUp()
   let s:word = expand("<cword>")
   exec "!elinks 'g ".s:word."'"
