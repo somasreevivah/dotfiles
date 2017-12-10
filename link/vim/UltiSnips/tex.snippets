@@ -501,7 +501,7 @@ snippet diff "Integral differential" w
 \mathrm{d} ${1:\\mathbf{r}}$0
 endsnippet
 
-snippet "(diff)\.(\S*)" "diff" r
+snippet "(diff)\.\.(\S*)" "diff" r
 \frac{\mathrm{d} $1}{\mathrm{d} `!p snip.rv=match.group(2)`}$0
 endsnippet
 
@@ -523,12 +523,20 @@ snippet par "partial" w
 \partial
 endsnippet
 
-snippet "(par)\.(\S*)" "partial" r
+snippet "(par)\.\.(\S*)" "partial" r
 \frac{\partial $1}{\partial `!p snip.rv=match.group(2)`}$0
 endsnippet
 
 snippet int "Integral" w
 \int${1:_{${2:\mathbb{R}}}} $0 ${3:\mathrm{d} ${4:x}}
+endsnippet
+
+snippet frac "Fraction" w
+\frac{$1}{$2}$0
+endsnippet
+
+snippet "(frac)\.\.(\S*)\.\.(\S*)" "Fraction" r
+\frac{`!p snip.rv=match.group(2)`}{`!p snip.rv=match.group(3)`}$0
 endsnippet
 
 
