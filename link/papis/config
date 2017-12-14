@@ -16,6 +16,7 @@ match-format = {doc[tags]}{doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
 header-format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
 mark-opener-format = zathura -P {mark[value]}
 open-mark = True
+default-gui = urwid
 
 gagp = git commit -a && git push origin master
 gs = git status
