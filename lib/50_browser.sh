@@ -10,7 +10,7 @@ else
   if dfs_is_osx ; then
     export BROWSER="open -a Safari"
   else
-    export BROWSER="firefox"
+    export BROWSER="qutebrowser"
   fi
 fi
 
