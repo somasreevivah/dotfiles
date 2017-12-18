@@ -10,5 +10,5 @@ global:
       <ctrl+u>: fake-key <Shift+Home> ;; fake-key <Delete>
       <ctrl+w>: fake-key <ctrl+backspace>
     normal:
-      <ctrl+e>: scroll-page 0 1
-      <ctrl+y>: scroll-page 0 -1
+      <ctrl+e>: scroll-page 0 0.05
+      <ctrl+y>: scroll-page 0 -0.05
