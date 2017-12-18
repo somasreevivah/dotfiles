@@ -11,7 +11,7 @@
 #defscrollback 1024
 #defflow off
 
-#caption always "%{rw} * | %H * $LOGNAME | %{bw}%c %D | %{-}%-Lw%{rw}%50>%{rW}%n%f* %t %{-}%+Lw%<"
+caption always "%{-}%-Lw%{rw}%50>%{rW}%n%f* %t %{-}%+Lw%<"
 
 
 #bind  j next
