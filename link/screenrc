@@ -1,15 +1,18 @@
 # ~/.screenrc
 
-term screen-256color
-startup_message off
-shell -$SHELL
-hardstatus on
-hardstatus alwayslastline '%H:  %-Lw%34>[%n*%f %t]%+Lw'
-escape ^\\\ # Ctrl+\ as escape command.
-bindkey ^A command
-defnonblock on
-defscrollback 1024
-defflow off
+#term screen-256color
+#startup_message off
+#shell -$SHELL
+#hardstatus on
+#hardstatus alwayslastline '%H:  %-Lw%34>[%n*%f %t]%+Lw'
+#escape ^\\\ # Ctrl+\ as escape command.
+#bindkey ^A command
+#defnonblock on
+#defscrollback 1024
+#defflow off
+
+#caption always "%{rw} * | %H * $LOGNAME | %{bw}%c %D | %{-}%-Lw%{rw}%50>%{rW}%n%f* %t %{-}%+Lw%<"
+
 
 #bind  j next
 #bind ^J next
