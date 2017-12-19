@@ -11,5 +11,6 @@ global:
       <ctrl+u>: fake-key <Shift+Home> ;; fake-key <Delete>
       <ctrl+w>: fake-key <ctrl+backspace>
     normal:
+      ',e': spawn urxvt -e bash -c 'curl {url} | urlview '
       <ctrl+e>: scroll-page 0 0.05
       <ctrl+y>: scroll-page 0 -0.05
