@@ -12,5 +12,6 @@ global:
       <ctrl+w>: fake-key <ctrl+backspace>
     normal:
       ',e': spawn urxvt -e bash -c 'curl {url} | urlview '
+      ',v': spawn mpsyt playurl {url}
       <ctrl+e>: scroll-page 0 0.05
       <ctrl+y>: scroll-page 0 -0.05
