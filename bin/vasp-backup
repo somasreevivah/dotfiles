@@ -3,6 +3,7 @@
 BACKUP_FILES=(
 INCAR
 POSCAR
+KPOINTS
 POTCAR
 CONTCAR
 WAVECAR
@@ -25,9 +26,7 @@ for f in ${BACKUP_FILES[@]}; do
   { echo ${ignore_files} | grep ${f} > /dev/null ; } && continue
   if [[ -f ${f} ]]; then
     echo "Backing up ${f}"
-    set -x
     cp ${f} ${folder}/
-    set +x
   fi
 done
 
