@@ -13,10 +13,9 @@ vasprun.xml
 set -e
 
 folder=$1
-[[ -e ${folder} ]] && {
-  echo "Folder ${folder} already exists";
-  exit 1
-} || echo "Using folder ${folder}"
+echo "Using folder ${folder}"
+mkdir ${folder}
+echo "${folder} created"
 shift
 ignore_files="$*"
 
