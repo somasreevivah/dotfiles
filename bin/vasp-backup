@@ -1,0 +1,36 @@
+#! /usr/bin/env bash
+
+BACKUP_FILES=(
+INCAR
+POSCAR
+POTCAR
+CONTCAR
+WAVECAR
+OUTCAR
+vasprun.xml
+)
+
+set -e
+
+folder=$1
+[[ -e ${folder} ]] && {
+  echo "Folder ${folder} already exists";
+  exit 1
+} || echo "Using folder ${folder}"
+shift
+ignore_files="$*"
+
+[[ -n ${ignore_files} ]] && echo "Ignoring: ${ignore_files}"
+
+for f in ${BACKUP_FILES[@]}; do
+  { echo ${ignore_files} | grep ${f} > /dev/null ; } && continue
+  if [[ -f ${f} ]]; then
+    echo "Backing up ${f}"
+    set -x
+    cp ${f} ${folder}/
+    set +x
+  fi
+done
+
+
+# vim: ft=sh
