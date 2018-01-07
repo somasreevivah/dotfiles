@@ -15,7 +15,7 @@ DMENU() {
     -i \
     -fn fixed-14 \
     -nb \#000000 \
-    -nf \#ffffff \
+    -nf \#55ff55 \
     -sb \#c0c0c0 \
     -sf \#000000; 
 }
