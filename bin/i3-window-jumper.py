@@ -72,7 +72,7 @@ def get_all_nodes(dictionary):
 
 tree = json.load(os.popen('i3-msg -t get_tree'))
 
-print(json.dumps(tree, indent=2))
+# print(json.dumps(tree, indent=2))
 
 nodes = get_all_nodes(tree)
 apps = [
