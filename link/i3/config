@@ -52,10 +52,14 @@ bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
 
 # change focus
 # It should be like in vim
-bindsym $mod+h mark \# ; focus left
-bindsym $mod+j mark \# ; focus down
-bindsym $mod+k mark \# ; focus up
-bindsym $mod+l mark \# ; focus right
+#bindsym $mod+h mark #; focus left
+#bindsym $mod+j mark #; focus down
+#bindsym $mod+k mark #; focus up
+#bindsym $mod+l mark #; focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

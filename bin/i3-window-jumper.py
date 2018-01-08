@@ -9,13 +9,23 @@ import itertools
 import re
 import subprocess
 
+def node_to_dmenustring(node):
+    dmenu_text = ""
+    if node.get('urgent'):
+        dmenu_text += '!'
+    if node.get('mark'):
+        dmenu_text += '[\'%s]' % node.get('mark')
+    dmenu_text += node.get('window_properties').get('class')
+    dmenu_text += ' :: '
+    dmenu_text += node.get('name')
+    return dmenu_text
+
+
 def dmenu(nodes):
     dmenu_text = ""
     for node in nodes:
-        dmenu_text += node.get('window_properties').get('class')
-        dmenu_text += ' :: '
-        dmenu_text += node.get('name')
-        dmenu_text += '\n'
+        node['dmenu_text'] = node_to_dmenustring(node)
+    dmenu_text = "\n".join(node.get('dmenu_text') for node in nodes)
     proc = subprocess.Popen(
         [
         "dmenu",
@@ -38,7 +48,7 @@ def dmenu(nodes):
         print('None selected')
         return None
     for node in nodes:
-        if re.match(r'.*'+node.get('name')+r'.*', selected.strip()):
+        if node.get('dmenu_text') == selected.strip():
             print('Node selected', node)
             return node
     return None
@@ -80,5 +90,5 @@ print('Window id', window_id)
 
 os.popen("i3-msg '[id=%s]' focus" % window_id).read()
 
-#vim-run: python3 %
 #vim-run: python3 % | less 
+#vim-run: python3 %
