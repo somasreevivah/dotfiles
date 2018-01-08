@@ -589,8 +589,8 @@ backend      : qt5agg
 
 keymap.fullscreen : f, ctrl+f       # toggling
 keymap.home : h, r, home            # home or reset mnemonic
-keymap.back : left, c, ctrl+p       # forward / backward keys to enable
-keymap.forward : ctrl+n, right, v   #   left handed quick navigation
+keymap.back : left, c, ctrl+p, 1    # forward / backward keys to enable
+keymap.forward : ctrl+n, right, v, 2 #   left handed quick navigation
 keymap.pan : p, e                   # pan mnemonic
 keymap.zoom : o, z, w               # zoom mnemonic
 keymap.save : s                     # saving current figure

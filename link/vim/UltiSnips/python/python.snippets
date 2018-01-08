@@ -38,6 +38,10 @@ snippet get "Get" w
 urllib.request.urlopen(${1:url}).read().decode('utf-8')
 endsnippet
 
+snippet ! "popen" w
+os.popen(${1:"${2:cmd}"}).read()
+endsnippet
+
 snippet logConfig "Logging configuration" b
 logging.basicConfig(${1:filename="", }level=${2:logging.${3:DEBUG}})
 endsnippet
