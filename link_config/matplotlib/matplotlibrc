@@ -591,8 +591,8 @@ keymap.fullscreen : f, ctrl+f       # toggling
 keymap.home : h, r, home            # home or reset mnemonic
 keymap.back : left, c, ctrl+p       # forward / backward keys to enable
 keymap.forward : ctrl+n, right, v   #   left handed quick navigation
-keymap.pan : p                      # pan mnemonic
-keymap.zoom : o, z                  # zoom mnemonic
+keymap.pan : p, e                   # pan mnemonic
+keymap.zoom : o, z, w               # zoom mnemonic
 keymap.save : s                     # saving current figure
 keymap.quit : ctrl+w, cmd+w         # close the current figure
 keymap.grid : g                     # switching on/off a grid in current axes
