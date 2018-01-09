@@ -13,6 +13,9 @@ def node_to_dmenustring(node):
     dmenu_text = ""
     if node.get('urgent'):
         dmenu_text += '!'
+    if node.get('marks'):
+        marks = ''.join(["'" + m for m in node.get('marks')])
+        dmenu_text += '[%s]' % (marks)
     if node.get('mark'):
         dmenu_text += '[\'%s]' % node.get('mark')
     dmenu_text += node.get('window_properties').get('class')
