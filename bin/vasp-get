@@ -4,10 +4,10 @@ set -e
 keyword=${1:--h}
 outcarfile=${2:-OUTCAR}
 
-if [[ -z ${keyword} || ${keyword} = '-h' ]]; then
+if [[ -z "${keyword}" || "${keyword}" = '-h' ]]; then
   echo "Usage: $(basename $0) <vasp-keyword> [OUTCAR FILE]"
   exit 1
 fi
 
-grep -E -m1 -o "${keyword} *= *(\S*) *" ${outcarfile} |
+grep -E -m1 -o "${keyword}[ =]*(\S*) *" ${outcarfile} |
 sed "s/.*=//; s/^ *//"
