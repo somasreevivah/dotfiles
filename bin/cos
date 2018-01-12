@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+#Author: Alejandro Gallo.
+#License: 2018, GPLv3.
+#Email: aamsgallo@gmail.com
+
+map cos $@
