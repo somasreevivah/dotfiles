@@ -624,6 +624,9 @@ if exists("+spelllang")
   set spelllang=en_gb
 endif
 
+" abbreviations {{{1
+cabbrev ct !ctags -R .
+
 " local vimrc {{{1
 
 let local_vimrc = ".vimrc.local"
