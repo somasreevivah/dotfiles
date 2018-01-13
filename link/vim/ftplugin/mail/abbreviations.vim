@@ -1,0 +1,1 @@
+iabbrev lg Liebe Grüße
