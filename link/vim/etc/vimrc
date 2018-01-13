@@ -626,6 +626,7 @@ endif
 
 " abbreviations {{{1
 cabbrev ct !ctags -R .
+cabbrev col column -t -s
 
 " local vimrc {{{1
 
