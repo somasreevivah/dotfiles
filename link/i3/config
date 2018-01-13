@@ -135,8 +135,7 @@ bindsym $mod+Shift+o exec firefox --search "$(rofi -dmenu -p 'Search: ')"
 #bindsym $mod+o exec "~/.dotfiles/bin/lib -d 'default_PICKER=dmenuSearcher' cmd "
 bindsym $mod+o exec \
   export PATH=$PATH:$HOME/.local/bin && \
-  python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1 | \
-  tee ~/.rofi-gui
+  python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1
 
 bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass || rofi-pass"
 
