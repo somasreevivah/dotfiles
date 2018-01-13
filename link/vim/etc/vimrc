@@ -628,6 +628,11 @@ endif
 cabbrev ct !ctags -R .
 cabbrev col column -t -s
 cabbrev gma !git -C <C-R>=expand("%:p:h")<CR> commit -a
+cabbrev ga !git -C <C-R>=expand("%:p:h")<CR> add <C-R>=expand("%:p")<CR>
+cabbrev gm !git -C <C-R>=expand("%:p:h")<CR> commit
+cabbrev gp !git -C <C-R>=expand("%:p:h")<CR> push
+cabbrev gu !git -C <C-R>=expand("%:p:h")<CR> pull
+cabbrev gs !git -C <C-R>=expand("%:p:h")<CR> status
 
 " local vimrc {{{1
 
