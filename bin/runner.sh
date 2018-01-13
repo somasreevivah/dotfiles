@@ -1,11 +1,13 @@
 #! /usr/bin/env bash
 
-~/.dotfiles/bin/i3-window-jumper.py
+~/.dotfiles/bin/i3-window-jumper.py &&
+exit 0 ||
+dmenu_run &&
 exit 0
 
 
 # In general do this
-if which ofi >&1 2> /dev/null; then
+if which rofi >&1 2> /dev/null; then
   if [[ $(hostname) == cqc02 ]]; then
     rofi -show run
   else
