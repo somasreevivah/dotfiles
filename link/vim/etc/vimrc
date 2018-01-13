@@ -627,6 +627,7 @@ endif
 " abbreviations {{{1
 cabbrev ct !ctags -R .
 cabbrev col column -t -s
+cabbrev gma !git -C <C-R>=expand("%:p:h")<CR> commit -a
 
 " local vimrc {{{1
 
