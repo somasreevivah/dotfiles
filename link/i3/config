@@ -310,7 +310,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # More workspace related stuff
 #bindsym $mod+Shift+Tab exec ~/.i3/scripts/desktop.sh
-bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/i3-window-jumper.py
+#bindsym $mod+Shift+Tab exec ~/.dotfiles/bin/i3-window-jumper.py
 bindsym $mod+n workspace next
 bindsym $mod+p workspace prev
 bindsym $mod+Tab workspace back_and_forth

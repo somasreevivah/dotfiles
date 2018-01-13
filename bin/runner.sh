@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+~/.dotfiles/bin/i3-window-jumper.py
+exit 0
 
 
 # In general do this

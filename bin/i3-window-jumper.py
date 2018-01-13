@@ -33,10 +33,10 @@ def node_to_dmenustring(node):
         dmenu_text += '[%s]' % (marks)
     if node.get('mark'):
         dmenu_text += '[\'%s]' % node.get('mark')
-    if node.get('window_properties'):
-        dmenu_text += node.get('window_properties').get('class')
-        dmenu_text += ' :: '
     dmenu_text += node.get('name')
+    if node.get('window_properties'):
+        dmenu_text += ' :: '
+        dmenu_text += node.get('window_properties').get('class')
     return dmenu_text
 
 
