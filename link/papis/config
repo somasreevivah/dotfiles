@@ -32,6 +32,9 @@ dir = ~/Documents/papers
 [books]
 dir = ~/Documents/books
 
+[datasheets]
+dir = ~/Documents/datasheets
+
 [videos]
 dir = ~/Videos/courses
 

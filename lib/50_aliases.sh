@@ -7,6 +7,7 @@ alias grep="grep --color=auto"
 
 alias bookis="papis -l books"
 alias conis="papis -l contacts"
+alias datis="papis -l datasheets"
 alias vapis="papis --pick-lib --picktool vim gui --vim"
 alias theis="papis -l /home/tsatsoulis/Documents/papers"
 alias fixis="papis -l /home/bumblebee/Documents/Papers"

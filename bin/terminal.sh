@@ -9,6 +9,6 @@ elif which lilyterm; then
 elif which konsole; then
   konsole $*
 else
-  xterm $*
+  i3-sensible-terminal $*
 fi
 } || xdg-terminal

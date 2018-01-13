@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+# papis-short-help: Add new contact
+
+info=$(mktemp)
+
+cat > ${info} <<EOF
+first_name: null
+last_name: null
+address:
+    home: null
+email:
+    home: null
+files:
+    - info.yaml
+org:
+    - Unknown
+tel:
+    cell: null
+    home: null
+    work: null
+EOF
+
+papis -l ${PAPIS_LIB} add --from-yaml ${info} --no-document $@
