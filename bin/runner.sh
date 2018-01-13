@@ -3,8 +3,10 @@
 ~/.dotfiles/bin/i3-window-jumper.py &&
 exit 0 ||
 dmenu_run &&
-exit 0
+exit 0 ||
+exit 1
 
+exit 0
 
 # In general do this
 if which rofi >&1 2> /dev/null; then

@@ -37,6 +37,9 @@ def node_to_dmenustring(node):
     if node.get('window_properties'):
         dmenu_text += ' :: '
         dmenu_text += node.get('window_properties').get('class')
+        dmenu_text = dmenu_text
+    else:
+        dmenu_text = 'run ' + dmenu_text
     return dmenu_text
 
 
@@ -117,7 +120,7 @@ apps = [
 ] + [string_to_node(program) for program in dmenu_path()]
 
 app = dmenu(apps)
-if app:
+if isinstance(app, dict):
     print(app)
     window_id = app.get('window')
     if window_id:
@@ -125,7 +128,18 @@ if app:
         os.popen("i3-msg '[id=%s]' focus" % window_id).read()
     else:
         print('Opening program ', app.get('name'))
-        subprocess.call([app.get('name')])
+        subprocess.Popen(
+            app.get('name').split(" "),
+            stdin=None, stdout=None, stderr=None, 
+            shell=False, close_fds=True
+        )
+elif app:
+    print('Opening program ', app)
+    subprocess.Popen(
+        app.split(" "),
+        stdin=None, stdout=None, stderr=None, 
+        shell=False, close_fds=True
+    )
 
-# vim-run: python3 % | less
 # vim-run: python3 %
+# vim-run: python3 % | less
