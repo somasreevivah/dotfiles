@@ -48,6 +48,8 @@ set tilde # show tildes like in vim
 set allow_ansi = yes # default: no
 set ascii_chars = no
 set charset = 'utf-8'
+# Control terminal title
+set ts_enabled = yes
 
 # editor {{{1
 #############

@@ -9,5 +9,5 @@ test -a ansiweather ||
   ln -s  $(pwd)/ansiweather $HOME/.local/bin/ansiweather 
 }
 ansiweather -l Wien,AT
-ansiweather -l Stuttgart,DE
+ansiweather -l St.Gallen,DE
 ansiweather -l Andorra,AD
