@@ -39,7 +39,7 @@ def node_to_dmenustring(node):
         dmenu_text += node.get('window_properties').get('class')
         dmenu_text = dmenu_text
     else:
-        dmenu_text = 'run ' + dmenu_text
+        dmenu_text = '\u2623 ' + dmenu_text
     return dmenu_text
 
 
@@ -76,7 +76,7 @@ def dmenu(nodes):
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE
     )
-    stdout, stderr = proc.communicate(dmenu_text.encode('ascii'))
+    stdout, stderr = proc.communicate(dmenu_text.encode('utf8'))
     selected = stdout.decode()
     print('String: ', selected)
     if not selected:
