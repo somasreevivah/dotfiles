@@ -126,9 +126,19 @@ bindsym $mod+Shift+r exec "~/.i3/i3status.sh" ; restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+Shift+o exec firefox --search "$(rofi -dmenu -p 'Search: ')"
+#bindsym $mod+o exec \
+  #export PATH=$PATH:$HOME/.local/bin && \
+  #python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1
+
+for_window [class="Papis document manager"] floating enable
 bindsym $mod+o exec \
-  export PATH=$PATH:$HOME/.local/bin && \
-  python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1
+  xterm \
+    -class "Papis document manager" \
+    -fa "Monospace" \
+    -fs 14 \
+    -e bash \
+    -ls \
+    -c "python3 -m papis.main -v --pick-lib open 2> .papis.i3.log && sleep .1"
 
 bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass || rofi-pass"
 
