@@ -265,6 +265,10 @@ nnoremap h :echo 'Do not touch it'<cr>
 nnoremap k :echo 'Do not touch it'<cr>
 nnoremap l :echo 'Do not touch it'<cr>
 
+cnoremap <C-v> xclip -o
+"inoremap <localleader><localleader>v <C-r>=system('xclip -o')<cr>
+
+
 nnoremap <localleader>cd :cd %:p:h<cr>:pwd<cr>
 command! -nargs=0 Xterm
       \ | execute ':silent !(xterm -e "cd %:p:h && bash" &)&'
