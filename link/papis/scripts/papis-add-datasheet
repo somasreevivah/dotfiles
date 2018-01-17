@@ -1,0 +1,24 @@
+#! /usr/bin/env bash
+# papis-short-help: Add new datasheet
+
+set -e
+
+info=$(mktemp)
+datasheet=${1}
+shift
+
+echo ${datasheet} |
+grep http && {
+  url=${datasheet}
+  datasheet=$(mktemp)
+  echo "Downloading ${url}"
+  wget -O ${datasheet} ${url}
+}
+
+cat > ${info} <<EOF
+symbol: "$(read -p 'symbol: ' name && echo ${name:-null})"
+title: "$(read -p 'title: ' name && echo ${name:-null})"
+manufacturer: "$(read -p 'manufacturer: ' name && echo ${name:-null})"
+EOF
+
+papis -l ${PAPIS_LIB} add ${datasheet} --from-yaml ${info} $@
