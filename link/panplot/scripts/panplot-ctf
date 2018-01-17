@@ -9,7 +9,13 @@ import matplotlib.pyplot as plt
 import pickle
 # plt.style.use(['dark_background'])
 
-show = False
+import argparse
+
+import logging
+import argparse
+
+
+
 
 def create_interactive_script(file_path):
     fd = open(file_path, 'w+')
@@ -103,7 +109,7 @@ def plot_2body_tensor(data, dirname):
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
     pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
     create_interactive_script(dirname+"/plot.py")
-    if show:
+    if args.show:
         plt.show()
 
 
@@ -170,44 +176,64 @@ def plot_tensor(data, dirname):
     elif len(data[0]) == 6:
         plot_2body_tensor(data, dirname)
 
+if __name__ == "__main__":
 
-log_file = "cc4s.stdout"
-magic_line = "Printing.tensor"
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,
+        description="Plot matrices and tensors"
+    )
 
-index_regex = r"\[(\d+)\]"
-general_format = r"{indices}\((\d+), <(.*)>\)"
-one_body = general_format.format(indices=index_regex*2)
-two_body = general_format.format(indices=index_regex*4)
+    parser.add_argument("-f",
+        help= "Input file.",
+        default="cc4s.stdout",
+        action="store"
+    )
 
-figure_counter = 0
-tensor_start = False
-data = []
-for line in open(log_file):
-    if tensor_start:
-        one_body_match = re.match(one_body, line)
-        two_body_match = re.match(two_body, line)
-        if one_body_match:
-            i = int(one_body_match.group(1))
-            j = int(one_body_match.group(2))
-            index = int(one_body_match.group(3))
-            value = float(one_body_match.group(4))
-            data.append((i, j, index, value))
-            print(data[-1])
-        elif two_body_match:
-            i = int(two_body_match.group(1))
-            j = int(two_body_match.group(2))
-            k = int(two_body_match.group(3))
-            l = int(two_body_match.group(4))
-            index = int(two_body_match.group(5))
-            value = float(two_body_match.group(6))
-            data.append((i, j, k, l, index, value))
-            print(data[-1])
-        else:
-            figure_counter += 1
-            tensor_start = False
-            plot_tensor(data, 'plots/'+str(figure_counter))
-            data = []
-    if re.match(magic_line, line):
-        tensor_start = True
-        print(line)
+    parser.add_argument("-s",
+        help= "Show plots",
+        action="store_true"
+    )
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    log_file = args.f
+    magic_line = "Printing.tensor"
+
+    index_regex = r"\[(\d+)\]"
+    general_format = r"{indices}\((\d+), <(.*)>\)"
+    one_body = general_format.format(indices=index_regex*2)
+    two_body = general_format.format(indices=index_regex*4)
+
+    figure_counter = 0
+    tensor_start = False
+    data = []
+    for line in open(log_file):
+        if tensor_start:
+            one_body_match = re.match(one_body, line)
+            two_body_match = re.match(two_body, line)
+            if one_body_match:
+                i = int(one_body_match.group(1))
+                j = int(one_body_match.group(2))
+                index = int(one_body_match.group(3))
+                value = float(one_body_match.group(4))
+                data.append((i, j, index, value))
+                print(data[-1])
+            elif two_body_match:
+                i = int(two_body_match.group(1))
+                j = int(two_body_match.group(2))
+                k = int(two_body_match.group(3))
+                l = int(two_body_match.group(4))
+                index = int(two_body_match.group(5))
+                value = float(two_body_match.group(6))
+                data.append((i, j, k, l, index, value))
+                print(data[-1])
+            else:
+                figure_counter += 1
+                tensor_start = False
+                plot_tensor(data, 'plots/'+str(figure_counter))
+                data = []
+        if re.match(magic_line, line):
+            tensor_start = True
+            print(line)
 
