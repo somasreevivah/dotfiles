@@ -1,0 +1,213 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+import pickle
+# plt.style.use(['dark_background'])
+
+show = False
+
+def create_interactive_script(file_path):
+    fd = open(file_path, 'w+')
+    fd.write("""\
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+import pickle
+import matplotlib.pyplot as plt
+
+fig = pickle.load(
+    open(
+        os.path.join(os.path.dirname(__file__), 'figure.pickle'),
+        'rb'
+    )
+)
+plt.show(fig)
+
+
+
+""")
+    fd.close()
+    os.chmod(file_path, 0o755)
+
+
+def to_spin(index):
+    return r'\bullet' if index % 2 == 0 else r'\circ'
+
+
+def plot_2body_tensor(data, dirname):
+    import matplotlib.pyplot as plt
+    lims = [
+        max([d[i] for d in data]) + 1
+        for i in range(4)
+    ]
+    print(lims)
+    i_lim = lims[0] * lims[1]
+    j_lim = lims[2] * lims[3]
+    print(i_lim, j_lim)
+    plot_data = np.zeros((i_lim, j_lim))
+    for point in data:
+        i = point[0] + point[1] * lims[0]
+        j = point[2] + point[3] * lims[2]
+        plot_data[i, j] = point[-1]
+    print(plot_data)
+    plt.matshow(np.array(plot_data).T)
+    for point in data:
+        i = point[0] + point[1] * lims[0]
+        j = point[2] + point[3] * lims[2]
+        if abs(point[-1]) <= 1e-9:
+            pass
+        plt.text(
+            i,j, r"$\!^{{{a}{b}}}_{{{i}{j}}}$".format(
+                a=to_spin(point[0]),
+                b=to_spin(point[1]),
+                i=to_spin(point[2]),
+                j=to_spin(point[3]),
+            ),
+            fontsize=15,
+            # color='red',
+            #bbox=dict(facecolor='red', alpha=0.05),
+            horizontalalignment='center',
+            verticalalignment='center'
+        )
+    fig = plt.gcf()
+    plt.colorbar()
+    plt.gca().set_yticks(
+        np.array(range(j_lim)) + 0.5,
+        minor=True
+    )
+    plt.yticks(
+        range(j_lim),
+        ["%s|%s" % (i, j) for j in range(lims[2]) for i in range(lims[3])],
+        rotation=40
+    )
+    plt.gca().set_xticks(
+        np.array(range(i_lim)) + 0.5,
+        minor=True
+    )
+    plt.xticks(
+        range(i_lim),
+        ["%s|%s" % (i, j) for j in range(lims[0]) for i in range(lims[1])],
+        rotation=40
+    )
+    plt.grid(which='minor', linestyle='dashed')
+    plt.xlabel('ab')
+    plt.ylabel('ij')
+    plt.title(r'$X^{ab}_{ij}$')
+    plt.savefig(dirname+"/plot.pdf")
+    pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
+    pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
+    create_interactive_script(dirname+"/plot.py")
+    if show:
+        plt.show()
+
+
+def plot_1body_tensor(data, dirname):
+    import matplotlib.pyplot as plt
+    lims = [
+        max([d[i] for d in data])+1 for i in range(2)
+    ]
+    print(lims)
+    i_lim = lims[0]
+    j_lim = lims[1]
+    plot_data = np.zeros(lims)
+    for point in data:
+        plot_data[point[0], point[1]] = point[-1]
+    plt.matshow(np.array(plot_data).T)
+    for point in data:
+        i = point[0]
+        j = point[1]
+        if abs(point[-1]) <= 1e-9:
+            pass
+            # continue
+        plt.text(
+            i,j, r"$\!^{{{a}}}_{{{i}}}$".format(
+                a=to_spin(point[0]),
+                i=to_spin(point[1])
+            ),
+            fontsize=25,
+            color='red',
+            #bbox=dict(facecolor='red', alpha=0.05),
+            horizontalalignment='center',
+            verticalalignment='center'
+        )
+    fig = plt.gcf()
+    plt.colorbar()
+    plt.gca().set_xticks(
+        np.array(range(i_lim)) + 0.5,
+        minor=True
+    )
+    plt.yticks(
+        range(j_lim),
+        ["%s" % (j) for j in range(j_lim)]
+    )
+    plt.gca().set_yticks(
+        np.array(range(j_lim)) + 0.5,
+        minor=True
+    )
+    plt.grid(which='minor', linestyle='dashed')
+    plt.xlabel('a')
+    plt.ylabel('i')
+    plt.title(r'$X^a_i$')
+    plt.savefig(dirname+"/plot.pdf")
+    pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
+    pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
+    create_interactive_script(dirname+"/plot.py")
+    if show:
+        plt.show()
+
+
+def plot_tensor(data, dirname):
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+    if len(data[0]) == 4:
+        plot_1body_tensor(data, dirname)
+    elif len(data[0]) == 6:
+        plot_2body_tensor(data, dirname)
+
+
+log_file = "cc4s.stdout"
+magic_line = "Printing.tensor"
+
+index_regex = r"\[(\d+)\]"
+general_format = r"{indices}\((\d+), <(.*)>\)"
+one_body = general_format.format(indices=index_regex*2)
+two_body = general_format.format(indices=index_regex*4)
+
+figure_counter = 0
+tensor_start = False
+data = []
+for line in open(log_file):
+    if tensor_start:
+        one_body_match = re.match(one_body, line)
+        two_body_match = re.match(two_body, line)
+        if one_body_match:
+            i = int(one_body_match.group(1))
+            j = int(one_body_match.group(2))
+            index = int(one_body_match.group(3))
+            value = float(one_body_match.group(4))
+            data.append((i, j, index, value))
+            print(data[-1])
+        elif two_body_match:
+            i = int(two_body_match.group(1))
+            j = int(two_body_match.group(2))
+            k = int(two_body_match.group(3))
+            l = int(two_body_match.group(4))
+            index = int(two_body_match.group(5))
+            value = float(two_body_match.group(6))
+            data.append((i, j, k, l, index, value))
+            print(data[-1])
+        else:
+            figure_counter += 1
+            tensor_start = False
+            plot_tensor(data, 'plots/'+str(figure_counter))
+            data = []
+    if re.match(magic_line, line):
+        tensor_start = True
+        print(line)
+
