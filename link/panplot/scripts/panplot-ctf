@@ -164,7 +164,7 @@ def plot_1body_tensor(data, dirname):
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
     pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
     create_interactive_script(dirname+"/plot.py")
-    if show:
+    if args.show:
         plt.show()
 
 
@@ -189,7 +189,7 @@ if __name__ == "__main__":
         action="store"
     )
 
-    parser.add_argument("-s",
+    parser.add_argument("-s", "--show",
         help= "Show plots",
         action="store_true"
     )
