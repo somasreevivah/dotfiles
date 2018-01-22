@@ -1,0 +1,41 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+# papis-short-help: Add mark to document
+# Copyright 2017 Alejandro Gallo. GPLv3
+import sys
+import papis.api
+
+
+def usage():
+    print("Usage: papis add-mark <papis search>")
+
+
+if len(sys.argv) < 2:
+    sys.argv.append('')
+
+
+papis_search = sys.argv[1]
+docs = papis.api.get_documents_in_lib(
+    search=papis_search,
+    library=papis.api.get_lib(),
+)
+
+doc = papis.api.pick_doc(docs) or sys.exit(0)
+
+mark_name = papis.utils.input("Mark name")
+mark_value = papis.utils.input("Mark value")
+
+print(mark_name, mark_value)
+if doc["marks"] is "" or doc["marks"] is None:
+    doc["marks"] = []
+
+if isinstance(doc["marks"], list):
+    doc['marks'].append(
+        dict(name=mark_name, value=mark_value)
+    )
+else:
+    raise Exception("Marks is supposed to be a list")
+
+print('Saving...')
+doc.save()
+
