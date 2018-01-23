@@ -17,6 +17,9 @@ set statusbar-home-tilde true
 map i recolor
 map <C-e> scroll down
 map <C-y> scroll up
+
+"map <C-a> exec papis zathura-citation $FILE
+map <C-a> focus_inputbar ":exec papis zathura-citations $FILE"
 "map [index] aa navigate_index bottom
 
 " vim-run: papis -l books open tour
