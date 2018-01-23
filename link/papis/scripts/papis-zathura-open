@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+# papis-short-help: Reopen document taking into account marks
+# Copyright © 2017 Alejandro Gallo. GPLv3
+# Last modified: 2018-01-23
+set -e
+file=$1
+dir=$(dirname ${file})
+
+
+xterm \
+  -class "Papis document manager" \
+  -fa "Monospace" \
+  -fs 14 \
+  -e bash \
+  -ls \
+  -c "python3 -m papis.main -l $dir open --tool 'zathura'; sleep 1"
