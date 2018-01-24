@@ -17,7 +17,7 @@ if ! exists("NO_SPARTAN")
   Plugin 'burnettk/vim-angular'
   Plugin 'jpalardy/vim-slime'
 endif
-Plugin 'easymotion/vim-easymotion'
+"Plugin 'easymotion/vim-easymotion'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'wilsaj/chuck.vim'
 if has("lua") " it needs lua!
@@ -41,7 +41,7 @@ Plugin 'alejandrogallo/cc4s.vim'
 Plugin 'antoniogsof/vim-molpro'
 Plugin 'alejandrogallo/vim-spice'
 Plugin 'alejandrogallo/vim-asymptote'
-Plugin 'flazz/vim-colorschemes'
+"Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-surround'
 Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'ervandew/supertab'
@@ -49,9 +49,9 @@ Plugin 'scrooloose/nerdcommenter'
 if v:version >= 704
   "it needs vim 7.04..
   Plugin 'SirVer/ultisnips'
-  Plugin 'honza/vim-snippets'
+  "Plugin 'honza/vim-snippets'
 endif
-Plugin 'JuliaEditorSupport/julia-vim'
+"Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'rust-lang/rust.vim'
 "Plugin 'mattn/emmet-vim'
 " Track the engine.
