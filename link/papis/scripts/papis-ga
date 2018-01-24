@@ -52,10 +52,18 @@ if __name__ == "__main__":
         search=search
     )
 
+    print("Checking which documents are tracked")
     documents = [d for d in documents if not is_added(d)]
 
-    doc = papis.api.pick_doc(
-        documents
-    )
+    print("Picking..")
+    if documents:
+        doc = papis.api.pick_doc(
+            documents
+        )
 
-    add(doc)
+        if doc:
+            add(doc)
+        else:
+            print("No document selected")
+    else:
+        print("No document found")
