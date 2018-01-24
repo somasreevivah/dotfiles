@@ -68,6 +68,9 @@ call vundle#end()
 set dictionary-=/usr/share/dict/words
 set dictionary+=/usr/share/dict/words
 
+" for wildcards
+set path+=**
+
 " vertical split default
 let g:netrw_preview   = 1
 let g:netrw_liststyle = 3

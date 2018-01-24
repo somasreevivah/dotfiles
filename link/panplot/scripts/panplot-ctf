@@ -184,7 +184,7 @@ if __name__ == "__main__":
     )
 
     parser.add_argument("-f",
-        help= "Input file.",
+        help= "Input file. (default cc4s.stdout)",
         default="cc4s.stdout",
         action="store"
     )
