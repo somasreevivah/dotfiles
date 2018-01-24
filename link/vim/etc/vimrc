@@ -634,6 +634,8 @@ cabbrev ct !ctags -R .
 cabbrev col column -t -s
 cabbrev gma !git -C <C-R>=expand("%:p:h")<CR> commit -a
 cabbrev ga !git -C <C-R>=expand("%:p:h")<CR> add <C-R>=expand("%:p")<CR>
+cabbrev gap !git -C <C-R>=expand("%:p:h")<CR> add -p <C-R>=expand("%:p")<CR>
+cabbrev gcp !git -C <C-R>=expand("%:p:h")<CR> checkout -p <C-R>=expand("%:p")<CR>
 cabbrev gm !git -C <C-R>=expand("%:p:h")<CR> commit
 cabbrev gp !git -C <C-R>=expand("%:p:h")<CR> push
 cabbrev gu !git -C <C-R>=expand("%:p:h")<CR> pull
