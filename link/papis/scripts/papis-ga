@@ -20,6 +20,24 @@ def add(doc):
     subprocess.call(cmd)
 
 
+def is_added(doc):
+    """Check if doc is added or modified
+    """
+    path = os.path.expanduser(papis.config.get('dir'))
+    files = doc.get_files() + [doc.get_info_file()]
+    for f in files:
+        cmd = ">/dev/null 2>&1 "\
+              "git -C '{}' ls-files --error-unmatch '{}'".format(path, f)
+        if not os.system(cmd) == 0:
+            return False
+        cmd = ">/dev/null 2>&1 git -C '{}' ls-files -m | grep '{}'".format(
+            path, f.replace(os.path.join(path, ""), "")
+        )
+        if os.system(cmd) == 0:
+            return False
+    return True
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         search = ""
@@ -33,6 +51,8 @@ if __name__ == "__main__":
         papis.api.get_lib(),
         search=search
     )
+
+    documents = [d for d in documents if not is_added(d)]
 
     doc = papis.api.pick_doc(
         documents

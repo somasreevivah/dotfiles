@@ -24,7 +24,7 @@ zat() {
     [[ -f $i ]] && file=$i
   done
   [[ -n ${file} ]] &&
-  zathura --data-dir=$(dirname $file)/zathura_cache/ $@ ||
+  zathura --data-dir=$(dirname $file)/.zathura/ $@ ||
   zathura $@
 }
 
