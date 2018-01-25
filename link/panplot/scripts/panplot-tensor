@@ -1,0 +1,234 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+import os
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+import pickle
+# plt.style.use(['dark_background'])
+
+import argparse
+
+import logging
+import argparse
+
+
+
+
+def create_interactive_script(file_path):
+    fd = open(file_path, 'w+')
+    fd.write("""\
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+import pickle
+import matplotlib.pyplot as plt
+
+fig = pickle.load(
+    open(
+        os.path.join(os.path.dirname(__file__), 'figure.pickle'),
+        'rb'
+    )
+)
+plt.show(fig)
+
+
+
+""")
+    fd.close()
+    os.chmod(file_path, 0o755)
+
+
+def to_spin(index):
+    return r'\bullet' if index % 2 == 0 else r'\circ'
+
+
+def plot_2body_tensor(data, dirname):
+    print('Plotting two body')
+    import matplotlib.pyplot as plt
+    lims = [
+        max([d[i] for d in data]) + 1
+        for i in range(4)
+    ]
+    print(lims)
+    i_lim = lims[0] * lims[1]
+    j_lim = lims[2] * lims[3]
+    print(i_lim, j_lim)
+    plot_data = np.zeros((i_lim, j_lim))
+    for point in data:
+        i = point[0] + point[1] * lims[0]
+        j = point[2] + point[3] * lims[2]
+        plot_data[i, j] = point[-1]
+    print(plot_data)
+    plt.matshow(np.array(plot_data).T)
+    for point in data:
+        i = point[0] + point[1] * lims[0]
+        j = point[2] + point[3] * lims[2]
+        if abs(point[-1]) <= 1e-9:
+            pass
+        plt.text(
+            i,j, r"$\!^{{{a}{b}}}_{{{i}{j}}}$".format(
+                a=to_spin(point[0]),
+                b=to_spin(point[1]),
+                i=to_spin(point[2]),
+                j=to_spin(point[3]),
+            ),
+            fontsize=15,
+            # color='red',
+            #bbox=dict(facecolor='red', alpha=0.05),
+            horizontalalignment='center',
+            verticalalignment='center'
+        )
+    fig = plt.gcf()
+    plt.colorbar()
+    plt.gca().set_yticks(
+        np.array(range(j_lim)) + 0.5,
+        minor=True
+    )
+    plt.yticks(
+        range(j_lim),
+        ["%s|%s" % (i, j) for j in range(lims[2]) for i in range(lims[3])],
+        rotation=40
+    )
+    plt.gca().set_xticks(
+        np.array(range(i_lim)) + 0.5,
+        minor=True
+    )
+    plt.xticks(
+        range(i_lim),
+        ["%s|%s" % (i, j) for j in range(lims[0]) for i in range(lims[1])],
+        rotation=40
+    )
+    plt.grid(which='minor', linestyle='dashed')
+    plt.xlabel('ab')
+    plt.ylabel('ij')
+    plt.title(r'$X^{ab}_{ij}$')
+    plt.savefig(dirname+"/plot.pdf")
+    pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
+    pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
+    create_interactive_script(dirname+"/plot.py")
+    if args.show:
+        plt.show()
+
+
+def plot_1body_tensor(data, dirname):
+    print('Plotting one body')
+    import matplotlib.pyplot as plt
+    lims = [
+        max([d[i] for d in data])+1 for i in range(2)
+    ]
+    print(lims)
+    i_lim = lims[0]
+    j_lim = lims[1]
+    plot_data = np.zeros(lims)
+    for point in data:
+        plot_data[point[0], point[1]] = point[-1]
+    plt.matshow(np.array(plot_data).T)
+    for point in data:
+        i = point[0]
+        j = point[1]
+        if abs(point[-1]) <= 1e-9:
+            pass
+            # continue
+        plt.text(
+            i,j, r"$\!^{{{a}}}_{{{i}}}$".format(
+                a=to_spin(point[0]),
+                i=to_spin(point[1])
+            ),
+            fontsize=25,
+            color='red',
+            #bbox=dict(facecolor='red', alpha=0.05),
+            horizontalalignment='center',
+            verticalalignment='center'
+        )
+    fig = plt.gcf()
+    plt.colorbar()
+    plt.gca().set_xticks(
+        np.array(range(i_lim)) + 0.5,
+        minor=True
+    )
+    plt.yticks(
+        range(j_lim),
+        ["%s" % (j) for j in range(j_lim)]
+    )
+    plt.gca().set_yticks(
+        np.array(range(j_lim)) + 0.5,
+        minor=True
+    )
+    plt.grid(which='minor', linestyle='dashed')
+    plt.xlabel('a')
+    plt.ylabel('i')
+    plt.title(r'$X^a_i$')
+    plt.savefig(dirname+"/plot.pdf")
+    pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
+    pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
+    create_interactive_script(dirname+"/plot.py")
+    if args.show:
+        plt.show()
+
+
+def cc4s_to_data(filename):
+    fd = open(filename)
+    first = fd.readline()
+    first = re.sub(r"  *", " ", first)
+    first = first.split(" ")
+    name = first[0]
+    dimension = int(first[1])
+    lens = [int(first[2+k]) for k in range(dimension)]
+    roworder = fd.readline()
+    print("Dimension = ", dimension)
+    print("lens      = ", lens)
+    print("I am interpreting it as row order... otherwise not implemented")
+    data = list()
+    i = 0
+    j = 0
+    for global_idx, line in enumerate(fd):
+        value = float(line)
+        indices = [0 for i in range(len(lens))]
+        rest = global_idx
+        for k, l in enumerate(lens):
+            teiler = np.prod(lens[0: -(k+1)])
+            indices[-(k+1)] = (int(rest // teiler))
+            rest = rest % teiler
+        data.append(tuple(indices + [global_idx, value]))
+    return data
+
+def plot_tensor(data, dirname):
+    print('Plotting ...')
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+    if len(data[0]) == 4:
+        plot_1body_tensor(data, dirname)
+    elif len(data[0]) == 6:
+        plot_2body_tensor(data, dirname)
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,
+        description="Plot matrices and tensors"
+    )
+
+    parser.add_argument("file",
+        help= "Input file.",
+        action="store"
+    )
+
+    parser.add_argument("-s", "--show",
+        help= "Show plots",
+        action="store_true"
+    )
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    data_file = args.file
+    data = cc4s_to_data(data_file)
+    plot_tensor(data, 'plots/test')
+
+
+#vim-run: python3 % Rai_5.tensor
+#vim-run: python3 % Rabij_5.tensor
