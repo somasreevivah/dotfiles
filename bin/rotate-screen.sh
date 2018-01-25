@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
 
+#left
+#xsetwacom  --set "Wacom ISDv4 E6 Finger touch" rotate ccw
+#right
+#xsetwacom  --set "Wacom ISDv4 E6 Finger touch" rotate ccw
+
 rotation_file=~/.cache/rotate-screen
 
 mode=${1}
