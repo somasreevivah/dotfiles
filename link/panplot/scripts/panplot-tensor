@@ -47,7 +47,7 @@ def to_spin(index):
     return r'\bullet' if index % 2 == 0 else r'\circ'
 
 
-def plot_2body_tensor(data, dirname):
+def plot_2body_tensor(data, dirname, title):
     print('Plotting two body')
     import matplotlib.pyplot as plt
     lims = [
@@ -106,7 +106,7 @@ def plot_2body_tensor(data, dirname):
     plt.grid(which='minor', linestyle='dashed')
     plt.ylabel('ab')
     plt.xlabel('ij')
-    plt.title(r'$X^{ab}_{ij}$')
+    plt.title(title)
     plt.savefig(dirname+"/plot.pdf")
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
     pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
@@ -115,7 +115,7 @@ def plot_2body_tensor(data, dirname):
         plt.show()
 
 
-def plot_1body_tensor(data, dirname):
+def plot_1body_tensor(data, dirname, title):
     print('Plotting one body')
     import matplotlib.pyplot as plt
     lims = [
@@ -162,7 +162,7 @@ def plot_1body_tensor(data, dirname):
     plt.grid(which='minor', linestyle='dashed')
     plt.xlabel('i')
     plt.ylabel('a')
-    plt.title(r'$X^a_i$')
+    plt.title(title)
     plt.savefig(dirname+"/plot.pdf")
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
     pickle.dump(data, open(dirname+"/data.pickle", 'wb+'))
@@ -197,14 +197,14 @@ def cc4s_to_data(filename):
         data.append(tuple(indices + [global_idx, value]))
     return data
 
-def plot_tensor(data, dirname):
+def plot_tensor(data, dirname, title=""):
     print('Plotting ...')
     if not os.path.exists(dirname):
         os.makedirs(dirname)
     if len(data[0]) == 4:
-        plot_1body_tensor(data, dirname)
+        plot_1body_tensor(data, dirname, title)
     elif len(data[0]) == 6:
-        plot_2body_tensor(data, dirname)
+        plot_2body_tensor(data, dirname, title)
 
 if __name__ == "__main__":
 
@@ -231,12 +231,20 @@ if __name__ == "__main__":
         action="store_true"
     )
 
+    parser.add_argument(
+        "-t", "--title",
+        help= "Title",
+        action="store",
+        default=""
+    )
+
     # Parse arguments
     args = parser.parse_args()
+    args.title = args.title or args.file
 
     data_file = args.file
     data = cc4s_to_data(data_file)
-    plot_tensor(data, args.out)
+    plot_tensor(data, args.out, title=args.title)
     shutil.copy(args.file, args.out)
 
 
