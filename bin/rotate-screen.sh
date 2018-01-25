@@ -1,13 +1,24 @@
 #! /usr/bin/env bash
 
-#left
-#xsetwacom  --set "Wacom ISDv4 E6 Finger touch" rotate ccw
-#right
-#xsetwacom  --set "Wacom ISDv4 E6 Finger touch" rotate ccw
-
 rotation_file=~/.cache/rotate-screen
 
+#normal left right inverted
 mode=${1}
+
+wacom_rotate() {
+  type -a xsetwacom || return
+  local mode=$1
+  if [[ ${mode} = normal ]]; then
+    mode=none
+  elif [[ ${mode} = left ]]; then
+    mode=ccw
+  elif [[ ${mode} = right ]]; then
+    mode=cw
+  elif [[ ${mode} = inverted ]]; then
+    mode=half
+  fi
+  xsetwacom  --set "Wacom ISDv4 E6 Finger touch" rotate ${mode}
+}
 
 get_primary_screen() {
   xrandr | grep 'connected primary' | cut -f1 -d ' '
@@ -27,11 +38,10 @@ primary=$(get_primary_screen)
 echo "${primary}"
 
 if is_rotated; then
-  cmd="xrandr --output ${primary} --rotate normal"
-  ${cmd}
-  echo "${cmd}" > ${rotation_file}
-else
-  cmd="xrandr --output ${primary} --rotate ${mode}"
-  ${cmd}
-  echo "${cmd}" > ${rotation_file}
+  mode="normal"
 fi
+
+cmd="xrandr --output ${primary} --rotate ${mode}"
+${cmd}
+wacom_rotate $mode
+echo "${cmd}" > ${rotation_file}
