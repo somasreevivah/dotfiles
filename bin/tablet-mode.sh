@@ -1,5 +1,8 @@
 #! /usr/bin/env bash
 
+# Go to the better version.... or come back
+~/.dotfiles/bin/tablet-mode.py && exit 0
+
 main_actions=(
 fullscreen
 go_to_sleep
