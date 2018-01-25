@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import shutil
 import sys
 import os
 import re
@@ -63,14 +64,14 @@ def plot_2body_tensor(data, dirname):
         j = point[2] + point[3] * lims[2]
         plot_data[i, j] = point[-1]
     print(plot_data)
-    plt.matshow(np.array(plot_data).T)
+    plt.matshow(np.array(plot_data))
     for point in data:
         i = point[0] + point[1] * lims[0]
         j = point[2] + point[3] * lims[2]
         if abs(point[-1]) <= 1e-9:
             pass
         plt.text(
-            i,j, r"$\!^{{{a}{b}}}_{{{i}{j}}}$".format(
+            j,i, r"$\!^{{{a}{b}}}_{{{i}{j}}}$".format(
                 a=to_spin(point[0]),
                 b=to_spin(point[1]),
                 i=to_spin(point[2]),
@@ -85,26 +86,26 @@ def plot_2body_tensor(data, dirname):
     fig = plt.gcf()
     plt.colorbar()
     plt.gca().set_yticks(
-        np.array(range(j_lim)) + 0.5,
-        minor=True
-    )
-    plt.yticks(
-        range(j_lim),
-        ["%s|%s" % (i, j) for j in range(lims[2]) for i in range(lims[3])],
-        rotation=40
-    )
-    plt.gca().set_xticks(
         np.array(range(i_lim)) + 0.5,
         minor=True
     )
-    plt.xticks(
+    plt.yticks(
         range(i_lim),
         ["%s|%s" % (i, j) for j in range(lims[0]) for i in range(lims[1])],
         rotation=40
     )
+    plt.gca().set_xticks(
+        np.array(range(j_lim)) + 0.5,
+        minor=True
+    )
+    plt.xticks(
+        range(j_lim),
+        ["%s|%s" % (i, j) for j in range(lims[2]) for i in range(lims[3])],
+        rotation=40
+    )
     plt.grid(which='minor', linestyle='dashed')
-    plt.xlabel('ab')
-    plt.ylabel('ij')
+    plt.ylabel('ab')
+    plt.xlabel('ij')
     plt.title(r'$X^{ab}_{ij}$')
     plt.savefig(dirname+"/plot.pdf")
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
@@ -126,7 +127,7 @@ def plot_1body_tensor(data, dirname):
     plot_data = np.zeros(lims)
     for point in data:
         plot_data[point[0], point[1]] = point[-1]
-    plt.matshow(np.array(plot_data).T)
+    plt.matshow(np.array(plot_data))
     for point in data:
         i = point[0]
         j = point[1]
@@ -134,7 +135,7 @@ def plot_1body_tensor(data, dirname):
             pass
             # continue
         plt.text(
-            i,j, r"$\!^{{{a}}}_{{{i}}}$".format(
+            j,i, r"$\!^{{{a}}}_{{{i}}}$".format(
                 a=to_spin(point[0]),
                 i=to_spin(point[1])
             ),
@@ -147,20 +148,20 @@ def plot_1body_tensor(data, dirname):
     fig = plt.gcf()
     plt.colorbar()
     plt.gca().set_xticks(
-        np.array(range(i_lim)) + 0.5,
-        minor=True
-    )
-    plt.yticks(
-        range(j_lim),
-        ["%s" % (j) for j in range(j_lim)]
-    )
-    plt.gca().set_yticks(
         np.array(range(j_lim)) + 0.5,
         minor=True
     )
+    plt.yticks(
+        range(i_lim),
+        ["%s" % (i) for i in range(i_lim)]
+    )
+    plt.gca().set_yticks(
+        np.array(range(i_lim)) + 0.5,
+        minor=True
+    )
     plt.grid(which='minor', linestyle='dashed')
-    plt.xlabel('a')
-    plt.ylabel('i')
+    plt.xlabel('i')
+    plt.ylabel('a')
     plt.title(r'$X^a_i$')
     plt.savefig(dirname+"/plot.pdf")
     pickle.dump(fig, open(dirname+"/figure.pickle", 'wb+'))
@@ -181,7 +182,7 @@ def cc4s_to_data(filename):
     roworder = fd.readline()
     print("Dimension = ", dimension)
     print("lens      = ", lens)
-    print("I am interpreting it as row order... otherwise not implemented")
+    print("I am interpreting it as column order... otherwise not implemented")
     data = list()
     i = 0
     j = 0
@@ -209,15 +210,23 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter,
-        description="Plot matrices and tensors"
+        description="Plot matrices and tensors in cc4s format"
     )
 
-    parser.add_argument("file",
+    parser.add_argument(
+        "file",
         help= "Input file.",
         action="store"
     )
 
-    parser.add_argument("-s", "--show",
+    parser.add_argument(
+        "-o", "--out",
+        help= "Output directory",
+        action="store"
+    )
+
+    parser.add_argument(
+        "-s", "--show",
         help= "Show plots",
         action="store_true"
     )
@@ -227,8 +236,9 @@ if __name__ == "__main__":
 
     data_file = args.file
     data = cc4s_to_data(data_file)
-    plot_tensor(data, 'plots/test')
+    plot_tensor(data, args.out)
+    shutil.copy(args.file, args.out)
 
 
-#vim-run: python3 % Rai_5.tensor
+#vim-run: python3 % Rai_5.tensor -o plots/test
 #vim-run: python3 % Rabij_5.tensor

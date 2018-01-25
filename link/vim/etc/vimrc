@@ -498,7 +498,7 @@ endif
 
 "  vim-run {{{1  "
 """"""""""""""""""
-nnoremap <localleader><localleader>r :call VIMRun()<cr>
+nnoremap <localleader>r :call VIMRun()<cr>
 
 
 
