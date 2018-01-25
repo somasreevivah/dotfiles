@@ -83,6 +83,14 @@ if exists("&colorcolumn")
   set cc=80
 endif
 
+fun! BreakSave()
+  let point = expand("%:t").":".line(".")
+  call system("echo break ".point." >> ~/.gdbbreakpoints")
+endfunction
+command! -nargs=0 BreakSave  call BreakSave()
+command! -nargs=0 BreakRemove  call system("rm ~/.gdbbreakpoints")
+command! -nargs=0 BreakEdit  e ~/.gdbbreakpoints
+
 function! AddToLookUpList()
   let word = expand("<cword>")
   exe("silent !echo '".word."' >> to_lookup")
