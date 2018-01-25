@@ -4,9 +4,6 @@
 [submodule "compile/c"]
 	path = compile/c
 	url = git://github.com/alejandrogallo/c.git
-[submodule "link/vim/bundle/Vundle.vim"]
-	path = link/vim/bundle/Vundle.vim
-	url = git://github.com/VundleVim/Vundle.vim
 [submodule "link/calcurse"]
 	path = link/calcurse
 	url = https://gitlab.com/alejandroamsg/calendar.git
@@ -16,3 +13,6 @@
 [submodule "docs/wallpapers"]
 	path = docs/wallpapers
 	url = https://gitlab.com/alejandroamsg/wallpapers.git
+[submodule "link/vim/bundle/vim-plug"]
+	path = link/vim/bundle/vim-plug
+	url = https://github.com/junegunn/vim-plug
