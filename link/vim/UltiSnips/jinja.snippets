@@ -1,21 +1,21 @@
 
 snippet jif "if" b
-{% if ${1:whtv} %}
+{%- if ${1:whtv} -%}
 $0
-{% endif %}
+{%- endif -%}
 endsnippet
 
 
 snippet jelse "if eles" b
-{% else %}
+{%- else -%}
 endsnippet
 
 
 
 snippet block "block" b
-{% block ${1:name} %}
+{%- block ${1:name} -%}
 		$2
-{% endblock $1 %}
+{%- endblock $1 -%}
 endsnippet
 
 
@@ -35,118 +35,118 @@ endsnippet
 
 
 snippet raw "escaped block" b
-{% raw %}
+{%- raw -%}
 		$1
-{% endraw %}
+{%- endraw -%}
 endsnippet
 
 
 snippet extends "extends" b
-{% extends "${1:template}" %}
+{%- extends "${1:template}" -%}
 endsnippet
 
 
 snippet include "include" b
-{% include "${1:template}" %}
+{%- include "${1:template}" -%}
 endsnippet
 
 
 snippet import "import" b
-{% import "${1:template}" %}
+{%- import "${1:template}" -%}
 endsnippet
 
 
 snippet from "from/import/as" b
-{% from "${1:template}" import ${2:name}${3: as ${4:$2}} %}
+{%- from "${1:template}" import ${2:name}${3: as ${4:$2}} -%}
 endsnippet
 
 
 snippet filter "filter" b
-{% filter ${1:filter} %}
+{%- filter ${1:filter} -%}
 	$2
-{% endfilter %}
+{%- endfilter -%}
 endsnippet
 
 
 snippet jfor "for" b
-{% for ${1:item} in ${2:sequence} %}
+{%- for ${1:item} in ${2:sequence} -%}
 	$3
-{% endfor %}
+{%- endfor -%}
 endsnippet
 
 
 snippet jfore "for/else" b
-{% for ${1:item} in ${2:sequence} %}
+{%- for ${1:item} in ${2:sequence} -%}
 	$3
-{% else %}
+{%- else -%}
 	$4
-{% endfor %}
+{%- endfor -%}
 endsnippet
 
 
 snippet jif "if" b
-{% if ${1:expr} %}
+{%- if ${1:expr} -%}
 	$2
-{% endif %}
+{%- endif -%}
 endsnippet
 
 
 snippet jife "if/else" b
-{% if ${1:expr} %}
+{%- if ${1:expr} -%}
 	$2
-{% else %}
+{%- else -%}
 	$3
-{% endif %}
+{%- endif -%}
 endsnippet
 
 
 snippet if "if/elif/else" b
-{% if ${1:expr} %}
+{%- if ${1:expr} -%}
 	$2
-{% elif %}
+{%- elif -%}
 	$3
-{% else %}
+{%- else -%}
 	$4
-{% endif %}
+{%- endif -%}
 endsnippet
 
 
 snippet macro "macro" b
-{% macro ${1:name}(${2:args}) %}
+{%- macro ${1:name}(${2:args}) -%}
 	$3
-{% endmacro %}
+{%- endmacro -%}
 endsnippet
 
 
 snippet call "call" b
-{% call ${1:name}(${2:args}) %}
+{%- call ${1:name}(${2:args}) -%}
 	$3
-{% endcall %}
+{%- endcall -%}
 endsnippet
 
 
 snippet set "set" b
-{% set ${1:name} = ${2:'value'} %}
+{%- set ${1:name} = ${2:'value'} -%}
 endsnippet
 
 
 snippet trans "translation" b
-{% trans %}
+{%- trans -%}
 	$1
-{% endtrans %}
+{%- endtrans -%}
 endsnippet
 
 
 snippet with "with" b
-{% with %}
+{%- with -%}
 	$1
-{% endwith %}
+{%- endwith -%}
 endsnippet
 
 snippet autoescape "autoescape" b
-{% autoescape ${1:true} %}
+{%- autoescape ${1:true} -%}
 	$2
-{% endautoescape %}
+{%- endautoescape -%}
 endsnippet
 
 # Filters

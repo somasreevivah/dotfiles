@@ -51,6 +51,7 @@ if v:version >= 704
   "Plug 'honza/vim-snippets'
 endif
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'glench/Vim-Jinja2-Syntax'
 "Plug 'mattn/emmet-vim'
 call plug#end()
 
@@ -450,13 +451,6 @@ let g:neocomplete#enable_fuzzy_completion = 1
 
 
 
-" Fugitive {{{1 "
-nnoremap <localleader>gs :Gstatus
-nnoremap <localleader>gw :Gwrite
-nnoremap <localleader>gm :Gcommit
-nnoremap <localleader>gma :Gcommit -a
-nnoremap <localleader>gp :Gpush
-nnoremap <localleader>gu :Gpull
 
 
 
@@ -640,14 +634,16 @@ endif
 " abbreviations {{{1
 cabbrev ct !ctags -R .
 cabbrev col column -t -s
-cabbrev gma !git -C <C-R>=expand("%:p:h")<CR> commit -a
-cabbrev ga !git -C <C-R>=expand("%:p:h")<CR> add <C-R>=expand("%:p")<CR>
-cabbrev gap !git -C <C-R>=expand("%:p:h")<CR> add -p <C-R>=expand("%:p")<CR>
-cabbrev gcp !git -C <C-R>=expand("%:p:h")<CR> checkout -p <C-R>=expand("%:p")<CR>
-cabbrev gm !git -C <C-R>=expand("%:p:h")<CR> commit
-cabbrev gp !git -C <C-R>=expand("%:p:h")<CR> push
-cabbrev gu !git -C <C-R>=expand("%:p:h")<CR> pull
-cabbrev gs !git -C <C-R>=expand("%:p:h")<CR> status
+
+" git stuff {{{1
+"nnoremap <localleader>gma :!git -C <C-R>=expand("%:p:h")<CR> commit -a
+nnoremap <localleader>gw  :!git -C <C-R>=expand("%:p:h")<CR> add <C-R>=expand("%:p")<CR>
+nnoremap <localleader>gap :!git -C <C-R>=expand("%:p:h")<CR> add -p <C-R>=expand("%:p")<CR>
+nnoremap <localleader>gcp :!git -C <C-R>=expand("%:p:h")<CR> checkout -p <C-R>=expand("%:p")<CR>
+nnoremap <localleader>gm  :!git -C <C-R>=expand("%:p:h")<CR> commit
+nnoremap <localleader>gp  :!git -C <C-R>=expand("%:p:h")<CR> push
+nnoremap <localleader>gu  :!git -C <C-R>=expand("%:p:h")<CR> pull
+nnoremap <localleader>gs  :!git -C <C-R>=expand("%:p:h")<CR> status
 
 " local vimrc {{{1
 
