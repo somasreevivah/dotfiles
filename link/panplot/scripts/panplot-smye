@@ -1,0 +1,104 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import logging
+import argparse
+import collections
+import sys
+import re
+import panplot.templates
+
+def get_bands_from_outcar(filepath):
+    State = collections.namedtuple(
+        'state', ['spin', 'kpoint', 'band', 'energy', 'occupation']
+    )
+    data = []
+    outcar = open(filepath)
+    spin = None
+    line = True
+    start_reading = False
+    while line:
+        line = outcar.readline()
+        m = re.match(r"^ spin component ([12])", line)
+        m = re.match(r"^ spin component ([12])", line)
+        if m:
+            spin = int(m.group(1))
+            # print('spin', spin)
+            outcar.readline()
+            continue
+        m = re.match(r"^ k-point  *([0-9]+)", line)
+        if m:
+            kpoint = int(m.group(1))
+            # print('kpoint', kpoint)
+            continue
+        if start_reading and re.match(r"^ *$", line):
+            # print('Stop reading state block')
+            start_reading = False
+            continue
+        if start_reading:
+            m = re.match(r"^"+" *(\S+)"*3, line)
+            band = m.group(1)
+            energy = m.group(2)
+            occupation = m.group(3)
+            state = State(
+                spin=spin,
+                kpoint=kpoint,
+                band=band,
+                occupation=occupation,
+                energy=energy
+            )
+            data.append(state)
+        m = re.match(r" *band No.  *band energies  *occupation *", line)
+        if m:
+            # print('Start reading state block')
+            start_reading = True
+    return data
+
+
+def get_last_iteration(states):
+    ispin = 2 if [s.spin for s in states if s.spin == 1] else 1
+    nbands =  max({ int(s.band) for s in states })
+    nstates = ispin * nbands
+    return states[-nstates:]
+
+
+def get_max_energy(states):
+    return max([s.energy for s in states])
+
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,
+        description="Plot bands from outcars"
+    )
+
+    parser.add_argument("file",
+        help= "Input file.",
+        action="store"
+    )
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    states = get_bands_from_outcar(sys.argv[1])
+    states = get_last_iteration(states)
+    template = panplot.templates.get('bands.j2')
+    template.environment.globals.update(
+        get_max_energy=lambda states: max([s.energy for s in states])
+    )
+    template.environment.globals.update(
+        get_min_energy=lambda states: min([s.energy for s in states])
+    )
+    text = template.render(
+        states=states,
+        args=args
+    )
+    print(text)
+    open('test.asy', 'w+').write(text)
+
+
+#vim-run: python3 % ~/software/show-me-your-electrons/data/OUTCAR_NOSPIN ; asy -f pdf test.asy && mupdf test.pdf
+#vim-run: python3 % ~/software/show-me-your-electrons/data/OUTCAR
+#vim-run: python3 % data/OUTCAR
