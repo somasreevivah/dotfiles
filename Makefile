@@ -3,4 +3,4 @@
 init:
 	./bin/dfs
 	./bin/dfs sub
-	vim +PluginInstall
+	vim +PlugInstall
