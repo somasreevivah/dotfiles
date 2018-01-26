@@ -79,11 +79,72 @@ if __name__ == "__main__":
         action="store"
     )
 
+    parser.add_argument(
+        "-o", "--out",
+        help= "Output file",
+        default="bands.asy",
+        action="store"
+    )
+
+    parser.add_argument(
+        "-t", "--title",
+        help= "Title",
+        default="",
+        action="store"
+    )
+
+    parser.add_argument(
+        "--erange",
+        type=float,
+        help= "Energy range",
+        nargs=2,
+        default=[],
+        action="store"
+    )
+
+    parser.add_argument(
+        "--brange",
+        help= "Band range",
+        type=int,
+        nargs=2,
+        default=[],
+        action="store"
+    )
+
+    parser.add_argument(
+        "--spin",
+        help= "Spin channel",
+        nargs=1,
+        type=int,
+        default=None,
+        action="store"
+    )
+
+    parser.add_argument(
+        "--height",
+        help= "Height of the plot in cm",
+        type=float,
+        default=10,
+        action="store"
+    )
+
     # Parse arguments
     args = parser.parse_args()
 
     states = get_bands_from_outcar(sys.argv[1])
     states = get_last_iteration(states)
+    if args.spin:
+        states = list(filter(lambda s: s.spin == args.spin[0], states))
+    if args.erange:
+        states = list(filter(
+            lambda s: args.erange[0] <= float(s.energy) <= args.erange[1],
+            states,
+        ))
+    if args.brange:
+        states = list(filter(
+            lambda s: args.brange[0] <= float(s.band) <= args.brange[1],
+            states,
+        ))
     template = panplot.templates.get('bands.j2')
     template.environment.globals.update(
         get_max_energy=lambda states: max([s.energy for s in states])
@@ -95,10 +156,6 @@ if __name__ == "__main__":
         states=states,
         args=args
     )
-    print(text)
-    open('test.asy', 'w+').write(text)
+    open(args.out, 'w+').write(text)
 
 
-#vim-run: python3 % ~/software/show-me-your-electrons/data/OUTCAR_NOSPIN ; asy -f pdf test.asy && mupdf test.pdf
-#vim-run: python3 % ~/software/show-me-your-electrons/data/OUTCAR
-#vim-run: python3 % data/OUTCAR
