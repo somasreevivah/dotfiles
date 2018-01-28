@@ -10,11 +10,6 @@ import os
 
 buttons = [
     {
-        "label": "Fullscreen",
-        "pressed": lambda e: os.system('(sleep .1; i3-msg fullscreen)&'),
-        "released": lambda e: os.system('i3-msg kill')
-    },
-    {
         "label": "Rotate left",
         "pressed": lambda e: os.system(
             "~/.dotfiles/bin/rotate-screen.sh left"
@@ -49,8 +44,10 @@ class Quiz:
         self.main_window = Gtk.Window()
         self.main_window.connect("delete-event", Gtk.main_quit)
         self.main_window.set_decorated(False)
-        self.main_window.set_title("Widget")
+        self.main_window.set_title("TabletModeWidget")
         self.main_window.connect("key-press-event", self.handle_key)
+        self.main_window.set_opacity(0.4)
+        self.screen = self.main_window.get_screen()
 
         Hbox = Gtk.VBox()
         self.definition_label = Gtk.Label()
@@ -67,15 +64,19 @@ class Quiz:
                     self.buttons[-1].connect(ev, button.get(ev))
             Hbox.add(self.buttons[-1])
 
-        Hbox.add(Gtk.VolumeButton())
 
         self.main_window.add(Hbox)
 
         self.main_window.show_all()
         self.main_window.move(0,0)
+        self.main_window.resize(
+            self.main_window.get_size()[0],
+            self.screen.get_height()
+        )
         Gtk.main()
 
     def handle_key(self, w, el):
+        self.main_window.move(0, 0)
         print(el.get_keycode())
         print(el.get_keyval())
         print(el.string)
