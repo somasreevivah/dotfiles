@@ -94,6 +94,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 for_window [title="Papis document manager"] floating enable
+for_window [title="TabletModeWidget"] floating enable
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -263,8 +264,8 @@ bindsym XF86Search            exec espeak search key
 bindsym XF86Tools             exec espeak tools key
 # }}}
 
-bindsym XF86RotateWindows     exec ~/.dotfiles/bin/rotate-screen.sh left
-bindsym XF86TaskPane          exec ~/.dotfiles/bin/tablet-mode.sh
+bindsym XF86RotateWindows     fullscreen
+bindsym XF86TaskPane          exec ~/.dotfiles/bin/tablet-mode.py
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp   exec xbacklight -inc 10
 bindsym XF86AudioRaiseVolume  exec amixer -q sset Master 3%+ && \
