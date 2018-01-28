@@ -1,3 +1,4 @@
+dfs_log sourcing 50_prompt.sh
 # ANSI CODES - SEPARATE MULTIPLE VALUES WITH ;
 #
 #  0  reset          4  underline

@@ -1,3 +1,4 @@
+dfs_log sourcing 50_misc.sh
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 

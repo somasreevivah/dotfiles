@@ -1,3 +1,4 @@
+dfs_log sourcing 50_homebrew.sh
 # OSX-only stuff. Abort if not OSX.
 dfs_is_osx || return 0
 

@@ -1,3 +1,4 @@
+dfs_log sourcing 10_localrc.sh
 
   #This file is to source local configuration files,
   #in our case it is just for the bash configuration file.

@@ -1,3 +1,7 @@
+dfs_log sourcing 50_bash_completion.sh
+# I will ignore it until I find out what is slowing
+# down the sourcing of the bahsrc
+return
 
 COMPLETION_PATHS=(
 /etc/

@@ -1,3 +1,4 @@
+dfs_log sourcing 50_browser.sh
 
 if [[ $TERM = "linux" || $TERM = "screen" ]]; then
   if which elinks &> /dev/null; then

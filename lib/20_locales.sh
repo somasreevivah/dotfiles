@@ -1,3 +1,4 @@
+dfs_log sourcing 20_locales.sh
 
 return
 

@@ -1,3 +1,4 @@
+dfs_log sourcing 50_vcs.sh
 
 # Git shortcuts
 

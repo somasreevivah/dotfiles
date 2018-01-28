@@ -1,3 +1,4 @@
+dfs_log sourcing 50_fkf.sh
 
 fkf() {
   ssh gallo@mz4.fkf.mpg.de $@

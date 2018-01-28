@@ -1,3 +1,4 @@
+dfs_log sourcing 50_term.sh
 #/**************************************************************************/
 #/* -bd color                    border color                              */
 #/* -/+bdc                       turn off/on display of bold as color      */

@@ -1,3 +1,4 @@
+dfs_log sourcing 50_aliases.sh
 
 
 alias octave="octave --silent"

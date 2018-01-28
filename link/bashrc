@@ -5,6 +5,16 @@
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 
+DFS_DEBUG=
+
+dfs_log (){
+  [[ -n ${DFS_DEBUG} ]] &&
+  echo "$(date +"%s %N"): $@" |
+  tee -a ~/.bashrc.debug.log
+}
+
+dfs_log Entering bashrc
+
 #local
 PATH=$HOME/local/bin:$PATH
 
@@ -28,6 +38,7 @@ export MANPATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
 
+dfs_log Paths exported
 
 # Source all files in "lib"
 source_lib_files() {
@@ -45,5 +56,7 @@ source_lib_files() {
 dotfiles() {
   $DOTFILES/bin/dfs "$@" && source_lib_files
 }
+
+dfs_log Sourcing lib files
 
 source_lib_files

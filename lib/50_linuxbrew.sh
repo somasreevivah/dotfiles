@@ -1,3 +1,4 @@
+dfs_log sourcing 50_linuxbrew.sh
 
 [[ $(hostname) = pccq* ]] || return 0
 which brew 2> /dev/null > /dev/null || return

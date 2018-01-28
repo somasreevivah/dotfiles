@@ -1,3 +1,4 @@
+dfs_log sourcing 50_editor.sh
  #Editing
 
 if which vim>/dev/null; then 

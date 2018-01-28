@@ -1,3 +1,4 @@
+dfs_log sourcing 50_ubuntu.sh
 # Ubuntu-only stuff. Abort if not Ubuntu.
 dfs_is_ubuntu || return 1
 

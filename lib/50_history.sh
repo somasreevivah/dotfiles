@@ -1,3 +1,4 @@
+dfs_log sourcing 50_history.sh
 # History settings
 
 # Allow use to re-edit a faild history substitution.

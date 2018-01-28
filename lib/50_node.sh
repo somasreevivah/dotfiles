@@ -1,3 +1,4 @@
+dfs_log sourcing 50_node.sh
 ######################################
 #  I DO NOT KNOW YET WHAT THIS DOES  #
 ######################################

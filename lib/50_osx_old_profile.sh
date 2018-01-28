@@ -1,3 +1,4 @@
+dfs_log sourcing 50_osx_old_profile.sh
 # OSX-only stuff. Abort if not OSX.
 dfs_is_osx || return 1
 

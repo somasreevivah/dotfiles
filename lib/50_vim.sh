@@ -1,3 +1,4 @@
+dfs_log sourcing 50_vim.sh
 
 
 alias vi="vim -N -u $HOME/.vim/etc/vanillaish.rc"

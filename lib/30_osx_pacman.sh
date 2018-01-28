@@ -1,3 +1,4 @@
+dfs_log sourcing 30_osx_pacman.sh
 
 # Package management
 alias dfs_update="brew -qq update && sudo brew upgrade"
