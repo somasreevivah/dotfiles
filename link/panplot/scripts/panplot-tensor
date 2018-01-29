@@ -241,6 +241,7 @@ if __name__ == "__main__":
     # Parse arguments
     args = parser.parse_args()
     args.title = args.title or args.file
+    args.out = args.out or args.file + ".out"
 
     data_file = args.file
     data = cc4s_to_data(data_file)
