@@ -95,6 +95,8 @@ bindsym $mod+Shift+space floating toggle
 
 for_window [title="Papis document manager"] floating enable
 for_window [title="TabletModeWidget"] floating enable
+for_window [title="Keyboard"] floating enable
+for_window [title="florence"] floating enable
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
