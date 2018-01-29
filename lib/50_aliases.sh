@@ -14,7 +14,7 @@ alias theis="papis -l /home/tsatsoulis/Documents/papers"
 alias fixis="papis -l /home/bumblebee/Documents/Papers"
 alias rawpapis="papis -c ~/.papis/simple-config"
 
-alias pplt="panplot"
+alias pp="panplot"
 
 rgrep() {
   grep -r "$@"
