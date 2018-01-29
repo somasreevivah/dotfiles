@@ -16,9 +16,9 @@ alias rawpapis="papis -c ~/.papis/simple-config"
 
 alias pp="panplot"
 
-rgrep() {
-  grep -r "$@"
-}
+rgrep() { grep -r "$@"; }
+igrep() { grep -i "$@"; }
+irgrep() { grep -ir "$@"; }
 
 zat() {
   for i in $@; do
