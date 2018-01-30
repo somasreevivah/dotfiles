@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-test -a ansiweather ||
+which ansiweather > /dev/null ||
 {
   cd $HOME/software;
   [ ! -d ansiweather ] &&
@@ -8,6 +8,21 @@ test -a ansiweather ||
   cd ansiweather;
   ln -s  $(pwd)/ansiweather $HOME/.local/bin/ansiweather 
 }
-ansiweather -l Wien,AT
-ansiweather -l St.Gallen,DE
-ansiweather -l Andorra,AD
+
+cities=(
+Wien,AT
+St.+Gallen,CH
+Andorra
+Stuttgart,DE
+San+Sebastian,ES
+)
+
+type -a parallel > /dev/null &&
+{
+  echo "${cities[@]}" | parallel -k -d ' ' --no-notice ansiweather -l :::
+} ||
+{
+for city in ${cities[@]} ; do
+  ansiweather -l "${city}"
+done
+}
