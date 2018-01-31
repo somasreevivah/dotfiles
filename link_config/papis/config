@@ -28,9 +28,11 @@ gma = git commit -a
 
 [papers]
 dir = ~/Documents/papers
+file-name = {doc[title]}-{doc[author]}
 
 [books]
 dir = ~/Documents/books
+file-name = {doc[title]}-{doc[author]}
 
 [datasheets]
 dir = ~/Documents/datasheets
