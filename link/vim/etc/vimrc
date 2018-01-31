@@ -21,7 +21,7 @@ Plug 'sirtaj/vim-openscad', {'for': 'openscad'}
 if has("lua") " it needs lua!
   "Plug 'Shougo/neocomplete.vim'
 endif
-Plug 'vim-scripts/OmniCppComplete'
+"Plug 'vim-scripts/OmniCppComplete'
 if hostname() != "abakus01"
   Plug 'vim-scripts/vim-auto-save', {'on': 'AutoSaveToggle'}
 endif
@@ -79,11 +79,11 @@ if exists("&colorcolumn")
   set cc=80
 endif
 
-fun! BreakSave()
+fun! BreakAdd()
   let point = expand("%:t").":".line(".")
   call system("echo break ".point." >> ~/.gdbbreakpoints")
 endfunction
-command! -nargs=0 BreakSave  call BreakSave()
+command! -nargs=0 BreakAdd  call BreakAdd()
 command! -nargs=0 BreakRemove  call system("rm ~/.gdbbreakpoints")
 command! -nargs=0 BreakEdit  e ~/.gdbbreakpoints
 
@@ -203,9 +203,9 @@ set list
 
 " OmniCompletion {{{1 "
 
-set tags+=~/.vim/commontags
-set omnifunc=syntaxcomplete#Complete
-set complete+=t
+"set tags+=~/.vim/commontags
+"set omnifunc=syntaxcomplete#Complete
+"set complete+=t
 
 " GrepAndReplace {{{1 "
 
