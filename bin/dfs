@@ -83,6 +83,12 @@ function dfs_assert() {
 
 function dfs_is_osx() { [[ "$OSTYPE" =~ ^darwin ]] || return 1; }
 function dfs_is_linux() { [[ "$OSTYPE" =~ linux ]] || return 1; }
+function dfs_is_rpi() {
+ uname -a |
+ grep raspberrypi > /dev/null &&
+ return 0 ||
+ return 1 
+}
 function dfs_is_debian() { [[ "$(cat /etc/issue 2> /dev/null)" =~ Debian ]] || return 1; }
 function dfs_is_ubuntu() { [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1; }
 function dfs_is_on_mpi_fkf() {

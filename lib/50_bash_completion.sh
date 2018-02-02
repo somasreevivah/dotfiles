@@ -1,4 +1,7 @@
 dfs_log sourcing 50_bash_completion.sh
+
+# This appears to be too expensive for the raspberry pi
+dfs_is_rpi && return
 # I will ignore it until I find out what is slowing
 # down the sourcing of the bahsrc
 
