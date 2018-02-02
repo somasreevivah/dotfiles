@@ -1,5 +1,8 @@
 # vim: ft=gdb
 
+set tui active-border-mode bold
+set tui border-kind ascii
+
 set case-sensitive off
 
 # Print a ctf tensor
