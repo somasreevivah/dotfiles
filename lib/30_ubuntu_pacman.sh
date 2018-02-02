@@ -1,4 +1,5 @@
 dfs_log sourcing 30_ubuntu_pacman.sh
+return
 
 # Package management
 alias dfs_update="sudo apt-get -qq update && sudo apt-get upgrade"
