@@ -37,6 +37,7 @@ prompt_exitcode() {
 
 # Git status.
 prompt_git() {
+  # This is too slow, TODO: try to improve performance
   prompt_getcolors
   local status output flags branch
   status="$(git status 2>/dev/null)"

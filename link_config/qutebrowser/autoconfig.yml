@@ -17,4 +17,4 @@ global:
         ; sleep 3'
       <ctrl+e>: scroll-page 0 0.05
       <ctrl+y>: scroll-page 0 -0.05
-  content.javascript.enabled: false
+  content.javascript.enabled: true
