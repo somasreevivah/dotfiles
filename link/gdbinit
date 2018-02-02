@@ -1,3 +1,5 @@
+# vim: ft=gdb
+
 set case-sensitive off
 
 # Print a ctf tensor
@@ -6,7 +8,7 @@ define ctfprint
 end
 
 # Print a ctf tensor pointer
-define ctfprint
+define ctfprintp
   call $arg0 ->print(stdout)
 end
 
