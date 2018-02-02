@@ -19,3 +19,10 @@ end
 define rcsource
   source ~/.gdbinit
 end
+
+define less
+  python import os
+  python os.popen("less","w").write(    \
+    gdb.execute($arg0,to_string=True) \
+  )
+end
