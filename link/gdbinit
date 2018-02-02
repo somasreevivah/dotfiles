@@ -1,1 +1,16 @@
 set case-sensitive off
+
+# Print a ctf tensor
+define ctfprint
+  call $arg0 .print(stdout)
+end
+
+# Print a ctf tensor pointer
+define ctfprint
+  call $arg0 ->print(stdout)
+end
+
+# Source the main gdbinit
+define rcsource
+  source ~/.gdbinit
+end
