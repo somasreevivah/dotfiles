@@ -42,10 +42,10 @@ Control-k: 'ls -1a\n'
 #Control-space: menu-complete
 $endif
 
-# For python debuger
-$if python -m pdb
-Control-k: 'list .\n'
-$endif
+## For python debuger
+#$if python
+#Control-k: 'list .\n'
+#$endif
 
 # For gdb
 $if gdb
