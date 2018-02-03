@@ -19,16 +19,6 @@ set keymap vi-insert
 # Control + l should clear the screen
 Control-l: clear-screen
 
-$if Bash
-# Only in bash
-Control-e: 'vim\n'
-Control-o: 'ranger\n'
-Control-v: '$(xclip -o) '
-Control-b: 'cd ..\n'
-Control-k: 'ls -1a\n'
-#Control-space: menu-complete
-$endif
-
 # Complete using control x
 Control-x: menu-complete
 
@@ -41,3 +31,23 @@ Control-n: history-search-forward
 
 # no annoying bell
 set bell-style none
+
+$if Bash
+# Only in bash
+Control-e: 'vim\n'
+Control-o: 'ranger\n'
+Control-v: '$(xclip -o) '
+Control-b: 'cd ..\n'
+Control-k: 'ls -1a\n'
+#Control-space: menu-complete
+$endif
+
+# For python debuger
+$if python -m pdb
+Control-k: 'list .\n'
+$endif
+
+# For gdb
+$if gdb
+Control-k: 'list .\n'
+$endif
