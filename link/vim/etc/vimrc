@@ -32,7 +32,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'derekwyatt/vim-fswitch'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'godlygeek/tabular', {'on': 'Tabularize'}
-Plug 'tpope/vim-fugitive', {'on': ['Gstatus', 'Gwrite', 'Gcommit', 'Gpush', 'Gpull'] }
+Plug 'tpope/vim-fugitive', {'on': ['Gstatus', 'Gwrite', 'Gcommit', 'Gblame', 'Gpush', 'Gpull'] }
 "Plug 'tpope/vim-fugitive', {'on': 'Gstatus'}
 Plug 'vim-scripts/gnuplot.vim'
 Plug 'alejandrogallo/vasp.vim'
