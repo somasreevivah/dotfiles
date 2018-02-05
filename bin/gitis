@@ -39,7 +39,6 @@ def get_user_name_from_repo_url(github_repo):
     return re.match(r"^.*github.com/(\S*)/.*$", github_repo).group(1)
 
 
-
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
@@ -64,10 +63,26 @@ if __name__ == "__main__":
         help='Add repository\'s fork as a remote'
     )
 
-
     subparsers.add_parser(
         'aor',
         help='Add owner\'s repository as a remote'
+    )
+
+    clone = subparsers.add_parser(
+        'clone',
+        help='Clone a repository from user'
+    )
+
+    clone.add_argument(
+        '-u',
+        help="Github user",
+        default='alejandrogallo'
+    )
+
+    clone.add_argument(
+        'clone_repo',
+        help='Repository',
+        action='store'
     )
 
 
@@ -90,3 +105,10 @@ if __name__ == "__main__":
         cmd = 'git remote add {} {}'.format(username, urls[url_index])
         print(cmd)
         os.system(cmd)
+    elif args.command == 'clone':
+        os.system(
+            'git clone git://github.com/{}/{}'.format(
+                args.u,
+                args.clone_repo
+            )
+        )
