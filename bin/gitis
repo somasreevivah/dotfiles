@@ -1,0 +1,92 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+import urllib.request
+import json
+import argparse
+import os
+import re
+
+
+def get_json(api_command):
+    return json.loads(
+        urllib.request.urlopen(api_command).read().decode('utf-8')
+    )
+
+
+def get_owner_fork_url(github_repo):
+    d = get_json(
+        'https://api.github.com/repos/{}'.format(github_repo)
+    )
+    if 'source' in d.keys():
+        return d.get('source').get('git_url')
+
+
+def get_repo_fork_urls(github_repo):
+    d = get_json(
+        'https://api.github.com/repos/{}/forks'.format(github_repo)
+    )
+    return [repo.get('git_url') for repo in d]
+
+
+def get_current_dir_github_repo():
+    git_remote = os.popen('git remote -v').read().split('\n')
+    for line in git_remote:
+        m = re.match(r"^origin\s.*github.com/(\S*) .*$", line)
+        if m: return re.sub(r"\.git$", "", m.group(1))
+
+
+def get_user_name_from_repo_url(github_repo):
+    return re.match(r"^.*github.com/(\S*)/.*$", github_repo).group(1)
+
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(
+        description="Tool to make working with github less painful"
+    )
+
+    parser.add_argument(
+        '-r', '--repo',
+        help='Repository to do the action on',
+        default=get_current_dir_github_repo(),
+        action='store'
+    )
+
+    subparsers = parser.add_subparsers(
+        metavar="command",
+        dest="command"
+
+    )
+
+    subparsers.add_parser(
+        'afr',
+        help='Add repository\'s fork as a remote'
+    )
+
+
+    subparsers.add_parser(
+        'aor',
+        help='Add owner\'s repository as a remote'
+    )
+
+
+    args = parser.parse_args()
+
+    print('Current repo:', args.repo)
+
+    if args.command == 'aor':
+        git_url = get_owner_fork_url(args.repo)
+        print('Adding as a remote', git_url)
+        os.popen("git remote add owner {}".format(git_url)).read()
+    elif args.command == 'afr':
+        urls = get_repo_fork_urls(args.repo)
+        for i, url in enumerate(urls):
+            print(i, url)
+        url_index = int(input("Choose url: "))
+        git_url = urls[url_index]
+        print(git_url)
+        username = get_user_name_from_repo_url(git_url)
+        cmd = 'git remote add {} {}'.format(username, urls[url_index])
+        print(cmd)
+        os.system(cmd)
