@@ -5,6 +5,7 @@ import json
 import argparse
 import os
 import re
+import sys
 
 
 def get_json(api_command):
@@ -92,6 +93,9 @@ if __name__ == "__main__":
 
     if args.command == 'aor':
         git_url = get_owner_fork_url(args.repo)
+        if git_url is None:
+            print('No owner found...')
+            sys.exit(1)
         print('Adding as a remote', git_url)
         os.popen("git remote add owner {}".format(git_url)).read()
     elif args.command == 'afr':
