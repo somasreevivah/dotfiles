@@ -38,6 +38,8 @@ def node_to_dmenustring(node):
         dmenu_text += ' :: '
         dmenu_text += node.get('window_properties').get('class')
         dmenu_text = dmenu_text
+    elif node.get('type') == 'workspace':
+        dmenu_text = '\u2620 workspace ' + dmenu_text
     else:
         dmenu_text = '\u2623 ' + dmenu_text
     return dmenu_text
@@ -115,17 +117,22 @@ nodes = get_all_nodes(tree)
 apps = [
     node
     for node in nodes
-    if node.get('window') is not None
+    if (node.get('window') is not None or node.get('type') == 'workspace')
     and not re.match(r"i3bar for output", str(node.get('name')))
 ] + [string_to_node(program) for program in dmenu_path()]
 
 app = dmenu(apps)
+
+print(app)
+
 if isinstance(app, dict):
     print(app)
     window_id = app.get('window')
     if window_id:
         print('Window id', window_id)
         os.popen("i3-msg '[id=%s]' focus" % window_id).read()
+    elif app.get('type') == 'workspace':
+        os.popen("i3-msg workspace %s" % app.get('name')).read()
     else:
         print('Opening program ', app.get('name'))
         subprocess.Popen(
