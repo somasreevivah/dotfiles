@@ -1,6 +1,6 @@
 [include]
-tk-gui = ~/.papis/tk-gui.ini
-rofi-gui = ~/.papis/rofi-gui.ini
+tk-gui = ~/.config/papis/tk-gui.ini
+rofi-gui = ~/.config/papis/rofi-gui.ini
 
 [settings]
 opentool = rifle
