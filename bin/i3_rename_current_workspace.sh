@@ -7,4 +7,19 @@ get_current_workspace() {
   sed "s/.*name\":\"//; s/\".*//"
 }
 
-i3-input -F 'rename workspace '$(get_current_workspace)' to %s' -P 'Rename: '
+
+
+new_name=$(
+  dmenu \
+    -p 'New name' \
+    -fn fixed-14 \
+    -nb \#000000 \
+    -nf \#55ff55 \
+    -sb \#005500 \
+    -sf \#f0f0f0 \
+    -b \
+)
+
+cmd="rename workspace \"$(get_current_workspace)\" to ${new_name}"
+echo "${cmd}"
+i3-msg "${cmd}"
