@@ -1,0 +1,7 @@
+[
+  { "name": "htop;", "icon": "\u2200", "run": "xterm -e htop" },
+  {
+    "name": "qutebrowser https://scihub.la/"
+  }
+]
+

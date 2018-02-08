@@ -10,6 +10,7 @@ It acts as an program launcher and program jumper.
 
 import json
 import os
+import sys
 import copy
 import itertools
 import re
@@ -21,6 +22,16 @@ def string_to_node(string):
         'name': string,
     }
 
+def get_local_options():
+    path = os.path.expanduser(
+        "~/.config/i3-window-jumper/config.json"
+    )
+    if os.path.exists(path):
+        import json
+        print('Sourcing ' + path)
+        return json.load(open(path))
+    else:
+        return []
 
 def node_to_dmenustring(node):
     """Convert a i3 node into a text representable object.
@@ -40,6 +51,8 @@ def node_to_dmenustring(node):
         dmenu_text = dmenu_text
     elif node.get('type') == 'workspace':
         dmenu_text = '\u2620 workspace ' + dmenu_text
+    elif node.get('icon'):
+        dmenu_text = node.get('icon') + ' ' + dmenu_text
     else:
         dmenu_text = '\u2623 ' + dmenu_text
     return dmenu_text
@@ -121,29 +134,28 @@ apps = [
     and not re.match(r"i3bar for output", str(node.get('name')))
 ] + [string_to_node(program) for program in dmenu_path()]
 
+apps += get_local_options()
+
 app = dmenu(apps)
 
 print(app)
 
-if isinstance(app, dict):
-    print(app)
-    window_id = app.get('window')
-    if window_id:
-        print('Window id', window_id)
-        os.popen("i3-msg '[id=%s]' focus" % window_id).read()
-    elif app.get('type') == 'workspace':
-        os.popen("i3-msg workspace %s" % app.get('name')).read()
-    else:
-        print('Opening program ', app.get('name'))
-        subprocess.Popen(
-            app.get('name').split(" "),
-            stdin=None, stdout=None, stderr=None, 
-            shell=False, close_fds=True
-        )
-elif app:
-    print('Opening program ', app)
+if isinstance(app, str):
+    app = string_to_node(app)
+elif app is None:
+    sys.exit(0)
+
+print(app)
+if app.get('window'):
+    print('Window id', app.get('window'))
+    os.popen("i3-msg '[id=%s]' focus" % app.get('window')).read()
+elif app.get('type') == 'workspace':
+    os.popen("i3-msg workspace %s" % app.get('name')).read()
+else:
+    cmd = app.get('run') if app.get('run') else app.get('name')
+    print('Opening program ', cmd)
     subprocess.Popen(
-        app.split(" "),
+        cmd.split(" "),
         stdin=None, stdout=None, stderr=None, 
         shell=False, close_fds=True
     )
