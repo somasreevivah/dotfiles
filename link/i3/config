@@ -45,6 +45,8 @@ bindsym $mod+$windows+h exec "systemctl poweroff"
 bindsym $mod+m exec i3-input -l 1 -F 'mark %s' -P 'Mark name: '
 bindsym $mod+g exec i3-input -l 1 -F '[con_mark=%s] focus' -P 'Goto mark: '
 
+bindsym $windows+r exec ~/.dotfiles/bin/i3_get_current_workspace.sh
+
 # program launcher
 bindsym $mod+d exec ~/.dotfiles/bin/runner.sh
 # program switcher
