@@ -403,8 +403,6 @@ mode "papis" {
     --pick-lib --set "picktool=dmenu editor=gvim" edit
   bindsym $mod+b exec python3 -m papis.main \
     --pick-lib --set picktool=dmenu browse
-  bindsym $mod+b exec python3 -m papis.main \
-    --pick-lib --set picktool=dmenu browse
 
   bindsym Ctrl+c mode "default"
   bindsym Return mode "default"
