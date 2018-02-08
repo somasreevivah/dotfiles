@@ -7,4 +7,4 @@ get_current_workspace() {
   sed "s/.*name\":\"//; s/\".*//"
 }
 
-i3-input -l 1 -F 'rename '$(get_current_workspace)' to %s' -P 'Rename: '
+i3-input -F 'rename workspace '$(get_current_workspace)' to %s' -P 'Rename: '
