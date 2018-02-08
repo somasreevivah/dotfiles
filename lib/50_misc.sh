@@ -20,5 +20,7 @@ fi
 # Disable ansible cows }:]
 export ANSIBLE_NOCOWS=1
 
+export COWPATH=${HOME}/.config/cowsay/cows:/usr/share/cowsay/cows
+
 
 
