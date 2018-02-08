@@ -34,6 +34,12 @@ buttons = [
         ),
     },
     {
+        "label": "Calc",
+        "pressed": lambda e: os.system(
+            "xcalc &"
+        ),
+    },
+    {
         "label": "Quit",
         "pressed": lambda e: Gtk.main_quit(),
     },
