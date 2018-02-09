@@ -1,7 +1,23 @@
 [
-  { "name": "htop;", "icon": "\u2200", "run": "xterm -e htop" },
   {
-    "name": "qutebrowser https://scihub.la/"
+    "name": ":htop",
+    "icon": "\u26f0",
+    "run": "urxvt -e htop"
+  },
+  {
+    "name": ":calcurse",
+    "icon": "\u2685",
+    "run": "urxvt -e calcurse"
+  },
+  {
+    "name": ":lswifi",
+    "icon": "\u2301",
+    "run": "urxvt -e watch -dc nmcli device wifi list"
+  },
+  {
+    "name": ":search",
+    "icon": "\u2301",
+    "run": "qutebrowser :open "
   }
 ]
 

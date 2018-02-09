@@ -50,7 +50,7 @@ def node_to_dmenustring(node):
         dmenu_text += node.get('window_properties').get('class')
         dmenu_text = dmenu_text
     elif node.get('type') == 'workspace':
-        dmenu_text = '\u2620 workspace ' + dmenu_text
+        dmenu_text = '\u25a6 workspace ' + dmenu_text
     elif node.get('icon'):
         dmenu_text = node.get('icon') + ' ' + dmenu_text
     else:
@@ -82,7 +82,7 @@ def dmenu(nodes):
             "-b",
             "-l", "10",
             "-i",
-            "-fn", "fixed-14",
+            "-fn", "monospace-14",
             "-nb", "#000000",
             "-nf", "#55ff55",
             "-sb", "#005500",
@@ -132,9 +132,10 @@ apps = [
     for node in nodes
     if (node.get('window') is not None or node.get('type') == 'workspace')
     and not re.match(r"i3bar for output", str(node.get('name')))
-] + [string_to_node(program) for program in dmenu_path()]
+]
 
 apps += get_local_options()
+apps += [string_to_node(program) for program in dmenu_path()]
 
 app = dmenu(apps)
 
