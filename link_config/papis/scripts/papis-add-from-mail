@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 # papis-short-help: Add contact from mail file
 
+import os
 import sys
+import fileinput
 
 if '-h' in sys.argv:
     print('Add contact from mail file')
@@ -11,15 +13,14 @@ if '-h' in sys.argv:
 import re
 import papis.api
 import papis.utils
+import papis.document
 
-contacts = papis.api.get_documents_in_lib()
+contacts = papis.api.get_documents_in_lib(
+    papis.api.get_lib()
+)
 
-mail_file = sys.argv[1]
 
-mail_fd = open(mail_file)
-papis.commands.init()
-
-for line in mail_fd:
+for line in fileinput.input():
     matches = re.findall(
         r'^(From|cc|to|bcc): *([a-z ]+) *<([a-z@.]+)>',
         line,
@@ -41,9 +42,39 @@ for line in mail_fd:
                 name_result
             )
             database_contact['new_email'] = email
-            papis.api.edit_file(database_contact.get_info_file())
-            print(database_contact.dump())
+            #papis.api.edit_file(database_contact.get_info_file())
+            #print(database_contact.dump())
+        else:
+            print(full_name, email, ' is not in our db')
+            sfull_name = full_name.split()
+            if len(sfull_name) > 1:
+                first_name = sfull_name[0]
+                last_name = " ".join(sfull_name[1:])
+            else:
+                first_name = full_name
+                last_name = ''
+            doc = papis.document.from_data(
+                {
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'email': dict(home=email)
+                }
+            )
+            print(doc.dump())
+            docpath = os.path.expanduser(
+                os.path.join(
+                    papis.config.get('dir'),
+                    papis.utils.clean_document_name(full_name)
+                )
+            )
+            print(docpath)
+            os.makedirs(docpath)
+            doc.set_folder(docpath)
+            doc.save()
+            papis.cache.clear_lib_cache()
 
 
+
+#vim-run: cat ~/matthias.txt | papis -l contacts add-from-mail
 #vim-run: papis -l contacts add-from-mail ~/lozovoi
 #vim-run: papis -h
