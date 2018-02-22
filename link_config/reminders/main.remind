@@ -1,0 +1,1 @@
+INCLUDE [getenv("HOME")]/.calcurse/remind/calcurse.remind
