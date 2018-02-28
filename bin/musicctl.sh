@@ -6,7 +6,6 @@ mpsytpid=$(xdotool search --name mpsyt)
 echo ${mpsytpid}
 
 
-espeak ${cmd}ing
 notify-send \
   -i notification-audio-${cmd} \
   -t 500 ${cmd} "Pid ${mpsytpid} $USER"
