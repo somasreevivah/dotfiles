@@ -23,17 +23,17 @@ use the legally obtainable doi information included in papis
 EOF
 
 SCIHUB_POSSIBLE_DOMAIN_NAMES=(
-sci-hub.bz
-sci-hub.io
-sci-hub.cc
-sci-hub.ac
 sci-hub.tw
-sci-hub.biz
 sci-hub.la
 sci-hub.mn
 sci-hub.name
 sci-hub.tw
 sci-hub.tv
+sci-hub.bz
+sci-hub.io
+sci-hub.cc
+sci-hub.ac
+sci-hub.biz
 sci-hub.hk
 sci-hub.is
 sci-hub.ws

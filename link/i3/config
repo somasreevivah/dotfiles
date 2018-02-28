@@ -95,6 +95,7 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+for_window [title="Papis gtk picker"] floating enable
 for_window [title="Papis document manager"] floating enable
 for_window [title="TabletModeWidget"] floating enable
 for_window [title="Keyboard"] floating enable
