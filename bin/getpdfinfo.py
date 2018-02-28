@@ -13,7 +13,10 @@ doc = pdfminer.pdfdocument.PDFDocument(parsed)
 
 for info in doc.info:
     for key in info:
-        print(key, info[key])
+        try:
+            print(key, info[key].decode('utf8'))
+        except:
+            print(key, info[key])
 
 
 

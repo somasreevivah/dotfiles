@@ -218,10 +218,6 @@ bindsym XF86MyComputer        exec espeak MyComputer key
 bindsym XF86Back              exec espeak Back key
 bindsym XF86Forward           exec espeak Forward key
 bindsym XF86Eject             exec espeak Eject key
-bindsym XF86AudioNext         exec espeak AudioNext key
-bindsym XF86AudioPlay         exec espeak AudioPlay key
-bindsym XF86AudioPrev         exec espeak AudioPrev key
-bindsym XF86AudioStop         exec espeak AudioStop key
 bindsym XF86AudioRecord       exec espeak AudioRecord key
 bindsym XF86AudioRewind       exec espeak AudioRewind key
 bindsym XF86Phone             exec espeak Phone key
@@ -240,7 +236,6 @@ bindsym XF86AudioMicMute      exec espeak AudioMicMute key
 bindsym XF86TouchpadToggle    exec espeak TouchpadToggle key
 bindsym XF86TouchpadOn        exec espeak TouchpadOn key
 bindsym XF86TouchpadOff       exec espeak TouchpadOff key
-bindsym XF86AudioPause        exec espeak AudioPause key
 bindsym XF86Launch3           exec espeak Launch3 key
 bindsym XF86Launch4           exec espeak Launch4 key
 bindsym XF86LaunchB           exec espeak LaunchB key
@@ -268,6 +263,14 @@ bindsym XF86WLAN              exec espeak WLAN key
 bindsym XF86Search            exec espeak search key
 bindsym XF86Tools             exec espeak tools key
 # }}}
+
+# Audio bindings
+bindsym XF86AudioNext         exec ~/.dotfiles/bin/musicctl.sh next
+bindsym XF86AudioPlay         exec ~/.dotfiles/bin/musicctl.sh play
+bindsym XF86AudioPrev         exec ~/.dotfiles/bin/musicctl.sh previous
+bindsym XF86AudioStop         exec ~/.dotfiles/bin/musicctl.sh stop
+bindsym XF86AudioPause        exec ~/.dotfiles/bin/musicctl.sh pause
+
 
 bindsym XF86RotateWindows     fullscreen
 bindsym XF86TaskPane          exec ~/.dotfiles/bin/tablet-mode.py
