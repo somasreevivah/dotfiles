@@ -220,7 +220,6 @@ bindsym XF86Back              exec espeak Back key
 bindsym XF86Forward           exec espeak Forward key
 bindsym XF86Eject             exec espeak Eject key
 bindsym XF86AudioRecord       exec espeak AudioRecord key
-bindsym XF86AudioRewind       exec espeak AudioRewind key
 bindsym XF86Phone             exec espeak Phone key
 bindsym XF86HomePage          exec espeak HomePage key
 bindsym XF86Reload            exec espeak Reload key
@@ -241,7 +240,6 @@ bindsym XF86Launch3           exec espeak Launch3 key
 bindsym XF86Launch4           exec espeak Launch4 key
 bindsym XF86LaunchB           exec espeak LaunchB key
 bindsym XF86Suspend           exec espeak Suspend key
-bindsym XF86AudioForward      exec espeak AudioForward key
 bindsym XF86WebCam            exec espeak WebCam key
 bindsym XF86Mail              exec espeak Mail key
 bindsym XF86Messenger         exec espeak Messenger key
@@ -271,6 +269,8 @@ bindsym XF86AudioPlay         exec ~/.dotfiles/bin/musicctl.sh play
 bindsym XF86AudioPrev         exec ~/.dotfiles/bin/musicctl.sh previous
 bindsym XF86AudioStop         exec ~/.dotfiles/bin/musicctl.sh stop
 bindsym XF86AudioPause        exec ~/.dotfiles/bin/musicctl.sh pause
+bindsym XF86AudioForward      exec ~/.dotfiles/bin/musicctl.sh forward
+bindsym XF86AudioRewind       exec ~/.dotfiles/bin/musicctl.sh rewind
 
 
 bindsym XF86RotateWindows     fullscreen

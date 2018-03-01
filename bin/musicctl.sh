@@ -12,6 +12,10 @@ notify-send \
 
 if [ ${cmd} == pause ] || [ ${cmd} == play ] || [ ${cmd} == stop ]; then
   xdotool key --window ${mpsytpid} p
+elif [ ${cmd} == rewind ]; then
+  xdotool type --window ${mpsytpid} left
+elif [ ${cmd} == forward ]; then
+  xdotool type --window ${mpsytpid} right
 elif [ ${cmd} == next ]; then
   xdotool type --window ${mpsytpid} '>'
 elif [ ${cmd} == previous ]; then
