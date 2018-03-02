@@ -17,6 +17,7 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+(require-package 'pdf-tools)
 (require-package 'evil)
 (require-package 'ledger-mode)
 
