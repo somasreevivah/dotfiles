@@ -17,12 +17,14 @@ Stuttgart,DE
 San+Sebastian,ES
 )
 
-type -a parallel > /dev/null &&
 {
-  echo "${cities[@]}" | parallel -k -d ' ' --no-notice ansiweather -l :::
-} ||
-{
-for city in ${cities[@]} ; do
-  ansiweather -l "${city}"
-done
-}
+  type -a parallel > /dev/null &&
+  {
+    echo "${cities[@]}" | parallel -k -d ' ' --no-notice ansiweather -l :::
+  } ||
+  {
+    for city in ${cities[@]} ; do
+      ansiweather -l "${city}"
+    done
+  }
+} | column -t -s '-'
