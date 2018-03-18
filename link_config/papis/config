@@ -29,7 +29,7 @@ gma = git commit -a
 [papers]
 dir = ~/Documents/papers
 file-name = {doc[title]}-{doc[author]}
-add-default-fields = ['title', 'author', 'year']
+add-default-fields = ['title', 'author', 'year', 'tags']
 
 [books]
 dir = ~/Documents/books
