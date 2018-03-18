@@ -139,15 +139,7 @@ bindsym $mod+Shift+o exec firefox --search "$(rofi -dmenu -p 'Search: ')"
   #python3 -m papis.main -v --picktool rofi --pick-lib gui --rofi 2>&1
 
 for_window [class="Papis document manager"] floating enable
-#bindsym $mod+o exec \
-  #xterm \
-    #-class "Papis document manager" \
-    #-fa "Monospace" \
-    #-fs 14 \
-    #-e bash \
-    #-ls \
-    #-c "python3 -m papis.main -v --pick-lib open 2> .papis.i3.log && sleep .1"
-bindsym $mod+o exec python3 -m papis.main --pick-lib --set picktool=dmenu open
+bindsym $mod+o exec python3 -m papis.main dmenu
 
 bindsym $mod+Shift+p exec "~/.local/bin/rofi-pass || rofi-pass"
 
