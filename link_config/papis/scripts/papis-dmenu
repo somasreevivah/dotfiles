@@ -24,4 +24,6 @@ dmenu \
 -p 'Query:'
 )
 
-python3 -m papis.main --pick-lib --set picktool=dmenu open "$query"
+if [[ -n "${query}" ]]; then
+  python3 -m papis.main --pick-lib --set picktool=dmenu open "$query"
+fi
