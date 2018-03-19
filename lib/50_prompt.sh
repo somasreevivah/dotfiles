@@ -36,6 +36,11 @@ prompt_exitcode() {
 }
 
 # Git status.
+prompt_git_branch() {
+  b="$(git branch 2> /dev/null | sed "s/\* *//" )"
+  [[ -z $b ]] && return;
+  echo "$c1[$c0$b$c1]$c9"
+}
 prompt_git() {
   # This is too slow, TODO: try to improve performance
   prompt_getcolors
@@ -88,7 +93,8 @@ prompt_command() {
   # http://twitter.com/cowboy/status/150254030654939137
   PS1="\n"
   # git: [branch:flags]
-  PS1="$PS1$(prompt_git)"
+  #PS1="$PS1$(prompt_git)"
+  PS1="$PS1$(prompt_git_branch)"
   # misc: [cmd#:hist#]
   # PS1="$PS1$c1[$c0#\#$c1:$c0!\!$c1]$c9"
   # path: [user@host:path]
