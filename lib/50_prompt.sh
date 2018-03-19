@@ -37,7 +37,7 @@ prompt_exitcode() {
 
 # Git status.
 prompt_git_branch() {
-  b="$(git branch 2> /dev/null | sed "s/\* *//" )"
+  b="$(git branch 2> /dev/null | grep '*' | sed "s/\* *//" )"
   [[ -z $b ]] && return;
   echo "$c1[$c0$b$c1]$c9"
 }
