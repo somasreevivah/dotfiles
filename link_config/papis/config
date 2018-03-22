@@ -43,6 +43,7 @@ dir = ~/Documents/datasheets
 dir = ~/Videos/courses
 
 [contacts]
+database-backend=papis
 dir = ~/contacts/general
 mode = contact
 header-format = {doc[first_name]} {doc[last_name]}
