@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+cmd="$@"
+
+if [[ ${cmd} = -h ]] || [[ ${cmd} = --help ]]; then
+  cmd=":help"
+fi
+
+curl "wttr.in/$cmd"
