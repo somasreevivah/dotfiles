@@ -39,3 +39,23 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 endsnippet
+
+snippet argparse-simple "Parse command line" b
+import argparse
+
+
+if __name__ == "__main__":
+
+	parser = argparse.ArgumentParser(
+		formatter_class=argparse.RawTextHelpFormatter,
+		description="$1"
+	)
+
+	parser.add_argument("-f",
+		help= "Input file.",
+		action="store"
+	)
+
+	# Parse arguments
+	args = parser.parse_args()
+endsnippet

@@ -43,18 +43,21 @@ if __name__ == "__main__":
 
     double_bytes = 8
     args = parser.parse_args()
-    print('No      :    {}'.format(args.no))
-    print('Nv      :    {}'.format(args.nv))
-    print('Trunc.  :    {}'.format(args.t))
-    print('#Vectors:    {}'.format(args.fockvectors))
     r_n = args.fockvectors * sum(
         pow(args.no, 2*level) * pow(args.nv, 2*level)
         for level in range(1, args.t+1)
     )
-    print('R^n     :    {}'.format(r_n))
-    print('R^n (B) :    {}'.format(double_bytes * r_n))
-    print('R^n (KB):    {}'.format(double_bytes * r_n / pow(2.0, 10)))
-    print('R^n (GB):    {}'.format(double_bytes * r_n / pow(2.0, 20)))
-    print('R^n (TB):    {}'.format(double_bytes * r_n / pow(2.0, 30)))
+    print('No        :    {}'.format(args.no))
+    print('Nv        :    {}'.format(args.nv))
+    print('Trunc.    :    {}'.format(args.t))
+    print('#Vectors  :    {}'.format(args.fockvectors))
+    print('R^n       :    {}'.format(r_n))
+    print('R^n (B)   :    {}'.format(double_bytes * r_n))
+    print('R^n (KiB) :    {}'.format(double_bytes * r_n / pow(2.0, 10)))
+    print('R^n (MiB) :    {}'.format(double_bytes * r_n / pow(2.0, 20)))
+    print('R^n (GiB) :    {}'.format(double_bytes * r_n / pow(2.0, 30)))
+    print('R^n (TiB) :    {}'.format(double_bytes * r_n / pow(2.0, 40)))
+    print('R^n (PiB) :    {}'.format(double_bytes * r_n / pow(2.0, 50)))
+    print('R^n (EiB) :    {}'.format(double_bytes * r_n / pow(2.0, 60)))
 
 #vim-run: python % 3
