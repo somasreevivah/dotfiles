@@ -13,7 +13,7 @@ bind index za collapse-thread
 
 bind index r reply
 bind index a group-reply
-bind index L list-reply
+#bind index L list-reply
 
 bind index l limit
 

@@ -121,4 +121,8 @@ source $HOME/.mutt/colorschemes/colors.angdraug
 ###############
 source $HOME/.mutt/bindings.muttrc
 
+# notmuch {{{1
+#############
+source $HOME/.mutt/notmuch.muttrc
+
 # vim: cc=80 ft=muttrc
