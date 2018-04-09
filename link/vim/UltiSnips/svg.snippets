@@ -1,0 +1,93 @@
+snippet svg "template" b
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100">
+</svg>
+endsnippet
+
+snippet vimrun
+<!-- inkscape %
+-->
+endsnippet
+
+snippet circle
+<circle
+	cx="${1:center position x}"
+	cy="${2:center position y}"
+	r="${3:radius}"
+	stroke="black"
+	stroke-width="1"
+	fill="blue"
+/>
+endsnippet
+
+snippet ellipse
+<ellipse
+	cx="${1:center position x}"
+	cy="${2:center position y}"
+	rx="${3:radius x}"
+	ry="${4:radius y}"
+	stroke="black"
+	stroke-width="1"
+	fill="blue"
+/>
+endsnippet
+
+snippet line
+<line
+	x1="5"
+	y1="5"
+	x2="55"
+	y2="37"
+	stroke="green"
+/>
+endsnippet
+
+snippet path
+<path
+	d="M5 5 C5 5 10 35 55 30 L30 5"
+	style="stroke:
+	black;fill:white"
+/>
+
+￼
+endsnippet
+
+snippet polygon
+<polygon
+	points="5,5 15,35 55,35 45,5"
+	style="stroke:black;
+	fill:rgb(200,200,200)"
+/>
+
+￼
+endsnippet
+
+snippet polyline
+<polyline
+	points="30,5 25,8 20,12 15,20 20,28 25,32 30,35"
+	style="fill:blue;stroke:black;
+	opacity:.5"
+/>
+
+￼
+endsnippet
+
+snippet rect
+<rect
+	x="5"
+	y="5"
+	width="50"
+	height="30"
+	stroke="red"
+	stroke-width="1"
+/>
+endsnippet
+
+snippet text
+<text
+	x="5"
+	y="15"
+	style="font-family:Times,serif;fill:red;font-size:12px">
+	Text
+</text>
+endsnippet
+
