@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+# Author: Alejandro Gallo.
+# License: 2018, GPLv3.
+# Email: aamsgallo@gmail.com
 
 import sys
 import json
