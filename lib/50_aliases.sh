@@ -6,6 +6,7 @@ alias emacs="emacs -nw"
 alias xa="xargs -n1"
 alias grep="grep --color=auto"
 alias qb="qutebrowser"
+alias jc="jupyter-console"
 
 alias bookis="papis -l books"
 alias conis="papis -l contacts"

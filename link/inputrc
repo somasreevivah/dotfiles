@@ -43,9 +43,8 @@ Control-k: 'ls -1a\n'
 $endif
 
 ## For python debuger
-#$if python
-#Control-k: 'list .\n'
-#$endif
+$if python
+$endif
 
 # For gdb
 $if gdb

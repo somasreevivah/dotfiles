@@ -12,7 +12,7 @@ global:
       <ctrl+w>: fake-key <ctrl+backspace>
     normal:
       ',e': spawn urxvt -e bash -c 'curl {url} | urlview '
-      ',v': spawn mpsyt playurl {url}
+      ';v': hint links spawn mpsyt playurl {hint-url}
       ;p: hint links fill :spawn urxvt -e bash -c 'python3 -m papis.main scihub {hint-url}
         ; sleep 3'
       <ctrl+e>: scroll-page 0 0.05
