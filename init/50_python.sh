@@ -1,7 +1,5 @@
 
 
-
-
 if ! type pip3 2>&1 > /dev/null ; then
   dfs_error "No pip found..."
   return 1
