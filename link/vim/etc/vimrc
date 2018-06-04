@@ -501,6 +501,8 @@ command! -nargs=0 Arabic    set keymap=arabic-qwerty | set rightleft
 command! -nargs=0 NoSemitic set keymap= | set norightleft
 
 command! -nargs=0 Russian   set keymap=russian-qwerty
+  \ | set spelllang=ru
+  \ | set spell
 
 if &arabic
   set keymap=arabic-qwerty
