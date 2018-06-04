@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+if [[ $1 = -h ]]; then
+  echo "Get diff by commit message"
+  echo ""
+  echo "Usage:"
+  echo "  git diffm <commit message>"
+  exit 0
+fi
+
+select commit in $(
+  git log --oneline  |
+  sed "s/ /_/g" |
+  grep "$@"
+); do
+  git diff "$(echo $commit | awk -F '_' '{print $1}')"
+  exit 0
+done
