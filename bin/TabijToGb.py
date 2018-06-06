@@ -44,7 +44,7 @@ if __name__ == "__main__":
     double_bytes = 8
     args = parser.parse_args()
     r_n = args.fockvectors * sum(
-        pow(args.no, 2*level) * pow(args.nv, 2*level)
+        pow(args.no, level) * pow(args.nv, level)
         for level in range(1, args.t+1)
     )
     print('No        :    {}'.format(args.no))
