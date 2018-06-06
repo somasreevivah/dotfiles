@@ -73,3 +73,15 @@ endsnippet
 snippet vimrun "Vim-run code snippet" b
 #vim-run: gnuplot -p %$0
 endsnippet
+
+snippet for "for loop" b
+do for [${1:var}=[${2:0}:${3:10}] {
+	$0
+}
+endsnippet
+
+snippet fori "for loop" b
+do for [${1:var} in ${3:list}] {
+	$0
+}
+endsnippet
