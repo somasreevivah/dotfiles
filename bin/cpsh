@@ -1,0 +1,44 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import prompt_toolkit
+import tempfile
+import os
+
+headers = """
+#include <complex>
+#include <limits>
+#include <iostream>
+#include <algorithm>
+#include <functional>
+"""
+
+main = """
+int main(int argc, char *argv[])
+{{
+    {program}
+
+    return 0;
+}}
+"""
+
+CXX = "g++"
+
+def write_and_compile(lines):
+    text = "\n".join(lines)
+    cxxfile = tempfile.mktemp(suffix='.cpp')
+    with open(cxxfile, 'w+') as fd:
+        fd.write(headers)
+        fd.write(main.format(program=text))
+    retval = os.system('g++ ' + cxxfile)
+    if retval > 0:
+        lines.pop()
+
+
+if __name__ == "__main__":
+
+    lines = []
+    while True:
+        result = prompt_toolkit.prompt('>> ')
+        lines += [result]
+        write_and_compile(lines)
