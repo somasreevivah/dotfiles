@@ -6,7 +6,7 @@ import tempfile
 import os
 
 headers = """
-#include <complex>
+#include <vector>
 #include <limits>
 #include <iostream>
 #include <algorithm>
@@ -27,12 +27,15 @@ CXX = "g++"
 def write_and_compile(lines):
     text = "\n".join(lines)
     cxxfile = tempfile.mktemp(suffix='.cpp')
+    exxfile = cxxfile + '.exe'
     with open(cxxfile, 'w+') as fd:
         fd.write(headers)
         fd.write(main.format(program=text))
-    retval = os.system('g++ ' + cxxfile)
+    retval = os.system('g++ -std=c++11 ' + cxxfile + ' -o ' + exxfile)
     if retval > 0:
         lines.pop()
+    else:
+        os.system(exxfile)
 
 
 if __name__ == "__main__":
