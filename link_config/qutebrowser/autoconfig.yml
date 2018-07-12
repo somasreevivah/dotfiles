@@ -13,6 +13,7 @@ global:
     normal:
       ',e': spawn urxvt -e bash -c 'curl {url} | urlview '
       ';v': hint links spawn mpsyt playurl {hint-url}
+      ',p': hint links spawn mpv {hint-url}
       ;p: hint links fill :spawn urxvt -e bash -c 'python3 -m papis.main scihub {hint-url}
         ; sleep 3'
       <ctrl+e>: scroll-page 0 0.05
