@@ -16,6 +16,7 @@ settings:
         ;p: hint links fill :spawn urxvt -e bash -c 'python3 -m papis.main scihub
           {hint-url} ; sleep 3'
         ;v: hint links spawn mpsyt playurl {hint-url}
+        ',p': hint links spawn mpv {hint-url}
         <ctrl+e>: scroll-page 0 0.05
         <ctrl+y>: scroll-page 0 -0.05
   content.javascript.enabled:
