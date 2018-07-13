@@ -2,6 +2,12 @@ snippet so "standard output" b
 message(${1:"something"})
 endsnippet
 
+snippet if "if" b
+if (${1:var})
+	$0
+endif()
+endsnippet
+
 snippet init
 cmake_minimum_required(VERSION ${1:2.8.2})
 project(${2:ProjectName})

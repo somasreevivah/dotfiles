@@ -1,5 +1,9 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Author: Alejandro Gallo.
+# License: 2017, GPLv3.
+# License: 2018, GPLv3.
+# Email: aamsgallo@gmail.com
 """
 Basically this program is replaces the functionality of rofi
 
@@ -122,44 +126,47 @@ def get_all_nodes(dictionary):
             return [dictionary]
 
 
-tree = json.load(os.popen('i3-msg -t get_tree'))
+def main():
 
-# print(json.dumps(tree, indent=2))
+    tree = json.load(os.popen('i3-msg -t get_tree'))
 
-nodes = get_all_nodes(tree)
-apps = [
-    node
-    for node in nodes
-    if (node.get('window') is not None or node.get('type') == 'workspace')
-    and not re.match(r"i3bar for output", str(node.get('name')))
-]
+    # print(json.dumps(tree, indent=2))
 
-apps += get_local_options()
-apps += [string_to_node(program) for program in dmenu_path()]
+    nodes = get_all_nodes(tree)
+    apps = [
+        node
+        for node in nodes
+        if (node.get('window') is not None or node.get('type') == 'workspace')
+        and not re.match(r"i3bar for output", str(node.get('name')))
+    ]
 
-app = dmenu(apps)
+    apps += get_local_options()
+    apps += [string_to_node(program) for program in dmenu_path()]
 
-print(app)
+    app = dmenu(apps)
 
-if isinstance(app, str):
-    app = string_to_node(app)
-elif app is None:
-    sys.exit(0)
+    print(app)
 
-print(app)
-if app.get('window'):
-    print('Window id', app.get('window'))
-    os.popen("i3-msg '[id=%s]' focus" % app.get('window')).read()
-elif app.get('type') == 'workspace':
-    os.popen("i3-msg workspace %s" % app.get('name')).read()
-else:
-    cmd = app.get('run') if app.get('run') else app.get('name')
-    print('Opening program ', cmd)
-    subprocess.Popen(
-        cmd.split(" "),
-        stdin=None, stdout=None, stderr=None, 
-        shell=False, close_fds=True
-    )
+    if isinstance(app, str):
+        app = string_to_node(app)
+    elif app is None:
+        sys.exit(0)
 
-# vim-run: python3 %
-# vim-run: python3 % | less
+    print(app)
+    if app.get('window'):
+        print('Window id', app.get('window'))
+        os.popen("i3-msg '[id=%s]' focus" % app.get('window')).read()
+    elif app.get('type') == 'workspace':
+        os.popen("i3-msg workspace %s" % app.get('name')).read()
+    else:
+        cmd = app.get('run') if app.get('run') else app.get('name')
+        print('Opening program ', cmd)
+        subprocess.Popen(
+            cmd.split(" "),
+            stdin=None, stdout=None, stderr=None, 
+            shell=False, close_fds=True
+        )
+
+
+if __name__ == "__main__":
+    main()
