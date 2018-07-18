@@ -93,8 +93,22 @@ endsnippet
 
 snippet props
 set_target_properties(${1:target}
-${2:properties} ${3:compile_flags}
-${0:"-O3 -Wall -pedantic"}
+	PROPERTIES
+	-O0
+	-g
+	-Wall -Werror -Wextra
+	-std=c++11
+	-pedantic
+)
+endsnippet
+
+snippet flags
+set_target_properties(${1:target}
+PUBLIC
+	-O0
+	-Wall -Werror -Wextra
+	-std=c++11
+	-pedantic
 )
 endsnippet
 
