@@ -1,3 +1,23 @@
+bin/a.out
+bin/vasputil_chgplaneplot
+link/emacs.d/spacemacs/
+link/jupyter/jupyter_notebook_config.py
+link/panplot/scripts/R0_5.tensor
+link/panplot/scripts/Rabij_5.tensor
+link/panplot/scripts/Rai_5.tensor
+link/panplot/scripts/plots/
+link/panplot/scripts/tags
+link/vim/spell/en.utf-8.add
+link/weechat/python/autoload/listbuffer.py
+link_config/fish/fish_history
+link_config/fish/fishd.cqc02
+link_config/papis/cache/
+link_config/qutebrowser/keys.conf
+link_config/qutebrowser/qsettings/
+link_config/qutebrowser/userscripts/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
 link/vim/spell/*spl
 link/vim/spell/*sug
 
