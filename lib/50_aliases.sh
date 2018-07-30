@@ -3,6 +3,9 @@ dfs_log sourcing 50_aliases.sh
 # terminal mode only, not gui
 alias emacs="emacs -nw"
 
+gdumb(){
+  cat - | gnuplot "$@" -e 'set terminal dumb; plot "<cat"'
+}
 alias xa="xargs -n1"
 alias grep="grep --color=auto"
 alias qb="qutebrowser"

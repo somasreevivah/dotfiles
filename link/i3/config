@@ -97,7 +97,7 @@ bindsym $mod+Shift+space floating toggle
 
 #for_window [class="mpv"] floating enable
 assign [class="mpv"] 10
-for_window [title="Papis gtk picker"] floating enable
+#for_window [title="Papis gtk picker"] floating enable
 for_window [title="Papis document manager"] floating enable
 for_window [title="TabletModeWidget"] floating enable
 for_window [title="Keyboard"] floating enable
