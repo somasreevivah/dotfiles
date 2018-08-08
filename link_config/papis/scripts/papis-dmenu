@@ -25,5 +25,12 @@ dmenu \
 )
 
 if [[ -n "${query}" ]]; then
-  python3 -m papis.main --pick-lib --set picktool=dmenu open "$query"
+
+  papis \
+    --pick-lib \
+    --set header-format \
+        "{doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})" \
+    --set picktool dmenu \
+    open "$query"
+
 fi
