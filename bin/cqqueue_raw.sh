@@ -1,4 +1,6 @@
 #! /usr/bin/bash
+set -eu
+
 echo -n "Checking if in abakus... "
 if [[ ! $HOSTNAME =~ abakus ]]; then
   echo "No"
@@ -15,6 +17,15 @@ queue(){
 list_idle_nodes(){
   local counter=0
   ${ABA} llstatus -L machine | grep Idle | grep -v Name | grep -v abakus01 |\
+  while read line; do
+    let counter+=1
+    echo -e "$counter)\t"$line | cut -d " " -f 1
+  done
+}
+
+list_down_nodes(){
+  local counter=0
+  ${ABA} llstatus -L machine | grep Down | grep -v Name | grep -v abakus01 |\
   while read line; do
     let counter+=1
     echo -e "$counter)\t"$line | cut -d " " -f 1
@@ -65,20 +76,24 @@ llq_min(){
 
 
 sleeptime=5
-header(){
-  sleep ${sleeptime}
-  clear
-  echo $1
+title(){
+  echo -e "$1"
   sed "s/./-/g" <<<"$1"
+}
+header(){
+  clear
+  title $1
 }
 
 main(){
   header 'Idle nodes'
   list_idle_nodes
-  #header 'Main queue'
-  #queue
+  title '\nDown nodes'
+  list_down_nodes
+  sleep ${sleeptime}
   header 'Queue min'
   llq_min | column -t
+  sleep ${sleeptime}
 }
 
 
