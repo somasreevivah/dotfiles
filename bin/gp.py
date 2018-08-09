@@ -3,23 +3,29 @@
 
 from __future__ import unicode_literals
 
-from prompt_toolkit.completion import WordCompleter
+from prompt_toolkit.completion import (
+    WordCompleter, Completer, Completion, merge_completers
+)
 from prompt_toolkit import PromptSession
 from prompt_toolkit.history import InMemoryHistory
-from pygments.lexers.graphics import GnuplotLexer
 from prompt_toolkit import prompt
 from prompt_toolkit.lexers import PygmentsLexer
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.styles import Style
 from prompt_toolkit import print_formatted_text
 from prompt_toolkit.formatted_text import HTML, FormattedText
+from prompt_toolkit.styles import style_from_pygments_cls
 
+from pygments.lexers.graphics import GnuplotLexer
+from pygments.style import Style as PygmentStyle
+from pygments.token import Keyword, Name, Comment, String, Error, \
+     Number, Operator, Generic
 
 import prompt_toolkit
 import os
 import sys
 
-completer = WordCompleter([
+wordcompleter = WordCompleter([
 "GNUTERM","GPVAL_TERM","GPVAL_TERMOPTIONS","GPVAL_SPLOT","GPVAL_OUTPUT",
 "GPVAL_ENCODING","GPVAL_VERSION","GPVAL_PATCHLEVEL","GPVAL_COMPILE_OPTIONS",
 "GPVAL_MULTIPLOT","GPVAL_PLOT","GPVAL_VIEW_ZSCALE","GPVAL_TERMINALS",
@@ -207,6 +213,7 @@ completer = WordCompleter([
 "spstats","stats","system","test","undefine","unset","update",
 ], ignore_case=True)
 
+
 style = Style.from_dict({
     'completion-menu.completion': 'bg:#008888 #ffffff',
     'completion-menu.completion.current': 'bg:#00aaaa #000000',
@@ -214,6 +221,115 @@ style = Style.from_dict({
     'scrollbar.button': 'bg:#222222',
 })
 
+
+class MyGpStyle(PygmentStyle):
+    default_style = ""
+    styles = {
+        Comment:                'italic #888',
+        Keyword:                'bold #ff0000',
+        Name:                   '#00aaff',
+        Name.Function:          '#0f0',
+        Name.Class:             'bold #0f0',
+        String:                 '#ffaa00'
+    }
+
+
+class PathCompleter(Completer):
+    """
+    Complete for Path variables.
+
+    :param get_paths: Callable which returns a list of directories to look into
+                      when the user enters a relative path.
+    :param file_filter: Callable which takes a filename and returns whether
+                        this file should show up in the completion. ``None``
+                        when no filtering has to be done.
+    :param min_input_len: Don't do autocompletion when the input string is shorter.
+    """
+    def __init__(self, only_directories=False, get_paths=None, file_filter=None,
+                 min_input_len=0, expanduser=False):
+        assert get_paths is None or callable(get_paths)
+        assert file_filter is None or callable(file_filter)
+        assert isinstance(min_input_len, int)
+        assert isinstance(expanduser, bool)
+
+        self.only_directories = only_directories
+        self.get_paths = get_paths or (lambda: ['.'])
+        self.file_filter = file_filter or (lambda _: True)
+        self.min_input_len = min_input_len
+        self.expanduser = expanduser
+
+    def get_completions(self, document, complete_event):
+        text = document.get_word_before_cursor()
+
+        if len(text) == 0:
+            return
+
+        if text[0] == '"' and text[0] == "'":
+            return
+        else:
+            text = text.replace('"', '')
+            text = text.replace("'", '')
+
+        # Complete only when we have at least the minimal input length,
+        # otherwise, we can too many results and autocompletion will become too
+        # heavy.
+        if len(text) < self.min_input_len:
+            return
+
+        try:
+            # Do tilde expansion.
+            if self.expanduser:
+                text = os.path.expanduser(text)
+
+            # Directories where to look.
+            dirname = os.path.dirname(text)
+            if dirname:
+                directories = [os.path.dirname(os.path.join(p, text))
+                               for p in self.get_paths()]
+            else:
+                directories = self.get_paths()
+
+            # Start of current file.
+            prefix = os.path.basename(text)
+
+            # Get all filenames.
+            filenames = []
+            for directory in directories:
+                # Look for matches in this directory.
+                if os.path.isdir(directory):
+                    for filename in os.listdir(directory):
+                        if filename.startswith(prefix):
+                            filenames.append((directory, filename))
+
+            # Sort
+            filenames = sorted(filenames, key=lambda k: k[1])
+
+            # Yield them.
+            for directory, filename in filenames:
+                completion = filename[len(prefix):]
+                full_name = os.path.join(directory, filename)
+
+                if os.path.isdir(full_name):
+                    # For directories, add a slash to the filename.
+                    # (We don't add them to the `completion`. Users can type it
+                    # to trigger the autocompletion themselves.)
+                    filename += '/'
+                elif self.only_directories:
+                    continue
+
+                if not self.file_filter(full_name):
+                    continue
+
+                yield Completion(completion, 0, display=filename)
+        except OSError:
+            pass
+
+
+
+pathcompleter = PathCompleter(expanduser=False)
+completer = merge_completers([pathcompleter, wordcompleter])
+
+style = style_from_pygments_cls(MyGpStyle)
 
 def prompt_info(text):
     print_formatted_text(HTML('<green>{0}</green>').format(text))
@@ -234,8 +350,8 @@ def gnuplot(lines):
     )
     for line in lines + ['quit']:
         proc.stdin.write('{0}\n'.format(line).encode())
-    #return ( proc.stdout.read(), proc.stderr.read() )
     return proc.communicate()
+
 
 def main():
 
@@ -253,7 +369,8 @@ def main():
     while True:
         try:
             text = session.prompt(
-                'g> ',
+                'ignu> ',
+                vi_mode=True,
                 lexer=PygmentsLexer(GnuplotLexer),
                 completer=completer,
                 multiline=True,
@@ -281,4 +398,3 @@ if __name__ == '__main__':
     print('')
 
     main()
-
