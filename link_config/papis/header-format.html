@@ -1,0 +1,8 @@
+<span color='#ff00ff'>{{doc.html_escape["title"]}}</span>
+<span color='#00ff00'>  {{doc.html_escape["author"]}}</span>
+<span color='#00ffaa'>   ({{doc.html_escape["year"]}}) </span>
+{%- if doc.has('tags') %}<span>[<yellow>{{doc['tags']}}</yellow>] </span>{%- endif %}
+{%- if doc.has('citations') %}<red>{{doc['citations']|length}}</red>{%- endif %}
+{%- if doc.has('url') %}
+<span>    {{doc.html_escape["url"]}}</span>
+{%- endif %}

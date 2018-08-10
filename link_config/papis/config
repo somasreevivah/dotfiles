@@ -12,12 +12,12 @@ add-confirm = True
 add-edit = True
 add-open = True
 mode = document
-match-format = {doc[tags]}{doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
-header-format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
+match-format = [{doc[tags]}]{doc.subfolder}{doc[title]}{doc[author]}{doc[year]}
+
+
 mark-opener-format = zathura -P {mark[value]}
 open-mark = True
-default-gui = urwid
-database-backend=whoosh
+database-backend = whoosh
 
 gagp = git commit -a && git push origin master
 gs = git status
@@ -28,9 +28,13 @@ gma = git commit -a
 
 
 [papers]
+;header-format = {doc[title]:<70.70}|{doc[author]:<20.20} ({doc[year]:-<4})
 dir = ~/Documents/papers
 file-name = {doc[title]}-{doc[author]}
 add-default-fields = ['title', 'author', 'year', 'tags']
+header-format-file = ~/.config/papis/header-format.html
+format-jinja2-enable = True
+match-format = [{{doc["tags"]}}]{{doc.subfolder}}{{doc["title"]}}{{doc["author"]}}{{doc["year"]}}
 
 [books]
 dir = ~/Documents/books
